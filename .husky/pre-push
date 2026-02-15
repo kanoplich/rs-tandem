@@ -1,2 +1,1 @@
-echo ""
-exit 0
+pnpm vitest run
