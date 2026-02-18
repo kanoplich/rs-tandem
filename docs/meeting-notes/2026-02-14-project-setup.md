@@ -86,4 +86,4 @@
 
 ### Документация стилей
 
-Все глобальные стили Tailwind CSS, переменные темы и описание их использования вынесены в отдельную документацию: [docs/tailwind/2026-02-17-global-style.md](docs/tailwind/2026-02-17-global-style.md)
+Все глобальные стили Tailwind CSS, переменные темы и описание их использования вынесены в отдельную документацию: [link](https://github.com/kanoplich/rs-tandem/blob/team42-7/style/globals/docs/tailwind/2026-02-17-global-style.md)

@@ -43,6 +43,6 @@
 1. Компоненты используют эти переменные через Tailwind классы.
 2. Пример использования на элементе сайдбара:
 
-<div className="sidebar-item p-2 rounded bg-[var(--sidebar-primary)] text-[var(--sidebar-primary-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--sidebar-ring)]">
-  Активный элемент
-</div>
+<button className="bg-sidebar-primary text-sidebar-primary-foreground rounded-md px-5 py-1.5">
+  Dashboard
+</button>
