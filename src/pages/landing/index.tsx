@@ -1,4 +1,4 @@
-export const LandingPage = () => {
+export const Landing = () => {
   return (
     <>
       <div>landing</div>
