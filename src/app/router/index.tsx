@@ -1,16 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AppLayout } from '../layout';
-
-import { Dashboard } from '@/pages/dashboard';
-import { History } from '@/pages/history';
-import { Landing } from '@/pages/landing';
-import { Login } from '@/pages/login';
-import { NotFound } from '@/pages/not-found';
-import { Profile } from '@/pages/profile';
-import { Register } from '@/pages/register';
-import { Task } from '@/pages/task';
-import { Topics } from '@/pages/topics';
+import { AppLayout } from '@/app/app-layout';
+import {
+  Dashboard,
+  History,
+  Landing,
+  Login,
+  NotFound,
+  Profile,
+  Register,
+  Task,
+  Topics,
+} from '@/pages';
 import { ROUTES } from '@/shared/config/routes';
 
 export const router = createBrowserRouter([
