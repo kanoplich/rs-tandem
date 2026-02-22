@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-// import type { Database } from '@/shared/types/database.types';
 import { config } from '@/shared/config/supabase';
+import type { Database } from '@/shared/types/database.types';
 
-// export type Public = Database['public'];
+export type Public = Database['public'];
 
 const { SUPABASE_URL, SUPABASE_ANON_KEY } = config;
 
