@@ -74,7 +74,7 @@ export function Landing() {
               </Button>
             </div>
 
-            <div className="flex gap-10 sm:gap-12 lg:gap-14 pt-4 animate-fade-in delay-700 justify-center lg:justify-start flex-wrap">
+            <div className="flex gap-10 sm:gap-12 lg:gap-14 pt-4 animate-fade-in justify-center lg:justify-start flex-wrap">
               {stats.map((item) => (
                 <div
                   key={item.label}

@@ -12,7 +12,6 @@
 .why-card {
   opacity: 0;
   transform: translateY(40px) scale(0.97);
-  transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .why-card.visible {
@@ -47,7 +46,7 @@
 }
 
 .why-card-inner {
-  transition: transform 0.35s ease-out;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .why-card:hover .why-card-inner {

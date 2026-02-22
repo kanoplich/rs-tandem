@@ -15,7 +15,10 @@
 .success-badge {
   opacity: 0;
   transform: translateY(35px) scale(0.97);
-  transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  --stagger: 0s;
+  transition-delay: var(--stagger);
+  animation-delay: var(--stagger);
 }
 
 .animate-fade-up.visible,
@@ -27,40 +30,71 @@
   animation: fadeUpScroll 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.delay-200.visible {
-  transition-delay: 0.2s;
-  animation-delay: 0.2s;
+.delay-200 {
+  --stagger: 0.2s;
 }
-.delay-300.visible {
-  transition-delay: 0.3s;
-  animation-delay: 0.3s;
+.delay-300 {
+  --stagger: 0.3s;
 }
-.delay-400.visible {
-  transition-delay: 0.4s;
-  animation-delay: 0.4s;
+.delay-400 {
+  --stagger: 0.4s;
 }
-.delay-500.visible {
-  transition-delay: 0.5s;
-  animation-delay: 0.5s;
+.delay-500 {
+  --stagger: 0.5s;
 }
-.delay-700.visible {
-  transition-delay: 0.7s;
-  animation-delay: 0.7s;
+.delay-700 {
+  --stagger: 0.7s;
 }
-.delay-1000.visible {
-  transition-delay: 1s;
-  animation-delay: 1s;
+.delay-1000 {
+  --stagger: 1s;
 }
 
-.stat-item:nth-child(1).visible {
-  transition-delay: 0.75s;
-  animation-delay: 0.75s;
+.stat-item:nth-child(1) {
+  --stagger: 0.75s;
 }
-.stat-item:nth-child(2).visible {
-  transition-delay: 0.9s;
-  animation-delay: 0.9s;
+.stat-item:nth-child(2) {
+  --stagger: 0.9s;
 }
-.stat-item:nth-child(3).visible {
-  transition-delay: 1.05s;
-  animation-delay: 1.05s;
+.stat-item:nth-child(3) {
+  --stagger: 1.05s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .stat-item,
+  .success-badge {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  @keyframes fadeUpScroll {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up,
+  .animate-fade-in,
+  .stat-item,
+  .success-badge {
+    transform: translateY(28px) !important;
+  }
+
+  .animate-fade-up.visible,
+  .animate-fade-in.visible,
+  .stat-item.visible,
+  .success-badge.visible {
+    animation-duration: 0.75s;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
 }

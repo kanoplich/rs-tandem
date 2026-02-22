@@ -1,0 +1,87 @@
+@keyframes fadeUpGentle {
+  0% {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+  }
+  70% {
+    opacity: 0.8;
+    transform: translateY(-4px) scale(1.015);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.step-card {
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  --delay: 0s;
+  transition-delay: var(--delay);
+  animation-delay: var(--delay);
+}
+
+.step-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: fadeUpGentle 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.delay-100 {
+  --delay: 0.1s;
+}
+.delay-200 {
+  --delay: 0.2s;
+}
+.delay-300 {
+  --delay: 0.3s;
+}
+.delay-400 {
+  --delay: 0.4s;
+}
+
+.step-inner {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.step-card:hover .step-inner {
+  transform: translateY(-4px) scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-card,
+  .step-inner {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  @keyframes fadeUpGentle {
+    0% {
+      opacity: 0;
+      transform: translateY(28px) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .step-card {
+    transform: translateY(28px) scale(0.98) !important;
+  }
+
+  .step-card.visible {
+    animation-duration: 0.8s;
+  }
+
+  .step-card:hover .step-inner {
+    transform: translateY(-3px) scale(1.01);
+  }
+}

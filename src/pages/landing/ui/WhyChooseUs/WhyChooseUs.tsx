@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-import LandingIcons1 from '@/assets/LandingIcons/Container1.svg';
-import LandingIcons2 from '@/assets/LandingIcons/Container2.svg';
-import LandingIcons3 from '@/assets/LandingIcons/Container3.svg';
-import LandingIcons4 from '@/assets/LandingIcons/Container4.svg';
-import LandingIcons5 from '@/assets/LandingIcons/Container5.svg';
-import LandingIcons6 from '@/assets/LandingIcons/Container6.svg';
+import LandingIcons1 from '@/assets/LandingIcons/WhyChooseUs/Container1.svg';
+import LandingIcons2 from '@/assets/LandingIcons/WhyChooseUs/Container2.svg';
+import LandingIcons3 from '@/assets/LandingIcons/WhyChooseUs/Container3.svg';
+import LandingIcons4 from '@/assets/LandingIcons/WhyChooseUs/Container4.svg';
+import LandingIcons5 from '@/assets/LandingIcons/WhyChooseUs/Container5.svg';
+import LandingIcons6 from '@/assets/LandingIcons/WhyChooseUs/Container6.svg';
 
 import './WhyChooseUs.css';
 
