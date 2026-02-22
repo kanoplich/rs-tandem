@@ -1,7 +1,9 @@
+import { LandingPage } from '@/pages/landing/LandingPage';
+
 export const App = () => {
   return (
     <>
-      <h1>Start App</h1>
+      <LandingPage />
     </>
   );
 };

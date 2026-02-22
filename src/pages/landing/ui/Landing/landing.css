@@ -1,0 +1,66 @@
+@keyframes fadeUpScroll {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-up,
+.animate-fade-in,
+.stat-item,
+.success-badge {
+  opacity: 0;
+  transform: translateY(35px) scale(0.97);
+  transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-fade-up.visible,
+.animate-fade-in.visible,
+.stat-item.visible,
+.success-badge.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: fadeUpScroll 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.delay-200.visible {
+  transition-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+.delay-300.visible {
+  transition-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.delay-400.visible {
+  transition-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+.delay-500.visible {
+  transition-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+.delay-700.visible {
+  transition-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+.delay-1000.visible {
+  transition-delay: 1s;
+  animation-delay: 1s;
+}
+
+.stat-item:nth-child(1).visible {
+  transition-delay: 0.75s;
+  animation-delay: 0.75s;
+}
+.stat-item:nth-child(2).visible {
+  transition-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+.stat-item:nth-child(3).visible {
+  transition-delay: 1.05s;
+  animation-delay: 1.05s;
+}
