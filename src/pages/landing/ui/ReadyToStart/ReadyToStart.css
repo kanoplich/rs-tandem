@@ -1,0 +1,42 @@
+@keyframes readyFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ready-card {
+  opacity: 0;
+  transform: translateY(50px) scale(0.94);
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ready-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: readyFadeUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ready-card,
+  .ready-card.visible {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .ready-card {
+    transform: translateY(40px) scale(0.96) !important;
+  }
+
+  .ready-card.visible {
+    animation-duration: 0.9s;
+  }
+}

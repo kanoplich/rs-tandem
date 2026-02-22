@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import './landing.css';
+import { ROUTES } from '@/shared/config/routes';
 import robotIcon from '@/shared/icons/icons8-ai-chatting.svg';
 import { Button } from '@/shared/ui/button';
 
@@ -63,14 +65,12 @@ export function Landing() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start animate-fade-in delay-500">
-              <Button className="w-full sm:w-auto px-9 py-7 text-base font-medium transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
-                Начать бесплатно
+              <Button asChild className="w-full sm:w-auto px-9 py-7">
+                <Link to={ROUTES.REGISTER}>Начать бесплатно</Link>
               </Button>
-              <Button
-                variant="outline"
-                className="w-full sm:w-auto px-9 py-7 text-base font-medium transition-all duration-300 hover:translate-y-[-2px]"
-              >
-                Войти
+
+              <Button asChild variant="outline" className="w-full sm:w-auto px-9 py-7">
+                <Link to={ROUTES.LOGIN}>Войти</Link>
               </Button>
             </div>
 
@@ -92,7 +92,7 @@ export function Landing() {
               <img
                 src="/images/RS School About.png"
                 alt="RS School interview"
-                className="w-full h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+                className="cursor-pointer w-full h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
               />
 
               <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 bg-primary rounded-2xl px-5 py-4 sm:px-6 sm:py-5 shadow-xl animate-fade-in delay-1000 success-badge">

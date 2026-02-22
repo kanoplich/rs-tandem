@@ -69,16 +69,7 @@ export function HowItWorks() {
 
         <div
           ref={sectionRef}
-          className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-4
-            gap-8
-            sm:gap-10
-            lg:gap-12
-            text-center
-          "
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 text-center"
         >
           {steps.map((step, index) => (
             <div key={index} className={`step-card delay-${(index + 1) * 100}`}>
