@@ -7,4 +7,4 @@ export type Public = Database['public'];
 
 const { SUPABASE_URL, SUPABASE_ANON_KEY } = config;
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY);
