@@ -151,6 +151,7 @@ export type Database = {
           icon: string | null;
           id: string;
           sort_order: number | null;
+          stage: number;
           title: string;
         };
         Insert: {
@@ -158,6 +159,7 @@ export type Database = {
           icon?: string | null;
           id: string;
           sort_order?: number | null;
+          stage?: number;
           title: string;
         };
         Update: {
@@ -165,6 +167,7 @@ export type Database = {
           icon?: string | null;
           id?: string;
           sort_order?: number | null;
+          stage?: number;
           title?: string;
         };
         Relationships: [];

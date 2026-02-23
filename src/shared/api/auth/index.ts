@@ -2,12 +2,18 @@ import type { Session, User } from '@supabase/supabase-js';
 
 import { supabase } from '../supabase-client';
 
+import { MOCK_SESSION, mockIsAuth, setMockIsAuth } from './mock';
 import type { AuthCredentials } from './types';
 
 import { ROUTES } from '@/shared/config/routes';
 import { config } from '@/shared/config/supabase';
+import { delay } from '@/shared/lib/delay';
 
-export const getSession = async (): Promise<Session | null> => {
+export const getSession = async (): Promise<Session | Partial<Session> | null> => {
+  if (config.USE_MOCK_SUPABASE) {
+    return mockIsAuth ? MOCK_SESSION : null;
+  }
+
   const {
     data: { session },
     error,
@@ -20,7 +26,14 @@ export const getSession = async (): Promise<Session | null> => {
   return session;
 };
 
-export const onAuthStateChange = (callback: (session: Session | null) => void) => {
+export const onAuthStateChange = (
+  callback: (session: Session | Partial<Session> | null) => void
+) => {
+  if (config.USE_MOCK_SUPABASE) {
+    callback(mockIsAuth ? MOCK_SESSION : null);
+    return;
+  }
+
   const {
     data: { subscription },
   } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -30,9 +43,43 @@ export const onAuthStateChange = (callback: (session: Session | null) => void) =
   return subscription;
 };
 
-export const signUp = async ({ email, password }: AuthCredentials): Promise<User> => {
+export const singIn = async ({
+  email,
+  password,
+}: AuthCredentials): Promise<Session | Partial<Session>> => {
+  if (config.USE_MOCK_SUPABASE) {
+    await delay(400);
+    setMockIsAuth(true);
+    return MOCK_SESSION;
+  }
+
   const {
-    data: { user },
+    data: { session },
+    error,
+  } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error || !session) {
+    throw error || new Error('Auth error');
+  }
+
+  return session;
+};
+
+export const signUp = async ({
+  email,
+  password,
+}: AuthCredentials): Promise<Session | Partial<Session>> => {
+  if (config.USE_MOCK_SUPABASE) {
+    console.log('Mock singUp');
+    await delay(400);
+    setMockIsAuth(true);
+    return MOCK_SESSION;
+  }
+  const {
+    data: { session },
     error,
   } = await supabase.auth.signUp({
     email,
@@ -42,9 +89,23 @@ export const signUp = async ({ email, password }: AuthCredentials): Promise<User
     },
   });
 
-  if (error || !user) {
+  if (error || !session) {
     throw error || new Error('Error auth');
   }
 
-  return user;
+  return session;
+};
+
+export const singOut = async (): Promise<void> => {
+  if (config.USE_MOCK_SUPABASE) {
+    await delay(400);
+    setMockIsAuth(false);
+    return;
+  }
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    throw error;
+  }
 };
