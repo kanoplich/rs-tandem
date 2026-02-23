@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Icons1 from '@/assets/LandingIcons/HowItWorks/Icons1.svg';
 import Icons2 from '@/assets/LandingIcons/HowItWorks/Icons2.svg';
@@ -9,21 +9,25 @@ import './HowItWorks.css';
 
 const steps = [
   {
+    id: 'stage',
     icon: Icons1,
     title: 'Выберите этап',
     description: 'Начните с того этапа, который вам нужен',
   },
   {
+    id: 'topics',
     icon: Icons2,
     title: 'Выберите темы',
     description: 'Определите темы для тренировки',
   },
   {
+    id: 'practice',
     icon: Icons3,
     title: 'Тренируйтесь',
     description: 'Отвечайте на вопросы интервьюера',
   },
   {
+    id: 'analyze',
     icon: Icons4,
     title: 'Анализируйте',
     description: 'Получайте результаты и улучшайтесь',
@@ -32,6 +36,7 @@ const steps = [
 
 export function HowItWorks() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -39,15 +44,13 @@ export function HowItWorks() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.length === 0 || !entries[0]?.isIntersecting) return;
+        const entry = entries[0];
+        if (!entry || !entry.isIntersecting) return;
 
-        const cards = section.querySelectorAll('.step-card');
-        cards.forEach((card) => card.classList.add('visible'));
+        setIsVisible(true);
+        observer.unobserve(entry.target);
       },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -100px 0px',
-      }
+      { threshold: 0.1 }
     );
 
     observer.observe(section);
@@ -72,7 +75,10 @@ export function HowItWorks() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 text-center"
         >
           {steps.map((step, index) => (
-            <div key={index} className={`step-card delay-${(index + 1) * 100}`}>
+            <div
+              key={step.id}
+              className={`step-card delay-${(index + 1) * 100} ${isVisible ? 'visible' : ''}`}
+            >
               <div className="step-inner flex flex-col items-center gap-4">
                 <img
                   src={step.icon}

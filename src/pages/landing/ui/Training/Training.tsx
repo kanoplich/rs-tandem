@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import './landing.css';
+import './Training.css';
 import { ROUTES } from '@/shared/config/routes';
 import robotIcon from '@/shared/icons/icons8-ai-chatting.svg';
 import { Button } from '@/shared/ui/button';
@@ -12,7 +12,7 @@ const stats = [
   { value: '3', label: 'Этапа' },
 ];
 
-export function Landing() {
+export function Training() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
