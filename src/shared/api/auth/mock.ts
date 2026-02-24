@@ -2,12 +2,10 @@ import type { Session } from '@supabase/supabase-js';
 
 export const viewer = {
   email: 'test@test.com',
-  password: 'qwerty',
+  password: 'Qwerty12345',
 };
 
-export let mockIsAuth = false;
-
-export const MOCK_SESSION: Partial<Session> = {
+export const MOCK_SESSION: Session = {
   access_token: 'mock-access-token',
   token_type: 'bearer',
   expires_in: 3600,
@@ -30,6 +28,16 @@ export const MOCK_SESSION: Partial<Session> = {
   },
 };
 
+export let mockIsAuth = false;
+
+const mockAuthListeners = new Set<(session: Session | null) => void>();
+
+export const addMockAuthListener = (callback: (session: Session | null) => void) => {
+  mockAuthListeners.add(callback);
+  return { unsubscribe: () => mockAuthListeners.delete(callback) };
+};
+
 export const setMockIsAuth = (value: boolean) => {
   mockIsAuth = value;
+  mockAuthListeners.forEach((cb) => cb(value ? MOCK_SESSION : null));
 };

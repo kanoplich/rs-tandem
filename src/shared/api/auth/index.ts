@@ -1,16 +1,18 @@
-import type { Session, User } from '@supabase/supabase-js';
+import type { Session } from '@supabase/supabase-js';
 
 import { supabase } from '../supabase-client';
 
-import { MOCK_SESSION, mockIsAuth, setMockIsAuth } from './mock';
+import { addMockAuthListener, MOCK_SESSION, mockIsAuth, setMockIsAuth } from './mock';
 import type { AuthCredentials } from './types';
 
 import { ROUTES } from '@/shared/config/routes';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
-export const getSession = async (): Promise<Session | Partial<Session> | null> => {
-  if (config.USE_MOCK_SUPABASE) {
+const { USE_MOCK_SUPABASE, HOST } = config;
+
+export const getSession = async (): Promise<Session | null> => {
+  if (USE_MOCK_SUPABASE) {
     return mockIsAuth ? MOCK_SESSION : null;
   }
 
@@ -26,12 +28,10 @@ export const getSession = async (): Promise<Session | Partial<Session> | null> =
   return session;
 };
 
-export const onAuthStateChange = (
-  callback: (session: Session | Partial<Session> | null) => void
-) => {
-  if (config.USE_MOCK_SUPABASE) {
+export const onAuthStateChange = (callback: (session: Session | null) => void) => {
+  if (USE_MOCK_SUPABASE) {
     callback(mockIsAuth ? MOCK_SESSION : null);
-    return;
+    return addMockAuthListener(callback);
   }
 
   const {
@@ -43,11 +43,33 @@ export const onAuthStateChange = (
   return subscription;
 };
 
-export const singIn = async ({
-  email,
-  password,
-}: AuthCredentials): Promise<Session | Partial<Session>> => {
-  if (config.USE_MOCK_SUPABASE) {
+export const signUp = async ({ email, password }: AuthCredentials): Promise<Session> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(400);
+    setMockIsAuth(true);
+    return MOCK_SESSION;
+  }
+
+  const {
+    data: { session },
+    error,
+  } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${HOST}${ROUTES.DASHBOARD}`,
+    },
+  });
+
+  if (error || !session) {
+    throw error || new Error('SingUp error');
+  }
+
+  return session;
+};
+
+export const singIn = async ({ email, password }: AuthCredentials): Promise<Session> => {
+  if (USE_MOCK_SUPABASE) {
     await delay(400);
     setMockIsAuth(true);
     return MOCK_SESSION;
@@ -62,42 +84,14 @@ export const singIn = async ({
   });
 
   if (error || !session) {
-    throw error || new Error('Auth error');
-  }
-
-  return session;
-};
-
-export const signUp = async ({
-  email,
-  password,
-}: AuthCredentials): Promise<Session | Partial<Session>> => {
-  if (config.USE_MOCK_SUPABASE) {
-    console.log('Mock singUp');
-    await delay(400);
-    setMockIsAuth(true);
-    return MOCK_SESSION;
-  }
-  const {
-    data: { session },
-    error,
-  } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${config.HOST}${ROUTES.DASHBOARD}`,
-    },
-  });
-
-  if (error || !session) {
-    throw error || new Error('Error auth');
+    throw error || new Error('SingIn error');
   }
 
   return session;
 };
 
 export const singOut = async (): Promise<void> => {
-  if (config.USE_MOCK_SUPABASE) {
+  if (USE_MOCK_SUPABASE) {
     await delay(400);
     setMockIsAuth(false);
     return;
