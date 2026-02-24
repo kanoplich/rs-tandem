@@ -1,6 +1,6 @@
 export { Dashboard } from './dashboard';
 export { History } from './history';
-export { Landing } from './landing/Landing';
+export { Landing } from './landing';
 export { Login } from './login';
 export { NotFound } from './not-found';
 export { Profile } from './profile';

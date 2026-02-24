@@ -9,10 +9,10 @@
   }
 }
 
-.animate-fade-up,
-.animate-fade-in,
-.stat-item,
-.success-badge {
+.animateFadeUp,
+.animateFadeIn,
+.statItem,
+.successBadge {
   opacity: 0;
   transform: translateY(35px) scale(0.97);
   transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
@@ -21,49 +21,46 @@
   animation-delay: var(--stagger);
 }
 
-.animate-fade-up.visible,
-.animate-fade-in.visible,
-.stat-item.visible,
-.success-badge.visible {
+.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
   animation: fadeUpScroll 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.delay-200 {
+.delay200 {
   --stagger: 0.2s;
 }
-.delay-300 {
+.delay300 {
   --stagger: 0.3s;
 }
-.delay-400 {
+.delay400 {
   --stagger: 0.4s;
 }
-.delay-500 {
+.delay500 {
   --stagger: 0.5s;
 }
-.delay-700 {
+.delay700 {
   --stagger: 0.7s;
 }
-.delay-1000 {
+.delay1000 {
   --stagger: 1s;
 }
 
-.stat-item:nth-child(1) {
+.statItem:nth-child(1) {
   --stagger: 0.75s;
 }
-.stat-item:nth-child(2) {
+.statItem:nth-child(2) {
   --stagger: 0.9s;
 }
-.stat-item:nth-child(3) {
+.statItem:nth-child(3) {
   --stagger: 1.05s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-fade-in,
-  .stat-item,
-  .success-badge {
+  .animateFadeUp,
+  .animateFadeIn,
+  .statItem,
+  .successBadge {
     transition: none !important;
     animation: none !important;
     transform: none !important;
@@ -83,17 +80,14 @@
     }
   }
 
-  .animate-fade-up,
-  .animate-fade-in,
-  .stat-item,
-  .success-badge {
+  .animateFadeUp,
+  .animateFadeIn,
+  .statItem,
+  .successBadge {
     transform: translateY(28px) !important;
   }
 
-  .animate-fade-up.visible,
-  .animate-fade-in.visible,
-  .stat-item.visible,
-  .success-badge.visible {
+  .visible {
     animation-duration: 0.75s;
     animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }

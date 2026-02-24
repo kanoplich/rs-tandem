@@ -13,7 +13,7 @@
   }
 }
 
-.step-card {
+.stepCard {
   opacity: 0;
   transform: translateY(32px) scale(0.97);
   transition:
@@ -24,32 +24,32 @@
   animation-delay: var(--delay);
 }
 
-.step-card.visible {
+.stepCardVisible {
   opacity: 1;
   transform: translateY(0) scale(1);
   animation: fadeUpGentle 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.delay-100 {
+.delay100 {
   --delay: 0.1s;
 }
-.delay-200 {
+.delay200 {
   --delay: 0.2s;
 }
-.delay-300 {
+.delay300 {
   --delay: 0.3s;
 }
-.delay-400 {
+.delay400 {
   --delay: 0.4s;
 }
 
-.step-inner {
+.stepInner {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .step-card,
-  .step-inner {
+  .stepCard,
+  .stepInner {
     transition: none !important;
     animation: none !important;
     transform: none !important;
@@ -69,15 +69,15 @@
     }
   }
 
-  .step-card {
+  .stepCard {
     transform: translateY(28px) scale(0.98) !important;
   }
 
-  .step-card.visible {
+  .stepCardVisible {
     animation-duration: 0.8s;
   }
 
-  .step-card:hover .step-inner {
+  .stepCard:hover .stepInner {
     transform: translateY(-3px) scale(1.01);
   }
 }
