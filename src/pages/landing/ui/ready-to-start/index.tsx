@@ -1,47 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
 
 import styles from './styles.module.css';
 
 import { ROUTES } from '@/shared/config/routes';
+import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 
-export function ReadyToStart() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry?.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+export const ReadyToStart = () => {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
 
   return (
     <section className="py-12 sm:py-16 lg:py-24 flex justify-center overflow-x-hidden">
       <div className="w-full flex justify-center px-4">
         <div
           ref={ref}
-          className={`
-            ${styles['readyCard']} ${isVisible ? styles['readyCardVisible'] : ''}
-            border border-secondary rounded-2xl flex flex-col items-center
-            bg-secondary/45 gap-5 py-10 px-6
-            w-full max-w-[720px] sm:max-w-[960px] lg:max-w-[1240px]
-            sm:scale-[0.95] lg:scale-100 origin-top
-            text-center
-          `}
+          className={cn(
+            styles['readyCard'],
+            isVisible && styles['readyCardVisible'],
+            'border border-secondary rounded-2xl flex flex-col items-center bg-secondary/45 gap-5 py-10 px-6 w-full max-w-[720px] sm:max-w-[960px] lg:max-w-[1240px] sm:scale-[0.95] lg:scale-100 origin-top text-center'
+          )}
         >
           <img
             src="/images/bg-landing2.png"
@@ -65,4 +44,4 @@ export function ReadyToStart() {
       </div>
     </section>
   );
-}
+};

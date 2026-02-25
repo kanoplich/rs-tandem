@@ -1,70 +1,48 @@
-import { useEffect, useRef } from 'react';
+import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
 
 import styles from './styles.module.css';
 
-import LandingIcons1 from '@/assets/LandingIcons/WhyChooseUs/Container1.svg';
-import LandingIcons2 from '@/assets/LandingIcons/WhyChooseUs/Container2.svg';
-import LandingIcons3 from '@/assets/LandingIcons/WhyChooseUs/Container3.svg';
-import LandingIcons4 from '@/assets/LandingIcons/WhyChooseUs/Container4.svg';
-import LandingIcons5 from '@/assets/LandingIcons/WhyChooseUs/Container5.svg';
-import LandingIcons6 from '@/assets/LandingIcons/WhyChooseUs/Container6.svg';
+import {
+  AwardIcon,
+  CheckIcon,
+  MessageIcon,
+  ProgressIcon,
+  StatisticIcon,
+  TopicIcon,
+} from '@/shared/assets/icons';
+import { cn } from '@/shared/lib/utils';
 
-export function WhyChooseUs() {
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!gridRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll<HTMLDivElement>(`.${styles['whyCard']}`);
-            cards.forEach((card) => {
-              card.classList.add(styles['whyCardVisible']!);
-            });
-          }
-        });
-      },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -100px 0px',
-      }
-    );
-
-    observer.observe(gridRef.current);
-
-    return () => observer.disconnect();
-  }, []);
+export const WhyChooseUs = () => {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.08 });
 
   const features = [
     {
-      icon: LandingIcons1,
+      icon: <MessageIcon />,
       title: 'Интерактивные тренировки',
       text: 'Практикуйтесь в реальном времени с AI-интервьюером, отвечая на технические вопросы',
     },
     {
-      icon: LandingIcons2,
+      icon: <ProgressIcon />,
       title: 'Персональный трекинг',
       text: 'Отслеживайте свой прогресс, средние оценки и сильные стороны по каждой теме',
     },
     {
-      icon: LandingIcons3,
+      icon: <TopicIcon />,
       title: '37 актуальных тем',
       text: 'От основ JavaScript до продвинутой архитектуры и Node.js',
     },
     {
-      icon: LandingIcons4,
+      icon: <StatisticIcon />,
       title: 'Анализ результатов',
       text: 'Получайте детальную статистику и рекомендации для улучшения',
     },
     {
-      icon: LandingIcons5,
+      icon: <CheckIcon />,
       title: '3 этапа обучения',
       text: 'Структурированная программа от базовых концепций до продвинутых тем',
     },
     {
-      icon: LandingIcons6,
+      icon: <AwardIcon />,
       title: 'Достижения',
       text: 'Зарабатывайте награды и отслеживайте свои успехи',
     },
@@ -82,17 +60,19 @@ export function WhyChooseUs() {
           </p>
         </div>
 
-        <div
-          ref={gridRef}
-          className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <div ref={ref} className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((item, index) => (
             <div
               key={index}
-              className={`bg-card border rounded-2xl p-6 sm:p-8 ${styles['whyCard']} cursor-pointer`}
+              className={cn(
+                'bg-card border rounded-2xl p-6 sm:p-8 cursor-pointer',
+                styles['whyCard'],
+                isVisible && styles['whyCardVisible']
+              )}
+              style={{ transitionDelay: `${(index + 1) * 100}ms` }}
             >
               <div className={`flex flex-col gap-4 ${styles['whyCardInner']}`}>
-                <img src={item.icon} alt={item.title} className="w-12 h-12 sm:w-14 sm:h-14" />
+                {item.icon}
                 <h4 className="text-lg sm:text-xl font-semibold">{item.title}</h4>
                 <p className="text-sm sm:text-base text-muted-foreground">{item.text}</p>
               </div>
@@ -102,4 +82,4 @@ export function WhyChooseUs() {
       </div>
     </section>
   );
-}
+};
