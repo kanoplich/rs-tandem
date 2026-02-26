@@ -4,6 +4,7 @@ import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
 
 import styles from './styles.module.css';
 
+import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
@@ -15,7 +16,9 @@ const stats = [
 ];
 
 export const Training = () => {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref, isVisible } = useIntersectionObserver({
+    threshold: INTERSECTION_OBSERVER_THRESHOLD,
+  });
 
   return (
     <section ref={ref} className="py-16 sm:py-20 lg:py-28 overflow-hidden">
@@ -39,7 +42,7 @@ export const Training = () => {
                   'text-lg sm:text-xl lg:text-xl font-medium text-muted-foreground leading-relaxed',
                   isVisible && styles.visible
                 )}
-                style={{ transitionDelay: '300ms' }}
+                style={{ transitionDelay: `${ANIMATION_DELAYS.HEADER_TEXT}ms` }}
               >
                 Готовьтесь к техническим собеседованиям RS School с интерактивными тренировками и
                 персональной обратной связью
@@ -52,7 +55,7 @@ export const Training = () => {
                 styles.animateFadeIn,
                 isVisible && styles.visible
               )}
-              style={{ transitionDelay: '500ms' }}
+              style={{ transitionDelay: `${ANIMATION_DELAYS.BUTTONS}ms` }}
             >
               <Button asChild className="w-full sm:w-auto px-9 py-7">
                 <Link to={ROUTES.REGISTER}>Начать бесплатно</Link>
@@ -91,7 +94,7 @@ export const Training = () => {
               styles.animateFadeIn,
               isVisible && styles.visible
             )}
-            style={{ transitionDelay: '400ms' }}
+            style={{ transitionDelay: `${ANIMATION_DELAYS.IMAGE}ms` }}
           >
             <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
               <img
@@ -105,7 +108,7 @@ export const Training = () => {
                   'absolute bottom-6 left-6 sm:bottom-8 sm:left-8 bg-primary rounded-2xl px-5 py-4 sm:px-6 sm:py-5 shadow-xl',
                   isVisible && styles.visible
                 )}
-                style={{ transitionDelay: '1000ms' }}
+                style={{ transitionDelay: `${ANIMATION_DELAYS.SUCCESS_BADGE}ms` }}
               >
                 <p className="text-2xl sm:text-3xl font-bold text-primary-foreground">98%</p>
                 <p className="text-sm sm:text-base text-primary-foreground mt-1">Успешность</p>

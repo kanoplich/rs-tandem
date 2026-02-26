@@ -3,6 +3,10 @@ import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
 import styles from './styles.module.css';
 
 import {
+  ANIMATION_DELAYS,
+  INTERSECTION_OBSERVER_THRESHOLD_FEATURES,
+} from '@/pages/landing/lib/constants';
+import {
   AwardIcon,
   CheckIcon,
   MessageIcon,
@@ -13,7 +17,9 @@ import {
 import { cn } from '@/shared/lib/utils';
 
 export const WhyChooseUs = () => {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.08 });
+  const { ref, isVisible } = useIntersectionObserver({
+    threshold: INTERSECTION_OBSERVER_THRESHOLD_FEATURES,
+  });
 
   const features = [
     {
@@ -69,7 +75,11 @@ export const WhyChooseUs = () => {
                 styles.whyCard,
                 isVisible && styles.whyCardVisible
               )}
-              style={{ '--delay': `${(index + 1) * 100}ms` } as React.CSSProperties}
+              style={
+                {
+                  '--delay': `${(index + 1) * ANIMATION_DELAYS.FEATURE_CARD}ms`,
+                } as React.CSSProperties
+              }
             >
               <div className={cn('flex flex-col gap-4', styles.whyCardInner)}>
                 {item.icon}

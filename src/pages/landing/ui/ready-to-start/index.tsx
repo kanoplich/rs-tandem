@@ -4,12 +4,15 @@ import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
 
 import styles from './styles.module.css';
 
+import { INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 
 export const ReadyToStart = () => {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref, isVisible } = useIntersectionObserver({
+    threshold: INTERSECTION_OBSERVER_THRESHOLD,
+  });
 
   return (
     <section className="py-12 sm:py-16 lg:py-24 flex justify-center overflow-x-hidden">

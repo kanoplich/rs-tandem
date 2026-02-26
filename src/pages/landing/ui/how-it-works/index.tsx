@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 
 import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
+import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
 import { cn } from '@/shared/lib/utils';
 
 const steps = [
@@ -27,7 +28,9 @@ const steps = [
 ];
 
 export const HowItWorks = () => {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref, isVisible } = useIntersectionObserver({
+    threshold: INTERSECTION_OBSERVER_THRESHOLD,
+  });
 
   return (
     <section className="bg-sidebar">
@@ -50,7 +53,7 @@ export const HowItWorks = () => {
               <div
                 key={step.id}
                 className={cn(styles.stepCard, isVisible && styles.stepCardVisible)}
-                style={{ transitionDelay: `${(index + 1) * 100}ms` }}
+                style={{ transitionDelay: `${(index + 1) * ANIMATION_DELAYS.STEP}ms` }}
               >
                 <div className={cn('flex flex-col items-center gap-4', styles.stepInner)}>
                   <span className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 flex items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">
