@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_HOST: string;
   readonly VITE_REGION: string;
   readonly VITE_USE_MOCK_SUPABASE: string;
+  readonly VITE_USE_MOCK_AI: string;
   readonly VITE_JUDGE_LEVEL: string;
 }
 
