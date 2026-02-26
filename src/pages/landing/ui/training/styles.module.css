@@ -1,4 +1,4 @@
-@keyframes fadeUpScroll {
+@keyframes fade-up-scroll {
   from {
     opacity: 0;
     transform: translateY(35px) scale(0.97);
@@ -9,13 +9,15 @@
   }
 }
 
-.animateFadeUp,
-.animateFadeIn,
-.statItem,
-.successBadge {
+.animate-fade-up,
+.animate-fade-in,
+.stat-item,
+.success-badge {
   opacity: 0;
   transform: translateY(35px) scale(0.97);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   --stagger: 0s;
   transition-delay: var(--stagger);
   animation-delay: var(--stagger);
@@ -24,43 +26,24 @@
 .visible {
   opacity: 1;
   transform: translateY(0) scale(1);
-  animation: fadeUpScroll 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fade-up-scroll 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.delay200 {
-  --stagger: 0.2s;
-}
-.delay300 {
-  --stagger: 0.3s;
-}
-.delay400 {
-  --stagger: 0.4s;
-}
-.delay500 {
-  --stagger: 0.5s;
-}
-.delay700 {
-  --stagger: 0.7s;
-}
-.delay1000 {
-  --stagger: 1s;
-}
-
-.statItem:nth-child(1) {
+.stat-item:nth-child(1) {
   --stagger: 0.75s;
 }
-.statItem:nth-child(2) {
+.stat-item:nth-child(2) {
   --stagger: 0.9s;
 }
-.statItem:nth-child(3) {
+.stat-item:nth-child(3) {
   --stagger: 1.05s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animateFadeUp,
-  .animateFadeIn,
-  .statItem,
-  .successBadge {
+  .animate-fade-up,
+  .animate-fade-in,
+  .stat-item,
+  .success-badge {
     transition: none !important;
     animation: none !important;
     transform: none !important;
@@ -69,7 +52,7 @@
 }
 
 @media (max-width: 640px) {
-  @keyframes fadeUpScroll {
+  @keyframes fade-up-scroll {
     from {
       opacity: 0;
       transform: translateY(28px);
@@ -80,10 +63,10 @@
     }
   }
 
-  .animateFadeUp,
-  .animateFadeIn,
-  .statItem,
-  .successBadge {
+  .animate-fade-up,
+  .animate-fade-in,
+  .stat-item,
+  .success-badge {
     transform: translateY(28px) !important;
   }
 

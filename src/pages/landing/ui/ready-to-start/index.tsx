@@ -17,8 +17,8 @@ export const ReadyToStart = () => {
         <div
           ref={ref}
           className={cn(
-            styles['readyCard'],
-            isVisible && styles['readyCardVisible'],
+            styles.readyCard,
+            isVisible && styles.readyCardVisible,
             'border border-secondary rounded-2xl flex flex-col items-center bg-secondary/45 gap-5 py-10 px-6 w-full max-w-[720px] sm:max-w-[960px] lg:max-w-[1240px] sm:scale-[0.95] lg:scale-100 origin-top text-center'
           )}
         >

@@ -19,4 +19,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts',
   },
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+    },
+  },
 });

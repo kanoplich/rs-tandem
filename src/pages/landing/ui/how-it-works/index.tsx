@@ -49,10 +49,10 @@ export const HowItWorks = () => {
             return (
               <div
                 key={step.id}
-                className={cn(styles['stepCard'], isVisible && styles['stepCardVisible'])}
+                className={cn(styles.stepCard, isVisible && styles.stepCardVisible)}
                 style={{ transitionDelay: `${(index + 1) * 100}ms` }}
               >
-                <div className={cn('flex flex-col items-center gap-4', styles['stepInner'])}>
+                <div className={cn('flex flex-col items-center gap-4', styles.stepInner)}>
                   <span className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 flex items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">
                     {index + 1}
                   </span>

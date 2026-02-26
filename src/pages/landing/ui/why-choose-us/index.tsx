@@ -66,12 +66,12 @@ export const WhyChooseUs = () => {
               key={index}
               className={cn(
                 'bg-card border rounded-2xl p-6 sm:p-8 cursor-pointer',
-                styles['whyCard'],
-                isVisible && styles['whyCardVisible']
+                styles.whyCard,
+                isVisible && styles.whyCardVisible
               )}
-              style={{ transitionDelay: `${(index + 1) * 100}ms` }}
+              style={{ '--delay': `${(index + 1) * 100}ms` } as React.CSSProperties}
             >
-              <div className={`flex flex-col gap-4 ${styles['whyCardInner']}`}>
+              <div className={cn('flex flex-col gap-4', styles.whyCardInner)}>
                 {item.icon}
                 <h4 className="text-lg sm:text-xl font-semibold">{item.title}</h4>
                 <p className="text-sm sm:text-base text-muted-foreground">{item.text}</p>

@@ -1,4 +1,4 @@
-@keyframes fadeUpGentle {
+@keyframes fade-up-gentle {
   0% {
     opacity: 0;
     transform: translateY(32px) scale(0.97);
@@ -13,7 +13,7 @@
   }
 }
 
-.stepCard {
+.step-card {
   opacity: 0;
   transform: translateY(32px) scale(0.97);
   transition:
@@ -24,32 +24,19 @@
   animation-delay: var(--delay);
 }
 
-.stepCardVisible {
+.step-card-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
-  animation: fadeUpGentle 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fade-up-gentle 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.delay100 {
-  --delay: 0.1s;
-}
-.delay200 {
-  --delay: 0.2s;
-}
-.delay300 {
-  --delay: 0.3s;
-}
-.delay400 {
-  --delay: 0.4s;
-}
-
-.stepInner {
+.step-inner {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stepCard,
-  .stepInner {
+  .step-card,
+  .step-inner {
     transition: none !important;
     animation: none !important;
     transform: none !important;
@@ -58,7 +45,7 @@
 }
 
 @media (max-width: 640px) {
-  @keyframes fadeUpGentle {
+  @keyframes fade-up-gentle {
     0% {
       opacity: 0;
       transform: translateY(28px) scale(0.98);
@@ -69,15 +56,15 @@
     }
   }
 
-  .stepCard {
+  .step-card {
     transform: translateY(28px) scale(0.98) !important;
   }
 
-  .stepCardVisible {
+  .step-card-visible {
     animation-duration: 0.8s;
   }
 
-  .stepCard:hover .stepInner {
+  .step-card:hover .step-inner {
     transform: translateY(-3px) scale(1.01);
   }
 }

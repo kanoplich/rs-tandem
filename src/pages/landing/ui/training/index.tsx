@@ -24,8 +24,8 @@ export const Training = () => {
           <div
             className={cn(
               'flex flex-col gap-6 lg:gap-8 w-full lg:w-1/2 xl:w-[55%] text-center lg:text-left',
-              styles['animateFadeUp'],
-              isVisible && styles['visible']
+              styles.animateFadeUp,
+              isVisible && styles.visible
             )}
           >
             <div className="flex flex-col sm:gap-4 lg:gap-6">
@@ -35,9 +35,9 @@ export const Training = () => {
 
               <p
                 className={cn(
-                  styles['animateFadeIn'],
+                  styles.animateFadeIn,
                   'text-lg sm:text-xl lg:text-xl font-medium text-muted-foreground leading-relaxed',
-                  isVisible && styles['visible']
+                  isVisible && styles.visible
                 )}
                 style={{ transitionDelay: '300ms' }}
               >
@@ -49,8 +49,8 @@ export const Training = () => {
             <div
               className={cn(
                 'flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start',
-                styles['animateFadeIn'],
-                isVisible && styles['visible']
+                styles.animateFadeIn,
+                isVisible && styles.visible
               )}
               style={{ transitionDelay: '500ms' }}
             >
@@ -65,17 +65,17 @@ export const Training = () => {
             <div
               className={cn(
                 'flex gap-10 sm:gap-12 lg:gap-14 pt-4 justify-center lg:justify-start flex-wrap',
-                styles['animateFadeIn'],
-                isVisible && styles['visible']
+                styles.animateFadeIn,
+                isVisible && styles.visible
               )}
             >
               {stats.map((item) => (
                 <div
                   key={item.label}
                   className={cn(
-                    styles['statItem'],
+                    styles.statItem,
                     'text-center lg:text-left transition-opacity duration-500 hover:opacity-80',
-                    isVisible && styles['visible']
+                    isVisible && styles.visible
                   )}
                 >
                   <p className="text-3xl sm:text-4xl font-bold text-primary">{item.value}</p>
@@ -88,8 +88,8 @@ export const Training = () => {
           <div
             className={cn(
               'relative flex justify-center lg:justify-end w-full lg:w-1/2 xl:w-[45%]',
-              styles['animateFadeIn'],
-              isVisible && styles['visible']
+              styles.animateFadeIn,
+              isVisible && styles.visible
             )}
             style={{ transitionDelay: '400ms' }}
           >
@@ -101,9 +101,9 @@ export const Training = () => {
               />
               <div
                 className={cn(
-                  styles['successBadge'],
+                  styles.successBadge,
                   'absolute bottom-6 left-6 sm:bottom-8 sm:left-8 bg-primary rounded-2xl px-5 py-4 sm:px-6 sm:py-5 shadow-xl',
-                  isVisible && styles['visible']
+                  isVisible && styles.visible
                 )}
                 style={{ transitionDelay: '1000ms' }}
               >
