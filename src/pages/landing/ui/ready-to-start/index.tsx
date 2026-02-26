@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 
-import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
-
 import styles from './styles.module.css';
 
+import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
 import { INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
+import { TEXT_CONSTANTS } from '@/pages/landing/locales/locales';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
+import { BUTTONS_TEXT } from '@/shared/model/constants';
 import { Button } from '@/shared/ui/button';
 
 export const ReadyToStart = () => {
@@ -32,16 +33,15 @@ export const ReadyToStart = () => {
           />
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
-            Готовы начать?
+            {TEXT_CONSTANTS.readyToStartTitle}
           </h2>
 
           <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-[90%] sm:max-w-[672px] mx-auto">
-            Присоединяйтесь к тысячам студентов RS School, которые успешно готовятся к техническим
-            интервью
+            {TEXT_CONSTANTS.readyToStartDescription}
           </p>
 
           <Button asChild className="mt-4 px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg">
-            <Link to={ROUTES.REGISTER}>Зарегистрироваться сейчас</Link>
+            <Link to={ROUTES.REGISTER}>{BUTTONS_TEXT.registerNow}</Link>
           </Button>
         </div>
       </div>

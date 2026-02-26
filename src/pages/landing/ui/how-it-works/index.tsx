@@ -2,30 +2,8 @@ import styles from './styles.module.css';
 
 import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
 import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
+import { TEXT_CONSTANTS, STEPS_TEXT } from '@/pages/landing/locales/locales';
 import { cn } from '@/shared/lib/utils';
-
-const steps = [
-  {
-    id: 'stage',
-    title: 'Выберите этап',
-    description: 'Начните с того этапа, который вам нужен',
-  },
-  {
-    id: 'topics',
-    title: 'Выберите темы',
-    description: 'Определите темы для тренировки',
-  },
-  {
-    id: 'practice',
-    title: 'Тренируйтесь',
-    description: 'Отвечайте на вопросы интервьюера',
-  },
-  {
-    id: 'analyze',
-    title: 'Анализируйте',
-    description: 'Получайте результаты и улучшайтесь',
-  },
-];
 
 export const HowItWorks = () => {
   const { ref, isVisible } = useIntersectionObserver({
@@ -37,10 +15,10 @@ export const HowItWorks = () => {
       <div className="container mx-auto max-w-[1280px] px-6 py-16">
         <div className="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
           <h2 className="mb-4 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl">
-            Как это работает?
+            {TEXT_CONSTANTS.howItWorksTitle}
           </h2>
           <p className="text-sm text-sidebar-foreground sm:text-base lg:text-lg">
-            Простой процесс для эффективной подготовки
+            {TEXT_CONSTANTS.howItWorksDescription}
           </p>
         </div>
 
@@ -48,7 +26,7 @@ export const HowItWorks = () => {
           ref={ref}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 text-center"
         >
-          {steps.map((step, index) => {
+          {STEPS_TEXT.map((step, index) => {
             return (
               <div
                 key={step.id}

@@ -1,19 +1,18 @@
 import { Link } from 'react-router-dom';
 
-import { useIntersectionObserver } from '../../hooks/use-intersection-observer';
-
 import styles from './styles.module.css';
 
-import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
+import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
+import {
+  ANIMATION_DELAYS,
+  INTERSECTION_OBSERVER_THRESHOLD,
+  stats,
+} from '@/pages/landing/lib/constants';
+import { TEXT_CONSTANTS } from '@/pages/landing/locales/locales';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
+import { BUTTONS_TEXT } from '@/shared/model/constants';
 import { Button } from '@/shared/ui/button';
-
-const stats = [
-  { value: '1000+', label: 'Студентов' },
-  { value: '37', label: 'Тем' },
-  { value: '3', label: 'Этапа' },
-];
 
 export const Training = () => {
   const { ref, isVisible } = useIntersectionObserver({
@@ -33,7 +32,7 @@ export const Training = () => {
           >
             <div className="flex flex-col sm:gap-4 lg:gap-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center lg:text-left">
-                Interview Training Platform
+                {TEXT_CONSTANTS.heroTitle}
               </h1>
 
               <p
@@ -44,8 +43,7 @@ export const Training = () => {
                 )}
                 style={{ transitionDelay: `${ANIMATION_DELAYS.HEADER_TEXT}ms` }}
               >
-                Готовьтесь к техническим собеседованиям RS School с интерактивными тренировками и
-                персональной обратной связью
+                {TEXT_CONSTANTS.heroDescription}
               </p>
             </div>
 
@@ -58,10 +56,10 @@ export const Training = () => {
               style={{ transitionDelay: `${ANIMATION_DELAYS.BUTTONS}ms` }}
             >
               <Button asChild className="w-full sm:w-auto px-9 py-7">
-                <Link to={ROUTES.REGISTER}>Начать бесплатно</Link>
+                <Link to={ROUTES.REGISTER}>{BUTTONS_TEXT.startFree}</Link>
               </Button>
               <Button asChild variant="outline" className="w-full sm:w-auto px-9 py-7">
-                <Link to={ROUTES.LOGIN}>Войти</Link>
+                <Link to={ROUTES.LOGIN}>{BUTTONS_TEXT.login}</Link>
               </Button>
             </div>
 
@@ -110,8 +108,12 @@ export const Training = () => {
                 )}
                 style={{ transitionDelay: `${ANIMATION_DELAYS.SUCCESS_BADGE}ms` }}
               >
-                <p className="text-2xl sm:text-3xl font-bold text-primary-foreground">98%</p>
-                <p className="text-sm sm:text-base text-primary-foreground mt-1">Успешность</p>
+                <p className="text-2xl sm:text-3xl font-bold text-primary-foreground">
+                  {TEXT_CONSTANTS.successRateValue}
+                </p>
+                <p className="text-sm sm:text-base text-primary-foreground mt-1">
+                  {TEXT_CONSTANTS.successRateLabel}
+                </p>
               </div>
             </div>
           </div>
