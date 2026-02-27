@@ -11,7 +11,7 @@ import {
 import { LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '@/pages/landing/locales/locales';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
-import { BUTTON_TEXT } from '@/shared/model/constants';
+import { BUTTON_TEXT, HEADERS_TEXT } from '@/shared/model/constants';
 import { Button } from '@/shared/ui/button';
 
 export const Training = () => {
@@ -32,7 +32,7 @@ export const Training = () => {
           >
             <div className="flex flex-col sm:gap-4 lg:gap-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center lg:text-left">
-                {LANDING_HERO_TEXT.TITLE}
+                {HEADERS_TEXT.SITE_TITLE}
               </h1>
 
               <p

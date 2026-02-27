@@ -1,5 +1,4 @@
 export const LANDING_HERO_TEXT = {
-  TITLE: 'Interview Training Platform',
   DESCRIPTION:
     'Готовьтесь к техническим собеседованиям RS School с интерактивными тренировками и персональной обратной связью',
 };
