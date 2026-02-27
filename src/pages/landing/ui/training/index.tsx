@@ -8,10 +8,10 @@ import {
   INTERSECTION_OBSERVER_THRESHOLD,
   stats,
 } from '@/pages/landing/lib/constants';
-import { TEXT_CONSTANTS } from '@/pages/landing/locales/locales';
+import { LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '@/pages/landing/locales/locales';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
-import { BUTTONS_TEXT } from '@/shared/model/constants';
+import { BUTTON_TEXT } from '@/shared/model/constants';
 import { Button } from '@/shared/ui/button';
 
 export const Training = () => {
@@ -32,7 +32,7 @@ export const Training = () => {
           >
             <div className="flex flex-col sm:gap-4 lg:gap-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-center lg:text-left">
-                {TEXT_CONSTANTS.heroTitle}
+                {LANDING_HERO_TEXT.TITLE}
               </h1>
 
               <p
@@ -43,7 +43,7 @@ export const Training = () => {
                 )}
                 style={{ transitionDelay: `${ANIMATION_DELAYS.HEADER_TEXT}ms` }}
               >
-                {TEXT_CONSTANTS.heroDescription}
+                {LANDING_HERO_TEXT.DESCRIPTION}
               </p>
             </div>
 
@@ -56,10 +56,10 @@ export const Training = () => {
               style={{ transitionDelay: `${ANIMATION_DELAYS.BUTTONS}ms` }}
             >
               <Button asChild className="w-full sm:w-auto px-9 py-7">
-                <Link to={ROUTES.REGISTER}>{BUTTONS_TEXT.startFree}</Link>
+                <Link to={ROUTES.REGISTER}>{BUTTON_TEXT.START_FREE}</Link>
               </Button>
               <Button asChild variant="outline" className="w-full sm:w-auto px-9 py-7">
-                <Link to={ROUTES.LOGIN}>{BUTTONS_TEXT.login}</Link>
+                <Link to={ROUTES.LOGIN}>{BUTTON_TEXT.LOGIN}</Link>
               </Button>
             </div>
 
@@ -109,10 +109,10 @@ export const Training = () => {
                 style={{ transitionDelay: `${ANIMATION_DELAYS.SUCCESS_BADGE}ms` }}
               >
                 <p className="text-2xl sm:text-3xl font-bold text-primary-foreground">
-                  {TEXT_CONSTANTS.successRateValue}
+                  {LANDING_SUCCESS_TEXT.VALUE}
                 </p>
                 <p className="text-sm sm:text-base text-primary-foreground mt-1">
-                  {TEXT_CONSTANTS.successRateLabel}
+                  {LANDING_SUCCESS_TEXT.LABEL}
                 </p>
               </div>
             </div>

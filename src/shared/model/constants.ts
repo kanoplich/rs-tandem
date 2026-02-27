@@ -1,5 +1,5 @@
-export const BUTTONS_TEXT = {
-  login: 'Войти',
-  startFree: 'Начать бесплатно',
-  registerNow: 'Зарегистрироваться сейчас',
+export const BUTTON_TEXT = {
+  LOGIN: 'Войти',
+  START_FREE: 'Начать бесплатно',
+  REGISTER_NOW: 'Зарегистрироваться сейчас',
 };

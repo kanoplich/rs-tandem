@@ -5,7 +5,7 @@ import {
   ANIMATION_DELAYS,
   INTERSECTION_OBSERVER_THRESHOLD_FEATURES,
 } from '@/pages/landing/lib/constants';
-import { FEATURES_TEXT, TEXT_CONSTANTS } from '@/pages/landing/locales/locales';
+import { LANDING_FEATURES_TEXT, LANDING_WHY_CHOOSE_US_TEXT } from '@/pages/landing/locales/locales';
 import {
   AwardIcon,
   CheckIcon,
@@ -65,16 +65,16 @@ export const WhyChooseUs = () => {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight mb-4">
-            {TEXT_CONSTANTS.whyChooseUsTitle}
+            {LANDING_WHY_CHOOSE_US_TEXT.TITLE}
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">
-            {TEXT_CONSTANTS.whyChooseUsDescription}
+            {LANDING_WHY_CHOOSE_US_TEXT.DESCRIPTION}
           </p>
         </div>
 
         <div ref={ref} className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((item, index) => {
-            const textItem = FEATURES_TEXT.find((f) => f.id === item.id);
+            const textItem = LANDING_FEATURES_TEXT.find((f) => f.ID === item.id);
             if (!textItem) return null;
             return (
               <div

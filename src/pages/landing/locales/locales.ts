@@ -1,81 +1,90 @@
-export const TEXT_CONSTANTS = {
-  heroTitle: 'Interview Training Platform',
-  heroDescription:
+export const LANDING_HERO_TEXT = {
+  TITLE: 'Interview Training Platform',
+  DESCRIPTION:
     'Готовьтесь к техническим собеседованиям RS School с интерактивными тренировками и персональной обратной связью',
+};
 
-  successRateValue: '98%',
-  successRateLabel: 'Успешность',
+export const LANDING_SUCCESS_TEXT = {
+  VALUE: '98%',
+  LABEL: 'Успешность',
+};
 
-  whyChooseUsTitle: 'Почему выбирают нас?',
-  whyChooseUsDescription:
+export const LANDING_WHY_CHOOSE_US_TEXT = {
+  TITLE: 'Почему выбирают нас?',
+  DESCRIPTION:
     'Платформа разработана специально для подготовки к интервью в рамках программы RS School',
+};
 
-  howItWorksTitle: 'Как это работает?',
-  howItWorksDescription: 'Простой процесс для эффективной подготовки',
+export const LANDING_HOW_IT_WORKS_TEXT = {
+  TITLE: 'Как это работает?',
+  DESCRIPTION: 'Простой процесс для эффективной подготовки',
+};
 
-  readyToStartTitle: 'Готовы начать?',
-  readyToStartDescription:
+export const LANDING_READY_TEXT = {
+  TITLE: 'Готовы начать?',
+  DESCRIPTION:
     'Присоединяйтесь к тысячам студентов RS School, которые успешно готовятся к техническим интервью',
 };
 
-export const FEATURES_TEXT = [
+export const LANDING_FEATURES_TEXT = [
   {
-    id: 'interactive-training',
-    title: 'Интерактивные тренировки',
-    text: 'Практикуйтесь в реальном времени с AI-интервьюером, отвечая на технические вопросы',
+    ID: 'interactive-training',
+    TITLE: 'Интерактивные тренировки',
+    DESCRIPTION:
+      'Практикуйтесь в реальном времени с AI-интервьюером, отвечая на технические вопросы',
   },
   {
-    id: 'personal-tracking',
-    title: 'Персональный трекинг',
-    text: 'Отслеживайте свой прогресс, средние оценки и сильные стороны по каждой теме',
+    ID: 'personal-tracking',
+    TITLE: 'Персональный трекинг',
+    DESCRIPTION: 'Отслеживайте свой прогресс, средние оценки и сильные стороны по каждой теме',
   },
   {
-    id: 'current-topics',
-    title: '37 актуальных тем',
-    text: 'От основ JavaScript до продвинутой архитектуры и Node.js',
+    ID: 'current-topics',
+    TITLE: '37 актуальных тем',
+    DESCRIPTION: 'От основ JavaScript до продвинутой архитектуры и Node.js',
   },
   {
-    id: 'analysis',
-    title: 'Анализ результатов',
-    text: 'Получайте детальную статистику и рекомендации для улучшения',
+    ID: 'analysis',
+    TITLE: 'Анализ результатов',
+    DESCRIPTION: 'Получайте детальную статистику и рекомендации для улучшения',
   },
   {
-    id: 'training-stage',
-    title: '3 этапа обучения',
-    text: 'Структурированная программа от базовых концепций до продвинутых тем',
+    ID: 'training-stage',
+    TITLE: '3 этапа обучения',
+    DESCRIPTION: 'Структурированная программа от базовых концепций до продвинутых тем',
   },
   {
-    id: 'achievements',
-    title: 'Достижения',
-    text: 'Зарабатывайте награды и отслеживайте свои успехи',
-  },
-];
-
-export const STEPS_TEXT = [
-  {
-    id: 'stage',
-    title: 'Выберите этап',
-    description: 'Начните с того этапа, который вам нужен',
-  },
-  {
-    id: 'topics',
-    title: 'Выберите темы',
-    description: 'Определите темы для тренировки',
-  },
-  {
-    id: 'practice',
-    title: 'Тренируйтесь',
-    description: 'Отвечайте на вопросы интервьюера',
-  },
-  {
-    id: 'analyze',
-    title: 'Анализируйте',
-    description: 'Получайте результаты и улучшайтесь',
+    ID: 'achievements',
+    TITLE: 'Достижения',
+    DESCRIPTION: 'Зарабатывайте награды и отслеживайте свои успехи',
   },
 ];
 
-export const STATS_TEXT = {
-  students: 'Студентов',
-  topics: 'Тем',
-  stages: 'Этапа',
+export const LANDING_STEPS_TEXT = [
+  {
+    ID: 'stage',
+    TITLE: 'Выберите этап',
+    DESCRIPTION: 'Начните с того этапа, который вам нужен',
+  },
+  {
+    ID: 'topics',
+    TITLE: 'Выберите темы',
+    DESCRIPTION: 'Определите темы для тренировки',
+  },
+  {
+    ID: 'practice',
+    TITLE: 'Тренируйтесь',
+    DESCRIPTION: 'Отвечайте на вопросы интервьюера',
+  },
+  {
+    ID: 'analyze',
+    TITLE: 'Анализируйте',
+    DESCRIPTION: 'Получайте результаты и улучшайтесь',
+  },
+];
+
+export const LANDING_STATS_TEXT = {
+  STUDENTS: 'Студентов',
+  TOPICS: 'Тем',
+  STAGES: 'Этапа',
 };
