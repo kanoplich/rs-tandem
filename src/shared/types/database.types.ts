@@ -152,6 +152,7 @@ export type Database = {
           id: string;
           sort_order: number | null;
           stage: number;
+          task_count: number | null;
           title: string;
         };
         Insert: {
@@ -160,6 +161,7 @@ export type Database = {
           id: string;
           sort_order?: number | null;
           stage?: number;
+          task_count?: number | null;
           title: string;
         };
         Update: {
@@ -168,6 +170,7 @@ export type Database = {
           id?: string;
           sort_order?: number | null;
           stage?: number;
+          task_count?: number | null;
           title?: string;
         };
         Relationships: [];
