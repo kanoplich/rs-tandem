@@ -1,15 +1,15 @@
-export interface User {
-  id: string;
-  email: string;
+import type { Session as SupabaseSession, User as SupabaseUser } from '@supabase/supabase-js';
+
+import type { Profile } from './database.types';
+
+export interface User extends SupabaseUser {
   username?: string;
   avatar?: string | null;
-  created_at?: string;
+  profile?: Profile | null;
 }
 
-export interface Session {
+export interface Session extends Omit<SupabaseSession, 'user'> {
   user: User | null;
-  access_token?: string;
-  expires_at?: number;
 }
 
 export interface AuthState {

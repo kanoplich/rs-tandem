@@ -1,6 +1,5 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
-
-import type { User as AuthUser, Session as AuthSession, AuthState, AuthContextValue } from './auth';
+import type { Session, User } from './index';
 
 export type Database = {
   // Allows to automatically instantiate createClient with right options
@@ -237,16 +236,14 @@ export type Database = {
   };
 };
 
-export type { AuthUser, AuthSession, AuthState, AuthContextValue };
-
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type Task = Database['public']['Tables']['tasks']['Row'];
 export type Submission = Database['public']['Tables']['submissions']['Row'];
 export type Topic = Database['public']['Tables']['topics']['Row'];
 
-export type AppUser = AuthUser & Partial<Profile>;
+export type AppUser = User & Partial<Profile>;
 
-export interface AppSession extends AuthSession {
+export interface AppSession extends Session {
   profile?: Profile | null;
 }
 
