@@ -5,3 +5,7 @@ export const HEADER_LINK_TEXT = {
   PROFILE: 'Профиль',
   EXIT: 'Выйти',
 };
+
+export const WARNING_WINDOWS_TEXT = {
+  DOWNLOAD: 'Загрузка',
+};

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { AppLayout } from '@/app/app-layout';
-import { ProtectedAppLayout } from '@/app/protected-app-layout';
+import { ProtectedAppLayout } from '@/app/app-layout/protected-app-layout';
 import { ProtectedRoute } from '@/app/routes/protected-route';
 import {
   Dashboard,
