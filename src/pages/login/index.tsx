@@ -1,4 +1,5 @@
-import { LoginForm } from '@/features/auth/ui/LoginForm';
+import { AUTH_LOGIN_PAGE_TEXT } from '@/features/auth/model/login-page.constants';
+import { LoginForm } from '@/features/auth/ui/login-form';
 
 export const Login = () => {
   return (
@@ -6,19 +7,15 @@ export const Login = () => {
       <div className="w-full flex flex-col items-center">
         <div className="mb-10 text-center">
           <h1 className="text-[30px] leading-[36px] font-bold text-white">
-            Interview Training Platform
+            {AUTH_LOGIN_PAGE_TEXT.TITLE}
           </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Подготовка к техническим интервью RS School
-          </p>
+          <p className="mt-2 text-sm text-muted-foreground">{AUTH_LOGIN_PAGE_TEXT.SUBTITLE}</p>
         </div>
 
         <LoginForm />
 
-        <div className="mt-16 text-center text-sm text-muted-foreground">
-          Тренируйте навыки технического интервью
-          <br />
-          для этапов отбора в RS School
+        <div className="mt-16 max-w-[308px] text-center text-sm text-muted-foreground">
+          {AUTH_LOGIN_PAGE_TEXT.FOOTER}
         </div>
       </div>
     </div>

@@ -1,52 +1,51 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
+import { LoginEmailField } from './login-email-field';
+import { LoginPasswordField } from './login-password-field';
+import { LoginSubmitButton } from './login-submit-button';
+
+import {
+  loginSchema,
+  type LoginFormValues,
+  AUTH_LOGIN_TEXT,
+  loginDefaultValues,
+} from '@/features/auth/model';
 import { ROUTES } from '@/shared/config/routes';
-import { Button } from '@/shared/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared/ui/card';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
-import { PasswordInput } from '@/shared/ui/password-input';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared/ui';
 
 export const LoginForm = () => {
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
+    defaultValues: loginDefaultValues,
+  });
+
+  const onSubmit = async (_data: LoginFormValues) => {
+    // TODO: authService.login
+  };
+
   return (
     <Card className="w-full max-w-[448px]">
       <CardHeader>
-        <CardTitle>Вход в систему</CardTitle>
-        <CardDescription>Введите свои данные для входа</CardDescription>
+        <CardTitle>{AUTH_LOGIN_TEXT.TITLE}</CardTitle>
+        <CardDescription>{AUTH_LOGIN_TEXT.DESCRIPTION}</CardDescription>
       </CardHeader>
 
       <CardContent className="space-y-6">
-        <form className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              className="focus-visible:ring-primary/50 focus-visible:border-primary"
-              type="email"
-              autoComplete="email"
-              placeholder="your.email@example.com"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="password">Пароль</Label>
-            <PasswordInput
-              id="password"
-              className="focus-visible:ring-primary/50 focus-visible:border-primary"
-              placeholder="••••••••"
-              autoComplete="current-password"
-            />
-          </div>
-
-          <Button type="submit" className="w-full cursor-pointer">
-            Войти
-          </Button>
-        </form>
+        <FormProvider {...form}>
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+            <LoginEmailField />
+            <LoginPasswordField />
+            <LoginSubmitButton />
+          </form>
+        </FormProvider>
 
         <p className="text-center text-sm text-muted-foreground">
-          Нет аккаунта?{' '}
+          {AUTH_LOGIN_TEXT.NO_ACCOUNT}{' '}
           <Link to={ROUTES.REGISTER} className="text-primary underline underline-offset-4">
-            Зарегистрироваться
+            {AUTH_LOGIN_TEXT.REGISTER_LINK}
           </Link>
         </p>
       </CardContent>
