@@ -43,12 +43,7 @@ export const onAuthStateChange = (callback: (session: Session | null) => void) =
   return subscription;
 };
 
-export const signUp = async (
-  p0: string,
-  p1: string,
-  p2: { username: string },
-  { email, password }: AuthCredentials
-): Promise<Session> => {
+export const signUp = async ({ email, password }: AuthCredentials): Promise<Session> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
     setMockIsAuth(true);
@@ -73,11 +68,7 @@ export const signUp = async (
   return session;
 };
 
-export const signIn = async (
-  p0: string,
-  p1: string,
-  { email, password }: AuthCredentials
-): Promise<Session> => {
+export const signIn = async ({ email, password }: AuthCredentials): Promise<Session> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
     setMockIsAuth(true);

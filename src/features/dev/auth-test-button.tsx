@@ -40,7 +40,7 @@ export const AuthTestButtons = () => {
           className={styles['button']}
           onClick={() =>
             handleAction('login', () =>
-              signIn('', '', { email: 'test@example.com', password: 'password123' })
+              signIn({ email: 'test@example.com', password: 'password123' })
             )
           }
           disabled={!!loading}
@@ -51,12 +51,7 @@ export const AuthTestButtons = () => {
           className={styles['button']}
           onClick={() =>
             handleAction('register', () =>
-              signUp(
-                '',
-                '',
-                { username: 'newuser' },
-                { email: 'newuser@example.com', password: 'password123' }
-              )
+              signUp({ email: 'newuser@example.com', password: 'password123' })
             )
           }
           disabled={!!loading}
