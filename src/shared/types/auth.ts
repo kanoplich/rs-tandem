@@ -20,4 +20,5 @@ export interface AuthState {
 
 export interface AuthContextValue extends AuthState {
   isAuthenticated: boolean;
+  signOut: () => Promise<void>;
 }

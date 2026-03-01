@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { AppLayout } from '@/app/app-layout';
+import { ProtectedAppLayout } from '@/app/protected-app-layout';
+import { ProtectedRoute } from '@/app/routes/protected-route';
 import {
   Dashboard,
   History,
@@ -21,12 +23,22 @@ export const router = createBrowserRouter([
       { path: ROUTES.LANDING, element: <Landing /> },
       { path: ROUTES.LOGIN, element: <Login /> },
       { path: ROUTES.REGISTER, element: <Register /> },
+      { path: ROUTES.NOT_FOUND, element: <NotFound /> },
+    ],
+  },
+  {
+    path: ROUTES.APP,
+    element: (
+      <ProtectedRoute>
+        <ProtectedAppLayout />
+      </ProtectedRoute>
+    ),
+    children: [
       { path: ROUTES.DASHBOARD, element: <Dashboard /> },
       { path: ROUTES.TOPICS, element: <Topics /> },
       { path: ROUTES.TASK, element: <Task /> },
       { path: ROUTES.HISTORY, element: <History /> },
       { path: ROUTES.PROFILE, element: <Profile /> },
-      { path: ROUTES.NOT_FOUND, element: <NotFound /> },
     ],
   },
 ]);

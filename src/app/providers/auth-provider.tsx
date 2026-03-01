@@ -2,7 +2,7 @@ import { type ReactNode, useEffect, useState } from 'react';
 
 import { AuthContext } from './auth-context';
 
-import { onAuthStateChange } from '@/shared/api/auth';
+import { onAuthStateChange, signOut as signOutApi } from '@/shared/api/auth';
 import type { Session } from '@/shared/types/index';
 
 interface AuthProviderProps {
@@ -24,11 +24,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
   }, []);
 
+  const signOut = async () => {
+    await signOutApi();
+  };
   const value = {
     session,
     user: session?.user ?? null,
     isLoading,
     isAuthenticated: !!session?.user,
+    signOut,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
