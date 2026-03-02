@@ -7,7 +7,7 @@ export interface Submission {
   // result: JudgeResult;
 }
 
-interface JudgeResult {
+export interface JudgeResult {
   score: number;
   maxScore: number;
   coveredPoints: string[];
@@ -16,7 +16,7 @@ interface JudgeResult {
   judgeLevel: 0 | 1 | 2;
 }
 
-interface RunResult {
+export interface RunResult {
   passed: boolean;
   totalTests: number;
   passedTests: number;
