@@ -1,4 +1,4 @@
-# Meeting Notes #3 - Настройка Supabase для AI Prep
+# Meeting Notes #4 - Настройка Supabase для AI Prep
 
 **Дата:** 21 февраля 2026
 
