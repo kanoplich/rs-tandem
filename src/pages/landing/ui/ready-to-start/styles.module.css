@@ -1,7 +1,7 @@
 @keyframes ready-fade-up {
   from {
     opacity: 0;
-    transform: translateY(50px) scale(0.94);
+    transform: translateY(var(--start-translate)) scale(var(--start-scale));
   }
   to {
     opacity: 1;
@@ -10,12 +10,17 @@
 }
 
 .ready-card {
+  --start-translate: 50px;
+  --start-scale: 0.94;
+  --delay: 0s;
+
   opacity: 0;
-  transform: translateY(50px) scale(0.94);
+  transform: translateY(var(--start-translate)) scale(var(--start-scale));
+
   transition:
     opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
     transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-  --delay: 0s;
+
   transition-delay: var(--delay);
   animation-delay: var(--delay);
 }
@@ -27,18 +32,22 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ready-card,
+  .ready-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
   .ready-card-visible {
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-    opacity: 1 !important;
+    animation: none;
   }
 }
 
 @media (max-width: 640px) {
   .ready-card {
-    transform: translateY(40px) scale(0.96) !important;
+    --start-translate: 40px;
+    --start-scale: 0.96;
   }
 
   .ready-card-visible {

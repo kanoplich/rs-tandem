@@ -1,6 +1,6 @@
 import { HowItWorks, ReadyToStart, Training, WhyChooseUs } from '@/pages/landing/ui';
 
-export function Landing() {
+export const Landing = () => {
   return (
     <div className="flex flex-col">
       <Training />
