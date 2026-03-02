@@ -9,4 +9,4 @@ export const Landing = () => {
       <ReadyToStart />
     </div>
   );
-}
+};
