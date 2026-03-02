@@ -5,6 +5,7 @@ import { DEVELOPERS } from './constants/constants';
 import { FOOTER_TEXTS } from './locales/locales';
 
 import { RsSchool } from '@/shared/assets/icons';
+import { HEADERS_TEXT } from '@/shared/model/constants';
 
 export const Footer = () => {
   const [showDevs, setShowDevs] = useState(false);
@@ -15,7 +16,7 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="text-center md:text-left space-y-2 max-w-md mx-auto md:mx-0">
             <h3 className="text-lg sm:text-xl font-semibold text-light tracking-wide">
-              Interview Training Platform
+              {HEADERS_TEXT.SITE_TITLE}
             </h3>
             <p className="text-sm sm:text-base text-muted-foreground">{FOOTER_TEXTS.DESCRIPTION}</p>
           </div>
