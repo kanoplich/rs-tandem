@@ -1,37 +1,36 @@
+import { Github, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
 import { DEVELOPERS } from './constants/constants';
+import { FOOTER_TEXTS } from './locales/locales';
 
-import { FOOTER_TEXTS } from '@/app/app-layout/footer/locales/locales';
+import { RsSchool } from '@/shared/assets/icons';
 
 export const Footer = () => {
   const [showDevs, setShowDevs] = useState(false);
 
   return (
     <footer className="mt-auto border-t border-border bg-background text-foreground">
-      <div className="max-w-7xl mx-auto px-4 py-12 sm:py-14">
+      <div className="max-w-7xl mx-auto px-4 pt-12 sm:pt-14 pb-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="text-center md:text-left space-y-2">
+          <div className="text-center md:text-left space-y-2 max-w-md mx-auto md:mx-0">
             <h3 className="text-lg sm:text-xl font-semibold text-light tracking-wide">
               Interview Training Platform
             </h3>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-md mx-auto md:mx-0">
-              {FOOTER_TEXTS.DESCRIPTION}
-            </p>
+            <p className="text-sm sm:text-base text-muted-foreground">{FOOTER_TEXTS.DESCRIPTION}</p>
           </div>
-
           <div className="flex flex-col items-center md:items-end gap-4 text-sm relative">
             <a
               href="https://rs.school/"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative no-underline text-foreground transition-colors duration-300 hover:text-primary
-           after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0
-           after:bg-primary hover:after:w-full"
+              className="relative inline-flex items-center gap-2 no-underline text-foreground transition-colors duration-300 hover:text-primary
+             after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0
+             after:bg-primary hover:after:w-full"
             >
               {FOOTER_TEXTS.POWERED_BY}
+              <RsSchool className="h-8 w-auto shrink-0" />
             </a>
-
             <div
               className="relative flex flex-col items-center md:items-end"
               onMouseEnter={() => setShowDevs(true)}
@@ -39,36 +38,38 @@ export const Footer = () => {
             >
               <button
                 type="button"
-                className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 {FOOTER_TEXTS.DEVELOPERS_LABEL}
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-300 ${showDevs ? 'rotate-180' : ''}`}
+                />
               </button>
-
-              {showDevs && (
-                <div
-                  className="absolute mt-2 right-0 flex flex-col bg-card border border-border rounded-lg shadow-lg z-10
-                             py-2 px-4 space-y-1 min-w-[160px] text-xs text-light"
-                >
-                  {DEVELOPERS.map((dev) => (
-                    <a
-                      key={dev.name}
-                      href={dev.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-left hover:text-primary transition-colors duration-200"
-                    >
-                      {dev.name}
-                    </a>
-                  ))}
-                </div>
-              )}
+              <div
+                className={`absolute mt-2 right-0 flex flex-col bg-card border border-border rounded-lg shadow-lg
+                            py-2 px-4 space-y-1 min-w-[160px] text-xs text-light
+                            transition-all duration-300 ease-out
+                            ${showDevs ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
+              >
+                {DEVELOPERS.map((dev) => (
+                  <a
+                    key={dev.name}
+                    href={dev.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-primary transition-colors duration-200"
+                  >
+                    <Github size={14} />
+                    {dev.name}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-
         <div className="mt-12 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-        <div className="mt-6 text-center text-xs text-muted-foreground tracking-wider">
+        <div className="mt-6 flex justify-center items-center text-xs text-muted-foreground tracking-normal h-10">
           {FOOTER_TEXTS.COPYRIGHT}
         </div>
       </div>
