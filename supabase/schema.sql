@@ -70,26 +70,34 @@ CREATE POLICY "Authenticated users see topics"
   USING (true);
 
   -- Статистика пользователя (вызывается через supabase.rpc())
-CREATE OR REPLACE FUNCTION get_user_stats()
-RETURNS JSON AS $$
+CREATE OR REPLACE FUNCTION public.get_user_stats()
+RETURNS json
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
   SELECT json_build_object(
-    'xp', COALESCE(SUM(score), 0),
+    'xp', COALESCE(SUM(s.score), 0),
     'streak', 0,  -- упрощено для MVP
-    'completedTasks', COUNT(DISTINCT task_id),
-    'totalTasks', (SELECT COUNT(*) FROM tasks),
+    'completedTasks', COUNT(DISTINCT s.task_id),
+    'totalTasks', (SELECT COUNT(*) FROM public.tasks),
     'rank', CASE
-      WHEN COALESCE(SUM(score), 0) < 500 THEN 'Junior'
-      WHEN COALESCE(SUM(score), 0) < 2000 THEN 'Middle'
+      WHEN COALESCE(SUM(s.score), 0) < 500 THEN 'Junior'
+      WHEN COALESCE(SUM(s.score), 0) < 2000 THEN 'Middle'
       ELSE 'Senior'
     END
   )
-  FROM submissions
-  WHERE user_id = auth.uid();
-$$ LANGUAGE SQL SECURITY DEFINER;
+  FROM public.submissions s
+  WHERE s.user_id = auth.uid();
+$$;
 
 -- Прогресс по темам
-CREATE OR REPLACE FUNCTION get_topic_progress()
-RETURNS JSON AS $$
+CREATE OR REPLACE FUNCTION public.get_topic_progress()
+RETURNS json
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
   SELECT json_agg(row_to_json(t))
   FROM (
     SELECT
@@ -99,13 +107,13 @@ RETURNS JSON AS $$
       COUNT(DISTINCT tk.id) AS total,
       COALESCE(AVG(s.score), 0)::INT AS "avgScore",
       MAX(s.submitted_at) AS "lastAttemptAt"
-    FROM topics t
-    LEFT JOIN tasks tk ON tk.topic_id = t.id
-    LEFT JOIN submissions s ON s.task_id = tk.id AND s.user_id = auth.uid()
+    FROM public.topics t
+    LEFT JOIN public.tasks tk ON tk.topic_id = t.id
+    LEFT JOIN public.submissions s ON s.task_id = tk.id AND s.user_id = auth.uid()
     GROUP BY t.id, t.title
     ORDER BY t.sort_order
   ) t;
-$$ LANGUAGE SQL SECURITY DEFINER;
+$$;
 
 CREATE TABLE profiles (
   id          UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -127,7 +135,11 @@ CREATE POLICY "Users can update own profile"
 
 
 CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS TRIGGER AS $$
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
 BEGIN
   INSERT INTO public.profiles (id, email, name, avatar_url)
   VALUES (
@@ -138,7 +150,7 @@ BEGIN
   );
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
 
 CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users

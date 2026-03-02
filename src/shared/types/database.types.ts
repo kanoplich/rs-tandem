@@ -230,7 +230,7 @@ export type Database = {
       get_user_stats: { Args: never; Returns: Json };
     };
     Enums: {
-      [_ in never]: never;
+      task_type: 'theory_open' | 'theory_choice' | 'coding';
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -355,6 +355,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      task_type: ['theory_open', 'theory_choice', 'coding'],
+    },
   },
 } as const;
