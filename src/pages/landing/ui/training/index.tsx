@@ -6,7 +6,7 @@ import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-
 import {
   ANIMATION_DELAYS,
   INTERSECTION_OBSERVER_THRESHOLD,
-  stats,
+  LANDING_STATS,
 } from '@/pages/landing/lib/constants';
 import { LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '@/pages/landing/locales/locales';
 import { ROUTES } from '@/shared/config/routes';
@@ -70,7 +70,7 @@ export const Training = () => {
                 isVisible && styles.visible
               )}
             >
-              {stats.map((item) => (
+              {LANDING_STATS.map((item) => (
                 <div
                   key={item.label}
                   className={cn(

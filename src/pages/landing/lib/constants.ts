@@ -10,7 +10,7 @@ export const ANIMATION_DELAYS = {
   SUCCESS_BADGE: 1000,
   FEATURE_CARD: 100,
 } as const;
-export const stats = [
+export const LANDING_STATS = [
   { value: '1000+', label: LANDING_STATS_TEXT.STUDENTS },
   { value: '37', label: LANDING_STATS_TEXT.TOPICS },
   { value: '3', label: LANDING_STATS_TEXT.STAGES },
