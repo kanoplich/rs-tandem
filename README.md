@@ -26,3 +26,7 @@
 - Михаил (https://github.com/Michael-JS-Bel)
 - Ольга (https://github.com/HelgaZhizhka)
 - Ирина (https://github.com/IrinaOsp)
+
+## Deploy
+
+https://rs-tandem.netlify.app/
