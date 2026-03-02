@@ -12,8 +12,7 @@ import {
   AUTH_LOGIN_TEXT,
   loginDefaultValues,
 } from '@/features/auth/model';
-import { ROUTES } from '@/shared/config/routes';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared/ui';
+import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
 
 export const LoginForm = () => {
   const form = useForm<LoginFormValues>({
