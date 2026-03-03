@@ -1,19 +1,12 @@
+import type { JudgeResult } from '../judge/types';
+
 export interface Submission {
   id: string;
   userId: string;
   taskId: string;
   answer: string;
   submittedAt: string;
-  // result: JudgeResult;
-}
-
-export interface JudgeResult {
-  score: number;
-  maxScore: number;
-  coveredPoints: string[];
-  missedPoints: string[];
-  feedback: string;
-  judgeLevel: 0 | 1 | 2;
+  result: JudgeResult;
 }
 
 export interface RunResult {
