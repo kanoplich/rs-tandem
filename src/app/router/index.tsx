@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AppLayout } from '@/app/app-layout';
-import { ProtectedAppLayout } from '@/app/app-layout/protected-app-layout';
+import { ProtectedAppLayout } from '@/app/private-layout/protected-app-layout';
+import { AppLayout } from '@/app/public-layout';
 import { ProtectedRoute } from '@/app/routes/protected-route';
+import { RootRedirect } from '@/app/routes/root-redirect';
 import {
   Dashboard,
   History,
@@ -17,6 +18,10 @@ import {
 import { ROUTES } from '@/shared/config/routes';
 
 export const router = createBrowserRouter([
+  {
+    path: ROUTES.HOME,
+    element: <RootRedirect />,
+  },
   {
     element: <AppLayout />,
     children: [

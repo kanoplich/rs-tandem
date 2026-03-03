@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { ROUTES } from '@/shared/config/routes';
-import { useAuth } from '@/shared/lib/hooks/use-auth';
+import { useAuth } from '@/shared/hooks/use-auth';
 import { WARNING_WINDOWS_TEXT } from '@/shared/ui/i18n/header-form';
 
 interface ProtectedRouteProps {

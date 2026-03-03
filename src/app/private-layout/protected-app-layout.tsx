@@ -3,7 +3,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import styles from '././protected-app-layout.module.css';
 
 import { ROUTES } from '@/shared/config/routes';
-import { useAuth } from '@/shared/lib/hooks/use-auth';
+import { useAuth } from '@/shared/hooks/use-auth';
 import { HEADER_LINK_TEXT } from '@/shared/ui/i18n/header-form';
 
 export const ProtectedAppLayout = () => {
