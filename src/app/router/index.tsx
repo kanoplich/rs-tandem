@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { ProtectedAppLayout } from '@/app/private-layout/protected-app-layout';
+import { ProtectedAppLayout } from '@/app/private-layout/protected-layout';
 import { AppLayout } from '@/app/public-layout';
 import { ProtectedRoute } from '@/app/routes/protected-route';
 import { RootRedirect } from '@/app/routes/root-redirect';
