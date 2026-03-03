@@ -12,12 +12,6 @@ export const evaluateTheory = async (taskId: string, answer: string): Promise<Ju
     return MOCK_JUDGE_RESULT_GOOD;
   }
 
-  if (config.JUDGE_LEVEL === 0) {
-    // Level 0: клиентский keyword matching (без Edge Function)
-    // const task = await getTask(taskId);
-    // return evaluateLevel0(answer, task.rubricItems);
-  }
-
   const { data, error } = await supabase.functions.invoke('judge', {
     body: { taskId, answer },
   });
