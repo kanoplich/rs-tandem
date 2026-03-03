@@ -17,7 +17,10 @@ export const AppLayout = () => {
   };
 
   const handleGroqApi = async () => {
-    const result = await evaluateTheory('123', 'Привет');
+    const result = await evaluateTheory(
+      'closures_basics_1',
+      'Замыкание — это функция, которая замыкается'
+    );
     console.log(result);
   };
 
