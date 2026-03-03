@@ -94,7 +94,7 @@ IMPORTANT: Respond ONLY with valid JSON:
   // });
   console.log(user);
 
-  const result: JudgeResult = {
+  const result = {
     score: raw.score,
     maxScore: 100,
     coveredPoints: raw.covered_points,
