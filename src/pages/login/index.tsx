@@ -1,4 +1,4 @@
-import { AUTH_LOGIN_PAGE_TEXT } from '@/features/auth/model/login-page.constants';
+import { AUTH_LOGIN_PAGE_TEXT } from '@/features/auth/locales/login-page-constants';
 import { LoginForm } from '@/features/auth/ui/login-form';
 
 export const Login = () => {

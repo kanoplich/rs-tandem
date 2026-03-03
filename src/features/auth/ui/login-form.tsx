@@ -2,16 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
+import { loginSchema, type LoginFormValues, AUTH_LOGIN_TEXT, loginDefaultValues } from '../index';
+
 import { LoginEmailField } from './login-email-field';
 import { LoginPasswordField } from './login-password-field';
 import { LoginSubmitButton } from './login-submit-button';
 
-import {
-  loginSchema,
-  type LoginFormValues,
-  AUTH_LOGIN_TEXT,
-  loginDefaultValues,
-} from '@/features/auth/model';
 import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
 
 export const LoginForm = () => {
