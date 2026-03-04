@@ -2,7 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { loginSchema, type LoginFormValues, AUTH_LOGIN_TEXT, loginDefaultValues } from '../index';
+import { loginDefaultValues } from '../lib/constants';
+import { AUTH_LOGIN_TEXT } from '../locales/locales';
+import { loginSchema, type LoginFormValues } from '../model/auth-schema';
 
 import { LoginEmailField } from './login-email-field';
 import { LoginPasswordField } from './login-password-field';

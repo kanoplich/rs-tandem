@@ -1,6 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
-import { AUTH_LOGIN_TEXT, type LoginFormValues } from '../';
+import { type LoginFormValues } from '../';
+import { AUTH_LOGIN_TEXT } from '../locales/locales';
 
 import { Button } from '@/shared/ui/button';
 

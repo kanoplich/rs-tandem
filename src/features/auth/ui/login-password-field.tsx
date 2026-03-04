@@ -1,8 +1,9 @@
 import { useFormContext } from 'react-hook-form';
 
-import { AUTH_LOGIN_TEXT, type LoginFormValues } from '../';
+import { type LoginFormValues } from '../';
+import { AUTH_LOGIN_TEXT } from '../locales/locales';
 
-import { Label } from '@/shared/ui/label';
+import { Label } from '@/shared/ui';
 import { PasswordInput } from '@/shared/ui/password-input';
 
 export const LoginPasswordField = () => {
