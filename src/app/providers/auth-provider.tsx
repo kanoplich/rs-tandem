@@ -2,8 +2,8 @@ import { type ReactNode, useEffect, useState } from 'react';
 
 import { AuthContext } from './auth-context';
 
-import { onAuthStateChange, getSession, signOut as signOutApi } from '@/shared/api/auth';
-import type { AuthSession as Session } from '@/shared/api/index';
+import type { AuthSession as Session } from '@/shared/api';
+import { onAuthStateChange, getSession } from '@/shared/api';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -14,44 +14,34 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let isMounted = true;
-
-    getSession()
-      .then((initialSession) => {
-        if (isMounted) {
-          setSession(initialSession);
-          setIsLoading(false);
-        }
-      })
-      .catch(() => {
-        if (isMounted) {
-          setSession(null);
-          setIsLoading(false);
-        }
-      });
-
-    const subscription = onAuthStateChange((newSession: Session | null) => {
-      if (isMounted) {
-        setSession(newSession);
+    const initializeAuth = async () => {
+      try {
+        const currentSession = await getSession();
+        setSession(currentSession);
+      } catch (error) {
+        console.error('Error getting session:', error);
+        setSession(null);
+      } finally {
+        setIsLoading(false);
       }
+    };
+
+    const subscription = onAuthStateChange((newSession) => {
+      setSession(newSession);
     });
 
+    initializeAuth();
+
     return () => {
-      isMounted = false;
       subscription?.unsubscribe();
     };
   }, []);
-
-  const signOut = async () => {
-    await signOutApi();
-  };
 
   const value = {
     session,
     user: session?.user ?? null,
     isLoading,
     isAuthenticated: !!session?.user,
-    signOut,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,9 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { ProtectedAppLayout } from '@/app/private-layout/protected-app-layout';
-import { AppLayout } from '@/app/public-layout';
-import { ProtectedRoute } from '@/app/routes/protected-route';
-import { RootRedirect } from '@/app/routes/root-redirect';
+import { PrivateLayout } from '@/app/private-layout';
+import { PublicLayout } from '@/app/public-layout';
+import { ProtectedRoute } from '@/app/router/protected-route';
 import {
   Dashboard,
   History,
@@ -19,23 +18,39 @@ import { ROUTES } from '@/shared/config/routes';
 
 export const router = createBrowserRouter([
   {
-    path: ROUTES.HOME,
-    element: <RootRedirect />,
-  },
-  {
-    element: <AppLayout />,
+    element: <PublicLayout />,
     children: [
-      { path: ROUTES.LANDING, element: <Landing /> },
-      { path: ROUTES.LOGIN, element: <Login /> },
-      { path: ROUTES.REGISTER, element: <Register /> },
+      {
+        path: ROUTES.HOME,
+        element: (
+          <ProtectedRoute reverse>
+            <Landing />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: ROUTES.LOGIN,
+        element: (
+          <ProtectedRoute reverse>
+            <Login />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: ROUTES.REGISTER,
+        element: (
+          <ProtectedRoute reverse>
+            <Register />
+          </ProtectedRoute>
+        ),
+      },
       { path: ROUTES.NOT_FOUND, element: <NotFound /> },
     ],
   },
   {
-    path: ROUTES.APP,
     element: (
       <ProtectedRoute>
-        <ProtectedAppLayout />
+        <PrivateLayout />
       </ProtectedRoute>
     ),
     children: [

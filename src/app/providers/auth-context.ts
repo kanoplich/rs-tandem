@@ -1,13 +1,19 @@
 import { createContext } from 'react';
 
-import type { AuthContextValue } from '@/shared/types/auth';
+import type { AuthSession, AuthUser } from '@/shared/api';
 
-const INITIAL_STATE: AuthContextValue = {
+export interface AuthState {
+  session: AuthSession | null;
+  user: AuthUser | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+}
+
+const INITIAL_STATE: AuthState = {
   session: null,
   user: null,
   isLoading: true,
   isAuthenticated: false,
-  signOut: async () => {},
 };
 
-export const AuthContext = createContext<AuthContextValue>(INITIAL_STATE);
+export const AuthContext = createContext<AuthState>(INITIAL_STATE);

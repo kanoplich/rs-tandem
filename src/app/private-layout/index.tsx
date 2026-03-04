@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router-dom';
 
-import { Footer } from '../ui/footer';
+import { Footer } from '../ui';
 
-export const PublicLayout = () => {
+export const PrivateLayout = () => {
   return (
     <>
+      <div>
+        <h1>Header</h1>
+      </div>
       <main>
         <Outlet />
       </main>
