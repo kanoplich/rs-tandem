@@ -1,5 +1,5 @@
 import { LoginForm } from '@/features/auth';
-import { AUTH_LOGIN_PAGE_TEXT } from '@/features/auth/locales/locales';
+import { AUTH_LOGIN_PAGE_TEXT } from '@/features/auth';
 
 export const Login = () => {
   return (

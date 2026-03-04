@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
-import { type LoginFormValues } from '../';
 import { AUTH_LOGIN_TEXT } from '../locales/locales';
+import { type LoginFormValues } from '../model/auth-schema';
 
 import { Input, Label } from '@/shared/ui';
 

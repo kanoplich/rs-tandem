@@ -1,9 +1,9 @@
 import { useFormContext } from 'react-hook-form';
 
-import { type LoginFormValues } from '../';
 import { AUTH_LOGIN_TEXT } from '../locales/locales';
+import { type LoginFormValues } from '../model/auth-schema';
 
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui';
 
 export const LoginSubmitButton = () => {
   const {
