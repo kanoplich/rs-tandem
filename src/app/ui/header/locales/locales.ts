@@ -7,6 +7,6 @@ export const HEADER_LINK_TEXT = {
 };
 
 export const WARNING_WINDOWS_TEXT = {
-  DOWNLOAD: 'Загрузка',
+  LOADING: 'Загрузка',
   FAILURE_LOGIN: 'Не удалось войти в систему',
 };

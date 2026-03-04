@@ -14,7 +14,7 @@ export const ProtectedRoute = ({ children, redirectTo = ROUTES.LOGIN }: Protecte
   const location = useLocation();
 
   if (isLoading) {
-    return <div className="warning">{WARNING_WINDOWS_TEXT.DOWNLOAD}</div>;
+    return <div className="warning">{WARNING_WINDOWS_TEXT.LOADING}</div>;
   }
   if (!isAuthenticated) {
     return <Navigate to={redirectTo} state={{ from: location }} replace />;

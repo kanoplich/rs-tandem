@@ -9,6 +9,6 @@ export const ROUTES = {
   TOPICS: '/app/topics',
   TASK: '/app/task/:id',
   HISTORY: '/app/history',
-  PROFILE: '/app/profile',
+  PROFILE: 'c',
   NOT_FOUND: '*',
 } as const;
