@@ -7,8 +7,6 @@ import { ROUTES } from '@/shared/config/routes';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
-export type { AuthCredentials, AuthSession } from './types';
-
 const { USE_MOCK_SUPABASE, HOST } = config;
 
 export const getSession = async (): Promise<AuthSession | null> => {

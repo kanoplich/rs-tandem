@@ -152,7 +152,6 @@ export type Database = {
           id: string;
           sort_order: number | null;
           stage: number;
-          task_count: number | null;
           title: string;
         };
         Insert: {
@@ -161,7 +160,6 @@ export type Database = {
           id: string;
           sort_order?: number | null;
           stage?: number;
-          task_count?: number | null;
           title: string;
         };
         Update: {
@@ -170,7 +168,6 @@ export type Database = {
           id?: string;
           sort_order?: number | null;
           stage?: number;
-          task_count?: number | null;
           title?: string;
         };
         Relationships: [];
@@ -230,7 +227,7 @@ export type Database = {
       get_user_stats: { Args: never; Returns: Json };
     };
     Enums: {
-      task_type: 'theory_open' | 'theory_choice' | 'coding';
+      [_ in never]: never;
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -355,8 +352,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      task_type: ['theory_open', 'theory_choice', 'coding'],
-    },
+    Enums: {},
   },
 } as const;

@@ -1,3 +1,5 @@
+import { MOCK_JUDGE_RESULT_POOR, MOCK_JUDGE_RESULT_GOOD } from '../judge/mock';
+
 import type { Submission } from './types';
 
 export const MOCK_SUBMISSIONS: Submission[] = [
@@ -8,7 +10,7 @@ export const MOCK_SUBMISSIONS: Submission[] = [
     answer:
       'Замыкание — это функция, которая запоминает своё лексическое окружение даже после завершения внешней функции.',
     submittedAt: new Date(Date.now() - 86400000).toISOString(),
-    // result: MOCK_JUDGE_RESULT_GOOD,
+    result: MOCK_JUDGE_RESULT_GOOD,
   },
   {
     id: 'sub-002',
@@ -16,6 +18,6 @@ export const MOCK_SUBMISSIONS: Submission[] = [
     taskId: 'event-loop-1',
     answer: 'Event loop следит за call stack и очередями задач.',
     submittedAt: new Date(Date.now() - 3600000).toISOString(),
-    // result: MOCK_JUDGE_RESULT_POOR,
+    result: MOCK_JUDGE_RESULT_POOR,
   },
 ];
