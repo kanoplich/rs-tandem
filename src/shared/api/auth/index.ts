@@ -70,7 +70,6 @@ export const signUp = async ({ email, password }: AuthCredentials): Promise<Auth
 export const signIn = async ({ email, password }: AuthCredentials): Promise<AuthSession> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
-    console.log('Login');
     setMockIsAuth(true);
     return MOCK_SESSION;
   }
