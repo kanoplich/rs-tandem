@@ -19,7 +19,7 @@ export const AppLayout = () => {
   const handleGroqApi = async () => {
     const result = await evaluateTheory(
       'closures_basics_1',
-      'Замыкание — это функция, которая замыкается'
+      'Замыкание — это функция, которая запоминает свое лексическое окружение даже после того, как внешняя функция завершила выполнение.'
     );
     console.log(result);
   };
