@@ -41,7 +41,7 @@ export const LoginForm = () => {
 
         <p className="text-center text-sm text-muted-foreground">
           {AUTH_LOGIN_TEXT.NO_ACCOUNT}{' '}
-          <Link to={ROUTES.REGISTER} className="text-primary underline underline-offset-4">
+          <Link to={ROUTES.REGISTER} className="text-primary">
             {AUTH_LOGIN_TEXT.REGISTER_LINK}
           </Link>
         </p>
