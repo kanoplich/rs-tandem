@@ -19,5 +19,5 @@ export const AUTH_LOGIN_PAGE_TEXT = {
 export const AUTH_LOGIN_ERRORS = {
   INVALID_EMAIL: 'Введите корректный email',
   PASSWORD_MIN: 'Минимум 8 символов',
-  PASSWORD_INVALID: 'Только буквы и цифры без пробелов и символов',
+  PASSWORD_INVALID: 'Пароль может содержать только латинские буквы (A–Z, a–z) и цифры (0–9)',
 };
