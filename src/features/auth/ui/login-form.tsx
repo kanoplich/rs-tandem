@@ -15,7 +15,7 @@ import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } fro
 export const LoginForm = () => {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
-    mode: 'onSubmit',
+    mode: 'onBlur',
     defaultValues: loginDefaultValues,
   });
 
