@@ -14,7 +14,7 @@ export const Login = () => {
 
         <LoginForm />
 
-        <div className="mt-16 max-w-[308px] text-center text-sm text-muted-foreground">
+        <div className="mt-6 max-w-[308px] text-center text-sm text-muted-foreground">
           {AUTH_LOGIN_PAGE_TEXT.FOOTER}
         </div>
       </div>
