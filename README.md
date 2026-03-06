@@ -31,3 +31,55 @@
 ## Deploy
 
 https://rs-tandem.netlify.app/
+
+## Локальная разработка с Supabase
+
+### ✅ Предварительные требования
+
+- **Node.js 18+**
+- **Docker & Docker Compose**
+- **pnpm**
+
+### 🚀 Установка и запуск
+
+```bash
+# 1. Установить зависимости проекта
+pnpm install
+
+# 2. Запустить локальный Supabase
+npx supabase start
+
+# 3. ✅ Применить ВСЕ миграции (БД создастся автоматически)
+npx supabase db reset
+
+```
+
+- **Studio: http://localhost:54323**
+
+### ⚙️ Переменные окружения
+
+После supabase start создастся .env.local:
+
+- VITE_SUPABASE_URL=http://localhost:54321
+- VITE_SUPABASE_ANON_KEY=[Ваш Publishable Authentication Keys]
+
+### 📋 Основные команды
+
+- 🎛️ **Управление Supabase**
+
+| Команда         | Что делает                  |
+| --------------- | --------------------------- |
+| supabase start  | 🟢 Запустить локальный стек |
+| supabase stop   | 🔴 Остановить               |
+| supabase status | 📋 Показать URL + ключи     |
+
+- 🗄️ **Миграции и БД**
+
+| Команда                          | Что делает                  |
+| -------------------------------- | --------------------------- |
+| supabase migration new fix-table | 📝 Создать миграцию         |
+| supabase migration up            | ⬆️ Применить новые миграции |
+| supabase db reset                | 💥 Сброс + все миграции     |
+| supabase db diff -f name         | 🎨 Studio → миграция        |
+| supabase db push                 | ☁️ Push на remote           |
+| pnpm types:db:local              | 🔤 Обновить TS типы         |
