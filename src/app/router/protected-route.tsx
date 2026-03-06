@@ -6,26 +6,24 @@ import { useAuth } from '@/shared/hooks/use-auth';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  redirectTo?: string;
   reverse?: boolean;
 }
 
-export const ProtectedRoute = ({
-  children,
-  redirectTo = ROUTES.LOGIN,
-  reverse = false,
-}: ProtectedRouteProps) => {
+export const ProtectedRoute = ({ children, reverse = false }: ProtectedRouteProps) => {
   const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
-  const from = location.state?.from?.pathname || redirectTo;
 
   if (isLoading) {
     return <LoaderCircle />;
   }
 
-  if (reverse) {
-    return isAuthenticated ? <Navigate to={ROUTES.DASHBOARD} replace /> : <>{children}</>;
+  if (reverse && isAuthenticated) {
+    return <Navigate to={ROUTES.DASHBOARD} replace />;
   }
 
-  return isAuthenticated ? <>{children}</> : <Navigate to={from} replace />;
+  if (!reverse && !isAuthenticated) {
+    return <Navigate to={ROUTES.LOGIN} state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
 };
