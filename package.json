@@ -15,7 +15,8 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "prepare": "husky",
-    "types:db": "supabase gen types typescript --project-id etxrqnjqqinygywiudcd --schema public > src/shared/types/database.types.ts"
+    "types:db": "supabase gen types typescript --project-id etxrqnjqqinygywiudcd --schema public > src/shared/types/database.types.ts",
+    "types:db:local": "supabase gen types typescript --local --schema public > src/shared/types/database.types.ts"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
