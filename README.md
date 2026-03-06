@@ -6,11 +6,12 @@
 
 ## Технологический стек
 
-- Frontend: React 19, TS 5 (Strict), Vite 5, pnpm, React Router v6
+- Frontend: React 19, TS 5 (Strict), Vite 5, pnpm,
 - Styling: CSS Modules + shadcn/ui
 - Backend: Supabase (Auth, RLS, Edge Functions)
 - AI API: Groq API (LLM)
 - Архитектура: FSD (Feature-Sliced Design)
+- React-router V.6
 
 ## Наша команда
 
@@ -26,3 +27,7 @@
 - Михаил (https://github.com/Michael-JS-Bel)
 - Ольга (https://github.com/HelgaZhizhka)
 - Ирина (https://github.com/IrinaOsp)
+
+## Deploy
+
+https://rs-tandem.netlify.app/
