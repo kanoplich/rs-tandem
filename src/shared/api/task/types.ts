@@ -1,3 +1,5 @@
+export const DEFAULT_MAX_SCORE = 100;
+
 export const DIFFICULTY = {
   EASY: 1,
   MEDIUM: 2,
