@@ -1,36 +1,29 @@
 import { z } from 'zod';
 
-export const ErrorRegisterMessages = {
-  EMAIL: 'Пожалуйста, укажите действительный адрес электронной почты.',
-  NAME: 'Имя должно начинаться с заглавной буквы, не содержать цифр и быть не длиннее 30 символов.',
-  PASSWORD: 'Ваш пароль должен содержать не менее 8 символов.',
-  PASSWORD_MATCH: 'Пароли не совпадают',
-};
+import { REGISTER_PATTERN } from '../lib/constants';
+import { AUTH_REGISTER_ERRORS } from '../locales/locales';
 
-export const namePattern = z.string().regex(/^[A-ZА-Я][a-zа-яё\-'\s]{0,29}$/, {
-  message: ErrorRegisterMessages.NAME,
+export const nameValidation = z.string().regex(REGISTER_PATTERN.NAME, {
+  message: AUTH_REGISTER_ERRORS.NAME,
 });
 
-export const passwordPattern = z
-  .string()
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
-  .min(8, {
-    message: ErrorRegisterMessages.PASSWORD,
-  });
+export const passwordValidation = z.string().regex(REGISTER_PATTERN.PASSWORD).min(8, {
+  message: AUTH_REGISTER_ERRORS.PASSWORD,
+});
 
 export const registerSchema = z
   .object({
-    firstName: namePattern,
+    firstName: nameValidation,
     email: z.email({
-      message: ErrorRegisterMessages.EMAIL,
+      message: AUTH_REGISTER_ERRORS.EMAIL,
     }),
-    password: passwordPattern,
+    password: passwordValidation,
     confirmPassword: z.string().min(8, {
-      message: ErrorRegisterMessages.PASSWORD,
+      message: AUTH_REGISTER_ERRORS.PASSWORD,
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: ErrorRegisterMessages.PASSWORD_MATCH,
+    message: AUTH_REGISTER_ERRORS.PASSWORD_MATCH,
     path: ['confirmPassword'],
   });
 

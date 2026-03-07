@@ -1,5 +1,4 @@
-import { AUTH_REGISTER_PAGE_TEXT } from '@/features/auth/model/register-page.constants';
-import { RegisterForm } from '@/features/auth/ui/register-form';
+import { AUTH_REGISTER_PAGE_TEXT, RegisterForm } from '@/features/auth';
 
 export const Register = () => {
   return (

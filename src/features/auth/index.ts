@@ -4,3 +4,4 @@ export * from './lib/constants';
 export * from './locales/locales';
 export * from './lib/constants';
 export * from './ui/login-form';
+export * from './ui/register-form';

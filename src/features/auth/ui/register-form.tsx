@@ -2,25 +2,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import type { RegisterFormType } from '../model/register-schema';
-import { registerSchema } from '../model/register-schema';
-import { AUTH_REGISTER_TEXT } from '../model/register.constants';
+import { registerDefaultValues } from '../lib/constants';
+import { AUTH_REGISTER_TEXT } from '../locales/locales';
+import { registerSchema, type RegisterFormType } from '../model/register-schema';
 
-import { ROUTES } from '@/shared/config/routes';
-import { Button } from '@/shared/ui/button';
-import { Input } from '@/shared/ui/input';
-import { Label } from '@/shared/ui/label';
-import { PasswordInput } from '@/shared/ui/password-input';
+import { ROUTES } from '@/shared';
+import { Button, Input, Label, PasswordInput } from '@/shared/ui';
 
 export const RegisterForm = () => {
   const form = useForm<RegisterFormType>({
     mode: 'onChange',
     resolver: zodResolver(registerSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
+    defaultValues: registerDefaultValues,
   });
 
   const handleSubmit = async (data: RegisterFormType) => {
