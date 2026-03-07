@@ -1,5 +1,6 @@
-import { JUDGE_LEVEL, type JudgeLevel } from '../judge/types';
+import { type JudgeLevel } from '../judge/types';
 import { supabase, type Public } from '../supabase-client';
+import { DEFAULT_MAX_SCORE } from '../task/types';
 
 import { MOCK_SUBMISSIONS } from './mock';
 import type { Submission } from './types';
@@ -15,17 +16,17 @@ const mapToSubmission = (data: SubmissionsRow[]): Submission[] => {
   return data.map((item) => {
     return {
       id: item.id,
-      userId: item.user_id ?? '',
-      taskId: item.task_id ?? '',
+      userId: item.user_id,
+      taskId: item.task_id,
       answer: item.answer,
-      submittedAt: item.submitted_at ?? '',
+      submittedAt: item.submitted_at,
       result: {
-        coveredPoints: item.covered ?? [],
-        missedPoints: item.missed ?? [],
-        feedback: item.feedback ?? '',
-        score: item.score ?? 0,
-        maxScore: 100,
-        judgeLevel: (item.judge_level ?? JUDGE_LEVEL.KEYWORD) as JudgeLevel,
+        coveredPoints: item.covered,
+        missedPoints: item.missed,
+        feedback: item.feedback,
+        score: item.score,
+        maxScore: DEFAULT_MAX_SCORE,
+        judgeLevel: item.judge_level as JudgeLevel,
       },
     };
   });

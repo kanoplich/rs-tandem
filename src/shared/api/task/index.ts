@@ -1,13 +1,7 @@
 import { supabase, type Public } from '../supabase-client';
 
 import { MOCK_TASKS } from './mock';
-import {
-  DEFAULT_MAX_SCORE,
-  DIFFICULTY,
-  type DifficultyLevel,
-  type Task,
-  type TaskType,
-} from './types';
+import { type DifficultyLevel, type Task, type TaskType } from './types';
 
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
@@ -19,15 +13,15 @@ const { USE_MOCK_SUPABASE } = config;
 const mapToTask = (data: TaskRow): Task => {
   return {
     id: data.id,
-    topicId: data.topic_id ?? '',
+    topicId: data.topic_id,
     title: data.title,
-    difficulty: (data.difficulty ?? DIFFICULTY.EASY) as DifficultyLevel,
+    difficulty: data.difficulty as DifficultyLevel,
     type: data.type as TaskType,
-    maxScore: data.max_score ?? DEFAULT_MAX_SCORE,
+    maxScore: data.max_score,
     questionText: data.question_text,
     rubricItems: data.rubric_items,
-    codeTemplate: data.code_template ?? '',
-    testCode: data.test_code ?? '',
+    codeTemplate: data.code_template,
+    testCode: data.test_code,
   };
 };
 

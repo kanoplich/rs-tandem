@@ -18,15 +18,15 @@ export type DifficultyLevel = (typeof DIFFICULTY)[keyof typeof DIFFICULTY];
 export type TaskType = (typeof TASK_TYPE)[keyof typeof TASK_TYPE];
 export interface Task {
   id: string;
-  topicId: string;
+  topicId: string | null;
   type: TaskType;
-  difficulty: DifficultyLevel;
+  difficulty: DifficultyLevel | null;
   title: string;
   questionText: string;
-  codeTemplate?: string;
-  testCode?: string;
+  codeTemplate?: string | null;
+  testCode?: string | null;
   rubricItems: string[];
-  maxScore: number;
+  maxScore: number | null;
 }
 
 export interface TaskSecret {

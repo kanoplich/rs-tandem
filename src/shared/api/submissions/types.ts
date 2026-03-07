@@ -2,10 +2,10 @@ import type { JudgeResult } from '../judge/types';
 
 export interface Submission {
   id: string;
-  userId: string;
-  taskId: string;
+  userId: string | null;
+  taskId: string | null;
   answer: string;
-  submittedAt: string;
+  submittedAt: string | null;
   result: JudgeResult;
 }
 
