@@ -16,9 +16,8 @@ export const RegisterForm = () => {
     defaultValues: registerDefaultValues,
   });
 
-  const handleSubmit = async (data: RegisterFormType) => {
-    console.log(data);
-    //  await signUp(viewer);
+  const handleSubmit = async (_data: RegisterFormType) => {
+    // TODO: authService.register
   };
 
   return (
