@@ -1,31 +1,51 @@
 import { supabase, type Public } from '../supabase-client';
 
 import { MOCK_TASKS } from './mock';
-import { type DifficultyLevel, type Task, type TaskType } from './types';
+import { DIFFICULTY, TASK_TYPE, type DifficultyLevel, type Task, type TaskType } from './types';
 
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
-type TaskRow = Public['Tables']['tasks']['Row'];
+type PublicTasksRow = Public['Views']['public_tasks']['Row'];
 
 const { USE_MOCK_SUPABASE } = config;
 
-const mapToTask = (data: TaskRow): Task => {
+const VALID_DIFFICULTY = new Set<number>(Object.values(DIFFICULTY));
+const VALID_TASK_TYPE = new Set<string>(Object.values(TASK_TYPE));
+
+const toDifficulty = (value: unknown): DifficultyLevel => {
+  if (typeof value === 'number' && VALID_DIFFICULTY.has(value)) {
+    return value as DifficultyLevel;
+  }
+  return DIFFICULTY.EASY;
+};
+
+const toTaskType = (value: unknown): TaskType => {
+  if (typeof value === 'string' && VALID_TASK_TYPE.has(value)) {
+    return value as TaskType;
+  }
+  return TASK_TYPE.THEORY_OPEN;
+};
+
+const mapToTask = (data: PublicTasksRow): Task => {
+  if (!data.id || !data.topic_id) {
+    throw new Error(`Invalid task data: ${data.id}`);
+  }
+
   return {
     id: data.id,
     topicId: data.topic_id,
-    title: data.title,
-    difficulty: data.difficulty as DifficultyLevel,
-    type: data.type as TaskType,
-    maxScore: data.max_score,
-    questionText: data.question_text,
-    rubricItems: data.rubric_items,
-    codeTemplate: data.code_template,
-    testCode: data.test_code,
+    title: data.title ?? '',
+    difficulty: toDifficulty(data.difficulty),
+    type: toTaskType(data.type),
+    maxScore: data.max_score ?? 100,
+    questionText: data.question_text ?? '',
+    rubricItems: data.rubric_items ?? [],
+    codeTemplate: data.code_template ?? '',
   };
 };
 
-export async function getTask(id: string): Promise<Task> {
+export const getTask = async (id: string): Promise<Task> => {
   if (USE_MOCK_SUPABASE) {
     await delay(300);
 
@@ -36,16 +56,16 @@ export async function getTask(id: string): Promise<Task> {
   }
 
   const { data: task } = await supabase
-    .from('tasks')
+    .from('public_tasks')
     .select('*')
     .eq('id', id)
     .single()
     .throwOnError();
 
   return mapToTask(task);
-}
+};
 
-export async function getTasksByTopic(topicId: string): Promise<Task[]> {
+export const getTasksByTopic = async (topicId: string): Promise<Task[]> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
 
@@ -56,11 +76,11 @@ export async function getTasksByTopic(topicId: string): Promise<Task[]> {
   }
 
   const { data: tasks } = await supabase
-    .from('tasks')
+    .from('public_tasks')
     .select('*')
     .eq('topic_id', topicId)
     .order('difficulty')
     .throwOnError();
 
   return tasks.map((t) => mapToTask(t));
-}
+};

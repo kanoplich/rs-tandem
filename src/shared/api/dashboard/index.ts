@@ -24,7 +24,7 @@ const mapToUserStats = (data: UserStatsReturns): UserStats => {
   };
 };
 
-export async function getDashboardStats(): Promise<UserStats> {
+export const getDashboardStats = async (): Promise<UserStats> => {
   if (USE_MOCK_SUPABASE) {
     await delay(500);
     return MOCK_USER_STATS;
@@ -37,22 +37,20 @@ export async function getDashboardStats(): Promise<UserStats> {
   }
 
   return mapToUserStats(data);
-}
-
-const mapToTopicProgress = (data: TopicProgressReturns): TopicProgress[] => {
-  return data.map((item) => {
-    return {
-      avgScore: item.avg_score,
-      completed: item.completed,
-      topicId: item.topic_id,
-      topicTitle: item.topic_title,
-      total: item.total,
-      lastAttemptAt: item.last_attempt_at,
-    };
-  });
 };
 
-export async function getTopicProgress(): Promise<TopicProgress[]> {
+const mapToTopicProgress = (data: TopicProgressReturns): TopicProgress[] => {
+  return data.map((item) => ({
+    avgScore: item.avg_score,
+    completed: item.completed,
+    topicId: item.topic_id,
+    topicTitle: item.topic_title,
+    total: item.total,
+    lastAttemptAt: item.last_attempt_at,
+  }));
+};
+
+export const getTopicProgress = async (): Promise<TopicProgress[]> => {
   if (USE_MOCK_SUPABASE) {
     await delay(500);
     return MOCK_TOPIC_PROGRESS;
@@ -67,4 +65,4 @@ export async function getTopicProgress(): Promise<TopicProgress[]> {
   if (!data) throw new Error('No topic progress data');
 
   return mapToTopicProgress(data);
-}
+};

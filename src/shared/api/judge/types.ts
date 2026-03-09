@@ -1,10 +1,10 @@
 export interface JudgeResult {
-  score: number | null;
+  score: number;
   maxScore: number;
-  coveredPoints: string[] | null;
-  missedPoints: string[] | null;
-  feedback: string | null;
-  judgeLevel: JudgeLevel | null;
+  coveredPoints: string[];
+  missedPoints: string[];
+  feedback: string;
+  judgeLevel: JudgeLevel;
 }
 
 export const JUDGE_LEVEL = {

@@ -1,5 +1,3 @@
-export const DEFAULT_MAX_SCORE = 100;
-
 export const DIFFICULTY = {
   EASY: 1,
   MEDIUM: 2,
@@ -18,15 +16,15 @@ export type DifficultyLevel = (typeof DIFFICULTY)[keyof typeof DIFFICULTY];
 export type TaskType = (typeof TASK_TYPE)[keyof typeof TASK_TYPE];
 export interface Task {
   id: string;
-  topicId: string | null;
+  topicId: string;
   type: TaskType;
-  difficulty: DifficultyLevel | null;
+  difficulty: DifficultyLevel;
   title: string;
   questionText: string;
-  codeTemplate?: string | null;
-  testCode?: string | null;
+  codeTemplate?: string;
+  testCode?: string;
   rubricItems: string[];
-  maxScore: number | null;
+  maxScore: number;
 }
 
 export interface TaskSecret {

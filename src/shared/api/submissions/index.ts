@@ -1,6 +1,5 @@
-import { type JudgeLevel } from '../judge/types';
-import { supabase, type Public } from '../supabase-client';
-import { DEFAULT_MAX_SCORE } from '../task/types';
+import { JUDGE_LEVEL, type JudgeLevel } from '../judge/types';
+import { supabase } from '../supabase-client';
 
 import { MOCK_SUBMISSIONS } from './mock';
 import type { Submission } from './types';
@@ -8,31 +7,18 @@ import type { Submission } from './types';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
-type SubmissionsRow = Public['Tables']['submissions']['Row'];
-
 const { USE_MOCK_SUPABASE } = config;
 
-const mapToSubmission = (data: SubmissionsRow[]): Submission[] => {
-  return data.map((item) => {
-    return {
-      id: item.id,
-      userId: item.user_id,
-      taskId: item.task_id,
-      answer: item.answer,
-      submittedAt: item.submitted_at,
-      result: {
-        coveredPoints: item.covered,
-        missedPoints: item.missed,
-        feedback: item.feedback,
-        score: item.score,
-        maxScore: DEFAULT_MAX_SCORE,
-        judgeLevel: item.judge_level as JudgeLevel,
-      },
-    };
-  });
+const VALID_JUDGE_LEVELS = new Set<number>(Object.values(JUDGE_LEVEL));
+
+const toJudgeLevel = (value: unknown): JudgeLevel => {
+  if (typeof value === 'number' && VALID_JUDGE_LEVELS.has(value)) {
+    return value as JudgeLevel;
+  }
+  return JUDGE_LEVEL.KEYWORD;
 };
 
-export async function getSubmissionHistory(): Promise<Submission[]> {
+export const getSubmissionHistory = async (): Promise<Submission[]> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
     return MOCK_SUBMISSIONS;
@@ -40,9 +26,25 @@ export async function getSubmissionHistory(): Promise<Submission[]> {
 
   const { data: submissions } = await supabase
     .from('submissions')
-    .select('*')
+    .select('*, tasks(max_score)')
     .order('submitted_at', { ascending: false })
     .throwOnError();
 
-  return mapToSubmission(submissions);
-}
+  return submissions.map((item) => {
+    return {
+      id: item.id,
+      userId: item.user_id,
+      taskId: item.task_id,
+      answer: item.answer,
+      submittedAt: item.submitted_at,
+      result: {
+        coveredPoints: item.covered ?? [],
+        missedPoints: item.missed ?? [],
+        feedback: item.feedback ?? '',
+        score: item.score ?? 0,
+        maxScore: item.tasks.max_score,
+        judgeLevel: toJudgeLevel(item.judge_level),
+      },
+    };
+  });
+};
