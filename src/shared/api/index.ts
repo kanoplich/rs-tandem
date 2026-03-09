@@ -1,1 +1,11 @@
-export * from './auth';
+export type { AuthSession, AuthUser, AuthCredentials } from './auth/types';
+export type { UserProfile, UserStats, TopicProgress } from './dashboard/types';
+export type { Submission, RunResult } from './submissions/types';
+export type { Task, TaskSecret, DifficultyLevel, TaskType } from './task/types';
+export type { Topic } from './topic/types';
+export { viewer } from './auth/mock';
+export { getSession, onAuthStateChange, signUp, signIn, signOut } from './auth';
+export { getDashboardStats, getTopicProgress } from './dashboard/';
+export { getSubmissionHistory } from './submissions';
+export { getTask, getTasksByTopic } from './task';
+export { getTopics } from './topic';

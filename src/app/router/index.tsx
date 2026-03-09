@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AppLayout } from '@/app/app-layout';
+import { PrivateLayout } from '@/app/private-layout';
+import { PublicLayout } from '@/app/public-layout';
+import { ProtectedRoute } from '@/app/router/protected-route';
 import {
   Dashboard,
   History,
@@ -16,17 +18,47 @@ import { ROUTES } from '@/shared/config/routes';
 
 export const router = createBrowserRouter([
   {
-    element: <AppLayout />,
+    element: <PublicLayout />,
     children: [
-      { path: ROUTES.LANDING, element: <Landing /> },
-      { path: ROUTES.LOGIN, element: <Login /> },
-      { path: ROUTES.REGISTER, element: <Register /> },
+      {
+        path: ROUTES.HOME,
+        element: (
+          <ProtectedRoute reverse>
+            <Landing />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: ROUTES.LOGIN,
+        element: (
+          <ProtectedRoute reverse>
+            <Login />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: ROUTES.REGISTER,
+        element: (
+          <ProtectedRoute reverse>
+            <Register />
+          </ProtectedRoute>
+        ),
+      },
+      { path: ROUTES.NOT_FOUND, element: <NotFound /> },
+    ],
+  },
+  {
+    element: (
+      <ProtectedRoute>
+        <PrivateLayout />
+      </ProtectedRoute>
+    ),
+    children: [
       { path: ROUTES.DASHBOARD, element: <Dashboard /> },
       { path: ROUTES.TOPICS, element: <Topics /> },
       { path: ROUTES.TASK, element: <Task /> },
       { path: ROUTES.HISTORY, element: <History /> },
       { path: ROUTES.PROFILE, element: <Profile /> },
-      { path: ROUTES.NOT_FOUND, element: <NotFound /> },
     ],
   },
 ]);
