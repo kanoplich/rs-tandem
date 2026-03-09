@@ -1,26 +1,28 @@
 import { House, BookOpen, History, User } from 'lucide-react';
 
-import { HEADER_LINK_TEXT } from '../locales';
+import { MENU_LINK_TEXT } from '../locales/locales';
 
-export const HEADER_LINKS = [
+import { ROUTES } from '@/shared';
+
+export const MENU_LINKS = [
   {
-    to: '/dashboard',
-    label: HEADER_LINK_TEXT.DASHBOARD,
+    to: ROUTES.DASHBOARD,
+    label: MENU_LINK_TEXT.DASHBOARD,
     icon: House,
   },
   {
-    to: '/topics',
-    label: HEADER_LINK_TEXT.TOPICS,
+    to: ROUTES.TOPICS,
+    label: MENU_LINK_TEXT.TOPICS,
     icon: BookOpen,
   },
   {
-    to: '/history',
-    label: HEADER_LINK_TEXT.HISTORY,
+    to: ROUTES.HISTORY,
+    label: MENU_LINK_TEXT.HISTORY,
     icon: History,
   },
   {
-    to: '/profile',
-    label: HEADER_LINK_TEXT.PROFILE,
+    to: ROUTES.PROFILE,
+    label: MENU_LINK_TEXT.PROFILE,
     icon: User,
   },
 ];
