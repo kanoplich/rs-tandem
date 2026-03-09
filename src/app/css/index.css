@@ -11,7 +11,7 @@
 
   color-scheme: light dark;
   color: #ffffff;
-  background-color: #0d0d0d;
+  background-color: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
