@@ -22,8 +22,6 @@ export const useLoginForm = () => {
       setError(null);
 
       await authApi.login(data.email, data.password);
-
-      console.log('Выполнен вход в систему');
     } catch {
       setError(
         'Невозможно войти в систему. Пожалуйста, проверьте свои учетные данные и попробуйте снова.'

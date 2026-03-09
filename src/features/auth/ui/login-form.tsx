@@ -11,7 +11,7 @@ import { LoginSubmitButton } from './login-submit-button';
 import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
 
 export const LoginForm = () => {
-  const { form, handleSubmit } = useLoginForm();
+  const { form, handleSubmit, error } = useLoginForm();
 
   return (
     <Card className="w-full max-w-[448px]">
@@ -29,6 +29,7 @@ export const LoginForm = () => {
           </form>
         </FormProvider>
 
+        {error && <p className="text-center text-sm text-red-500">{error}</p>}
         <p className="text-center text-sm text-muted-foreground">
           {AUTH_LOGIN_TEXT.NO_ACCOUNT}{' '}
           <Link to={ROUTES.REGISTER} className="text-primary">
