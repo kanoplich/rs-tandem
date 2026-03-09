@@ -15,5 +15,5 @@ export const registerDefaultValues: RegisterFormType = {
 
 export const REGISTER_PATTERN = {
   NAME: /^[A-ZА-ЯЁ][a-zа-яё\-'\s]{0,29}$/,
-  PASSWORD: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+  PASSWORD: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\S{8,}$/,
 };
