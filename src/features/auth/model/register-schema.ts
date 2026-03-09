@@ -7,7 +7,7 @@ export const nameValidation = z.string().regex(REGISTER_PATTERN.NAME, {
   message: AUTH_REGISTER_ERRORS.NAME,
 });
 
-export const passwordValidation = z.string().regex(REGISTER_PATTERN.PASSWORD).min(8, {
+export const passwordValidation = z.string().regex(REGISTER_PATTERN.PASSWORD, {
   message: AUTH_REGISTER_ERRORS.PASSWORD,
 });
 
@@ -18,9 +18,7 @@ export const registerSchema = z
       message: AUTH_REGISTER_ERRORS.EMAIL,
     }),
     password: passwordValidation,
-    confirmPassword: z.string().min(8, {
-      message: AUTH_REGISTER_ERRORS.PASSWORD,
-    }),
+    confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: AUTH_REGISTER_ERRORS.PASSWORD_MATCH,

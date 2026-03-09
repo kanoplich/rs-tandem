@@ -11,7 +11,7 @@ import { Button, Input, Label, PasswordInput } from '@/shared/ui';
 
 export const RegisterForm = () => {
   const form = useForm<RegisterFormType>({
-    mode: 'onChange',
+    mode: 'onBlur',
     resolver: zodResolver(registerSchema),
     defaultValues: registerDefaultValues,
   });
@@ -24,8 +24,6 @@ export const RegisterForm = () => {
     <div className="w-full max-w-[448px]">
       <h2>{AUTH_REGISTER_TEXT.TITLE}</h2>
       <p>{AUTH_REGISTER_TEXT.DESCRIPTION}</p>
-
-      <div className="space-y-6"></div>
 
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         <div className="space-y-2">
@@ -64,11 +62,11 @@ export const RegisterForm = () => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="confirmPassword">{AUTH_REGISTER_TEXT.PASSWORD_LABEL}</Label>
+          <Label htmlFor="confirmPassword">{AUTH_REGISTER_TEXT.CONFIRM_LABEL}</Label>
           <PasswordInput
             id="confirmPassword"
             className="focus-visible:ring-primary/50 focus-visible:border-primary"
-            placeholder={AUTH_REGISTER_TEXT.CONFIRM_LABEL}
+            placeholder={AUTH_REGISTER_TEXT.PASSWORD_PLACEHOLDER}
             autoComplete="current-password"
             {...form.register('confirmPassword')}
           />
