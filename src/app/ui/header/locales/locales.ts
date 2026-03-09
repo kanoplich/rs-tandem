@@ -1,5 +1,5 @@
 export const MENU_LINK_TEXT = {
-  DASHBOARD: 'Дашборд',
+  DASHBOARD: 'Панель управления',
   TOPICS: 'Темы',
   HISTORY: 'История',
   PROFILE: 'Профиль',
