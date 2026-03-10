@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { loginDefaultValues } from '../lib/constants';
-import { AUTH_LOGIN_ERRORS } from '../locales/locales';
+import { AUTH_LOGIN_ERRORS } from '../locales';
 import { loginSchema, type LoginFormValues } from '../model/auth-schema';
 
 import { signIn } from '@/shared/api';
