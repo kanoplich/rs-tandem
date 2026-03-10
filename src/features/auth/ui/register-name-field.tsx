@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import { AUTH_REGISTER_TEXT } from '../locales/locales';
+import { AUTH_REGISTER_TEXT } from '../locales';
 import { type RegisterFormType } from '../model/register-schema';
 
 import { Input, Label } from '@/shared/ui';

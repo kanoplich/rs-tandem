@@ -3,7 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { registerDefaultValues } from '../lib/constants';
-import { AUTH_REGISTER_TEXT } from '../locales/locales';
+import { AUTH_REGISTER_TEXT } from '../locales';
 import { registerSchema, type RegisterFormType } from '../model/register-schema';
 
 import { RegisterConfirmField } from './register-confirm-field';

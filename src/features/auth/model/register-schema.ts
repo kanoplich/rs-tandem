@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { REGISTER_PATTERN } from '../lib/constants';
-import { AUTH_REGISTER_ERRORS } from '../locales/locales';
+import { AUTH_REGISTER_ERRORS } from '../locales';
 
 export const nameValidation = z
   .string()
