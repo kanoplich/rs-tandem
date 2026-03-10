@@ -15,12 +15,10 @@ export const useLoginForm = () => {
     defaultValues: loginDefaultValues,
   });
 
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (data: LoginFormValues) => {
     try {
-      setLoading(true);
       setError(null);
 
       await signIn(data);
@@ -30,15 +28,13 @@ export const useLoginForm = () => {
       } else {
         setError(AUTH_LOGIN_ERRORS.AUTH_ERROR);
       }
-    } finally {
-      setLoading(false);
     }
   };
 
   return {
     form,
     handleSubmit,
-    loading,
     error,
+    isSubmitting: form.formState.isSubmitting,
   };
 };
