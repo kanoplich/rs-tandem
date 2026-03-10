@@ -8,6 +8,7 @@ export const AUTH_LOGIN_TEXT = {
   SUBMIT_BUTTON: 'Войти',
   NO_ACCOUNT: 'Нет аккаунта?',
   REGISTER_LINK: 'Зарегистрироваться',
+  BUTTON_PENDING: 'Вход в систему...',
 };
 
 export const AUTH_LOGIN_PAGE_TEXT = {

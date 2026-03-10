@@ -12,7 +12,7 @@ export const LoginSubmitButton = () => {
 
   return (
     <Button type="submit" className="w-full cursor-pointer" disabled={isSubmitting}>
-      {AUTH_LOGIN_TEXT.SUBMIT_BUTTON}
+      {isSubmitting ? AUTH_LOGIN_TEXT.BUTTON_PENDING : AUTH_LOGIN_TEXT.SUBMIT_BUTTON}
     </Button>
   );
 };
