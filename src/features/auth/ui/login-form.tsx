@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { useLoginForm } from '../hooks';
+import { useLoginForm } from '../hooks/hooks';
 import { AUTH_LOGIN_TEXT } from '../locales/locales';
 
 import { LoginEmailField } from './login-email-field';
