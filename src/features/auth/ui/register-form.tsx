@@ -55,7 +55,7 @@ export const RegisterForm = () => {
             id="password"
             className="focus-visible:ring-primary/50 focus-visible:border-primary"
             placeholder={AUTH_REGISTER_TEXT.PASSWORD_PLACEHOLDER}
-            autoComplete="current-password"
+            autoComplete="new-password"
             {...form.register('password')}
           />
           <p>{form.formState.errors.password?.message}</p>
@@ -67,7 +67,7 @@ export const RegisterForm = () => {
             id="confirmPassword"
             className="focus-visible:ring-primary/50 focus-visible:border-primary"
             placeholder={AUTH_REGISTER_TEXT.PASSWORD_PLACEHOLDER}
-            autoComplete="current-password"
+            autoComplete="new-password"
             {...form.register('confirmPassword')}
           />
           <p>{form.formState.errors.confirmPassword?.message}</p>
