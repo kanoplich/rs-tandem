@@ -1,3 +1,5 @@
+import type { Provider } from '@supabase/supabase-js';
+
 import { supabase } from '../supabase-client';
 
 import { addMockAuthListener, MOCK_SESSION, mockIsAuth, setMockIsAuth } from './mock';
@@ -100,4 +102,15 @@ export const signOut = async (): Promise<void> => {
   if (error) {
     throw error;
   }
+};
+
+export const signInWithOAuth = async (provider: Provider): Promise<void> => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${HOST}${ROUTES.DASHBOARD}`,
+    },
+  });
+
+  if (error) throw error;
 };
