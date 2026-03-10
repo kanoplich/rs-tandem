@@ -24,8 +24,12 @@ export const useLoginForm = () => {
       setError(null);
 
       await signIn(data);
-    } catch {
-      setError(AUTH_LOGIN_ERRORS.INVALID_CREDENTIALS);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError(AUTH_LOGIN_ERRORS.AUTH_ERROR);
+      }
     } finally {
       setLoading(false);
     }
