@@ -1,11 +1,6 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: '14.1';
-  };
   public: {
     Tables: {
       profiles: {
@@ -41,9 +36,9 @@ export type Database = {
           judge_level: number | null;
           missed: string[] | null;
           score: number | null;
-          submitted_at: string | null;
-          task_id: string | null;
-          user_id: string | null;
+          submitted_at: string;
+          task_id: string;
+          user_id: string;
         };
         Insert: {
           answer: string;
@@ -53,9 +48,9 @@ export type Database = {
           judge_level?: number | null;
           missed?: string[] | null;
           score?: number | null;
-          submitted_at?: string | null;
-          task_id?: string | null;
-          user_id?: string | null;
+          submitted_at?: string;
+          task_id: string;
+          user_id: string;
         };
         Update: {
           answer?: string;
@@ -65,9 +60,9 @@ export type Database = {
           judge_level?: number | null;
           missed?: string[] | null;
           score?: number | null;
-          submitted_at?: string | null;
-          task_id?: string | null;
-          user_id?: string | null;
+          submitted_at?: string;
+          task_id?: string;
+          user_id?: string;
         };
         Relationships: [
           {
@@ -94,13 +89,13 @@ export type Database = {
           golden_answer: string;
           hints: string[] | null;
           id: string;
-          max_score: number | null;
+          max_score: number;
           question_text: string;
           rubric_items: string[];
           rubric_weights: Json | null;
           test_code: string | null;
           title: string;
-          topic_id: string | null;
+          topic_id: string;
           type: string;
         };
         Insert: {
@@ -110,13 +105,13 @@ export type Database = {
           golden_answer: string;
           hints?: string[] | null;
           id: string;
-          max_score?: number | null;
+          max_score?: number;
           question_text: string;
           rubric_items: string[];
           rubric_weights?: Json | null;
           test_code?: string | null;
           title: string;
-          topic_id?: string | null;
+          topic_id: string;
           type: string;
         };
         Update: {
@@ -126,13 +121,13 @@ export type Database = {
           golden_answer?: string;
           hints?: string[] | null;
           id?: string;
-          max_score?: number | null;
+          max_score?: number;
           question_text?: string;
           rubric_items?: string[];
           rubric_weights?: Json | null;
           test_code?: string | null;
           title?: string;
-          topic_id?: string | null;
+          topic_id?: string;
           type?: string;
         };
         Relationships: [
