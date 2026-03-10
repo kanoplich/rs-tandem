@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { useLoginForm } from '../hooks/hooks';
+import { useLoginForm } from '../hooks/use-login-form';
 import { AUTH_LOGIN_TEXT } from '../locales/locales';
 
 import { LoginEmailField } from './login-email-field';
@@ -11,7 +11,7 @@ import { LoginSubmitButton } from './login-submit-button';
 import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
 
 export const LoginForm = () => {
-  const { form, handleSubmit, error } = useLoginForm();
+  const { form, handleSubmit, error, isSubmitting } = useLoginForm();
 
   return (
     <Card className="w-full max-w-[448px]">
@@ -25,11 +25,12 @@ export const LoginForm = () => {
           <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
             <LoginEmailField />
             <LoginPasswordField />
-            <LoginSubmitButton />
+            <LoginSubmitButton isSubmitting={isSubmitting} />
+
+            {error && <p className="text-center text-sm text-red-500">{error}</p>}
           </form>
         </FormProvider>
 
-        {error && <p className="text-center text-sm text-red-500">{error}</p>}
         <p className="text-center text-sm text-muted-foreground">
           {AUTH_LOGIN_TEXT.NO_ACCOUNT}{' '}
           <Link to={ROUTES.REGISTER} className="text-primary">
