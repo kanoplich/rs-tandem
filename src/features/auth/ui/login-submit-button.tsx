@@ -1,4 +1,4 @@
-import { AUTH_LOGIN_TEXT } from '../locales/locales';
+import { AUTH_LOGIN_TEXT } from '../locales';
 
 import { Button } from '@/shared/ui';
 
