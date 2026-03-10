@@ -20,4 +20,6 @@ export const AUTH_LOGIN_ERRORS = {
   INVALID_EMAIL: 'Введите корректный email (пример: your.email@example.com)',
   PASSWORD_MIN: 'Введите пароль',
   PASSWORD_INVALID: 'Используйте только латинские буквы (A–Z, a–z) и цифры (0–9)',
+  INVALID_CREDENTIALS:
+    'Невозможно войти в систему. Пожалуйста, проверьте свои учетные данные и попробуйте снова.',
 };

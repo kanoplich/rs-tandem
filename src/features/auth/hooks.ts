@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { loginDefaultValues } from './lib/constants';
+import { AUTH_LOGIN_ERRORS } from './locales/locales';
 import { loginSchema, type LoginFormValues } from './model/auth-schema';
 
 import { signIn } from '@/shared/api';
@@ -24,9 +25,7 @@ export const useLoginForm = () => {
 
       await signIn(data);
     } catch {
-      setError(
-        'Невозможно войти в систему. Пожалуйста, проверьте свои учетные данные и попробуйте снова.'
-      );
+      setError(AUTH_LOGIN_ERRORS.INVALID_CREDENTIALS);
     } finally {
       setLoading(false);
     }
