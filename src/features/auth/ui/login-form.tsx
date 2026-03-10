@@ -1,10 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, FormProvider } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { loginDefaultValues } from '../lib/constants';
+import { useLoginForm } from '../hooks/use-login-form';
 import { AUTH_LOGIN_TEXT } from '../locales/locales';
-import { loginSchema, type LoginFormValues } from '../model/auth-schema';
 
 import { LoginEmailField } from './login-email-field';
 import { LoginPasswordField } from './login-password-field';
@@ -13,15 +11,7 @@ import { LoginSubmitButton } from './login-submit-button';
 import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
 
 export const LoginForm = () => {
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
-    mode: 'onBlur',
-    defaultValues: loginDefaultValues,
-  });
-
-  const onSubmit = async (_data: LoginFormValues) => {
-    // TODO: authService.login
-  };
+  const { form, handleSubmit, error, isSubmitting } = useLoginForm();
 
   return (
     <Card className="w-full max-w-[448px]">
@@ -32,10 +22,12 @@ export const LoginForm = () => {
 
       <CardContent className="space-y-6">
         <FormProvider {...form}>
-          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+          <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
             <LoginEmailField />
             <LoginPasswordField />
-            <LoginSubmitButton />
+            <LoginSubmitButton isSubmitting={isSubmitting} />
+
+            {error && <p className="text-center text-sm text-red-500">{error}</p>}
           </form>
         </FormProvider>
 
