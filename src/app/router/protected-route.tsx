@@ -15,7 +15,7 @@ export const ProtectedRoute = ({ children, reverse = false }: ProtectedRouteProp
   const location = useLocation();
 
   if (isLoading) {
-    return <Loader loading={true} />;
+    return <Loader />;
   }
 
   if (reverse && isAuthenticated) {

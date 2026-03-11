@@ -1,30 +1,22 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
 interface LoaderProps {
-  loading: boolean;
+  loading?: boolean;
   size?: number;
   speed?: number;
   thickness?: number;
   color?: string;
 }
 
-export const Loader: React.FC<LoaderProps> = ({
+export const Loader = ({
   loading,
   size = 80,
-  speed = 4,
+  speed = 0.8,
   thickness = 2.5,
   color = 'var(--primary)',
-}) => {
-  useEffect(() => {
-    document.body.style.overflow = loading ? 'hidden' : 'unset';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [loading]);
-
+}: LoaderProps) => {
   const cssVariables = {
     '--loader-size': `${size}px`,
     '--loader-speed': `${speed}s`,
@@ -56,5 +48,3 @@ export const Loader: React.FC<LoaderProps> = ({
     </AnimatePresence>
   );
 };
-
-export default Loader;
