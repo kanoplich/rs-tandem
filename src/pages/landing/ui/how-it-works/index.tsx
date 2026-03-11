@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 
 import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
 import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
-import { LANDING_HOW_IT_WORKS_TEXT, LANDING_STEPS_TEXT } from '@/pages/landing/locales/locales';
+import { LANDING_HOW_IT_WORKS_TEXT, LANDING_STEPS_TEXT } from '@/pages/landing/locales';
 import { cn } from '@/shared/lib/utils';
 
 export const HowItWorks = () => {
