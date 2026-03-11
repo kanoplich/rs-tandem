@@ -9,12 +9,12 @@ import { Button } from '@/shared';
 import { signOut } from '@/shared/api';
 import { cn } from '@/shared/lib/utils';
 
-interface HeaderNavProps {
+interface MenuLinksProps {
   variant: 'desktop' | 'mobile';
   onNavigate?: () => void;
 }
 
-export const HeaderNav = ({ variant, onNavigate }: HeaderNavProps) => {
+export const MenuLinks = ({ variant, onNavigate }: MenuLinksProps) => {
   const isDesktop = variant === 'desktop';
   const navClass = ({ isActive }: { isActive: boolean }) =>
     cn(
@@ -26,7 +26,6 @@ export const HeaderNav = ({ variant, onNavigate }: HeaderNavProps) => {
   const mobileLinkClass = 'px-4 py-3 flex items-center gap-2 hover:bg-white/10 transition-colors';
 
   const iconClass = isDesktop ? 'w-4 h-4' : 'w-5 h-5';
-
   const textClass = isDesktop ? 'hidden lg:inline' : '';
 
   return (

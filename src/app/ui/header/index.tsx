@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { MENU_LINK_TEXT } from './locales';
-import { HeaderNav } from './ui/menu-links';
+import { MenuLinks } from './ui/menu-links';
 
 import { Button, ROUTES } from '@/shared';
 import { LogoIcon } from '@/shared/assets/icons';
@@ -25,7 +25,7 @@ export const Header = () => {
       </Link>
 
       <nav className="hidden md:flex items-center gap-2 flex-wrap">
-        <HeaderNav variant="desktop" />
+        <MenuLinks variant="desktop" />
       </nav>
 
       <Button
@@ -46,7 +46,7 @@ export const Header = () => {
         )}
         aria-label="Mobile navigation"
       >
-        <HeaderNav variant="mobile" onNavigate={handleNavigate} />
+        <MenuLinks variant="mobile" onNavigate={handleNavigate} />
       </nav>
     </header>
   );
