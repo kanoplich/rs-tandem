@@ -1,6 +1,6 @@
 import { House, BookOpen, History, User } from 'lucide-react';
 
-import { MENU_LINK_TEXT } from '../locales/locales';
+import { MENU_LINK_TEXT } from '../../locales';
 
 import { ROUTES } from '@/shared';
 
