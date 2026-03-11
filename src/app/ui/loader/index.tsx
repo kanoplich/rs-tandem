@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -24,22 +25,35 @@ export const Loader: React.FC<LoaderProps> = ({
     };
   }, [loading]);
 
-  if (!loading) return null;
+  const cssVariables = {
+    '--loader-size': `${size}px`,
+    '--loader-speed': `${speed}s`,
+    '--loader-thickness': `${thickness}px`,
+    '--loader-color': color,
+  } as React.CSSProperties;
 
   return (
-    <div className={styles.overlay}>
-      <div
-        className={styles.loader}
-        style={
-          {
-            '--loader-size': `${size}px`,
-            '--loader-speed': `${speed}s`,
-            '--loader-thickness': `${thickness}px`,
-            '--loader-color': color,
-          } as React.CSSProperties
-        }
-      />
-    </div>
+    <AnimatePresence>
+      {loading && (
+        <motion.div
+          className={styles.overlay}
+          initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          animate={{ opacity: 1, backdropFilter: 'blur(4px)' }}
+          exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+        >
+          <div style={cssVariables}>
+            <motion.div
+              className={styles.loader}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
