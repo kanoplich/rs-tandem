@@ -1,8 +1,8 @@
 import { Github, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
-import { DEVELOPERS } from './constants';
-import { FOOTER_TEXTS } from './locales/locales';
+import { DEVELOPERS } from './lib/constants';
+import { FOOTER_TEXTS } from './locales';
 
 import { RsSchool } from '@/shared/assets/icons';
 import { HEADERS_TEXT } from '@/shared/model/constants';
