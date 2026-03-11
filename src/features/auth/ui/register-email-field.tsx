@@ -1,25 +1,25 @@
 import { useFormContext } from 'react-hook-form';
 
-import { AUTH_LOGIN_TEXT } from '../locales';
-import { type LoginFormValues } from '../model/auth-schema';
+import { AUTH_REGISTER_TEXT } from '../locales';
+import { type RegisterFormType } from '../model/register-schema';
 
 import { Input, Label } from '@/shared/ui';
 
-export const LoginEmailField = () => {
+export const RegisterEmailField = () => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<LoginFormValues>();
+  } = useFormContext<RegisterFormType>();
 
   return (
     <div className="space-y-2">
-      <Label htmlFor="email">{AUTH_LOGIN_TEXT.EMAIL_LABEL}</Label>
+      <Label htmlFor="email">{AUTH_REGISTER_TEXT.EMAIL_LABEL}</Label>
 
       <Input
         id="email"
         type="email"
         autoComplete="email"
-        placeholder={AUTH_LOGIN_TEXT.EMAIL_PLACEHOLDER}
+        placeholder={AUTH_REGISTER_TEXT.EMAIL_PLACEHOLDER}
         className="focus-visible:ring-primary focus-visible:border-primary"
         {...register('email')}
       />

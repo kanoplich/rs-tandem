@@ -1,11 +1,6 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: '14.1';
-  };
   public: {
     Tables: {
       profiles: {
@@ -35,39 +30,39 @@ export type Database = {
       submissions: {
         Row: {
           answer: string;
-          covered: Json | null;
+          covered: string[] | null;
           feedback: string | null;
           id: string;
           judge_level: number | null;
-          missed: Json | null;
+          missed: string[] | null;
           score: number | null;
-          submitted_at: string | null;
-          task_id: string | null;
-          user_id: string | null;
+          submitted_at: string;
+          task_id: string;
+          user_id: string;
         };
         Insert: {
           answer: string;
-          covered?: Json | null;
+          covered?: string[] | null;
           feedback?: string | null;
           id?: string;
           judge_level?: number | null;
-          missed?: Json | null;
+          missed?: string[] | null;
           score?: number | null;
-          submitted_at?: string | null;
-          task_id?: string | null;
-          user_id?: string | null;
+          submitted_at?: string;
+          task_id: string;
+          user_id: string;
         };
         Update: {
           answer?: string;
-          covered?: Json | null;
+          covered?: string[] | null;
           feedback?: string | null;
           id?: string;
           judge_level?: number | null;
-          missed?: Json | null;
+          missed?: string[] | null;
           score?: number | null;
-          submitted_at?: string | null;
-          task_id?: string | null;
-          user_id?: string | null;
+          submitted_at?: string;
+          task_id?: string;
+          user_id?: string;
         };
         Relationships: [
           {
@@ -92,15 +87,15 @@ export type Database = {
           created_at: string | null;
           difficulty: number | null;
           golden_answer: string;
-          hints: Json | null;
+          hints: string[] | null;
           id: string;
-          max_score: number | null;
+          max_score: number;
           question_text: string;
-          rubric_items: Json;
+          rubric_items: string[];
           rubric_weights: Json | null;
           test_code: string | null;
           title: string;
-          topic_id: string | null;
+          topic_id: string;
           type: string;
         };
         Insert: {
@@ -108,15 +103,15 @@ export type Database = {
           created_at?: string | null;
           difficulty?: number | null;
           golden_answer: string;
-          hints?: Json | null;
+          hints?: string[] | null;
           id: string;
-          max_score?: number | null;
+          max_score?: number;
           question_text: string;
-          rubric_items: Json;
+          rubric_items: string[];
           rubric_weights?: Json | null;
           test_code?: string | null;
           title: string;
-          topic_id?: string | null;
+          topic_id: string;
           type: string;
         };
         Update: {
@@ -124,15 +119,15 @@ export type Database = {
           created_at?: string | null;
           difficulty?: number | null;
           golden_answer?: string;
-          hints?: Json | null;
+          hints?: string[] | null;
           id?: string;
-          max_score?: number | null;
+          max_score?: number;
           question_text?: string;
-          rubric_items?: Json;
+          rubric_items?: string[];
           rubric_weights?: Json | null;
           test_code?: string | null;
           title?: string;
-          topic_id?: string | null;
+          topic_id?: string;
           type?: string;
         };
         Relationships: [
@@ -182,7 +177,7 @@ export type Database = {
           id: string | null;
           max_score: number | null;
           question_text: string | null;
-          rubric_items: Json | null;
+          rubric_items: string[] | null;
           title: string | null;
           topic_id: string | null;
           type: string | null;
@@ -194,7 +189,7 @@ export type Database = {
           id?: string | null;
           max_score?: number | null;
           question_text?: string | null;
-          rubric_items?: Json | null;
+          rubric_items?: string[] | null;
           title?: string | null;
           topic_id?: string | null;
           type?: string | null;
@@ -206,7 +201,7 @@ export type Database = {
           id?: string | null;
           max_score?: number | null;
           question_text?: string | null;
-          rubric_items?: Json | null;
+          rubric_items?: string[] | null;
           title?: string | null;
           topic_id?: string | null;
           type?: string | null;
@@ -223,8 +218,27 @@ export type Database = {
       };
     };
     Functions: {
-      get_topic_progress: { Args: never; Returns: Json };
-      get_user_stats: { Args: never; Returns: Json };
+      get_topic_progress: {
+        Args: never;
+        Returns: {
+          avg_score: number;
+          completed: number;
+          last_attempt_at: string;
+          topic_id: string;
+          topic_title: string;
+          total: number;
+        }[];
+      };
+      get_user_stats: {
+        Args: never;
+        Returns: {
+          completed_tasks: number;
+          rank: string;
+          streak: number;
+          total_tasks: number;
+          xp: number;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;

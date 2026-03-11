@@ -11,6 +11,7 @@ const { USE_MOCK_SUPABASE, HOST } = config;
 
 export const getSession = async (): Promise<AuthSession | null> => {
   if (USE_MOCK_SUPABASE) {
+    await delay(400);
     return mockIsAuth ? MOCK_SESSION : null;
   }
 
