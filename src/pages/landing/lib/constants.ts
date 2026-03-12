@@ -1,4 +1,4 @@
-import { LANDING_STATS_TEXT } from '@/pages/landing/locales/locales';
+import { LANDING_STATS_TEXT } from '@/pages/landing/locales';
 
 export const INTERSECTION_OBSERVER_THRESHOLD = 0.1;
 export const INTERSECTION_OBSERVER_THRESHOLD_FEATURES = 0.08;

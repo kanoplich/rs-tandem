@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
 import { INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
-import { LANDING_READY_TEXT } from '@/pages/landing/locales/locales';
+import { LANDING_READY_TEXT } from '@/pages/landing/locales';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
 import { BUTTON_TEXT } from '@/shared/model/constants';
