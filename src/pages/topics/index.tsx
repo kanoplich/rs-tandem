@@ -1,7 +1,14 @@
+import { StageTabs, StageOverview, ActionBar, TopicGrid } from './ui';
+
 export const Topics = () => {
   return (
     <>
-      <div>topics</div>
+      <div className="flex flex-col">
+        <StageTabs />
+        <StageOverview />
+        <ActionBar />
+        <TopicGrid />
+      </div>
     </>
   );
 };
