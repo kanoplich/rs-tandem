@@ -389,11 +389,11 @@ s3_secret_key = "env(S3_SECRET_KEY)"
 
 [auth.external.google]
 enabled = true
-client_id = "env(VITE_SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
-secret = "env(VITE_SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_SECRET)"
+client_id = "env(GOOGLE_CLIENT_ID)"
+secret = "env(GOOGLE_CLIENT_SECRET)"
 skip_nonce_check = false
 
 [auth.external.github]
 enabled = true
-client_id = "env(VITE_SUPABASE_AUTH_EXTERNAL_GITHUB_CLIENT_ID)"
-secret = "env(VITE_SUPABASE_AUTH_EXTERNAL_GITHUB_CLIENT_SECRET)"
+client_id = "env(GITHUB_CLIENT_ID)"
+secret = "env(GITHUB_CLIENT_SECRET)"

@@ -7,10 +7,4 @@ export type Public = Database['public'];
 
 const { SUPABASE_URL, SUPABASE_ANON_KEY } = config;
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true,
-  },
-});
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY);
