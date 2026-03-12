@@ -7,6 +7,7 @@ import { AUTH_REGISTER_ERRORS } from '../locales';
 import { registerSchema, type RegisterFormType } from '../model/register-schema';
 
 import { signUp } from '@/shared/api';
+import type { RegisterCredentials } from '@/shared/api/auth/types';
 
 export const useRegisterForm = () => {
   const form = useForm<RegisterFormType>({
@@ -18,9 +19,16 @@ export const useRegisterForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (data: RegisterFormType) => {
+    const { firstName: first_name, email, password } = data;
+    const userData: RegisterCredentials = {
+      first_name,
+      email,
+      password,
+    };
+
     try {
       setError(null);
-      await signUp(data);
+      await signUp(userData);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
