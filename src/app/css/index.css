@@ -10,7 +10,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #ffffff;
+  color: var(--foreground);
   background-color: var(--background);
 
   font-synthesis: none;
