@@ -110,6 +110,12 @@ export const signOut = async (): Promise<void> => {
 };
 
 export const signInWithOAuth = async (provider: Provider): Promise<void> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(800);
+    setMockIsAuth(true);
+    return;
+  }
+
   const { error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
