@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './styles.module.css';
 
 interface LoaderProps {
-  loading?: boolean;
   size?: number;
   speed?: number;
   thickness?: number;
@@ -11,7 +10,6 @@ interface LoaderProps {
 }
 
 export const Loader = ({
-  loading,
   size = 80,
   speed = 0.8,
   thickness = 2.5,
@@ -26,7 +24,7 @@ export const Loader = ({
 
   return (
     <AnimatePresence>
-      {loading && (
+      {
         <motion.div
           className={styles.overlay}
           initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
@@ -44,7 +42,7 @@ export const Loader = ({
             />
           </div>
         </motion.div>
-      )}
+      }
     </AnimatePresence>
   );
 };
