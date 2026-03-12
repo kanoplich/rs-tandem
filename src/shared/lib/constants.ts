@@ -1,6 +1,4 @@
-import type { Provider } from '@supabase/supabase-js';
-
-export const PROVIDERS: Record<string, Provider> = {
+export const PROVIDERS = {
   GOOGLE: 'google',
   GITHUB: 'github',
-};
+} as const;
