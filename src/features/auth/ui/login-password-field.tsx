@@ -20,7 +20,11 @@ export const LoginPasswordField = () => {
         id="password"
         autoComplete="current-password"
         placeholder={AUTH_LOGIN_TEXT.PASSWORD_PLACEHOLDER}
-        className="focus-visible:ring-primary focus-visible:border-primary"
+        className="outline-none
+ring-0
+focus:ring-0
+focus-visible:ring-0
+focus-visible:border-primary"
         {...register('password')}
       />
 

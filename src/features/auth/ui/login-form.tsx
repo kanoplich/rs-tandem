@@ -5,9 +5,9 @@ import { useLoginForm } from '../hooks/use-login-form';
 import { AUTH_LOGIN_TEXT } from '../locales';
 
 import { LoginEmailField } from './login-email-field';
-import { LoginOAuthButtons } from './login-oauth-buttons';
 import { LoginPasswordField } from './login-password-field';
 import { LoginSubmitButton } from './login-submit-button';
+import { OAuthButtons } from './oauth-buttons';
 
 import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
 
@@ -23,11 +23,11 @@ export const LoginForm = () => {
 
       <CardContent className="space-y-4">
         <FormProvider {...form}>
-          <form className="space-y-3" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
+          <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
             <LoginEmailField />
             <LoginPasswordField />
             <LoginSubmitButton isSubmitting={isSubmitting} />
-            <LoginOAuthButtons />
+            <OAuthButtons />
 
             {error && <p className="text-center text-sm text-red-500">{error}</p>}
           </form>
