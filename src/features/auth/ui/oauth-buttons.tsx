@@ -17,7 +17,7 @@ export const OAuthButtons = () => {
       <Button
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GOOGLE)}
-        className="w-48 h-10 flex items-center justify-center cursor-pointer bg-card hover:border-primary"
+        className="w-48 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
       >
         <GoogleIcon />
       </Button>
@@ -25,7 +25,7 @@ export const OAuthButtons = () => {
       <Button
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GITHUB)}
-        className="w-48 h-10 flex items-center justify-center cursor-pointer bg-card hover:border-primary"
+        className="w-48 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
       >
         <GithubIcon className="fill-light" />
       </Button>
