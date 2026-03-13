@@ -23,7 +23,7 @@ export const LoginForm = () => {
 
       <CardContent className="space-y-4">
         <FormProvider {...form}>
-          <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
+          <form className="space-y-3" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
             <LoginEmailField />
             <LoginPasswordField />
             <LoginSubmitButton isSubmitting={isSubmitting} />
