@@ -12,13 +12,14 @@ import { cn } from '@/shared/lib/utils';
 
 interface MenuLinksProps {
   variant: 'desktop' | 'mobile';
-  mobileOpen: boolean;
+  mobileOpen?: boolean;
   onNavigate?: () => void;
 }
 
 export const MenuLinks = forwardRef<HTMLDivElement, MenuLinksProps>(
   ({ variant, mobileOpen, onNavigate }, ref) => {
     const isDesktop = variant === 'desktop';
+
     const navClass = ({ isActive }: { isActive: boolean }) =>
       cn(
         'flex items-center gap-2 rounded-md px-4 py-2 text-sm transition',
@@ -26,20 +27,46 @@ export const MenuLinks = forwardRef<HTMLDivElement, MenuLinksProps>(
           ? 'bg-sidebar-primary text-sidebar-primary-foreground'
           : 'text-white hover:bg-white/10'
       );
-    const mobileLinkClass = 'px-4 py-3 flex items-center gap-2 hover:bg-white/10 transition-colors';
+
+    const mobileLinkClass = ({ isActive }: { isActive: boolean }) =>
+      cn(
+        'px-3 py-2 flex items-center gap-2 text-sm transition-colors',
+        isActive
+          ? 'bg-sidebar-primary text-sidebar-primary-foreground'
+          : 'text-white hover:bg-white/10'
+      );
 
     const iconClass = isDesktop ? 'w-4 h-4' : 'w-5 h-5';
     const textClass = isDesktop ? 'hidden lg:inline' : '';
 
+    const handleLogout = async () => {
+      try {
+        await signOut();
+      } catch (error) {
+        console.error('Sign out failed:', error);
+      }
+
+      onNavigate?.();
+    };
+
+    const baseNav = 'flex flex-col md:flex-row md:items-center md:gap-2 md:flex-wrap';
+
+    const mobileNav =
+      'absolute top-full right-4 mt-2 w-56 bg-card border border-white/10 rounded-lg shadow-lg';
+
+    const desktopNav =
+      'md:static md:mt-0 md:w-auto md:bg-transparent md:border-none md:rounded-none md:shadow-none';
+
+    const animation = 'overflow-hidden transition-all duration-300';
+
+    const openState = mobileOpen
+      ? 'opacity-100 translate-y-0'
+      : 'opacity-0 -translate-y-2 pointer-events-none md:opacity-100 md:translate-y-0 md:pointer-events-auto';
+
     return (
       <nav
         ref={ref}
-        className={cn(
-          'flex flex-col md:flex-row md:items-center md:gap-2 md:flex-wrap absolute md:static top-full right-4 mt-2 md:mt-0 w-56 md:w-auto bg-card md:bg-transparent border md:border-none border-white/10 rounded-lg md:rounded-none shadow-lg md:shadow-none overflow-hidden transition-all duration-300',
-          mobileOpen
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 -translate-y-2 pointer-events-none md:opacity-100 md:translate-y-0 md:pointer-events-auto'
-        )}
+        className={cn(baseNav, mobileNav, desktopNav, animation, openState)}
         aria-label="Navigation"
       >
         {MENU_LINKS.map(({ to, label, icon: Icon }) => (
@@ -60,12 +87,9 @@ export const MenuLinks = forwardRef<HTMLDivElement, MenuLinksProps>(
           className={
             isDesktop
               ? 'flex items-center gap-2 text-white hover:bg-white/10'
-              : 'px-4 py-3 flex items-center gap-2 text-red-400 hover:bg-white/10 justify-start'
+              : 'px-4 py-3 flex items-center gap-2 text-destructive hover:bg-white/10 justify-start'
           }
-          onClick={() => {
-            signOut();
-            if (onNavigate) onNavigate();
-          }}
+          onClick={handleLogout}
         >
           <LogOut className={iconClass} />
           <span className={textClass}>{MENU_LINK_TEXT.LOGOUT}</span>

@@ -1,5 +1,5 @@
 import { Menu, X } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { MENU_LINK_TEXT } from './locales';
@@ -10,23 +10,8 @@ import { LogoIcon } from '@/shared/assets/icons';
 
 export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   const handleNavigate = () => setMobileOpen(false);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMobileOpen(false);
-      }
-    };
-    if (mobileOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [mobileOpen]);
 
   return (
     <header className="bg-card px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
@@ -50,8 +35,7 @@ export const Header = () => {
       </Button>
 
       <MenuLinks
-        ref={menuRef}
-        variant={mobileOpen ? 'mobile' : 'desktop'}
+        variant={window.innerWidth >= 768 ? 'desktop' : 'mobile'}
         mobileOpen={mobileOpen}
         onNavigate={handleNavigate}
       />
