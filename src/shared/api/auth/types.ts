@@ -9,5 +9,5 @@ export type AuthCredentials = {
 };
 
 export type RegisterCredentials = AuthCredentials & {
-  first_name: string;
+  name: string;
 };
