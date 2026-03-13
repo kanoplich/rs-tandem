@@ -29,7 +29,7 @@ export const LoginForm = () => {
             <LoginSubmitButton isSubmitting={isSubmitting} />
             <OAuthButtons />
 
-            {error && <p className="text-center text-sm text-red-500">{error}</p>}
+            {error && <p className="text-center text-sm text-destructive">{error}</p>}
           </form>
         </FormProvider>
 
