@@ -9,10 +9,6 @@ import { Button } from '@/shared/ui/button';
 export const AppLayout = () => {
   const [llmResult, setLlmResult] = useState<string>('');
 
-  const taskId = 'closures__lexical-environment-closures';
-  const answer =
-    'Замыкание — это когда функция "помнит" переменные из своего лексического окружения даже после того, как внешняя функция завершила работу.';
-
   const handleSignUp = async () => {
     const session = await signUp({ email: 'seva.kavalenka@gmail.com', password: 'Qwerty12345' });
     console.log('Signed up session:', session);
@@ -26,12 +22,17 @@ export const AppLayout = () => {
   const handleGroqApi = async () => {
     setLlmResult('');
 
-    const reader = (await evaluateTheory(
-      taskId,
-      answer,
-      'stream'
-    )) as ReadableStreamDefaultReader<Uint8Array>;
+    const result = await evaluateTheory(
+      'closures__lexical-environment-closures',
+      'Замыкание — это когда функция "помнит" переменные из своего лексического окружения даже после того, как внешняя функция завершила работу.'
+    );
 
+    if ('feedback' in result) {
+      setLlmResult(result.feedback);
+      return;
+    }
+
+    const reader = result;
     const decoder = new TextDecoder();
 
     while (true) {
@@ -39,13 +40,9 @@ export const AppLayout = () => {
 
       if (done) break;
 
-      const token = decoder.decode(value);
-      setLlmResult((prev) => prev + token);
+      const chunk = decoder.decode(value);
+      setLlmResult((prev) => prev + chunk);
     }
-
-    const result = await evaluateTheory(taskId, answer, 'json');
-
-    console.log(result);
   };
 
   return (
