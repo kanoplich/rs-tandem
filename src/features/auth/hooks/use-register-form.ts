@@ -19,9 +19,9 @@ export const useRegisterForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (data: RegisterFormType) => {
-    const { firstName: first_name, email, password } = data;
+    const { name, email, password } = data;
     const userData: RegisterCredentials = {
-      first_name,
+      name,
       email,
       password,
     };

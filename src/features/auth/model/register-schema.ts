@@ -19,7 +19,7 @@ export const passwordValidation = z
 
 export const registerSchema = z
   .object({
-    firstName: nameValidation,
+    name: nameValidation,
     email: z.email({
       message: AUTH_REGISTER_ERRORS.EMAIL,
     }),
