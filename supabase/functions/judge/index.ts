@@ -2,7 +2,7 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 import { corsHeaders } from './utils/cors.ts';
-import { response } from './utils/response.ts';
+import { errorResponse } from './utils/error-response.ts';
 import { isValidJudgeResponse } from './utils/validators.ts';
 
 serve(async (req) => {
@@ -15,16 +15,16 @@ serve(async (req) => {
   try {
     body = await req.json();
   } catch {
-    return response('Invalid JSON body', 400);
+    return errorResponse('Invalid JSON body', 400);
   }
 
   const { taskId, answer } = body;
 
-  if (!taskId || !answer) return response('TaskId and answer are required', 400);
+  if (!taskId || !answer) return errorResponse('TaskId and answer are required', 400);
 
   const authHeader = req.headers.get('Authorization');
 
-  if (!authHeader) return response('Authorization header is required', 400);
+  if (!authHeader) return errorResponse('Authorization header is required', 400);
 
   const userClient = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -36,7 +36,7 @@ serve(async (req) => {
     data: { user },
   } = await userClient.auth.getUser();
 
-  if (!user) return response('Unauthorized user', 401);
+  if (!user) return errorResponse('Unauthorized user', 401);
 
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -49,7 +49,7 @@ serve(async (req) => {
     .eq('id', taskId)
     .single();
 
-  if (!task) return response('Task not found', 404);
+  if (!task) return errorResponse('Task not found', 404);
 
   const systemPrompt = `
 ROLE: You are a strict technical interviewer.
@@ -106,6 +106,12 @@ Respond ONLY according to system instructions and rubric.
       max_tokens: 1000,
     }),
   });
+
+  if (!llmResponse.ok) {
+    const errorText = await llmResponse.text();
+    console.error('LLM request failed:', errorText);
+    return errorResponse('LLM request failed', 500);
+  }
 
   const FEEDBACK_END_MARKER = '---RESULT---';
   const markerLength = FEEDBACK_END_MARKER.length;
