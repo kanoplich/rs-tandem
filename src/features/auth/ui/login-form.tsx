@@ -5,6 +5,7 @@ import { useLoginForm } from '../hooks/use-login-form';
 import { AUTH_LOGIN_TEXT } from '../locales';
 
 import { LoginEmailField } from './login-email-field';
+import { LoginOAuthButtons } from './login-oauth-buttons';
 import { LoginPasswordField } from './login-password-field';
 import { LoginSubmitButton } from './login-submit-button';
 
@@ -20,12 +21,13 @@ export const LoginForm = () => {
         <CardDescription>{AUTH_LOGIN_TEXT.DESCRIPTION}</CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4">
         <FormProvider {...form}>
-          <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
+          <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
             <LoginEmailField />
             <LoginPasswordField />
             <LoginSubmitButton isSubmitting={isSubmitting} />
+            <LoginOAuthButtons />
 
             {error && <p className="text-center text-sm text-red-500">{error}</p>}
           </form>
@@ -33,7 +35,7 @@ export const LoginForm = () => {
 
         <p className="text-center text-sm text-muted-foreground">
           {AUTH_LOGIN_TEXT.NO_ACCOUNT}{' '}
-          <Link to={ROUTES.REGISTER} className="text-primary">
+          <Link to={ROUTES.REGISTER} className="text-primary hover:no-underline">
             {AUTH_LOGIN_TEXT.REGISTER_LINK}
           </Link>
         </p>
