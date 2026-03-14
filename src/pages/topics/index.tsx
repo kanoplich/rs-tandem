@@ -1,4 +1,4 @@
-import { TopicsHeader, StageTabs, StageOverview, ActionBar, TopicGrid } from './ui';
+import { TopicsHeader, StageTabs } from './ui';
 
 export const Topics = () => {
   return (
@@ -6,9 +6,9 @@ export const Topics = () => {
       <div className="flex flex-col">
         <TopicsHeader />
         <StageTabs />
-        <StageOverview />
+        {/*  <StageOverview />
         <ActionBar />
-        <TopicGrid />
+        <TopicGrid /> */}
       </div>
     </>
   );

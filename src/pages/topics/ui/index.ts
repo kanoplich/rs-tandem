@@ -1,2 +1,2 @@
-export { StageTabs } from './stage-tabs';
-export { TopicsHeader } from './topics-header';
+export { StageTabs } from '../ui/stage-tabs';
+export { TopicsHeader } from '../ui/topics-header';

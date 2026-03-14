@@ -1,0 +1,31 @@
+.trigger {
+  flex: 1 1 0%;
+  height: 29px;
+  margin: 3.5px;
+  border-radius: 12px;
+  transition: all 0.15s ease;
+  color: var(--light);
+  font-size: 0.875rem;
+  font-weight: 400;
+  background-color: transparent;
+  outline: none;
+}
+
+.trigger[data-state='active'] {
+  background-color: var(--card);
+  color: var(--light);
+}
+
+.trigger[data-state='inactive'] {
+  background-color: transparent;
+}
+
+.trigger[data-state='inactive']:hover,
+.trigger:hover {
+  color: var(--primary);
+  transform: scale(1.025);
+}
+
+.trigger:focus-visible {
+  outline: none;
+}
