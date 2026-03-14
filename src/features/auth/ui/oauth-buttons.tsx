@@ -1,14 +1,22 @@
+import { useState } from 'react';
+
 import { PROVIDERS } from '@/shared/';
 import { signInWithOAuth } from '@/shared/api/auth';
 import { GoogleIcon, GithubIcon } from '@/shared/assets/icons';
 import { Button } from '@/shared/ui/button';
 
 export const OAuthButtons = () => {
+  const [loading, setLoading] = useState(false);
+
   const manageSignIn = async (provider: 'google' | 'github') => {
+    if (loading) return;
+    setLoading(true);
     try {
       await signInWithOAuth(provider);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
