@@ -9,8 +9,8 @@ export const StageTabs = () => {
   return (
     <section className="container mx-auto max-w-[1280px] px-4 pt-6">
       <Tabs
-        defaultValue="stages"
-        className="w-full max-w-[1248px] h-[36px] mx-auto rounded-lg bg-input border-0 px-[3px]"
+        defaultValue="stages1"
+        className="w-full max-w-[1248px] mx-auto rounded-lg border-0 px-[3px]"
       >
         <TabsList className="w-full h-[36px] bg-input p-0 rounded-lg border-0 flex">
           <TabsTrigger className={styles.trigger} value="stage1">
@@ -23,28 +23,34 @@ export const StageTabs = () => {
             {STAGE_THIRD_TEXT.TITLE}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="stage 1">
-          <Card>
+        <TabsContent value="stage1" className="mt-4 w-full h-[147.8px] mx-auto">
+          <Card className="bg-card border-0">
             <CardHeader>
               <CardTitle>{STAGE_FIRST_TEXT.TITLE}</CardTitle>
             </CardHeader>
-            <CardContent className="">{STAGE_FIRST_TEXT.DESCRIPTION}</CardContent>
+            <CardContent>
+              <p className="text-foreground">{STAGE_FIRST_TEXT.DESCRIPTION}</p>
+            </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="stage 2">
-          <Card>
+        <TabsContent value="stage2" className="mt-4 w-full mx-auto">
+          <Card className="bg-card border-0">
             <CardHeader>
               <CardTitle>{STAGE_SECOND_TEXT.TITLE}</CardTitle>
             </CardHeader>
-            <CardContent className="">{STAGE_SECOND_TEXT.DESCRIPTION}</CardContent>
+            <CardContent>
+              <p className="text-foreground">{STAGE_SECOND_TEXT.DESCRIPTION}</p>
+            </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="stage 3">
-          <Card>
+        <TabsContent value="stage3" className="mt-4 w-full mx-auto">
+          <Card className="bg-card border-0">
             <CardHeader>
               <CardTitle>{STAGE_THIRD_TEXT.TITLE}</CardTitle>
             </CardHeader>
-            <CardContent className="">{STAGE_THIRD_TEXT.DESCRIPTION}</CardContent>
+            <CardContent>
+              <p className="text-foreground">{STAGE_THIRD_TEXT.DESCRIPTION}</p>
+            </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
