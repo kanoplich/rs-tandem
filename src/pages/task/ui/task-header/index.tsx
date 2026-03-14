@@ -11,7 +11,7 @@ export const TaskHeader = () => {
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-3">
               <h2 className="text-base">{TASK_HEADER.TITLE}</h2>
-              <div className="text-xs px-1 py-1.5 rounded bg-[var(--input)]">Stage 1</div>
+              <div className="text-xs px-1 py-1.5 rounded bg-input">Stage 1</div>
             </div>
             <div>
               {TASK_HEADER.QUESTION} 1 {TASK_HEADER.FROM} 10
