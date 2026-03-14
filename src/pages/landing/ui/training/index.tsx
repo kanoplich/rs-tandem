@@ -8,7 +8,7 @@ import {
   INTERSECTION_OBSERVER_THRESHOLD,
   LANDING_STATS,
 } from '@/pages/landing/lib/constants';
-import { LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '@/pages/landing/locales/locales';
+import { LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '@/pages/landing/locales';
 import { ROUTES } from '@/shared/config/routes';
 import { cn } from '@/shared/lib/utils';
 import { BUTTON_TEXT, HEADERS_TEXT } from '@/shared/model/constants';

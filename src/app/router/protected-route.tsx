@@ -1,5 +1,6 @@
-import { LoaderCircle } from 'lucide-react';
 import { Navigate, useLocation } from 'react-router-dom';
+
+import { Loader } from '../ui/loader';
 
 import { ROUTES } from '@/shared/config/routes';
 import { useAuth } from '@/shared/hooks/use-auth';
@@ -14,7 +15,7 @@ export const ProtectedRoute = ({ children, reverse = false }: ProtectedRouteProp
   const location = useLocation();
 
   if (isLoading) {
-    return <LoaderCircle />;
+    return <Loader />;
   }
 
   if (reverse && isAuthenticated) {

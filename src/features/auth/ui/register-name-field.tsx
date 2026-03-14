@@ -13,16 +13,16 @@ export const RegisterNameField = () => {
 
   return (
     <div className="space-y-2">
-      <Label htmlFor="firstName">{AUTH_REGISTER_TEXT.NAME_LABEL}</Label>
+      <Label htmlFor="userName">{AUTH_REGISTER_TEXT.NAME_LABEL}</Label>
 
       <Input
-        id="firstName"
+        id="userName"
         placeholder={AUTH_REGISTER_TEXT.NAME_PLACEHOLDER}
         className="focus-visible:ring-primary focus-visible:border-primary"
-        {...register('firstName')}
+        {...register('name')}
       />
 
-      {errors.firstName && <p className="text-xs text-destructive">{errors.firstName.message}</p>}
+      {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
     </div>
   );
 };
