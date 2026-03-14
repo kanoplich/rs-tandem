@@ -2,7 +2,7 @@ import { TASK_ADVISE } from '../../locales';
 
 export const TaskAdvise = () => {
   return (
-    <section className="py-6">
+    <section className="pb-6">
       <div className="mx-auto max-w-5xl p-6 rounded-xl border border-secondary bg-secondary/45">
         <div className="flex gap-4">
           <img src="/images/bg-landing2.png" alt="RS School interview" className="w-24 h-24" />

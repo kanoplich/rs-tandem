@@ -4,7 +4,7 @@ import { Progress } from '@/shared/ui/progress';
 
 export const TaskProgress = () => {
   return (
-    <section className="py-6">
+    <section className="pb-6">
       <div className="mx-auto max-w-5xl p-6 rounded-xl bg-card border border-border">
         <div className="flex justify-between items-center">
           <h3 className="text-base">{TASK_PROGRESS.LABEL}</h3>

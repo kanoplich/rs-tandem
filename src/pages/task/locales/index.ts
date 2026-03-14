@@ -9,6 +9,10 @@ export const TASK_PROGRESS = {
   VALUE: '0%',
 };
 
+export const TASK_CHAT = {
+  PLACEHOLDER: 'Введите ваш ответ... (Enter для отправки, Shift+Enter для новой строки)',
+};
+
 export const TASK_ADVISE = {
   TITLE: 'Советы для тренировки',
   ADVISE_1: 'Отвечайте подробно и структурированно',
