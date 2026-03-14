@@ -1,10 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, FormProvider } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { registerDefaultValues } from '../lib/constants';
+import { useRegisterForm } from '../hooks/use-register-form';
 import { AUTH_REGISTER_TEXT } from '../locales';
-import { registerSchema, type RegisterFormType } from '../model/register-schema';
 
 import { RegisterConfirmField } from './register-confirm-field';
 import { RegisterEmailField } from './register-email-field';
@@ -15,15 +13,7 @@ import { RegisterSubmitButton } from './register-submit-button';
 import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
 
 export const RegisterForm = () => {
-  const form = useForm<RegisterFormType>({
-    mode: 'onBlur',
-    resolver: zodResolver(registerSchema),
-    defaultValues: registerDefaultValues,
-  });
-
-  const onSubmit = async (_data: RegisterFormType) => {
-    // TODO: authService.register
-  };
+  const { form, handleSubmit, error, isSubmitting } = useRegisterForm();
 
   return (
     <Card className="w-full max-w-[448px]">
@@ -34,12 +24,14 @@ export const RegisterForm = () => {
 
       <CardContent className="space-y-6">
         <FormProvider {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6" noValidate>
             <RegisterNameField />
             <RegisterEmailField />
             <RegisterPasswordField />
             <RegisterConfirmField />
-            <RegisterSubmitButton />
+            <RegisterSubmitButton isSubmitting={isSubmitting} />
+
+            {error && <p className="text-center text-sm text-destructive">{error}</p>}
           </form>
         </FormProvider>
 

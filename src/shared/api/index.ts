@@ -1,4 +1,4 @@
-export type { AuthSession, AuthUser, AuthCredentials } from './auth/types';
+export type { AuthSession, AuthUser, AuthCredentials, RegisterCredentials } from './auth/types';
 export type { UserProfile, UserStats, TopicProgress } from './dashboard/types';
 export type { Submission, RunResult } from './submissions/types';
 export type { Task, TaskSecret, DifficultyLevel, TaskType } from './task/types';
