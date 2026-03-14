@@ -1,7 +1,9 @@
+import { TaskHeader } from './ui/task-header';
+
 export const Task = () => {
   return (
-    <>
-      <div>task</div>
-    </>
+    <div className="flex flex-col">
+      <TaskHeader />
+    </div>
   );
 };
