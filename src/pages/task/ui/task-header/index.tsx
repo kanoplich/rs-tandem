@@ -1,13 +1,16 @@
 import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 import { TASK_HEADER } from '@/pages/task/locales';
 
 export const TaskHeader = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="pt-8 pb-6">
       <div className="mx-auto max-w-5xl">
         <div className="flex items-center gap-4">
-          <ArrowLeft className="cursor-pointer" />
+          <ArrowLeft className="cursor-pointer" onClick={() => navigate(-1)} />
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-3">
               <h2 className="text-base">{TASK_HEADER.TITLE}</h2>
