@@ -12,7 +12,11 @@ export const OAuthButtons = ({ onError }: Props) => {
   const manageSignIn = (provider: 'google' | 'github') => {
     onError('');
     signInWithOAuth(provider).catch((error: unknown) => {
-      console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR, error);
+      if (error instanceof Error) {
+        console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR, error.message);
+      } else {
+        console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
+      }
       onError(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
     });
   };
