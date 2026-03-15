@@ -1,7 +1,15 @@
 import { STAGE_TEXT } from '../../locales';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared/ui/tabs';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '@/shared';
 
 export const StageTabs = () => {
   return (
