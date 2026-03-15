@@ -19,6 +19,7 @@ export const OAuthButtons = ({ onError }: Props) => {
   return (
     <div className="flex justify-center gap-3 mt-2">
       <Button
+        type="button"
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GOOGLE)}
         className="flex-1 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
@@ -27,6 +28,7 @@ export const OAuthButtons = ({ onError }: Props) => {
       </Button>
 
       <Button
+        type="button"
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GITHUB)}
         className="flex-1 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
