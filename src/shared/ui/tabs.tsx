@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
-function Tabs({
+export function Tabs({
   className,
   orientation = 'horizontal',
   ...props
@@ -36,7 +36,7 @@ const tabsListVariants = cva(
   }
 );
 
-function TabsList({
+export function TabsList({
   className,
   variant = 'default',
   ...props
@@ -68,7 +68,7 @@ const tabsTriggerVariants = cva(
   }
 );
 
-function TabsTrigger({
+export function TabsTrigger({
   className,
   variant = 'default',
   ...props
@@ -83,7 +83,10 @@ function TabsTrigger({
   );
 }
 
-function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>) {
+export function TabsContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Content>) {
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
@@ -92,5 +95,3 @@ function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPr
     />
   );
 }
-
-export { Tabs, TabsList, TabsTrigger, TabsContent };
