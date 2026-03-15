@@ -1,17 +1,15 @@
 import { STAGE_TEXT } from '../../locales';
 
-import styles from './styles.module.css';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared/ui/tabs';
 
 export const StageTabs = () => {
   return (
     <section className="container mx-auto max-w-7xl px-4 pt-6">
-      <Tabs defaultValue="stage1" className="w-full max-w-312 mx-auto rounded-lg border-0 px-0.75">
-        <TabsList className="w-full h-9 bg-input p-0 rounded-lg border-0 flex">
+      <Tabs defaultValue="stage1" className="w-full max-w-312 mx-auto">
+        <TabsList variant="stages">
           {STAGE_TEXT.map((stage) => (
-            <TabsTrigger key={stage.ID} className={styles.trigger} value={stage.ID}>
+            <TabsTrigger key={stage.ID} value={stage.ID} variant="stages">
               {stage.TITLE}
             </TabsTrigger>
           ))}
