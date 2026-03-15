@@ -11,7 +11,7 @@ type Props = {
 export const OAuthButtons = ({ onError }: Props) => {
   const manageSignIn = (provider: 'google' | 'github') => {
     onError('');
-    signInWithOAuth(provider).catch((error) => {
+    signInWithOAuth(provider).catch((error: unknown) => {
       console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR, error);
       onError(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
     });
