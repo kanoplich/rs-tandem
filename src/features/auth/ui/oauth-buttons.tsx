@@ -1,9 +1,9 @@
 import { AUTH_LOGIN_ERRORS } from '../locales';
 
-import { PROVIDERS } from '@/shared/';
+import { PROVIDERS } from '@/shared';
+import { Button } from '@/shared';
 import { signInWithOAuth } from '@/shared/api/auth';
 import { GoogleIcon, GithubIcon } from '@/shared/assets/icons';
-import { Button } from '@/shared/ui/button';
 
 type Props = {
   onError: (error: string) => void;
