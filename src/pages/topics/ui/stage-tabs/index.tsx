@@ -7,12 +7,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared/ui/tabs';
 
 export const StageTabs = () => {
   return (
-    <section className="container mx-auto max-w-[1280px] px-4 pt-6">
-      <Tabs
-        defaultValue="stages1"
-        className="w-full max-w-[1248px] mx-auto rounded-lg border-0 px-[3px]"
-      >
-        <TabsList className="w-full h-[36px] bg-input p-0 rounded-lg border-0 flex">
+    <section className="container mx-auto max-w-7xl px-4 pt-6">
+      <Tabs defaultValue="stage1" className="w-full max-w-312 mx-auto rounded-lg border-0 px-0.75">
+        <TabsList className="w-full h-9 bg-input p-0 rounded-lg border-0 flex">
           <TabsTrigger className={styles.trigger} value="stage1">
             {STAGE_FIRST_TEXT.TITLE}
           </TabsTrigger>
