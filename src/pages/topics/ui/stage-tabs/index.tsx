@@ -1,3 +1,4 @@
+import { DEFAULT_VALUE } from '../../lib/constants';
 import { STAGE_TEXT } from '../../locales';
 
 import {
@@ -14,7 +15,7 @@ import {
 export const StageTabs = () => {
   return (
     <section className="container mx-auto max-w-7xl px-4 pt-6">
-      <Tabs defaultValue="stage1" className="w-full max-w-312 mx-auto">
+      <Tabs defaultValue={DEFAULT_VALUE} className="w-full max-w-312 mx-auto">
         <TabsList variant="stages">
           {STAGE_TEXT.map((stage) => (
             <TabsTrigger key={stage.ID} value={stage.ID} variant="stages">
@@ -23,7 +24,7 @@ export const StageTabs = () => {
           ))}
         </TabsList>
         {STAGE_TEXT.map((stage) => (
-          <TabsContent key={stage.ID} value={stage.ID} className="mt-4 w-full h-[147.8px] mx-auto">
+          <TabsContent key={stage.ID} value={stage.ID} className="mt-4 w-full mx-auto">
             <Card className="bg-card border-0">
               <CardHeader>
                 <CardTitle>{stage.TITLE}</CardTitle>
