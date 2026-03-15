@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } fro
 
 export const LoginForm = () => {
   const { form, handleSubmit, error, isSubmitting } = useLoginForm();
+  const [oauthError, setOAuthError] = useState<string | null>(null);
 
   return (
     <Card className="w-full max-w-[448px]">
@@ -27,9 +29,11 @@ export const LoginForm = () => {
             <LoginEmailField />
             <LoginPasswordField />
             <LoginSubmitButton isSubmitting={isSubmitting} />
-            <OAuthButtons />
+            <OAuthButtons onError={setOAuthError} />
 
-            {error && <p className="text-center text-sm text-destructive">{error}</p>}
+            {(error || oauthError) && (
+              <p className="text-center text-sm text-destructive">{error || oauthError}</p>
+            )}
           </form>
         </FormProvider>
 

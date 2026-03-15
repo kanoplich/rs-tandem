@@ -1,11 +1,19 @@
+import { AUTH_LOGIN_ERRORS } from '../locales';
+
 import { PROVIDERS } from '@/shared/';
 import { signInWithOAuth } from '@/shared/api/auth';
 import { GoogleIcon, GithubIcon } from '@/shared/assets/icons';
 import { Button } from '@/shared/ui/button';
 
-export const OAuthButtons = () => {
+type Props = {
+  onError: (error: string) => void;
+};
+export const OAuthButtons = ({ onError }: Props) => {
   const manageSignIn = (provider: 'google' | 'github') => {
-    signInWithOAuth(provider).catch(console.error);
+    signInWithOAuth(provider).catch((error) => {
+      console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR, error);
+      onError(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
+    });
   };
 
   return (
