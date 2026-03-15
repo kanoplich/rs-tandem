@@ -8,8 +8,10 @@ import { Button } from '@/shared/ui/button';
 type Props = {
   onError: (error: string) => void;
 };
+
 export const OAuthButtons = ({ onError }: Props) => {
   const manageSignIn = (provider: 'google' | 'github') => {
+    onError('');
     signInWithOAuth(provider).catch((error) => {
       console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR, error);
       onError(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
@@ -33,7 +35,7 @@ export const OAuthButtons = ({ onError }: Props) => {
         onClick={() => manageSignIn(PROVIDERS.GITHUB)}
         className="flex-1 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
       >
-        <GithubIcon className="fill-light" />
+        <GithubIcon className="fill-white" />
       </Button>
     </div>
   );
