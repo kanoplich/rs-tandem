@@ -5,9 +5,6 @@ import '@testing-library/jest-dom';
 
 import { LoginForm } from './login-form';
 
-/**
- * mock react-hook-form context
- */
 vi.mock('react-hook-form', async () => {
   const actual = await vi.importActual<typeof import('react-hook-form')>('react-hook-form');
 
@@ -22,9 +19,6 @@ vi.mock('react-hook-form', async () => {
   };
 });
 
-/**
- * mock useLoginForm hook
- */
 vi.mock('../hooks/use-login-form', () => ({
   useLoginForm: () => ({
     form: {
