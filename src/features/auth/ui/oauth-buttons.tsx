@@ -1,8 +1,7 @@
 import { AUTH_LOGIN_ERRORS } from '../locales';
 
-import { PROVIDERS } from '@/shared';
-import { Button } from '@/shared';
-import { signInWithOAuth } from '@/shared/api/auth';
+import { PROVIDERS, Button } from '@/shared';
+import { signInWithOAuth } from '@/shared/api';
 import { GoogleIcon, GithubIcon } from '@/shared/assets/icons';
 
 type Props = {
