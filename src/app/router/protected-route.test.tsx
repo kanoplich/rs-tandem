@@ -102,8 +102,8 @@ describe('ProtectedRoute', () => {
       </TestComponent>
     );
 
-    expect(screen.getByTestId('protected-content')).toBeInTheDocument();
+    expect(screen.getByTestId('dashboard-page')).toBeInTheDocument();
+    expect(screen.queryByTestId('protected-content')).not.toBeInTheDocument();
     expect(screen.queryByTestId('login-page')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('dashboard-page')).not.toBeInTheDocument();
   });
 });
