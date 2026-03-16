@@ -1,7 +1,10 @@
+import { TopicsHeader, StageTabs } from './ui';
+
 export const Topics = () => {
   return (
-    <>
-      <div>topics</div>
-    </>
+    <div className="flex flex-col">
+      <TopicsHeader />
+      <StageTabs />
+    </div>
   );
 };

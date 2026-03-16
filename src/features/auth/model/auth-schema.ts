@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { AUTH_LOGIN_ERRORS } from '../locales/locales';
+import { AUTH_LOGIN_ERRORS } from '../locales';
 
 export const emailSchema = z.email(AUTH_LOGIN_ERRORS.INVALID_EMAIL);
 

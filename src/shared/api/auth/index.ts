@@ -1,7 +1,9 @@
+import type { Provider } from '@supabase/supabase-js';
+
 import { supabase } from '../supabase-client';
 
 import { addMockAuthListener, MOCK_SESSION, mockIsAuth, setMockIsAuth } from './mock';
-import type { AuthCredentials, AuthSession } from './types';
+import type { AuthCredentials, AuthSession, RegisterCredentials } from './types';
 
 import { ROUTES } from '@/shared/config/routes';
 import { config } from '@/shared/config/supabase';
@@ -11,6 +13,7 @@ const { USE_MOCK_SUPABASE, HOST } = config;
 
 export const getSession = async (): Promise<AuthSession | null> => {
   if (USE_MOCK_SUPABASE) {
+    await delay(400);
     return mockIsAuth ? MOCK_SESSION : null;
   }
 
@@ -40,7 +43,11 @@ export const onAuthStateChange = (callback: (session: AuthSession | null) => voi
   return subscription;
 };
 
-export const signUp = async ({ email, password }: AuthCredentials): Promise<AuthSession> => {
+export const signUp = async ({
+  email,
+  password,
+  name,
+}: RegisterCredentials): Promise<AuthSession> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
     setMockIsAuth(true);
@@ -55,6 +62,9 @@ export const signUp = async ({ email, password }: AuthCredentials): Promise<Auth
     password,
     options: {
       emailRedirectTo: `${HOST}${ROUTES.DASHBOARD}`,
+      data: {
+        name,
+      },
     },
   });
 
@@ -96,7 +106,22 @@ export const signOut = async (): Promise<void> => {
 
   const { error } = await supabase.auth.signOut();
 
-  if (error) {
-    throw error;
+  if (error) throw error;
+};
+
+export const signInWithOAuth = async (provider: Provider): Promise<void> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(800);
+    setMockIsAuth(true);
+    return;
   }
+
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${HOST}${ROUTES.DASHBOARD}`,
+    },
+  });
+
+  if (error) throw error;
 };

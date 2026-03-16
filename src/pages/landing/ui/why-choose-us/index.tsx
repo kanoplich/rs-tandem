@@ -5,7 +5,7 @@ import {
   ANIMATION_DELAYS,
   INTERSECTION_OBSERVER_THRESHOLD_FEATURES,
 } from '@/pages/landing/lib/constants';
-import { LANDING_FEATURES_TEXT, LANDING_WHY_CHOOSE_US_TEXT } from '@/pages/landing/locales/locales';
+import { LANDING_FEATURES_TEXT, LANDING_WHY_CHOOSE_US_TEXT } from '@/pages/landing/locales';
 import {
   AwardIcon,
   CheckIcon,

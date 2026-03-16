@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import { AUTH_LOGIN_TEXT } from '../locales/locales';
+import { AUTH_LOGIN_TEXT } from '../locales';
 import { type LoginFormValues } from '../model/auth-schema';
 
 import { Label } from '@/shared/ui';
@@ -20,7 +20,7 @@ export const LoginPasswordField = () => {
         id="password"
         autoComplete="current-password"
         placeholder={AUTH_LOGIN_TEXT.PASSWORD_PLACEHOLDER}
-        className="focus-visible:ring-primary focus-visible:border-primary"
+        className="border-1 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary"
         {...register('password')}
       />
 
