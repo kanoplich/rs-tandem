@@ -7,7 +7,7 @@ export const loginDefaultValues: LoginFormValues = {
 };
 
 export const registerDefaultValues: RegisterFormType = {
-  firstName: '',
+  name: '',
   email: '',
   password: '',
   confirmPassword: '',

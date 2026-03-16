@@ -22,6 +22,7 @@ export const AUTH_LOGIN_ERRORS = {
   PASSWORD_MIN: 'Введите пароль',
   PASSWORD_INVALID: 'Используйте только латинские буквы (A–Z, a–z) и цифры (0–9)',
   AUTH_ERROR: 'Ошибка авторизации. Попробуйте позже.',
+  OAUTH_ERROR: 'Ошибка авторизации. Попробуйте другой способ входа или повторите попытку позже.',
 };
 
 export const AUTH_REGISTER_TEXT = {
@@ -37,6 +38,7 @@ export const AUTH_REGISTER_TEXT = {
   SUBMIT_BUTTON: 'Зарегистрироваться',
   HAS_ACCOUNT: 'Уже есть аккаунт?',
   LOGIN_LINK: 'Войти',
+  BUTTON_PENDING: 'Регистрация...',
 };
 
 export const AUTH_REGISTER_PAGE_TEXT = {
@@ -51,4 +53,5 @@ export const AUTH_REGISTER_ERRORS = {
   PASSWORD:
     'Ваш пароль должен содержать не менее 8 символов, минимум одну заглавную букву (A-Z), одну строчную (a-z) и одну цифру. Без пробелов.',
   PASSWORD_MATCH: 'Пароли не совпадают',
+  AUTH_ERROR: 'Ошибка регистрации. Попробуйте позже.',
 };

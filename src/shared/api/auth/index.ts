@@ -46,7 +46,7 @@ export const onAuthStateChange = (callback: (session: AuthSession | null) => voi
 export const signUp = async ({
   email,
   password,
-  first_name,
+  name,
 }: RegisterCredentials): Promise<AuthSession> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
@@ -63,7 +63,7 @@ export const signUp = async ({
     options: {
       emailRedirectTo: `${HOST}${ROUTES.DASHBOARD}`,
       data: {
-        first_name,
+        name,
       },
     },
   });
