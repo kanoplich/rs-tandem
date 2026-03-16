@@ -43,6 +43,12 @@ export const LoginForm = () => {
             {AUTH_LOGIN_TEXT.REGISTER_LINK}
           </Link>
         </p>
+        <p className="text-center text-sm text-muted-foreground">
+          {AUTH_LOGIN_TEXT.FORGOT_PASSWORD}{' '}
+          <Link to={ROUTES.FORGOT} className="text-primary hover:no-underline">
+            {AUTH_LOGIN_TEXT.FORGOT_LINK}
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
