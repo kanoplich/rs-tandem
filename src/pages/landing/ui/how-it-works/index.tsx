@@ -12,7 +12,7 @@ export const HowItWorks = () => {
 
   return (
     <section className="bg-sidebar">
-      <div className="container mx-auto max-w-7xl px-6 py-16">
+      <div className="container mx-auto  max-w-[1280px] px-6 py-16">
         <div className="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
           <h2 className="mb-4 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl">
             {LANDING_HOW_IT_WORKS_TEXT.TITLE}

@@ -1,1 +1,1 @@
-export const DEFAULT_VALUE = 'stage1';
+export const DEFAULT_VALUE = 'Stage1';
