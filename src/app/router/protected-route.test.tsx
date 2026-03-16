@@ -84,5 +84,26 @@ describe('ProtectedRoute', () => {
     );
 
     expect(screen.getByTestId('protected-content')).toBeInTheDocument();
+    expect(screen.queryByTestId('login-page')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('dashboard-page')).not.toBeInTheDocument();
+  });
+
+  test('Redirect to /dashboard, if is authenticated and reverse=true', () => {
+    mockUseAuth.mockReturnValue({
+      isAuthenticated: true,
+      isLoading: false,
+      session: null,
+      user: null,
+    });
+
+    render(
+      <TestComponent reverse>
+        <div data-testid="protected-content">Protected Content</div>
+      </TestComponent>
+    );
+
+    expect(screen.getByTestId('protected-content')).toBeInTheDocument();
+    expect(screen.queryByTestId('login-page')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('dashboard-page')).not.toBeInTheDocument();
   });
 });
