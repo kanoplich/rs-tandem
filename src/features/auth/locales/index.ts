@@ -22,6 +22,7 @@ export const AUTH_LOGIN_ERRORS = {
   PASSWORD_MIN: 'Введите пароль',
   PASSWORD_INVALID: 'Используйте только латинские буквы (A–Z, a–z) и цифры (0–9)',
   AUTH_ERROR: 'Ошибка авторизации. Попробуйте позже.',
+  OAUTH_ERROR: 'Ошибка авторизации. Попробуйте другой способ входа или повторите попытку позже.',
 };
 
 export const AUTH_REGISTER_TEXT = {
