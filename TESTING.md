@@ -45,12 +45,12 @@ PR с тестами: https://github.com/kanoplich/rs-tandem/pull/128
 
 Что тестирую: API-сервис
 
-| Файл                                           | Описание                   |
-| ---------------------------------------------- | -------------------------- |
-| src/shared/api/auth/auth.test.ts               | Получение сессии           |
-| src/shared/api/dashboard/dashboard.test.ts     | Получение статистики юзера |
-| src/shared/api/submissions/submissions.test.ts | Получение истории          |
-| src/shared/api/task/task.test.ts               | Получение задач            |
-| src/shared/api/topic/topic.test.ts             | Получение тем              |
+| Файл                                             | Описание                   |
+| ------------------------------------------------ | -------------------------- |
+| `src/shared/api/auth/auth.test.ts`               | Получение сессии           |
+| `src/shared/api/dashboard/dashboard.test.ts`     | Получение статистики юзера |
+| `src/shared/api/submissions/submissions.test.ts` | Получение истории          |
+| `src/shared/api/task/task.test.ts`               | Получение задач            |
+| `src/shared/api/topic/topic.test.ts`             | Получение тем              |
 
 PR с тестами: https://github.com/kanoplich/rs-tandem/pull/121
