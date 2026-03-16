@@ -52,7 +52,7 @@ describe('ProtectedRoute', () => {
     expect(screen.queryByTestId('protected-content')).not.toBeInTheDocument();
   });
 
-  test('Redirect to /login, if is not authenticated (reverse=false)', () => {
+  test('Redirect to /login, if is not authenticated  (reverse=false)', () => {
     mockUseAuth.mockReturnValue({
       isAuthenticated: false,
       isLoading: false,
