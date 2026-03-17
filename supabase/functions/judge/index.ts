@@ -214,7 +214,7 @@ Respond ONLY according to system instructions and rubric.
 
         try {
           await supabase.from('submissions').insert({
-            user_id: user!.id,
+            user_id: user.id,
             task_id: taskId,
             answer,
             score: raw.score,
