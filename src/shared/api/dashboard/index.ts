@@ -46,6 +46,7 @@ const mapToTopicProgress = (data: TopicProgressReturns): TopicProgress[] => {
     topicId: item.topic_id,
     topicTitle: item.topic_title,
     total: item.total,
+    stage: item.stage,
     lastAttemptAt: item.last_attempt_at,
   }));
 };

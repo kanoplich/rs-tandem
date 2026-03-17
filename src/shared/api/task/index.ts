@@ -3,6 +3,7 @@ import { supabase, type Public } from '../supabase-client';
 import { MOCK_TASKS } from './mock';
 import { DIFFICULTY, TASK_TYPE, type DifficultyLevel, type Task, type TaskType } from './types';
 
+import { DEFAULT_MAX_SCORE } from '@/shared';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
@@ -38,7 +39,7 @@ const mapToTask = (data: PublicTasksRow): Task => {
     title: data.title ?? '',
     difficulty: toDifficulty(data.difficulty),
     type: toTaskType(data.type),
-    maxScore: data.max_score ?? 100,
+    maxScore: DEFAULT_MAX_SCORE,
     questionText: data.question_text ?? '',
     rubricItems: data.rubric_items ?? [],
     codeTemplate: data.code_template ?? '',
