@@ -3,13 +3,21 @@ import { supabase } from '../supabase-client';
 import { MOCK_JUDGE_RESULT_GOOD } from './mock';
 
 import { config } from '@/shared/config/supabase';
+import { delay } from '@/shared/lib/delay';
 
 export const evaluateTheory = async (
   taskId: string,
   answer: string
 ): Promise<ReadableStreamDefaultReader> => {
   if (config.USE_MOCK_AI) {
-    return MOCK_JUDGE_RESULT_GOOD;
+    await delay(800);
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode(MOCK_JUDGE_RESULT_GOOD.feedback));
+        controller.close();
+      },
+    });
+    return stream.getReader();
   }
 
   const {

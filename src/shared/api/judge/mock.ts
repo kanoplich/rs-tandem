@@ -1,22 +1,17 @@
 import type { JudgeResult } from './types';
 
-export const MOCK_JUDGE_RESULT_GOOD: ReadableStreamDefaultReader = (() => {
-  const encoder = new TextEncoder();
-
-  const text =
-    'Отличное теоретическое объяснение! ' +
-    'Ты правильно описал лексическое окружение и механизм сохранения переменных. ' +
-    'Для полного балла добавь конкретный пример кода.';
-
-  const stream = new ReadableStream({
-    start(controller) {
-      controller.enqueue(encoder.encode(text));
-      controller.close();
-    },
-  });
-
-  return stream.getReader();
-})();
+export const MOCK_JUDGE_RESULT_GOOD: JudgeResult = {
+  score: 85,
+  maxScore: 100,
+  coveredPoints: [
+    'Упомянул лексическое окружение',
+    'Объяснил сохранение переменных во внешней области видимости',
+  ],
+  missedPoints: ['Привёл корректный пример кода'],
+  feedback:
+    'Отличное теоретическое объяснение! Ты правильно описал лексическое окружение и механизм сохранения переменных. Для полного балла добавь конкретный пример кода с замыканием.',
+  judgeLevel: 0,
+};
 
 export const MOCK_JUDGE_RESULT_POOR: JudgeResult = {
   score: 30,
