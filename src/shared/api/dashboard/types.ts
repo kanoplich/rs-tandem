@@ -21,4 +21,5 @@ export interface TopicProgress {
   total: number;
   avgScore: number;
   lastAttemptAt?: string;
+  stage: number;
 }
