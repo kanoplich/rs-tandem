@@ -1,3 +1,5 @@
+import { toast } from 'sonner';
+
 import { AUTH_LOGIN_ERRORS } from '../locales';
 
 import { PROVIDERS, Button } from '@/shared';
@@ -17,6 +19,7 @@ export const OAuthButtons = ({ onError }: Props) => {
       } else {
         console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
       }
+      toast.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
       onError(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
     });
   };

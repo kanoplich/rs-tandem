@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { loginDefaultValues } from '../lib/constants';
 import { AUTH_LOGIN_ERRORS } from '../locales';
@@ -23,6 +24,7 @@ export const useLoginForm = () => {
 
       await signIn(data);
     } catch (err: unknown) {
+      toast.error(AUTH_LOGIN_ERRORS.AUTH_ERROR);
       if (err instanceof Error) {
         setError(err.message);
       } else {

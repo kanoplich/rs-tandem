@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { registerDefaultValues } from '../lib/constants';
 import { AUTH_REGISTER_ERRORS } from '../locales';
@@ -30,6 +31,7 @@ export const useRegisterForm = () => {
       setError(null);
       await signUp(userData);
     } catch (err: unknown) {
+      toast.error(AUTH_REGISTER_ERRORS.AUTH_ERROR);
       if (err instanceof Error) {
         setError(err.message);
       } else {
