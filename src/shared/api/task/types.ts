@@ -26,10 +26,3 @@ export interface Task {
   rubricItems: string[];
   maxScore: number;
 }
-
-export interface TaskSecret {
-  taskId: string;
-  goldenAnswer: string;
-  rubricWeights: number[];
-  hints: string[];
-}
