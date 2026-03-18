@@ -8,7 +8,7 @@ interface Props {
 
 export const LoginSubmitButton = ({ isSubmitting }: Props) => {
   return (
-    <Button type="submit" className="w-full cursor-pointer" disabled={isSubmitting}>
+    <Button type="submit" className="w-full mt-2 cursor-pointer" disabled={isSubmitting}>
       {isSubmitting ? AUTH_LOGIN_TEXT.BUTTON_PENDING : AUTH_LOGIN_TEXT.SUBMIT_BUTTON}
     </Button>
   );

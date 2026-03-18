@@ -1,22 +1,20 @@
-import { useNavigate } from 'react-router-dom';
-
-import { Button } from '@/shared';
+import { TopicsHeader, StageTabs } from './ui';
 
 export const Topics = () => {
-  const navigate = useNavigate();
-  const topics = 'closures,functions,this-keyword';
+  // const navigate = useNavigate();
+  // const topics = 'closures,functions,this-keyword';
 
-  const handleClick = () => {
-    navigate({
-      pathname: '/task/id:1',
-      search: `?topics=${topics}`,
-    });
-  };
+  // const handleClick = () => {
+  //   navigate({
+  //     pathname: '/task/id:1',
+  //     search: `?topics=${topics}`,
+  //   });
+  // };
 
   return (
-    <>
-      <div>Topic</div>
-      <Button onClick={handleClick}>Go to task</Button>
-    </>
+    <div className="flex flex-col">
+      <TopicsHeader />
+      <StageTabs />
+    </div>
   );
 };

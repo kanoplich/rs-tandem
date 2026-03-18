@@ -3,7 +3,7 @@ import type { Provider } from '@supabase/supabase-js';
 import { supabase } from '../supabase-client';
 
 import { addMockAuthListener, MOCK_SESSION, mockIsAuth, setMockIsAuth } from './mock';
-import type { AuthCredentials, AuthSession, RegisterCredentials } from './types';
+import type { AuthCredentials, AuthSession, AuthUser, RegisterCredentials } from './types';
 
 import { ROUTES } from '@/shared/config/routes';
 import { config } from '@/shared/config/supabase';
@@ -124,4 +124,27 @@ export const signInWithOAuth = async (provider: Provider): Promise<void> => {
   });
 
   if (error) throw error;
+};
+
+export const resetPassword = async (email: string): Promise<void> => {
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${HOST}${ROUTES.RESET}`,
+  });
+
+  if (error) throw error;
+};
+
+export const updateUserPassword = async (password: string): Promise<AuthUser | null> => {
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.updateUser({
+    password,
+  });
+
+  if (error || !user) {
+    throw error || new Error('Failed to update password');
+  }
+
+  return user;
 };
