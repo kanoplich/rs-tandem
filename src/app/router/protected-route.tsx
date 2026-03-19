@@ -1,9 +1,8 @@
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { Loader } from '../ui/loader';
-
 import { ROUTES } from '@/shared/config/routes';
 import { useAuth } from '@/shared/hooks/use-auth';
+import { Loader } from '@/shared/ui/loader';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
