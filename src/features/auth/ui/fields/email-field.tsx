@@ -20,7 +20,7 @@ export const EmailField = ({ label, placeholder }: Props) => {
         placeholder={placeholder}
         {...register('email')}
       />
-      <FormMessage name="email" />
+      <FormMessage name="email" className="text-xs text-destructive" />
     </FormItem>
   );
 };

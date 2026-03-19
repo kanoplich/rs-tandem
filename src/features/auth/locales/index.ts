@@ -10,8 +10,7 @@ export const AUTH_LOGIN_TEXT = {
   REGISTER_LINK: 'Зарегистрироваться',
   BUTTON_PENDING: 'Вход в систему...',
   LOGIN_SUCCESS: 'Вы успешно вошли в аккаунт!',
-  FORGOT_PASSWORD: 'Забыли пароль?',
-  FORGOT_LINK: 'Создать новый пароль',
+  FORGOT_LINK: 'Забыли пароль?',
 };
 
 export const AUTH_LOGIN_PAGE_TEXT = {
@@ -72,8 +71,8 @@ export const FORGOT_PASSWORD_FORM_TEXT = {
   EMAIL_PLACEHOLDER: 'your.email@example.com',
   SUBMIT_BUTTON: 'Сбросить пароль',
   BUTTON_PENDING: 'Сброс пароля...',
-  HAS_PASSWORD: 'Вспомнили пароль?',
-  LOGIN_LINK: 'Веруться на страницу входа',
+  LOGIN_LINK: 'Вспомнили пароль?',
+  SUBMIT_SUCCESS: 'Письмо для восстановления пароля отправлено!',
 };
 
 export const FORGOT_PASSWORD_ERRORS = {
@@ -94,6 +93,7 @@ export const RESET_PASSWORD_FORM_TEXT = {
   CONFIRM_LABEL: 'Подтвердите пароль',
   SUBMIT_BUTTON: 'Войти с новым паролем',
   BUTTON_PENDING: 'Вход в систему...',
+  RESET_SUCCESS: 'Вы успешно обновили пароль!',
 };
 
 export const RESET_PASSWORD_ERRORS = {

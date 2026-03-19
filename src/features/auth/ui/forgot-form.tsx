@@ -34,7 +34,6 @@ export const ForgotForm = () => {
         </Form>
 
         <p className="text-center text-sm text-muted-foreground">
-          {FORGOT_PASSWORD_FORM_TEXT.HAS_PASSWORD}{' '}
           <Link to={ROUTES.LOGIN} className="text-primary underline underline-offset-4">
             {FORGOT_PASSWORD_FORM_TEXT.LOGIN_LINK}
           </Link>

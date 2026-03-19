@@ -1,9 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { resetDefaultValues } from '../lib/constants';
-import { AUTH_REGISTER_ERRORS } from '../locales';
+import { RESET_PASSWORD_ERRORS, RESET_PASSWORD_FORM_TEXT } from '../locales';
 import { resetSchema, type ResetFormType } from '../model/reset-schema';
 
 import { updateUserPassword } from '@/shared/api/auth';
@@ -23,11 +24,14 @@ export const useResetForm = () => {
     try {
       setError(null);
       await updateUserPassword(password);
+      toast.success(RESET_PASSWORD_FORM_TEXT.RESET_SUCCESS);
     } catch (err: unknown) {
       if (err instanceof Error) {
+        toast.error(err.message);
         setError(err.message);
       } else {
-        setError(AUTH_REGISTER_ERRORS.AUTH_ERROR);
+        toast.error(RESET_PASSWORD_ERRORS.AUTH_ERROR);
+        setError(RESET_PASSWORD_ERRORS.AUTH_ERROR);
       }
     }
   };

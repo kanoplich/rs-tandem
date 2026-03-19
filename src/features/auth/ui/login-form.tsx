@@ -44,7 +44,6 @@ export const LoginForm = () => {
           </Link>
         </p>
         <p className="text-center text-sm text-muted-foreground">
-          {AUTH_LOGIN_TEXT.FORGOT_PASSWORD}{' '}
           <Link to={ROUTES.FORGOT} className="text-primary hover:no-underline">
             {AUTH_LOGIN_TEXT.FORGOT_LINK}
           </Link>

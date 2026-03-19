@@ -21,7 +21,7 @@ export const PasswordField = ({ name, label, placeholder, autoComplete }: Props)
         placeholder={placeholder}
         {...register(name)}
       />
-      <FormMessage name={name} />
+      <FormMessage name={name} className="text-xs text-destructive" />
     </FormItem>
   );
 };
