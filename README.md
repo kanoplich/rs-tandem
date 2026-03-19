@@ -83,3 +83,7 @@ npx supabase db reset
 | supabase db diff -f name         | 🎨 Studio → миграция        |
 | supabase db push                 | ☁️ Push на remote           |
 | pnpm types:db:local              | 🔤 Обновить TS типы         |
+
+## Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API):
+
+https://www.youtube.com/watch?v=u6UQGfPwMlg
