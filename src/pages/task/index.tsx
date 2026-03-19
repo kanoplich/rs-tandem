@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { TaskAdvise } from './ui/task-advise';
+import { TaskAdvice } from './ui/task-advice';
 import { TaskHeader } from './ui/task-header';
 import { TaskProgress } from './ui/task-progress';
 
@@ -39,7 +39,7 @@ export const Task = () => {
     <div className="flex flex-col">
       <TaskHeader stageNumber={stageNumber} tasks={tasks} />
       <TaskProgress />
-      <TaskAdvise />
+      <TaskAdvice />
     </div>
   );
 };

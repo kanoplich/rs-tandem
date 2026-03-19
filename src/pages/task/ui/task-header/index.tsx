@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { TASK_HEADER } from '@/pages/task/locales';
+import { ROUTES } from '@/shared';
 import type { Task } from '@/shared/api';
 import { STAGES } from '@/shared/lib/constants';
 
@@ -19,7 +20,7 @@ export const TaskHeader = ({ stageNumber, tasks }: TaskHeaderProps) => {
     <section className="pt-8 pb-6">
       <div className="mx-auto max-w-5xl">
         <div className="flex items-center gap-4">
-          <ArrowLeft className="cursor-pointer" onClick={() => navigate(-1)} />
+          <ArrowLeft className="cursor-pointer" onClick={() => navigate(ROUTES.TOPICS)} />
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-3">
               <h2 className="text-base">{TASK_HEADER.TITLE}</h2>

@@ -1,6 +1,6 @@
 import { TASK_PROGRESS } from '../../locales';
 
-import { Progress } from '@/shared/ui/progress';
+import { Progress } from '@/shared/ui';
 
 export const TaskProgress = () => {
   return (
