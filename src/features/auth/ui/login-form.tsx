@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { useLoginForm } from '../hooks/use-login-form';
 import { AUTH_LOGIN_TEXT } from '../locales';
 
-import { LoginEmailField } from './login-email-field';
-import { LoginPasswordField } from './login-password-field';
-import { LoginSubmitButton } from './login-submit-button';
+import { AuthSubmitButton, EmailField, PasswordField } from './fields';
 import { OAuthButtons } from './oauth-buttons';
 
 import { ROUTES, Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared';
+import { Form } from '@/shared/ui';
 
 export const LoginForm = () => {
   const { form, handleSubmit, error, isSubmitting } = useLoginForm();
@@ -24,18 +22,28 @@ export const LoginForm = () => {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <FormProvider {...form}>
-          <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
-            <LoginEmailField />
-            <LoginPasswordField />
-            <LoginSubmitButton isSubmitting={isSubmitting} />
-            <OAuthButtons onError={setOAuthError} />
+        <Form form={form} onSubmit={handleSubmit} className="space-y-6">
+          <EmailField
+            label={AUTH_LOGIN_TEXT.EMAIL_LABEL}
+            placeholder={AUTH_LOGIN_TEXT.EMAIL_PLACEHOLDER}
+          />
+          <PasswordField
+            name="password"
+            label={AUTH_LOGIN_TEXT.PASSWORD_LABEL}
+            placeholder={AUTH_LOGIN_TEXT.PASSWORD_PLACEHOLDER}
+            autoComplete="current-password"
+          />
+          <AuthSubmitButton
+            isSubmitting={isSubmitting}
+            pendingText={AUTH_LOGIN_TEXT.BUTTON_PENDING}
+            submitText={AUTH_LOGIN_TEXT.SUBMIT_BUTTON}
+          />
+          <OAuthButtons onError={setOAuthError} />
 
-            {(error || oauthError) && (
-              <p className="text-center text-sm text-destructive">{error || oauthError}</p>
-            )}
-          </form>
-        </FormProvider>
+          {(error || oauthError) && (
+            <p className="text-center text-sm text-destructive">{error || oauthError}</p>
+          )}
+        </Form>
 
         <p className="text-center text-sm text-muted-foreground">
           {AUTH_LOGIN_TEXT.NO_ACCOUNT}{' '}
