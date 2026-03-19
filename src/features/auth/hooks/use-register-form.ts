@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { registerDefaultValues } from '../lib/constants';
-import { AUTH_REGISTER_ERRORS } from '../locales';
+import { AUTH_REGISTER_ERRORS, AUTH_REGISTER_TEXT } from '../locales';
 import { registerSchema, type RegisterFormType } from '../model/register-schema';
 
 import { signUp } from '@/shared/api';
@@ -30,11 +30,13 @@ export const useRegisterForm = () => {
     try {
       setError(null);
       await signUp(userData);
+      toast.success(AUTH_REGISTER_TEXT.REGISTER_SUCCESS);
     } catch (err: unknown) {
-      toast.error(AUTH_REGISTER_ERRORS.AUTH_ERROR);
       if (err instanceof Error) {
+        toast.error(err.message);
         setError(err.message);
       } else {
+        toast.error(AUTH_REGISTER_ERRORS.AUTH_ERROR);
         setError(AUTH_REGISTER_ERRORS.AUTH_ERROR);
       }
     }

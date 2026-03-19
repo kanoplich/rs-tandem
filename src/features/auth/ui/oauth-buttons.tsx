@@ -16,10 +16,12 @@ export const OAuthButtons = ({ onError }: Props) => {
     signInWithOAuth(provider).catch((error: unknown) => {
       if (error instanceof Error) {
         console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR, error.message);
+        toast.error(error.message);
       } else {
         console.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
+        toast.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
       }
-      toast.error(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
+
       onError(AUTH_LOGIN_ERRORS.OAUTH_ERROR);
     });
   };

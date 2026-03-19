@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { loginDefaultValues } from '../lib/constants';
-import { AUTH_LOGIN_ERRORS } from '../locales';
+import { AUTH_LOGIN_ERRORS, AUTH_LOGIN_TEXT } from '../locales';
 import { loginSchema, type LoginFormValues } from '../model/auth-schema';
 
 import { signIn } from '@/shared/api';
@@ -23,11 +23,13 @@ export const useLoginForm = () => {
       setError(null);
 
       await signIn(data);
+      toast.success(AUTH_LOGIN_TEXT.LOGIN_SUCCESS);
     } catch (err: unknown) {
-      toast.error(AUTH_LOGIN_ERRORS.AUTH_ERROR);
       if (err instanceof Error) {
+        toast.error(err.message);
         setError(err.message);
       } else {
+        toast.error(AUTH_LOGIN_ERRORS.AUTH_ERROR);
         setError(AUTH_LOGIN_ERRORS.AUTH_ERROR);
       }
     }
