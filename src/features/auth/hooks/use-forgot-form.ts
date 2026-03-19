@@ -6,7 +6,7 @@ import { forgotDefaultValues } from '../lib/constants';
 import { FORGOT_PASSWORD_ERRORS } from '../locales';
 import { forgotSchema, type ForgotFormValues } from '../model/forgot-schema';
 
-// import { resetPasswordForEmail } from '@/shared/api';
+import { resetPassword } from '@/shared/api/auth';
 
 export const useForgotForm = () => {
   const form = useForm<ForgotFormValues>({
@@ -16,12 +16,15 @@ export const useForgotForm = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (data: ForgotFormValues) => {
     try {
       setError(null);
 
-      // await resetPasswordForEmail(data);
+      await resetPassword(data.email);
+      setIsSuccess(true);
+      form.reset();
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -35,6 +38,7 @@ export const useForgotForm = () => {
     form,
     handleSubmit,
     error,
+    isSuccess,
     isSubmitting: form.formState.isSubmitting,
   };
 };

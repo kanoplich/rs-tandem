@@ -52,21 +52,22 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA "extensions";
 
 
 
-CREATE OR REPLACE FUNCTION "public"."get_topic_progress"() RETURNS TABLE("topic_id" "text", "topic_title" "text", "completed" integer, "total" integer, "avg_score" integer, "last_attempt_at" timestamp with time zone)
+CREATE OR REPLACE FUNCTION "public"."get_topic_progress"() RETURNS TABLE("topic_id" "text", "topic_title" "text", "stage" integer, "completed" integer, "total" integer, "avg_score" integer, "last_attempt_at" timestamp with time zone)
     LANGUAGE "sql" SECURITY DEFINER
     SET "search_path" TO 'public', 'pg_temp'
     AS $$
   SELECT
     t.id AS topic_id,
     t.title AS topic_title,
-    COUNT(DISTINCT s.task_id) AS completed,
-    COUNT(DISTINCT tk.id) AS total,
-    COALESCE(AVG(s.score), 0)::INT AS avg_score,
+    t.stage AS stage,
+    COUNT(DISTINCT s.task_id)::integer AS completed,
+    COUNT(DISTINCT tk.id)::integer AS total,
+    COALESCE(AVG(s.score), 0)::integer AS avg_score,
     MAX(s.submitted_at) AS last_attempt_at
   FROM public.topics t
   LEFT JOIN public.tasks tk ON tk.topic_id = t.id
   LEFT JOIN public.submissions s ON s.task_id = tk.id AND s.user_id = auth.uid()
-  GROUP BY t.id, t.title
+  GROUP BY t.id, t.title, t.stage
   ORDER BY t.sort_order;
 $$;
 
@@ -134,58 +135,24 @@ ALTER TABLE "public"."profiles" OWNER TO "postgres";
 
 CREATE TABLE IF NOT EXISTS "public"."tasks" (
     "id" character varying(50) NOT NULL,
-    "topic_id" character varying(50),
+    "topic_id" character varying(50) NOT NULL,
     "type" character varying(20) NOT NULL,
     "difficulty" integer,
     "title" character varying(200) NOT NULL,
     "question_text" "text" NOT NULL,
     "code_template" "text",
     "test_code" "text",
-    "rubric_items" text[] NOT NULL,
+    "rubric_items" "text"[] NOT NULL,
     "golden_answer" "text" NOT NULL,
     "rubric_weights" "jsonb",
-    "hints" text[],
-    "max_score" integer DEFAULT 100,
-    "created_at" timestamp with time zone DEFAULT "now"(),
+    "hints" "text"[],
+    "max_score" integer DEFAULT 100 NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     CONSTRAINT "tasks_difficulty_check" CHECK ((("difficulty" >= 1) AND ("difficulty" <= 5)))
 );
 
 
 ALTER TABLE "public"."tasks" OWNER TO "postgres";
-
-
-CREATE OR REPLACE VIEW "public"."public_tasks" WITH ("security_invoker"='on') AS
- SELECT "id",
-    "topic_id",
-    "type",
-    "difficulty",
-    "title",
-    "question_text",
-    "code_template",
-    "rubric_items",
-    "max_score",
-    "created_at"
-   FROM "public"."tasks";
-
-
-ALTER VIEW "public"."public_tasks" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."submissions" (
-    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
-    "user_id" "uuid",
-    "task_id" character varying(50),
-    "answer" "text" NOT NULL,
-    "score" integer,
-    "covered" text[],
-    "missed" text[],
-    "feedback" "text",
-    "judge_level" integer DEFAULT 0,
-    "submitted_at" timestamp with time zone DEFAULT "now"()
-);
-
-
-ALTER TABLE "public"."submissions" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."topics" (
@@ -200,6 +167,42 @@ CREATE TABLE IF NOT EXISTS "public"."topics" (
 
 
 ALTER TABLE "public"."topics" OWNER TO "postgres";
+
+
+CREATE OR REPLACE VIEW "public"."public_tasks" AS
+ SELECT "t"."id",
+    "t"."topic_id",
+    "t"."type",
+    "t"."difficulty",
+    "t"."title",
+    "t"."question_text",
+    "t"."code_template",
+    "t"."rubric_items",
+    "t"."max_score",
+    "t"."created_at",
+    "tp"."stage"
+   FROM ("public"."tasks" "t"
+     LEFT JOIN "public"."topics" "tp" ON ((("tp"."id")::"text" = ("t"."topic_id")::"text")));
+
+
+ALTER VIEW "public"."public_tasks" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."submissions" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "user_id" "uuid" NOT NULL,
+    "task_id" character varying(50) NOT NULL,
+    "answer" "text" NOT NULL,
+    "score" integer,
+    "covered" "text"[],
+    "missed" "text"[],
+    "feedback" "text",
+    "judge_level" integer DEFAULT 0,
+    "submitted_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."submissions" OWNER TO "postgres";
 
 
 ALTER TABLE ONLY "public"."profiles"
@@ -502,6 +505,12 @@ GRANT ALL ON TABLE "public"."tasks" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."topics" TO "anon";
+GRANT ALL ON TABLE "public"."topics" TO "authenticated";
+GRANT ALL ON TABLE "public"."topics" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."public_tasks" TO "anon";
 GRANT ALL ON TABLE "public"."public_tasks" TO "authenticated";
 GRANT ALL ON TABLE "public"."public_tasks" TO "service_role";
@@ -511,12 +520,6 @@ GRANT ALL ON TABLE "public"."public_tasks" TO "service_role";
 GRANT ALL ON TABLE "public"."submissions" TO "anon";
 GRANT ALL ON TABLE "public"."submissions" TO "authenticated";
 GRANT ALL ON TABLE "public"."submissions" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."topics" TO "anon";
-GRANT ALL ON TABLE "public"."topics" TO "authenticated";
-GRANT ALL ON TABLE "public"."topics" TO "service_role";
 
 
 

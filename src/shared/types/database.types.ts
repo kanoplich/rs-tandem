@@ -84,7 +84,7 @@ export type Database = {
       tasks: {
         Row: {
           code_template: string | null;
-          created_at: string | null;
+          created_at: string;
           difficulty: number | null;
           golden_answer: string;
           hints: string[] | null;
@@ -100,7 +100,7 @@ export type Database = {
         };
         Insert: {
           code_template?: string | null;
-          created_at?: string | null;
+          created_at?: string;
           difficulty?: number | null;
           golden_answer: string;
           hints?: string[] | null;
@@ -116,7 +116,7 @@ export type Database = {
         };
         Update: {
           code_template?: string | null;
-          created_at?: string | null;
+          created_at?: string;
           difficulty?: number | null;
           golden_answer?: string;
           hints?: string[] | null;
@@ -224,6 +224,7 @@ export type Database = {
           avg_score: number;
           completed: number;
           last_attempt_at: string;
+          stage: number;
           topic_id: string;
           topic_title: string;
           total: number;

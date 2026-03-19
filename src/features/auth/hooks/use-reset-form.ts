@@ -6,8 +6,7 @@ import { resetDefaultValues } from '../lib/constants';
 import { AUTH_REGISTER_ERRORS } from '../locales';
 import { resetSchema, type ResetFormType } from '../model/reset-schema';
 
-// import { updateUser } from '@/shared/api';
-// import type { RegisterCredentials } from '@/shared/api/auth/types';
+import { updateUserPassword } from '@/shared/api/auth';
 
 export const useResetForm = () => {
   const form = useForm<ResetFormType>({
@@ -20,13 +19,10 @@ export const useResetForm = () => {
 
   const handleSubmit = async (data: ResetFormType) => {
     const { password } = data;
-    // const userData: RegisterCredentials = {
-    //        password,
-    // };
 
     try {
       setError(null);
-      // await signUp(userData);
+      await updateUserPassword(password);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
