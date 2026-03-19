@@ -11,7 +11,7 @@ vi.mock('@/shared/hooks/use-auth', () => ({
   useAuth: vi.fn(),
 }));
 
-vi.mock('@/app/ui/loader', () => ({
+vi.mock('@/shared/ui/loader', () => ({
   Loader: () => <div data-testid="loader">Loading...</div>,
 }));
 
