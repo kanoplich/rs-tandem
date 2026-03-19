@@ -2,9 +2,8 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { TASK_HEADER } from '@/pages/task/locales';
-import { ROUTES } from '@/shared';
+import { ROUTES, STAGES } from '@/shared';
 import type { Task } from '@/shared/api';
-import { STAGES } from '@/shared/lib/constants';
 
 interface TaskHeaderProps {
   stageNumber: number;
