@@ -37,7 +37,7 @@ export const Task = () => {
 
   return (
     <div className="flex flex-col">
-      <TaskHeader stageNumber={stageNumber} />
+      <TaskHeader stageNumber={stageNumber} tasks={tasks} />
       <TaskProgress />
       <TaskAdvise />
     </div>

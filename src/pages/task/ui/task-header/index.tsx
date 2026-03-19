@@ -2,15 +2,18 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { TASK_HEADER } from '@/pages/task/locales';
+import type { Task } from '@/shared/api';
 import { STAGES } from '@/shared/lib/constants';
 
 interface TaskHeaderProps {
   stageNumber: number;
+  tasks: Task[];
 }
 
-export const TaskHeader = ({ stageNumber }: TaskHeaderProps) => {
+export const TaskHeader = ({ stageNumber, tasks }: TaskHeaderProps) => {
   const navigate = useNavigate();
   const stage = STAGES.find((stage) => stage.id === stageNumber);
+  const questionCount = tasks.length;
 
   return (
     <section className="pt-8 pb-6">
@@ -23,7 +26,7 @@ export const TaskHeader = ({ stageNumber }: TaskHeaderProps) => {
               <div className="text-xs px-1 py-1.5 rounded bg-input">{stage?.title}</div>
             </div>
             <div>
-              {TASK_HEADER.QUESTION} 1 {TASK_HEADER.FROM} 10
+              {TASK_HEADER.QUESTION} 1 {TASK_HEADER.FROM} {questionCount}
             </div>
           </div>
         </div>
