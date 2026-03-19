@@ -33,7 +33,7 @@ export const Task = () => {
     };
 
     loadTasks();
-  }, [topics]);
+  }, [topics, stage]);
 
   return (
     <div className="flex flex-col">
