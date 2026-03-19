@@ -9,6 +9,7 @@ export const AUTH_LOGIN_TEXT = {
   NO_ACCOUNT: 'Нет аккаунта?',
   REGISTER_LINK: 'Зарегистрироваться',
   BUTTON_PENDING: 'Вход в систему...',
+  LOGIN_SUCCESS: 'Вы успешно вошли в аккаунт!',
 };
 
 export const AUTH_LOGIN_PAGE_TEXT = {
@@ -39,6 +40,7 @@ export const AUTH_REGISTER_TEXT = {
   HAS_ACCOUNT: 'Уже есть аккаунт?',
   LOGIN_LINK: 'Войти',
   BUTTON_PENDING: 'Регистрация...',
+  REGISTER_SUCCESS: 'Вы успешно зарегистрировались!',
 };
 
 export const AUTH_REGISTER_PAGE_TEXT = {
