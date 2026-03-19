@@ -86,4 +86,4 @@ npx supabase db reset
 
 ## Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API):
 
-https://www.youtube.com/watch?v=u6UQGfPwMlg
+https://www.youtube.com/watch?v=M_s63RHPufU
