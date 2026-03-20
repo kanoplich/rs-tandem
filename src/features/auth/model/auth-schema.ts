@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { AUTH_LOGIN_ERRORS } from '../locales';
 
-export const emailSchema = z.email(AUTH_LOGIN_ERRORS.INVALID_EMAIL);
+import { emailSchema } from './common-schemas';
 
 export const passwordSchema = z.string().min(8, AUTH_LOGIN_ERRORS.PASSWORD_MIN);
 

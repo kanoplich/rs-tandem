@@ -1,15 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import { resetDefaultValues } from '../lib/constants';
 import { RESET_PASSWORD_ERRORS, RESET_PASSWORD_FORM_TEXT } from '../locales';
 import { resetSchema, type ResetFormType } from '../model/reset-schema';
 
+import { ROUTES } from '@/shared';
 import { updateUserPassword } from '@/shared/api/auth';
 
 export const useResetForm = () => {
+  const navigate = useNavigate();
   const form = useForm<ResetFormType>({
     mode: 'onBlur',
     resolver: zodResolver(resetSchema),
@@ -25,6 +28,7 @@ export const useResetForm = () => {
       setError(null);
       await updateUserPassword(password);
       toast.success(RESET_PASSWORD_FORM_TEXT.RESET_SUCCESS);
+      navigate(ROUTES.DASHBOARD);
     } catch (err: unknown) {
       if (err instanceof Error) {
         toast.error(err.message);

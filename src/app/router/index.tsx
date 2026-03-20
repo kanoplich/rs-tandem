@@ -55,6 +55,14 @@ export const router = createBrowserRouter([
         ),
       },
       { path: ROUTES.NOT_FOUND, element: <NotFound /> },
+      {
+        path: ROUTES.RESET,
+        element: (
+          <ProtectedRoute>
+            <Reset />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
@@ -69,7 +77,6 @@ export const router = createBrowserRouter([
       { path: ROUTES.TASK, element: <Task /> },
       { path: ROUTES.HISTORY, element: <History /> },
       { path: ROUTES.PROFILE, element: <Profile /> },
-      { path: ROUTES.RESET, element: <Reset /> },
     ],
   },
 ]);

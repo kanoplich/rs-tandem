@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
-import { FORGOT_PASSWORD_ERRORS } from '../locales';
-
-export const emailSchema = z.email(FORGOT_PASSWORD_ERRORS.INVALID_EMAIL);
+import { emailSchema } from './common-schemas';
 
 export const forgotSchema = z.object({
   email: emailSchema,

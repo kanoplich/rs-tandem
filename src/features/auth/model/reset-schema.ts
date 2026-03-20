@@ -1,18 +1,12 @@
 import { z } from 'zod';
 
-import { REGISTER_PATTERN } from '../lib/constants';
 import { RESET_PASSWORD_ERRORS } from '../locales';
 
-export const resetValidation = z
-  .string()
-  .min(1, { message: RESET_PASSWORD_ERRORS.REQUIRED })
-  .regex(REGISTER_PATTERN.PASSWORD, {
-    message: RESET_PASSWORD_ERRORS.PASSWORD,
-  });
+import { passwordValidation } from './common-schemas';
 
 export const resetSchema = z
   .object({
-    password: resetValidation,
+    password: passwordValidation,
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {

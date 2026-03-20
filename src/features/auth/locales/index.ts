@@ -76,7 +76,6 @@ export const FORGOT_PASSWORD_FORM_TEXT = {
 };
 
 export const FORGOT_PASSWORD_ERRORS = {
-  INVALID_EMAIL: 'Введите корректный email (пример: your.email@example.com)',
   AUTH_ERROR: 'Ошибка авторизации. Попробуйте позже.',
 };
 
@@ -101,5 +100,5 @@ export const RESET_PASSWORD_ERRORS = {
   PASSWORD:
     'Ваш пароль должен содержать не менее 8 символов, минимум одну заглавную букву (A-Z), одну строчную (a-z) и одну цифру. Без пробелов.',
   PASSWORD_MATCH: 'Пароли не совпадают',
-  AUTH_ERROR: 'Ошибка регистрации. Попробуйте позже.',
+  AUTH_ERROR: 'Ошибка сброса пароля',
 };
