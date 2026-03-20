@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { OVERVIEW_TEXT } from '../../locales';
-
-import { Progress } from '@/shared';
+/* import { Progress } from '@/shared'; */
 
 interface StageOverviewProps {
   title: string;
@@ -25,12 +23,12 @@ export const StageOverview: React.FC<StageOverviewProps> = ({
         <div className="text-right">
           <div className="text-4xl font-bold text-primary">{percent}%</div>
           <div className="text-sm text-foreground mt-1">
-            {completedTopics}/{totalTopics} {OVERVIEW_TEXT.TOPICS}
+            {completedTopics}/{totalTopics}
           </div>
         </div>
       </div>
 
-      <Progress value={percent} />
+      {/* <Progress value={percent} /> */}
     </div>
   );
 };

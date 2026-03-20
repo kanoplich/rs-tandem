@@ -20,7 +20,3 @@ export const STAGE_TEXT = [
     DESCRIPTION: 'Бэкенд и базы данных',
   },
 ];
-
-export const OVERVIEW_TEXT = {
-  TOPICS: 'тем',
-};

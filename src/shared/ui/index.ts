@@ -5,4 +5,3 @@ export * from './label';
 export * from './password-input';
 export * from './card';
 export * from './tabs';
-export * from './progress';
