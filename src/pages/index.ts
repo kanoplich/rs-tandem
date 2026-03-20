@@ -1,9 +1,11 @@
 export { Dashboard } from './dashboard';
+export { Forgot } from './forgot';
 export { History } from './history';
 export { Landing } from './landing';
 export { Login } from './login';
 export { NotFound } from './not-found';
 export { Profile } from './profile';
 export { Register } from './register';
+export { Reset } from './reset';
 export { Task } from './task';
 export { Topics } from './topics';

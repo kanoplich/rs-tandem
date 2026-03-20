@@ -8,3 +8,5 @@ export { default as LogoIcon } from './logo.svg?react';
 export { default as RsSchool } from './rs-school.svg?react';
 export { default as GoogleIcon } from './google.svg?react';
 export { default as GithubIcon } from './github.svg?react';
+export { default as SendButton } from './send-button.svg?react';
+export { default as BotIcon } from './bot-icon.svg?react';
