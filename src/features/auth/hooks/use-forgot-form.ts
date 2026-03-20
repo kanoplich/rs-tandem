@@ -17,7 +17,6 @@ export const useForgotForm = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (data: ForgotFormValues) => {
     try {
@@ -25,8 +24,6 @@ export const useForgotForm = () => {
 
       await resetPassword(data.email);
       toast.success(FORGOT_PASSWORD_FORM_TEXT.SUBMIT_SUCCESS);
-      setIsSuccess(true);
-      form.reset();
     } catch (err: unknown) {
       if (err instanceof Error) {
         toast.error(err.message);
@@ -42,7 +39,6 @@ export const useForgotForm = () => {
     form,
     handleSubmit,
     error,
-    isSuccess,
     isSubmitting: form.formState.isSubmitting,
   };
 };
