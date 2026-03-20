@@ -1,34 +1,18 @@
-import React from 'react';
-
-/* import { Progress } from '@/shared'; */
+import { STAGES } from '@/shared';
 
 interface StageOverviewProps {
-  title: string;
-  completedTopics: number;
-  totalTopics: number;
+  stageId: number;
 }
 
-export const StageOverview: React.FC<StageOverviewProps> = ({
-  title,
-  completedTopics,
-  totalTopics,
-}) => {
-  const percent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
+export const StageOverview = ({ stageId }: StageOverviewProps) => {
+  const stage = STAGES.find((stage) => stage.id === stageId);
+  if (!stage) return null;
 
   return (
     <div className="bg-card rounded-xl p-6 border border-border">
       <div className="flex items-start justify-between mb-4">
-        <h3 className="text-xl font-semibold text-light">{title}</h3>
-
-        <div className="text-right">
-          <div className="text-4xl font-bold text-primary">{percent}%</div>
-          <div className="text-sm text-foreground mt-1">
-            {completedTopics}/{totalTopics}
-          </div>
-        </div>
+        <h3>{stage.title}</h3>
       </div>
-
-      {/* <Progress value={percent} /> */}
     </div>
   );
 };
