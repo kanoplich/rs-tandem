@@ -5,13 +5,19 @@ import { TaskAdvice } from './ui/task-advice';
 import { TaskHeader } from './ui/task-header';
 import { TaskProgress } from './ui/task-progress';
 
+import { Loader } from '@/shared';
+
 export const Task = () => {
   const [searchParams] = useSearchParams();
 
-  const { tasks, stageNumber } = useTasksLoading({
-    topics: searchParams.get('topics'),
-    stage: searchParams.get('stage'),
-  });
+  const topics = searchParams.get('topics');
+  const stage = searchParams.get('stage');
+
+  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topics });
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="flex flex-col">
