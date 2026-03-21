@@ -5,12 +5,14 @@ import { PublicLayout } from '@/app/public-layout';
 import { ProtectedRoute } from '@/app/router/protected-route';
 import {
   Dashboard,
+  Forgot,
   History,
   Landing,
   Login,
   NotFound,
   Profile,
   Register,
+  Reset,
   Task,
   Topics,
 } from '@/pages';
@@ -44,7 +46,23 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: ROUTES.FORGOT,
+        element: (
+          <ProtectedRoute reverse>
+            <Forgot />
+          </ProtectedRoute>
+        ),
+      },
       { path: ROUTES.NOT_FOUND, element: <NotFound /> },
+      {
+        path: ROUTES.RESET,
+        element: (
+          <ProtectedRoute>
+            <Reset />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
