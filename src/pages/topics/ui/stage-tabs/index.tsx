@@ -1,7 +1,6 @@
 import { StageOverview } from '../stage-overview';
 
-import { STAGES, DEFAULT_STAGES_VALUE } from '@/shared';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared';
+import { STAGES, DEFAULT_STAGES_VALUE, Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared';
 
 export const StageTabs = () => {
   return (
