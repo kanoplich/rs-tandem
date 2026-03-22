@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useTasksLoading } from './hooks/use-tasks-loading';
 import { TaskAdvice } from './ui/task-advice';
+import { TaskEmptyState } from './ui/task-empty-state';
 import { TaskHeader } from './ui/task-header';
 import { TaskProgress } from './ui/task-progress';
 
@@ -17,6 +18,10 @@ export const Task = () => {
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (tasks.length === 0 && !isLoading) {
+    return <TaskEmptyState />;
   }
 
   return (

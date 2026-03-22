@@ -25,3 +25,9 @@ export const TASK_LOADING_ERRORS = {
   TASKS_LOADING: 'Не удалось загрузить задания. Попробуйте позже.',
   NO_TOPICS: 'Темы не выбраны. Пожалуйста выберите темы для тренировки.',
 };
+
+export const TASK_EMPTY_STATE = {
+  TITLE: 'Заданий по этой теме пока нет',
+  DESCRIPTION: 'Попробуйте выбрать другую тему или вернитесь позже',
+  BUTTON_TEXT: 'Вернуться назад',
+};
