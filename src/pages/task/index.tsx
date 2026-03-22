@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useTasksLoading } from './hooks/use-tasks-loading';
@@ -12,6 +13,7 @@ import { Loader } from '@/shared';
 
 export const Task = () => {
   const [searchParams] = useSearchParams();
+  const [userAnswer, setUserAnswer] = useState('');
 
   const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
@@ -30,8 +32,8 @@ export const Task = () => {
     <div className="flex flex-col">
       <TaskHeader stageNumber={stageNumber} tasks={tasks} />
       <TaskProgress />
-      <TaskArea tasks={tasks} />
-      <TaskMessage />
+      <TaskArea tasks={tasks} userAnswer={userAnswer} />
+      <TaskMessage setUserAnswer={setUserAnswer} />
       <TaskAdvice />
     </div>
   );

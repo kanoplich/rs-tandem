@@ -5,11 +5,16 @@ import { TASK_MESSAGE } from '../../locales';
 import { Button } from '@/shared';
 import { cn } from '@/shared/lib/utils';
 
-export const TaskMessage = () => {
+interface TaskMessageProps {
+  setUserAnswer: (message: string) => void;
+}
+
+export const TaskMessage = ({ setUserAnswer }: TaskMessageProps) => {
   const [userMessage, setUserMessage] = useState('');
 
   const handleSendUserMessage = () => {
     if (userMessage.trim()) {
+      setUserAnswer(userMessage);
       setUserMessage('');
     }
   };
