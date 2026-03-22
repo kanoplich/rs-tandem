@@ -1,3 +1,5 @@
+import { TASK_AREA } from '../../locales';
+
 import type { Task } from '@/shared/api';
 
 interface TaskAreaProps {
@@ -8,10 +10,13 @@ export const TaskArea = ({ tasks }: TaskAreaProps) => {
   const currentTask = tasks[0];
   return (
     <section className="pb-6">
-      <div className="flex flex-col mx-auto max-w-5xl p-6 rounded-xl bg-card">
-        <div>{currentTask?.topicId}</div>
-        <p>Привет</p>
-        <div>Task</div>
+      <div className="mx-auto max-w-5xl p-6 rounded-xl bg-card border border-border">
+        <h2 className="w-fit font-light text-primary text-sm px-3 py-1.5 rounded-md bg-secondary">
+          {currentTask?.title}
+        </h2>
+        <p className="py-4">{TASK_AREA.WELCOME_MESSAGE}</p>
+        <hr />
+        <p className="pt-3 font-bold text-base sm:text-lg">{currentTask?.questionText}</p>
       </div>
     </section>
   );
