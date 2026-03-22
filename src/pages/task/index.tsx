@@ -11,10 +11,10 @@ import { Loader } from '@/shared';
 export const Task = () => {
   const [searchParams] = useSearchParams();
 
-  const topics = searchParams.get('topics');
+  const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
 
-  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topics });
+  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
 
   if (isLoading) {
     return <Loader />;
