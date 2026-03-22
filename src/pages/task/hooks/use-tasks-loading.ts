@@ -9,7 +9,7 @@ import { getTasksByTopic, type Task } from '@/shared/api';
 
 interface UseTasksLoadingProps {
   stage: string | null;
-  topics: string | null;
+  topicsParam: string | null;
 }
 
 interface UseTasksReturn {
@@ -18,7 +18,7 @@ interface UseTasksReturn {
   isLoading: boolean;
 }
 
-export const useTasksLoading = ({ stage, topics }: UseTasksLoadingProps): UseTasksReturn => {
+export const useTasksLoading = ({ stage, topicsParam }: UseTasksLoadingProps): UseTasksReturn => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [stageNumber, setStageNumber] = useState(1);
@@ -30,20 +30,15 @@ export const useTasksLoading = ({ stage, topics }: UseTasksLoadingProps): UseTas
         const parsedStage = stage ? Number.parseInt(stage, 10) : 1;
         setStageNumber(parsedStage);
 
-        if (!topics) {
+        if (!topicsParam) {
           toast.error(TASK_LOADING_ERRORS.NO_TOPICS);
           navigate(ROUTES.TOPICS);
           return;
         }
 
-        const topicsArr = topics.split(',');
-
-        const results: Task[][] = await Promise.all(
-          topicsArr.map((topic) => getTasksByTopic(topic))
-        );
-
-        const sortedTasks = results.flat().sort((a, b) => a.difficulty - b.difficulty);
-        setTasks(sortedTasks);
+        const topicsArr = topicsParam.split(',');
+        const results: Task[] = await getTasksByTopic(topicsArr);
+        setTasks(results);
       } catch (error: unknown) {
         toast.error(error instanceof Error ? error.message : TASK_LOADING_ERRORS.TASKS_LOADING);
       } finally {
@@ -52,7 +47,7 @@ export const useTasksLoading = ({ stage, topics }: UseTasksLoadingProps): UseTas
     };
 
     loadTasks();
-  }, [topics, stage, navigate]);
+  }, [topicsParam, stage, navigate]);
 
   return {
     tasks,

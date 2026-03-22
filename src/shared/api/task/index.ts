@@ -66,20 +66,20 @@ export const getTask = async (id: string): Promise<Task> => {
   return mapToTask(task);
 };
 
-export const getTasksByTopic = async (topicId: string): Promise<Task[]> => {
+export const getTasksByTopic = async (topicIds: string[]): Promise<Task[]> => {
   if (USE_MOCK_SUPABASE) {
     await delay(400);
 
-    const task = MOCK_TASKS.filter((t) => t.topicId === topicId);
-    if (!task) throw new Error(`Task not found: ${topicId}`);
+    const tasks = MOCK_TASKS.filter((t) => topicIds.includes(t.topicId));
+    if (!tasks) throw new Error(`Tasks not found`);
 
-    return task;
+    return tasks;
   }
 
   const { data: tasks } = await supabase
     .from('public_tasks')
     .select('*')
-    .eq('topic_id', topicId)
+    .in('topic_id', topicIds)
     .order('difficulty')
     .throwOnError();
 

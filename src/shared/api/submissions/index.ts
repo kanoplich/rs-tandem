@@ -27,7 +27,7 @@ export const getSubmissionHistory = async (): Promise<Submission[]> => {
 
   const { data: submissions } = await supabase
     .from('submissions')
-    .select('*')
+    .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
     .order('submitted_at', { ascending: false })
     .throwOnError();
 
@@ -38,6 +38,8 @@ export const getSubmissionHistory = async (): Promise<Submission[]> => {
       taskId: item.task_id,
       answer: item.answer,
       submittedAt: item.submitted_at,
+      title: item.public_tasks.topics?.title ?? '',
+      stage: item.public_tasks.topics?.stage ?? 1,
       result: {
         coveredPoints: item.covered ?? [],
         missedPoints: item.missed ?? [],
