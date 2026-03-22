@@ -3,18 +3,13 @@ import { z } from 'zod';
 import { REGISTER_PATTERN } from '../lib/constants';
 import { AUTH_REGISTER_ERRORS } from '../locales';
 
+import { passwordValidation } from './common-schemas';
+
 export const nameValidation = z
   .string()
   .min(1, { message: AUTH_REGISTER_ERRORS.REQUIRED })
   .regex(REGISTER_PATTERN.NAME, {
     message: AUTH_REGISTER_ERRORS.NAME,
-  });
-
-export const passwordValidation = z
-  .string()
-  .min(1, { message: AUTH_REGISTER_ERRORS.REQUIRED })
-  .regex(REGISTER_PATTERN.PASSWORD, {
-    message: AUTH_REGISTER_ERRORS.PASSWORD,
   });
 
 export const registerSchema = z
