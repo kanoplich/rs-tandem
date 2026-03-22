@@ -1,10 +1,10 @@
 import type { Task } from '@/shared/api';
 
-interface TaskWelcomeMessageProps {
+interface TaskAreaProps {
   tasks: Task[];
 }
 
-export const TaskWelcomeMessage = ({ tasks }: TaskWelcomeMessageProps) => {
+export const TaskArea = ({ tasks }: TaskAreaProps) => {
   const currentTask = tasks[0];
   return (
     <section className="pb-6">

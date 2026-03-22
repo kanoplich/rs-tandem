@@ -2,9 +2,9 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useTasksLoading } from './hooks/use-tasks-loading';
 import { TaskAdvice } from './ui/task-advice';
+import { TaskArea } from './ui/task-area';
 import { TaskHeader } from './ui/task-header';
 import { TaskProgress } from './ui/task-progress';
-import { TaskWelcomeMessage } from './ui/task-welcome-message';
 
 import { Loader } from '@/shared';
 
@@ -24,7 +24,7 @@ export const Task = () => {
     <div className="flex flex-col">
       <TaskHeader stageNumber={stageNumber} tasks={tasks} />
       <TaskProgress />
-      <TaskWelcomeMessage tasks={tasks} />
+      <TaskArea tasks={tasks} />
       <TaskAdvice />
     </div>
   );
