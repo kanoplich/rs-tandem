@@ -11,6 +11,7 @@ export const TASK_PROGRESS = {
 
 export const TASK_MESSAGE = {
   PLACEHOLDER: 'Введите ваш ответ... (Enter для отправки, Shift+Enter для новой строки)',
+  BUTTON_TEXT: 'Отправить',
 };
 
 export const TASK_ADVICE = {

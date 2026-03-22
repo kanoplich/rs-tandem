@@ -5,6 +5,7 @@ import { TaskAdvice } from './ui/task-advice';
 import { TaskArea } from './ui/task-area';
 import { TaskEmptyState } from './ui/task-empty-state';
 import { TaskHeader } from './ui/task-header';
+import { TaskMessage } from './ui/task-message';
 import { TaskProgress } from './ui/task-progress';
 
 import { Loader } from '@/shared';
@@ -30,6 +31,7 @@ export const Task = () => {
       <TaskHeader stageNumber={stageNumber} tasks={tasks} />
       <TaskProgress />
       <TaskArea tasks={tasks} />
+      <TaskMessage />
       <TaskAdvice />
     </div>
   );
