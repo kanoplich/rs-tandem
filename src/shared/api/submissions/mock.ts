@@ -11,6 +11,8 @@ export const MOCK_SUBMISSIONS: Submission[] = [
       'Замыкание — это функция, которая запоминает своё лексическое окружение даже после завершения внешней функции.',
     submittedAt: new Date(Date.now() - 86400000).toISOString(),
     result: MOCK_JUDGE_RESULT_GOOD,
+    title: 'Closures',
+    stage: 1,
   },
   {
     id: 'sub-002',
@@ -19,5 +21,7 @@ export const MOCK_SUBMISSIONS: Submission[] = [
     answer: 'Event loop следит за call stack и очередями задач.',
     submittedAt: new Date(Date.now() - 3600000).toISOString(),
     result: MOCK_JUDGE_RESULT_POOR,
+    title: 'Event loop',
+    stage: 3,
   },
 ];
