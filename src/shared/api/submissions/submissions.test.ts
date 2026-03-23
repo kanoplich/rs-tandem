@@ -21,7 +21,10 @@ describe('getSubmissionHistory method', () => {
 
   it('getSubmissionHistory return submission', async () => {
     vi.mocked(
-      supabase.from('submissions').select('*, tasks(max_score)').order('submitted_at').throwOnError
+      supabase
+        .from('submissions')
+        .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+        .order('submitted_at').throwOnError
     ).mockResolvedValue({
       data: [
         {
@@ -35,8 +38,12 @@ describe('getSubmissionHistory method', () => {
           submitted_at: '',
           task_id: 'user-mock-01',
           user_id: 'closures-1',
-          tasks: {
-            max_score: 100,
+          public_tasks: {
+            topic_id: '',
+            topics: {
+              stage: 1,
+              title: 'Closures',
+            },
           },
         },
       ],
@@ -55,7 +62,10 @@ describe('getSubmissionHistory method', () => {
 
   it('getSubmissionHistory throw error', async () => {
     vi.mocked(
-      supabase.from('submissions').select('*, tasks(max_score)').order('submitted_at').throwOnError
+      supabase
+        .from('submissions')
+        .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+        .order('submitted_at').throwOnError
     ).mockRejectedValue(new Error('Error'));
 
     await expect(getSubmissionHistory()).rejects.toThrow('Error');
