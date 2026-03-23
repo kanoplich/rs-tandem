@@ -17,6 +17,7 @@ export const MOCK_TOPIC_PROGRESS: TopicProgress[] = MOCK_TOPICS.map((t) => ({
   completed: t.id === 'closures' ? 1 : t.id === 'event-loop' ? 1 : 0,
   total: t.taskCount,
   avgScore: t.id === 'closures' ? 85 : t.id === 'event-loop' ? 30 : 0,
+  stage: 1,
   lastAttemptAt:
     t.id === 'closures'
       ? new Date(Date.now() - 86400000).toISOString()

@@ -4,6 +4,7 @@ import { supabase } from '../supabase-client';
 import { MOCK_SUBMISSIONS } from './mock';
 import type { Submission } from './types';
 
+import { DEFAULT_MAX_SCORE } from '@/shared';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
@@ -26,7 +27,7 @@ export const getSubmissionHistory = async (): Promise<Submission[]> => {
 
   const { data: submissions } = await supabase
     .from('submissions')
-    .select('*, tasks(max_score)')
+    .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
     .order('submitted_at', { ascending: false })
     .throwOnError();
 
@@ -37,12 +38,14 @@ export const getSubmissionHistory = async (): Promise<Submission[]> => {
       taskId: item.task_id,
       answer: item.answer,
       submittedAt: item.submitted_at,
+      title: item.public_tasks.topics?.title ?? '',
+      stage: item.public_tasks.topics?.stage ?? 1,
       result: {
         coveredPoints: item.covered ?? [],
         missedPoints: item.missed ?? [],
         feedback: item.feedback ?? '',
         score: item.score ?? 0,
-        maxScore: item.tasks.max_score,
+        maxScore: DEFAULT_MAX_SCORE,
         judgeLevel: toJudgeLevel(item.judge_level),
       },
     };
