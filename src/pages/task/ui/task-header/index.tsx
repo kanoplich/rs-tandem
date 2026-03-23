@@ -22,7 +22,7 @@ export const TaskHeader = ({ stageNumber, tasks }: TaskHeaderProps) => {
           <ArrowLeft className="cursor-pointer" onClick={() => navigate(ROUTES.TOPICS)} />
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-3">
-              <h2 className="text-base">{TASK_HEADER.TITLE}</h2>
+              <h1 className="text-base">{TASK_HEADER.TITLE}</h1>
               <div className="text-xs px-1 py-1.5 rounded bg-input">{stage?.title}</div>
             </div>
             <div>

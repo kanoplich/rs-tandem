@@ -1,39 +1,28 @@
-import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { useTasksLoading } from './hooks/use-tasks-loading';
 import { TaskAdvice } from './ui/task-advice';
+import { TaskEmptyState } from './ui/task-empty-state';
 import { TaskHeader } from './ui/task-header';
 import { TaskProgress } from './ui/task-progress';
 
-import { getTasksByTopic, type Task as TaskType } from '@/shared/api';
+import { Loader } from '@/shared';
 
 export const Task = () => {
-  const [tasks, setTasks] = useState<TaskType[]>([]);
-  const [stageNumber, setStageNumber] = useState(1);
   const [searchParams] = useSearchParams();
 
-  const topics = searchParams.get('topics');
+  const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
 
-  useEffect(() => {
-    const loadTasks = async () => {
-      try {
-        setStageNumber(stage ? Number.parseInt(stage, 10) : 1);
+  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
 
-        const topicsArr = topics?.split(',') || [];
-        const results: TaskType[][] = await Promise.all(
-          topicsArr.map((topic) => getTasksByTopic(topic))
-        );
+  if (isLoading) {
+    return <Loader />;
+  }
 
-        const sortedTasks = results.flat().sort((a, b) => a.difficulty - b.difficulty);
-        setTasks(sortedTasks);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    loadTasks();
-  }, [topics, stage]);
+  if (tasks.length === 0 && !isLoading) {
+    return <TaskEmptyState />;
+  }
 
   return (
     <div className="flex flex-col">

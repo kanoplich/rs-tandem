@@ -6,6 +6,8 @@ export interface Submission {
   taskId: string;
   answer: string;
   submittedAt: string;
+  title: string;
+  stage: number;
   result: JudgeResult;
 }
 
