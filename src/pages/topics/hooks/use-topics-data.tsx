@@ -3,9 +3,14 @@ import { toast } from 'sonner';
 
 import { ERROR } from '../locales';
 
-import { getTopics, getTopicProgress, type Topic, type TopicProgress } from '@/shared/api';
-import type { TopicWithProgress } from '@/shared/api';
-import { groupByStage } from '@/shared/lib/group-by-stage';
+import { groupByStage } from '@/shared';
+import {
+  getTopics,
+  getTopicProgress,
+  type Topic,
+  type TopicProgress,
+  type TopicWithProgress,
+} from '@/shared/api';
 
 export const useTopicsData = () => {
   const [topics, setTopics] = useState<TopicWithProgress[]>([]);
