@@ -1,39 +1,25 @@
-import { useProfileData } from '../hooks';
-import { PROFILE_TEXT } from '../locales';
-
-import { StageBadge, STAGES } from '@/shared';
+import { Badge } from '@/shared';
 import { useAuth } from '@/shared/hooks';
 
+type StageBadgeType = {
+  title: string;
+  completed: boolean;
+};
+
 type ProfileHeaderProps = {
-  stageBadges?: string[];
+  stageBadges?: StageBadgeType[];
 };
 
 export const ProfileHeader = ({ stageBadges = [] }: ProfileHeaderProps) => {
   const { user } = useAuth();
-  const { progress } = useProfileData();
 
   const email = user?.email ?? '';
 
-  const fullName = user?.user_metadata?.name || email.split('@')[0] || 'User';
+  const fullName = user?.user_metadata?.name ?? '';
 
   const avatar = user?.user_metadata?.avatar;
 
-  const initials = fullName
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((n: string) => n.charAt(0).toUpperCase())
-    .join('');
-
-  const computedBadges =
-    stageBadges.length > 0
-      ? stageBadges
-      : Array.from(new Set(progress.map((t) => t.stage)))
-          .filter((stage) => progress.some((t) => t.stage === stage && t.completed > 0))
-          .map((stageId) => {
-            const stage = STAGES.find((s) => s.id === stageId);
-            return stage?.title ?? `Stage ${stageId}`;
-          });
+  const initials = fullName.charAt(0).toUpperCase();
 
   return (
     <div className="px-4 pt-8 pb-6">
@@ -60,19 +46,11 @@ export const ProfileHeader = ({ stageBadges = [] }: ProfileHeaderProps) => {
             </span>
 
             <div className="flex gap-2 mt-2 overflow-x-auto">
-              {computedBadges.length > 0 ? (
-                computedBadges.map((badge, index) => (
-                  <StageBadge
-                    key={badge}
-                    text={badge}
-                    variant={index % 2 === 0 ? 'default' : 'completed'}
-                  />
-                ))
-              ) : (
-                <span className="text-xs text-muted-foreground whitespace-nowrap">
-                  {PROFILE_TEXT.NO_STAGES}
-                </span>
-              )}
+              {stageBadges.map((stage) => (
+                <Badge key={stage.title} variant={stage.completed ? 'active' : 'default'}>
+                  {stage.title}
+                </Badge>
+              ))}
             </div>
           </div>
         </div>

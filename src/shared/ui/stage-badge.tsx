@@ -3,35 +3,38 @@ import * as React from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
-const stageBadgeVariants = cva(
-  'inline-flex items-center justify-center text-xs font-medium rounded-sm whitespace-nowrap transition-colors',
+const badgeVariants = cva(
+  'inline-flex items-center justify-center font-medium rounded-sm whitespace-nowrap transition-colors',
   {
     variants: {
       variant: {
-        default: 'px-2.5 py-1 bg-input text-light',
-        completed: 'px-2.5 py-1 border border-color-input text-light',
+        default: 'bg-input text-light',
+        active: 'border border-color-input bg-primary text-light',
+      },
+      size: {
+        sm: 'text-xs px-2 py-1',
+        md: 'text-sm px-3 py-1.5',
+        lg: 'text-base px-4 py-2',
       },
     },
     defaultVariants: {
       variant: 'default',
+      size: 'sm',
     },
   }
 );
 
-type StageBadgeProps = React.HTMLAttributes<HTMLSpanElement> &
-  VariantProps<typeof stageBadgeVariants> & {
-    text: string;
-  };
+type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & VariantProps<typeof badgeVariants>;
 
-export const StageBadge = ({ text, variant, className, ...props }: StageBadgeProps) => {
+export const Badge: React.FC<BadgeProps> = ({ children, variant, size, className, ...props }) => {
   return (
     <span
-      data-slot="stage-badge"
+      data-slot="badge"
       data-variant={variant}
-      className={cn(stageBadgeVariants({ variant }), className)}
+      className={cn(badgeVariants({ variant, size }), className)}
       {...props}
     >
-      {text}
+      {children}
     </span>
   );
 };
