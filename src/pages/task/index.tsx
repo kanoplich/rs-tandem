@@ -13,12 +13,14 @@ import { Loader } from '@/shared';
 
 export const Task = () => {
   const [searchParams] = useSearchParams();
-  const [userAnswer, setUserAnswer] = useState('');
-
   const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
-
   const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
+  const [currentTaskIndex] = useState(0);
+
+  const handleTaskMessage = (message: string) => {
+    console.warn(message);
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -29,11 +31,15 @@ export const Task = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <TaskHeader stageNumber={stageNumber} tasks={tasks} />
+    <div className="flex flex-col mx-auto max-w-5xl p-1">
+      <TaskHeader
+        currentTaskNumber={currentTaskIndex + 1}
+        stageNumber={stageNumber}
+        tasksCount={tasks.length}
+      />
       <TaskProgress />
-      <TaskArea tasks={tasks} userAnswer={userAnswer} />
-      <TaskMessage setUserAnswer={setUserAnswer} />
+      {tasks[currentTaskIndex] && <TaskArea task={tasks[currentTaskIndex]} />}
+      <TaskMessage onSubmit={handleTaskMessage} />
       <TaskAdvice />
     </div>
   );
