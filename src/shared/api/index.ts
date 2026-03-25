@@ -2,7 +2,7 @@ export type { AuthSession, AuthUser, AuthCredentials, RegisterCredentials } from
 export type { UserProfile, UserStats, TopicProgress } from './dashboard/types';
 export type { Submission, RunResult } from './submissions/types';
 export type { Task, DifficultyLevel, TaskType } from './task/types';
-export type { Topic, TopicWithProgress } from './topic/types';
+export type { Topic } from './topic/types';
 export { viewer } from './auth/mock';
 export { getSession, onAuthStateChange, signUp, signIn, signOut, signInWithOAuth } from './auth';
 export { getDashboardStats, getTopicProgress } from './dashboard/';

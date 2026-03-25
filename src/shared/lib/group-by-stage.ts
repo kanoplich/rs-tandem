@@ -1,26 +1,9 @@
-import type { TopicWithProgress } from '@/shared/api';
+import { STAGES } from './constants';
 
-export const groupByStage = (topics: TopicWithProgress[]): Record<number, TopicWithProgress[]> => {
-  const grouped = topics.reduce<Record<number, TopicWithProgress[]>>((acc, topic) => {
-    const stage = topic.stage;
-    if (!acc[stage]) {
-      acc[stage] = [];
-    }
-    acc[stage].push(topic);
-    return acc;
-  }, {});
-
-  for (const stage in grouped) {
-    const group = grouped[stage];
-    if (group) {
-      group.sort((a, b) => {
-        const orderA = a.sort_order ?? Number.MAX_SAFE_INTEGER;
-        const orderB = b.sort_order ?? Number.MAX_SAFE_INTEGER;
-        if (orderA !== orderB) return orderA - orderB;
-        return a.title.localeCompare(b.title);
-      });
-    }
+export const groupByStage = <T extends { stage: number }>(items: T[]): Record<number, T[]> => {
+  const result: Record<number, T[]> = {};
+  for (const { id } of STAGES) {
+    result[id] = items.filter((t) => t.stage === id);
   }
-
-  return grouped;
+  return result;
 };
