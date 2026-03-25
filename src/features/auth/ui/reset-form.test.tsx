@@ -39,13 +39,13 @@ describe('ResetForm', () => {
     );
   };
 
-  it('renders the title and description', () => {
+  it('should render the title and description', () => {
     renderForm();
     expect(screen.getByText(RESET_PASSWORD_FORM_TEXT.TITLE)).toBeInTheDocument();
     expect(screen.getByText(RESET_PASSWORD_FORM_TEXT.DESCRIPTION)).toBeInTheDocument();
   });
 
-  it('renders two password fields', () => {
+  it('should render two password fields', () => {
     renderForm();
     const passwordInputs = screen.getAllByPlaceholderText(
       RESET_PASSWORD_FORM_TEXT.PASSWORD_PLACEHOLDER
@@ -56,13 +56,13 @@ describe('ResetForm', () => {
     expect(screen.getByLabelText(RESET_PASSWORD_FORM_TEXT.CONFIRM_LABEL)).toBeInTheDocument();
   });
 
-  it('renders the submit button', () => {
+  it('should render the submit button', () => {
     renderForm();
     const submitBtn = screen.getByRole('button', { name: RESET_PASSWORD_FORM_TEXT.SUBMIT_BUTTON });
     expect(submitBtn).toBeInTheDocument();
   });
 
-  it('displays error message when reset fails', () => {
+  it('should display error message when reset fails', () => {
     const apiError = 'Token expired or invalid';
 
     (useResetForm as Mock).mockReturnValueOnce({

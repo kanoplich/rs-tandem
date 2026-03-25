@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import { toast } from 'sonner';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
@@ -20,6 +20,13 @@ vi.mock('sonner', () => ({
 }));
 
 describe('useRegisterForm', () => {
+  const testData = {
+    name: 'Vadym',
+    email: 'test@example.com',
+    password: 'Password123!',
+    confirmPassword: 'Password123!',
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -34,13 +41,6 @@ describe('useRegisterForm', () => {
 
   it('should successfully call signUp and show a notification', async () => {
     const { result } = renderHook(() => useRegisterForm());
-    const testData = {
-      name: 'Vadym',
-      email: 'test@example.com',
-      password: 'Password123!',
-      confirmPassword: 'Password123!',
-    };
-
     const mockSession = {
       user: { id: 'user-123', email: testData.email },
     } as Partial<AuthSession>;
@@ -56,7 +56,6 @@ describe('useRegisterForm', () => {
       email: testData.email,
       password: testData.password,
     });
-
     expect(toast.success).toHaveBeenCalledWith(AUTH_REGISTER_TEXT.REGISTER_SUCCESS);
     expect(result.current.error).toBeNull();
   });
@@ -68,12 +67,7 @@ describe('useRegisterForm', () => {
     vi.mocked(signUp).mockRejectedValueOnce(new Error(errorMessage));
 
     await act(async () => {
-      await result.current.handleSubmit({
-        name: 'Vadym',
-        email: 'test@example.com',
-        password: 'Password123!',
-        confirmPassword: 'Password123!',
-      });
+      await result.current.handleSubmit(testData);
     });
 
     expect(result.current.error).toBe(errorMessage);
@@ -86,15 +80,27 @@ describe('useRegisterForm', () => {
     vi.mocked(signUp).mockRejectedValueOnce('Unexpected String Error');
 
     await act(async () => {
-      await result.current.handleSubmit({
-        name: 'Vadym',
-        email: 'test@example.com',
-        password: 'Password123!',
-        confirmPassword: 'Password123!',
-      });
+      await result.current.handleSubmit(testData);
     });
 
     expect(result.current.error).toBe(AUTH_REGISTER_ERRORS.AUTH_ERROR);
     expect(toast.error).toHaveBeenCalledWith(AUTH_REGISTER_ERRORS.AUTH_ERROR);
+  });
+
+  it('should set isSubmitting to true while calling signUp', async () => {
+    const { result } = renderHook(() => useRegisterForm());
+
+    vi.mocked(signUp).mockReturnValueOnce(new Promise(() => {}));
+
+    act(() => {
+      result.current.form.handleSubmit(result.current.handleSubmit)();
+    });
+
+    await waitFor(
+      () => {
+        expect(result.current.isSubmitting).toBe(true);
+      },
+      { timeout: 2000 }
+    );
   });
 });

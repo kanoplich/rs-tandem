@@ -38,41 +38,41 @@ describe('RegisterForm', () => {
     );
   };
 
-  it('renders the registration title and description', () => {
+  it('should render the registration title and description', () => {
     renderForm();
     expect(screen.getByText(AUTH_REGISTER_TEXT.TITLE)).toBeInTheDocument();
     expect(screen.getByText(AUTH_REGISTER_TEXT.DESCRIPTION)).toBeInTheDocument();
   });
 
-  it('renders the name field', () => {
+  it('should render the name field', () => {
     renderForm();
     expect(screen.getByPlaceholderText(AUTH_REGISTER_TEXT.NAME_PLACEHOLDER)).toBeInTheDocument();
   });
 
-  it('renders the email field', () => {
+  it('should render the email field', () => {
     renderForm();
     expect(screen.getByPlaceholderText(AUTH_REGISTER_TEXT.EMAIL_PLACEHOLDER)).toBeInTheDocument();
   });
 
-  it('renders two password fields (primary and confirmation)', () => {
+  it('should render two password fields (primary and confirmation)', () => {
     renderForm();
     const passwordInputs = screen.getAllByPlaceholderText(AUTH_REGISTER_TEXT.PASSWORD_PLACEHOLDER);
     expect(passwordInputs).toHaveLength(2);
   });
 
-  it('renders the submit button with the correct text', () => {
+  it('should render the submit button with the correct text', () => {
     renderForm();
     const submitBtn = screen.getByRole('button', { name: AUTH_REGISTER_TEXT.SUBMIT_BUTTON });
     expect(submitBtn).toBeInTheDocument();
   });
 
-  it('renders social media buttons (OAuth)', () => {
+  it('should render social media buttons (OAuth)', () => {
     renderForm();
     const buttons = screen.getAllByRole('button');
     expect(buttons.length).toBeGreaterThan(1);
   });
 
-  it('renders a link to go to the login page', () => {
+  it('should render a link to go to the login page', () => {
     renderForm();
     const link = screen.getByRole('link', { name: AUTH_REGISTER_TEXT.LOGIN_LINK });
     expect(link).toBeInTheDocument();

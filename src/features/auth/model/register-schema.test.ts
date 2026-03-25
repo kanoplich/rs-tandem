@@ -57,4 +57,33 @@ describe('registerSchema', () => {
       expect(result.error.format().name?._errors).toContain(AUTH_REGISTER_ERRORS.REQUIRED);
     }
   });
+
+  it('should give an error if the password is too weak', () => {
+    const invalidData = {
+      ...validData,
+      password: '123',
+      confirmPassword: '123',
+    };
+
+    const result = registerSchema.safeParse(invalidData);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const error = result.error.format();
+      expect(error.password?._errors).toContain(AUTH_REGISTER_ERRORS.PASSWORD);
+    }
+  });
+
+  it('should give an error if the name format is incorrect', () => {
+    const invalidData = {
+      ...validData,
+      name: 'vadym',
+    };
+
+    const result = registerSchema.safeParse(invalidData);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const error = result.error.format();
+      expect(error.name?._errors).toContain(AUTH_REGISTER_ERRORS.NAME);
+    }
+  });
 });

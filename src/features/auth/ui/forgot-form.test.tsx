@@ -39,7 +39,7 @@ describe('ForgotForm', () => {
     );
   };
 
-  it('renders the main elements of the form', () => {
+  it('should render the main elements of the form', () => {
     renderForm();
     expect(screen.getByText(FORGOT_PASSWORD_FORM_TEXT.TITLE)).toBeInTheDocument();
     expect(screen.getByText(FORGOT_PASSWORD_FORM_TEXT.DESCRIPTION)).toBeInTheDocument();
@@ -48,13 +48,13 @@ describe('ForgotForm', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders the submit button', () => {
+  it('should render the submit button', () => {
     renderForm();
     const submitBtn = screen.getByRole('button', { name: FORGOT_PASSWORD_FORM_TEXT.SUBMIT_BUTTON });
     expect(submitBtn).toBeInTheDocument();
   });
 
-  it('shows the loading status on the button', () => {
+  it('should show the loading status on the button', () => {
     (useForgotForm as Mock).mockReturnValueOnce({
       form: { handleSubmit: (fn: unknown) => fn },
       handleSubmit: vi.fn(),
@@ -68,7 +68,7 @@ describe('ForgotForm', () => {
     expect(screen.getByText(FORGOT_PASSWORD_FORM_TEXT.BUTTON_PENDING)).toBeInTheDocument();
   });
 
-  it('renders an error message when provided', () => {
+  it('should render an error message when provided', () => {
     const errorMessage = 'Custom Error Message';
 
     (useForgotForm as Mock).mockReturnValueOnce({
@@ -82,7 +82,7 @@ describe('ForgotForm', () => {
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
 
-  it('renders a link to the login page', () => {
+  it('should render a link to the login page', () => {
     renderForm();
     const loginLink = screen.getByRole('link', { name: FORGOT_PASSWORD_FORM_TEXT.LOGIN_LINK });
     expect(loginLink).toBeInTheDocument();

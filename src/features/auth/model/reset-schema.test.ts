@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { RESET_PASSWORD_ERRORS } from '../locales';
+import { AUTH_REGISTER_ERRORS, RESET_PASSWORD_ERRORS } from '../locales';
 
 import { resetSchema } from './reset-schema';
 
@@ -38,5 +38,10 @@ describe('resetSchema', () => {
 
     const result = resetSchema.safeParse(invalidData);
     expect(result.success).toBe(false);
+
+    if (!result.success) {
+      const error = result.error.format();
+      expect(error.password?._errors).toContain(AUTH_REGISTER_ERRORS.PASSWORD);
+    }
   });
 });
