@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { useTasksLoading } from './hooks/use-tasks-loading';
+import { useTasksLoading } from './hooks';
 import { TaskAdvice } from './ui/task-advice';
 import { TaskArea } from './ui/task-area';
 import { TaskEmptyState } from './ui/task-empty-state';
