@@ -15,19 +15,22 @@ export const StatsCards = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {STATS_CARDS.map(({ key, title, icon: Icon }) => {
         const value = statsMap[key];
 
         return (
-          <Card key={key} className="w-73.5 max-w-full h-38 p-6 text-center md:text-left">
-            <div className="flex items-center gap-2">
-              {Icon && <Icon className="w-5 h-5 text-primary" />}
+          <Card
+            key={key}
+            className="w-full min-h-[150px] p-6 flex flex-col justify-center items-center md:items-start text-center md:text-left"
+          >
+            <div className="flex flex-col items-center md:flex-row md:items-center gap-2 w-full">
+              {Icon && <Icon className="w-6 h-6 text-primary" />}
               <div className="text-sm text-muted-foreground">{title}</div>
             </div>
 
             <div
-              className={`text-2xl font-bold mt-2 pt-2 ${colorMap[key] || 'text-light'}`}
+              className={`text-2xl font-bold mt-2 ${colorMap[key] || 'text-light'}`}
               aria-label={`${title}: ${isLoading ? 'loading' : value}`}
             >
               {isLoading ? '—' : value}

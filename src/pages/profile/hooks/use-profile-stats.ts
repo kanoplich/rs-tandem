@@ -10,7 +10,7 @@ export const useProfileStats = () => {
   const avgScore =
     progress.length > 0
       ? (progress.reduce((acc, item) => acc + item.avgScore, 0) / progress.length).toFixed(1)
-      : '0.0';
+      : 0;
 
   return {
     isLoading,
