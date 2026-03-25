@@ -11,7 +11,7 @@ export const StageOverview = ({ stageId, topics }: StageOverviewProps) => {
   if (!stage) return null;
 
   return (
-    <div className="bg-card rounded-xl p-6 border border-border" data-topics-count={topics.length}>
+    <div className="bg-card rounded-xl border p-6 border-border" data-topics-count={topics.length}>
       <div className="flex items-start justify-between mb-4">
         <h3>{stage.title}</h3>
       </div>
