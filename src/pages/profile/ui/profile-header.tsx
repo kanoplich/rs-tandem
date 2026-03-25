@@ -1,5 +1,6 @@
+import { useUserProfile } from '../hooks/use-user-profile';
+
 import { Badge } from '@/shared';
-import { useAuth } from '@/shared/hooks';
 
 type StageBadgeType = {
   title: string;
@@ -7,19 +8,11 @@ type StageBadgeType = {
 };
 
 type ProfileHeaderProps = {
-  stageBadges?: StageBadgeType[];
+  stageBadges: StageBadgeType[];
 };
 
 export const ProfileHeader = ({ stageBadges = [] }: ProfileHeaderProps) => {
-  const { user } = useAuth();
-
-  const email = user?.email ?? '';
-
-  const fullName = user?.user_metadata?.name ?? '';
-
-  const avatar = user?.user_metadata?.avatar;
-
-  const initials = fullName.charAt(0).toUpperCase();
+  const { email, fullName, avatar, initials } = useUserProfile();
 
   return (
     <div className="px-4 pt-8 pb-6">
@@ -36,6 +29,7 @@ export const ProfileHeader = ({ stageBadges = [] }: ProfileHeaderProps) => {
               {initials}
             </div>
           )}
+
           <div className="flex flex-col overflow-hidden">
             <span className="text-base sm:text-lg text-accent-foreground capitalize whitespace-nowrap overflow-hidden text-ellipsis">
               {fullName}
