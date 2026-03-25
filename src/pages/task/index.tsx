@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import Markdown from 'react-markdown';
 import { useSearchParams } from 'react-router-dom';
 
-import { useTasksLoading } from './hooks';
+import { useTaskSession, useTasksLoading } from './hooks';
 import { TaskAdvice } from './ui/task-advice';
 import { TaskArea } from './ui/task-area';
 import { TaskEmptyState } from './ui/task-empty-state';
@@ -16,11 +16,10 @@ export const Task = () => {
   const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
   const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
-  const [currentTaskIndex] = useState(0);
-
-  const handleTaskMessage = (message: string) => {
-    console.warn(message);
-  };
+  const { currentTaskNumber, tasksCount, currentTask, handleSubmit, userAnswer, feedback } =
+    useTaskSession({
+      tasks,
+    });
 
   if (isLoading) {
     return <Loader />;
@@ -33,13 +32,23 @@ export const Task = () => {
   return (
     <div className="flex flex-col mx-auto max-w-5xl p-1">
       <TaskHeader
-        currentTaskNumber={currentTaskIndex + 1}
+        currentTaskNumber={currentTaskNumber}
         stageNumber={stageNumber}
-        tasksCount={tasks.length}
+        tasksCount={tasksCount}
       />
       <TaskProgress />
-      {tasks[currentTaskIndex] && <TaskArea task={tasks[currentTaskIndex]} />}
-      <TaskMessage onSubmit={handleTaskMessage} />
+      {currentTask && <TaskArea task={currentTask} />}
+      <section className="pb-6">
+        <div className="p-3 sm:p-6 rounded-xl bg-card border border-border">
+          {userAnswer ? <Markdown>{userAnswer}</Markdown> : <TaskMessage onSubmit={handleSubmit} />}
+        </div>
+      </section>
+      {feedback && (
+        <div style={{ marginTop: 16, padding: 12, background: '#f4f4f4', borderRadius: 8 }}>
+          <strong>Фидбэк:</strong>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{feedback}</p>
+        </div>
+      )}
       <TaskAdvice />
     </div>
   );
