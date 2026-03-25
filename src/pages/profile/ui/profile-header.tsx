@@ -1,4 +1,4 @@
-import { useUserProfile } from '../hooks/use-user-profile';
+import { useUserProfile } from '../hooks';
 
 import { Badge } from '@/shared';
 
