@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
-import { getSubmissionHistory, type Task } from '@/shared/api';
+import { getSubmissionHistoryByTaskId, type Task } from '@/shared/api';
 import { evaluateTheory } from '@/shared/api/judge';
 import type { JudgeResult } from '@/shared/api/judge/types';
 
@@ -29,7 +29,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const [userAnswer, setUserAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
   const [result, setResult] = useState<JudgeResult | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
@@ -53,6 +53,8 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       return;
     }
 
+    setIsLoading(true);
+
     try {
       const reader = await evaluateTheory(currentTask.id, message);
       const decoder = new TextDecoder();
@@ -63,14 +65,8 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
         setFeedback((prev) => prev + decoder.decode(value));
       }
 
-      const submissions = await getSubmissionHistory();
-
-      const judgeResult = submissions.find((item) => item.taskId === currentTask.id)?.result;
-
-      if (!judgeResult) {
-        toast.error(USE_TASK_SESSION.RESULT_UNAVAILABLE);
-        return;
-      }
+      const submission = await getSubmissionHistoryByTaskId(currentTask.id);
+      const judgeResult = submission.result;
 
       setResult(judgeResult);
     } catch (error: unknown) {

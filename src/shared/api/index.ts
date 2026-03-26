@@ -6,6 +6,6 @@ export type { Topic } from './topic/types';
 export { viewer } from './auth/mock';
 export { getSession, onAuthStateChange, signUp, signIn, signOut, signInWithOAuth } from './auth';
 export { getDashboardStats, getTopicProgress } from './dashboard/';
-export { getSubmissionHistory } from './submissions';
+export { getSubmissionHistory, getSubmissionHistoryByTaskId } from './submissions';
 export { getTask, getTasksByTopic } from './task';
 export { getTopics } from './topic';
