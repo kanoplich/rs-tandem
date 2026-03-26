@@ -8,3 +8,8 @@ export const PROFILE_STATS_TEXT = {
   RANK: 'Ранг',
   XP: 'Опыт',
 };
+
+export const STAGE_PROGRESS_TEXT = {
+  TITLE: 'Прогресс по этапам',
+  SUBTITLE: 'ваше продвижение в обучении',
+};

@@ -25,7 +25,7 @@ export const StatsCards = ({ stats, progress = [] }: StatsCardsProps) => {
   );
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
       {STATS_CARDS.map(({ key, title, icon: Icon, color }) => (
         <Card
           key={key}
