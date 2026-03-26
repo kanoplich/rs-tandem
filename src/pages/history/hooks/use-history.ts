@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-import { getTopicProgress } from '@/shared/api/dashboard';
-import type { TopicProgress } from '@/shared/api/dashboard/types';
-import { groupByStage, type StageInfo } from '@/shared/lib/group-by-stage';
+import { getTopicProgress, type TopicProgress } from '@/shared/api';
+import { groupByStage } from '@/shared';
+import type { StageInfo } from '../model/types';
 
 export interface Training {
   id: string;
@@ -27,15 +27,16 @@ export const useHistory = () => {
         const grouped = groupByStage(progress);
 
         const stageStats: StageInfo[] = Object.entries(grouped).map(([stage, items]) => {
-          const successful = items.filter((item) => item.avgScore > 70);
+const totalTopics = items.length;
 
-          const totalTopics = items.length;
-          const completedTopics = successful.length;
+const completedTopics = items.filter(
+  (item) => item.completed > 0
+).length;
 
-          const avgScore =
-            successful.length > 0
-              ? successful.reduce((sum, item) => sum + item.avgScore, 0) / successful.length
-              : 0;
+const avgScore =
+  items.length > 0
+    ? items.reduce((sum, item) => sum + item.avgScore, 0) / items.length
+    : 0;
 
           return {
             stage: Number(stage),
