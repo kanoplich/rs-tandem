@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { STAGE_PROGRESS_TEXT } from '../locales';
 
 import {
@@ -15,13 +17,13 @@ type StageProgressProps = {
 };
 
 export const StageProgressCard = ({ progress }: StageProgressProps) => {
-  const grouped = groupByStage(progress);
+  const grouped = useMemo(() => groupByStage(progress), [progress]);
 
   return (
     <Card className="p-4 sm:p-6 w-full">
       <div className="flex flex-col gap-1 mb-2">
         <h2 className="text-base sm:text-lg font-bold">{STAGE_PROGRESS_TEXT.TITLE}</h2>
-        <p className="text-xs sm:text-sm text-muted-foreground ">{STAGE_PROGRESS_TEXT.SUBTITLE}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground">{STAGE_PROGRESS_TEXT.SUBTITLE}</p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -42,7 +44,7 @@ export const StageProgressCard = ({ progress }: StageProgressProps) => {
               <Progress value={percent} />
 
               <div className="text-xs sm:text-sm text-muted-foreground">
-                {completed} из {total} тем завершено
+                {completed} / {total}
               </div>
             </div>
           );
