@@ -24,42 +24,39 @@ export const useHistory = () => {
       try {
         const progress: TopicProgress[] = await getTopicProgress();
 
-const grouped = groupByStage(progress);
+        const grouped = groupByStage(progress);
 
-const stageStats: StageInfo[] = Object.entries(grouped).map(
-  ([stage, items]) => {
-    const successful = items.filter((item) => item.avgScore > 70);
+        const stageStats: StageInfo[] = Object.entries(grouped).map(([stage, items]) => {
+          const successful = items.filter((item) => item.avgScore > 70);
 
-    const totalTopics = items.length;
-    const completedTopics = successful.length;
+          const totalTopics = items.length;
+          const completedTopics = successful.length;
 
-    const avgScore =
-      successful.length > 0
-        ? successful.reduce((sum, item) => sum + item.avgScore, 0) /
-          successful.length
-        : 0;
+          const avgScore =
+            successful.length > 0
+              ? successful.reduce((sum, item) => sum + item.avgScore, 0) / successful.length
+              : 0;
 
-    return {
-      stage: Number(stage),
-      totalTopics,
-      completedTopics,
-      avgScore,
-    };
-  }
-);
+          return {
+            stage: Number(stage),
+            totalTopics,
+            completedTopics,
+            avgScore,
+          };
+        });
 
-setStages(stageStats);
+        setStages(stageStats);
 
-const mapped: Training[] = progress
-  .filter((item) => item.avgScore > 70)
-  .map((item) => ({
-    id: item.topicId,
-    title: item.topicTitle,
-    stage: item.stage,
-    date: '',
-    duration: '',
-    score: Number((item.avgScore / 10).toFixed(1)),
-  }));
+        const mapped: Training[] = progress
+          .filter((item) => item.avgScore > 70)
+          .map((item) => ({
+            id: item.topicId,
+            title: item.topicTitle,
+            stage: item.stage,
+            date: '',
+            duration: '',
+            score: Number((item.avgScore / 10).toFixed(1)),
+          }));
 
         setHistory(mapped);
       } catch (err) {
