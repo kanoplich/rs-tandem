@@ -66,6 +66,8 @@ export const getSubmissionHistoryByTaskId = async (taskId: string): Promise<Subm
     .from('submissions')
     .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
     .eq('task_id', taskId)
+    .order('submitted_at', { ascending: false })
+    .limit(1)
     .single()
     .throwOnError();
 

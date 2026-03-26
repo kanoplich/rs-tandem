@@ -43,3 +43,11 @@ export const USE_TASK_SESSION = {
   LOADING_ERROR: 'Не удалось загрузить данные. Попробуйте ещё раз.',
   ID_MISSING: 'Не удалось определить текущее задание. Пожалуйста, выберите задание для тренировки.',
 };
+
+export const TASK_FEEDBACK = {
+  TITLE: 'Обратная связь',
+};
+
+export const TASK_ANSWER = {
+  TITLE: 'Твой ответ',
+};
