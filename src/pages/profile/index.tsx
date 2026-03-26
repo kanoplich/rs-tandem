@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
 import { useProfileData } from './hooks';
-import { ProfileHeader } from './ui';
+import { ProfileHeader, StatsCards } from './ui';
 
 import { isTopicCompleted, Loader, STAGES } from '@/shared';
 
 export const Profile = () => {
-  const { progress, isLoading } = useProfileData();
+  const { stats, progress, isLoading } = useProfileData();
 
   const stageBadges = useMemo(
     () =>
@@ -25,6 +25,7 @@ export const Profile = () => {
   return (
     <div className="px-4 py-6 max-w-7xl mx-auto flex flex-col gap-6">
       <ProfileHeader stageBadges={stageBadges} />
+      <StatsCards stats={stats} progress={progress} />
     </div>
   );
 };
