@@ -6,7 +6,7 @@ import { Button, ROUTES } from '@/shared';
 
 export const StartButton = () => {
   return (
-    <section className="py-4 flex justify-center">
+    <section className="mb-8 mt-4 sm:mb-4 flex justify-center">
       <Button asChild className="w-full sm:w-auto px-9 py-7 text-lg">
         <Link to={ROUTES.TOPICS}>{START_BUTTON_TEXT}</Link>
       </Button>
