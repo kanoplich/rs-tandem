@@ -11,17 +11,17 @@ export const OverallStats = () => {
         <StatCard
           icon={<ProgressIcon />}
           description={OVERALL_STATS_TEXT.GENERAL_PROGRESS_CARD_TEXT}
-          stats={'42%'}
+          stats="42%"
         />
         <StatCard
           icon={<TopicIcon />}
           description={OVERALL_STATS_TEXT.AVERAGE_SCORE_CARD_TEXT}
-          stats={'6.5/10'}
+          stats="6.5/10"
         />
         <StatCard
           icon={<StatisticIcon />}
           description={OVERALL_STATS_TEXT.TOPICS_FINISHED_CARD_TEXT}
-          stats={'16/37'}
+          stats="16/37"
         />
       </div>
     </section>
