@@ -1,4 +1,8 @@
-import type { StatCardProps } from '../../model/dashboard.types';
+interface StatCardProps {
+  icon: React.ReactNode;
+  description: string;
+  stats: string;
+}
 
 export const StatCard = ({ icon, description, stats }: StatCardProps) => {
   return (

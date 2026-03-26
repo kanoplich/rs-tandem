@@ -1,5 +1,5 @@
 import { OVERALL_STATS_TEXT } from '../../locales';
-import { StatCard } from '../stat-card/stat-card';
+import { StatCard } from '../stat-card';
 
 import { ProgressIcon, StatisticIcon, TopicIcon } from '@/shared/assets/icons';
 

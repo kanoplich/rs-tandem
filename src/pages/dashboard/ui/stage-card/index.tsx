@@ -1,7 +1,13 @@
 import { STAGE_CARDS_TEXT } from '../../locales';
-import type { StageCardProps } from '../../model/dashboard.types';
 
 import { Progress, STAGES } from '@/shared';
+
+interface StageCardProps {
+  id: number;
+  progress: number;
+  topicsFinished: string;
+  averageScore: string;
+}
 
 export const StageCard = ({ id, progress, topicsFinished, averageScore }: StageCardProps) => {
   const stage = STAGES.find((stage) => stage.id === id);
