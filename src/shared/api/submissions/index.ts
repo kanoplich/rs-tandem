@@ -51,3 +51,41 @@ export const getSubmissionHistory = async (): Promise<Submission[]> => {
     };
   });
 };
+
+export const getSubmissionHistoryByTaskId = async (taskId: string): Promise<Submission> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(400);
+    const submission = MOCK_SUBMISSIONS.find((item) => item.taskId === taskId);
+
+    if (!submission) throw new Error(`Submission not found`);
+
+    return submission;
+  }
+
+  const { data: submission } = await supabase
+    .from('submissions')
+    .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+    .eq('task_id', taskId)
+    .order('submitted_at', { ascending: false })
+    .limit(1)
+    .single()
+    .throwOnError();
+
+  return {
+    id: submission.id,
+    userId: submission.user_id,
+    taskId: submission.task_id,
+    answer: submission.answer,
+    submittedAt: submission.submitted_at,
+    title: submission.public_tasks.topics?.title ?? '',
+    stage: submission.public_tasks.topics?.stage ?? 1,
+    result: {
+      coveredPoints: submission.covered ?? [],
+      missedPoints: submission.missed ?? [],
+      feedback: submission.feedback ?? '',
+      score: submission.score ?? 0,
+      maxScore: DEFAULT_MAX_SCORE,
+      judgeLevel: toJudgeLevel(submission.judge_level),
+    },
+  };
+};

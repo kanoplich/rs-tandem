@@ -1,20 +1,26 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { useTasksLoading } from './hooks/use-tasks-loading';
+import { useTaskSession, useTasksLoading } from './hooks';
 import { TaskAdvice } from './ui/task-advice';
+import { TaskAnswer } from './ui/task-answer';
+import { TaskArea } from './ui/task-area';
 import { TaskEmptyState } from './ui/task-empty-state';
+import { TaskFeedback } from './ui/task-feedback';
 import { TaskHeader } from './ui/task-header';
+import { TaskMessage } from './ui/task-message';
 import { TaskProgress } from './ui/task-progress';
 
 import { Loader } from '@/shared';
 
 export const Task = () => {
   const [searchParams] = useSearchParams();
-
   const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
-
   const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
+  const { currentTaskNumber, tasksCount, currentTask, handleSubmit, userAnswer, feedback } =
+    useTaskSession({
+      tasks,
+    });
 
   if (isLoading) {
     return <Loader />;
@@ -25,9 +31,20 @@ export const Task = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <TaskHeader stageNumber={stageNumber} tasks={tasks} />
+    <div className="flex flex-col mx-auto max-w-5xl p-1">
+      <TaskHeader
+        currentTaskNumber={currentTaskNumber}
+        stageNumber={stageNumber}
+        tasksCount={tasksCount}
+      />
       <TaskProgress />
+      {currentTask && <TaskArea task={currentTask} />}
+      {userAnswer ? (
+        <TaskAnswer userAnswer={userAnswer} />
+      ) : (
+        <TaskMessage onSubmit={handleSubmit} />
+      )}
+      {feedback && <TaskFeedback feedback={feedback} />}
       <TaskAdvice />
     </div>
   );
