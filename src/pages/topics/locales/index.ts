@@ -6,3 +6,7 @@ export const TOPICS_HEADER_TEXT = {
 export const ERROR = {
   DOWNLOAD: 'Ошибка загрузки данных',
 };
+
+export const TOPICS_OVERVIEW_TEXT = {
+  ABSENCE: 'Нет тем',
+};

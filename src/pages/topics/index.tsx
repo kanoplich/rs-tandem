@@ -3,8 +3,7 @@ import { useMemo } from 'react';
 import { useTopicsData } from './hooks/use-topics-data';
 import { TopicsHeader, StageTabs } from './ui';
 
-import { groupByStage } from '@/shared';
-import { Loader } from '@/shared';
+import { groupByStage, Loader } from '@/shared';
 
 export const Topics = () => {
   const { topics, isLoading } = useTopicsData();
