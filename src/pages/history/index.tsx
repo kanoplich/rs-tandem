@@ -13,12 +13,11 @@ export const History = () => {
 
   const total = stages.reduce((sum, s) => sum + s.totalTopics, 0);
 
-  const allScores = stages.flatMap((s) => (s.avgScore ? [s.avgScore] : []));
+  const totalAttempts = history.length;
 
-  const avg =
-    allScores.length > 0
-      ? (allScores.reduce((sum, s) => sum + s, 0) / allScores.length / 10).toFixed(1)
-      : '0.0';
+  const totalScore = stages.reduce((sum, s) => sum + s.avgScore * s.completedTopics, 0);
+
+  const avg = totalAttempts > 0 ? (totalScore / totalAttempts).toFixed(1) : '0.0';
 
   const best = history.length > 0 ? Math.max(...history.map((item) => item.score)) : 0;
 

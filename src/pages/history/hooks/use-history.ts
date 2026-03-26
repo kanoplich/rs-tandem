@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-import { getTopicProgress, type TopicProgress } from '@/shared/api';
-import { groupByStage } from '@/shared';
 import type { StageInfo } from '../model/types';
+
+import { groupByStage } from '@/shared';
+import { getSubmissionHistory } from '@/shared/api/submissions';
 
 export interface Training {
   id: string;
@@ -22,18 +23,18 @@ export const useHistory = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const progress: TopicProgress[] = await getTopicProgress();
-
-        const grouped = groupByStage(progress);
-
+        const submissions = await getSubmissionHistory();
+        const grouped = groupByStage(submissions);
         const stageStats: StageInfo[] = Object.entries(grouped).map(([stage, items]) => {
+          const successful = items.filter((item) => item.result.score > 70);
+
           const totalTopics = items.length;
 
-          const completedTopics = items.filter((item) => item.completed > 0).length;
+          const completedTopics = successful.length;
 
           const avgScore =
             items.length > 0
-              ? items.reduce((sum, item) => sum + item.avgScore, 0) / items.length
+              ? items.reduce((sum, item) => sum + item.result.score / 10, 0) / items.length
               : 0;
 
           return {
@@ -46,15 +47,15 @@ export const useHistory = () => {
 
         setStages(stageStats);
 
-        const mapped: Training[] = progress
-          .filter((item) => item.avgScore > 70)
+        const mapped: Training[] = submissions
+          .filter((item) => item.result.score > 70)
           .map((item) => ({
-            id: item.topicId,
-            title: item.topicTitle,
+            id: item.id,
+            title: item.title,
             stage: item.stage,
-            date: '',
+            date: item.submittedAt,
             duration: '',
-            score: Number((item.avgScore / 10).toFixed(1)),
+            score: Number((item.result.score / 10).toFixed(1)),
           }));
 
         setHistory(mapped);

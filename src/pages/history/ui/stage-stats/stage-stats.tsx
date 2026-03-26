@@ -36,9 +36,7 @@ export const StageStats = ({ items }: StageStatsProps) => {
             <div className="flex justify-between text-sm text-muted-foreground">
               {' '}
               Средний балл:{' '}
-              <div className="text-sm font-semibold text-primary">
-                {(item.avg / 10).toFixed(1)}/10
-              </div>
+              <div className="text-sm font-semibold text-primary">{item.avg.toFixed(1)}/10</div>
             </div>
           </Card>
         ))}
