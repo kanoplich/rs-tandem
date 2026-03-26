@@ -27,16 +27,14 @@ export const useHistory = () => {
         const grouped = groupByStage(progress);
 
         const stageStats: StageInfo[] = Object.entries(grouped).map(([stage, items]) => {
-const totalTopics = items.length;
+          const totalTopics = items.length;
 
-const completedTopics = items.filter(
-  (item) => item.completed > 0
-).length;
+          const completedTopics = items.filter((item) => item.completed > 0).length;
 
-const avgScore =
-  items.length > 0
-    ? items.reduce((sum, item) => sum + item.avgScore, 0) / items.length
-    : 0;
+          const avgScore =
+            items.length > 0
+              ? items.reduce((sum, item) => sum + item.avgScore, 0) / items.length
+              : 0;
 
           return {
             stage: Number(stage),

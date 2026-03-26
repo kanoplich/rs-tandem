@@ -11,11 +11,13 @@ export const History = () => {
     return <div className="p-6">Загрузка...</div>;
   }
 
-  const total = history.length;
+  const total = stages.reduce((sum, s) => sum + s.totalTopics, 0);
+
+  const allScores = stages.flatMap((s) => (s.avgScore ? [s.avgScore] : []));
 
   const avg =
-    history.length > 0
-      ? (history.reduce((sum, item) => sum + item.score, 0) / history.length).toFixed(1)
+    allScores.length > 0
+      ? (allScores.reduce((sum, s) => sum + s, 0) / allScores.length / 10).toFixed(1)
       : '0.0';
 
   const best = history.length > 0 ? Math.max(...history.map((item) => item.score)) : 0;
