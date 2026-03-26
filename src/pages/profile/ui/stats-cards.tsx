@@ -1,13 +1,16 @@
 import { useMemo } from 'react';
 
-import { useProfileData } from '../hooks';
 import { STATS_CARDS } from '../lib/constants';
 
 import { Card } from '@/shared';
+import type { TopicProgress, UserStats } from '@/shared/api';
 
-export const StatsCards = () => {
-  const { stats, progress, isLoading } = useProfileData();
+type StatsCardsProps = {
+  stats: UserStats | null;
+  progress: TopicProgress[];
+};
 
+export const StatsCards = ({ stats, progress = [] }: StatsCardsProps) => {
   const computedStats = useMemo(
     () => ({
       completedTasks: stats?.completedTasks ?? 0,
@@ -15,7 +18,7 @@ export const StatsCards = () => {
         progress.length > 0
           ? (progress.reduce((acc, item) => acc + item.avgScore, 0) / progress.length).toFixed(1)
           : 0,
-      rank: stats?.rank,
+      rank: stats?.rank ?? '—',
       xp: stats?.xp ?? 0,
     }),
     [stats, progress]
@@ -32,11 +35,8 @@ export const StatsCards = () => {
             {Icon && <Icon className="w-6 h-6 text-primary" />}
             <div className="text-sm text-muted-foreground">{title}</div>
           </div>
-          <div
-            className={`text-2xl font-bold mt-2 ${color || 'text-light'}`}
-            aria-label={`${title}: ${isLoading ? 'loading' : computedStats[key]}`}
-          >
-            {isLoading ? '—' : computedStats[key]}
+          <div className={`text-2xl font-bold mt-2 ${color || 'text-light'}`}>
+            {computedStats[key]}
           </div>
         </Card>
       ))}
