@@ -12,10 +12,13 @@ export const Profile = () => {
 
   const stageBadges = useMemo(
     () =>
-      STAGES.map((stage) => ({
-        title: stage.title,
-        completed: (grouped[stage.id] ?? []).every(isTopicCompleted),
-      })),
+      STAGES.map((stage) => {
+        const topics = grouped[stage.id] ?? [];
+        return {
+          title: stage.title,
+          completed: topics.length > 0 && topics.every(isTopicCompleted),
+        };
+      }),
     [grouped]
   );
 

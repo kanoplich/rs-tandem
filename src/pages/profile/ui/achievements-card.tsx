@@ -14,41 +14,27 @@ type AchievementsCardProps = {
 export const AchievementsCard = ({ stats, progress = [] }: AchievementsCardProps) => {
   const achievements = useMemo(() => {
     const completedTasks = stats?.completedTasks ?? 0;
-
     const isStageMaster = STAGES.some((stage) => {
       const stageTopics = progress.filter((t) => t.stage === stage.id);
       return stageTopics.length > 0 && stageTopics.every(isTopicCompleted);
     });
-
     const isPerfectionist = progress.some(
       (topic) => isTopicCompleted(topic) && topic.avgScore === DEFAULT_MAX_SCORE
     );
 
     const isExpert = progress.length > 0 && progress.every(isTopicCompleted);
 
-    return ACHIEVEMENTS.map((achievement) => {
-      let completed = false;
-
-      switch (achievement.key) {
-        case 'first':
-          completed = completedTasks >= 1;
-          break;
-        case 'ten':
-          completed = completedTasks >= 10;
-          break;
-        case 'stage':
-          completed = isStageMaster;
-          break;
-        case 'perfect':
-          completed = isPerfectionist;
-          break;
-        case 'expert':
-          completed = isExpert;
-          break;
-      }
-
-      return { ...achievement, completed };
-    });
+    return ACHIEVEMENTS.map((a) => ({
+      ...a,
+      completed:
+        {
+          first: completedTasks >= 1,
+          ten: completedTasks >= 10,
+          stage: isStageMaster,
+          perfect: isPerfectionist,
+          expert: isExpert,
+        }[a.key] ?? false,
+    }));
   }, [stats, progress]);
 
   return (
