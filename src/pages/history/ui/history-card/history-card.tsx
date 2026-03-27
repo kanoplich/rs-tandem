@@ -1,3 +1,5 @@
+import { HISTORY_PAGE_TEXT } from '../../locales';
+
 import { STAGES } from '@/shared/lib/constants';
 import { formatScore } from '@/shared/lib/format-score';
 import { Progress } from '@/shared/ui';
@@ -29,16 +31,22 @@ export const HistoryCard = ({
 
         <div className="text-right">
           <div className="text-sm">
-            {completedTopics}/{totalTopics}
+            {completedTopics}
+            {HISTORY_PAGE_TEXT.CARD.DIVIDER}
+            {totalTopics}
           </div>
-          <div className="text-xs text-muted-foreground">{percent}%</div>
+          <div className="text-xs text-muted-foreground">
+            {percent}
+            {HISTORY_PAGE_TEXT.CARD.PERCENT}
+          </div>
         </div>
       </div>
 
       <Progress value={percent} />
 
       <div className="text-sm text-muted-foreground">
-        Средний балл: {formatScore(avgScore)} / 10
+        {HISTORY_PAGE_TEXT.STAGE_STATS.AVG} {formatScore(avgScore)} {HISTORY_PAGE_TEXT.CARD.FROM}{' '}
+        {HISTORY_PAGE_TEXT.CARD.MAX_SCORE}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ export const History = () => {
   const { stages, history, isLoading } = useHistory();
 
   if (isLoading) {
-    return <div className="p-6">Загрузка...</div>;
+    return <div className="p-6">{HISTORY_PAGE_TEXT.HEADER.LOADING}</div>;
   }
 
   const total = stages.reduce((sum, s) => sum + s.totalTopics, 0);
@@ -24,8 +24,8 @@ export const History = () => {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">{HISTORY_PAGE_TEXT.TITLE}</h1>
-        <p className="text-muted-foreground">Все ваши результаты и достижения</p>
+        <h1 className="text-2xl font-bold">{HISTORY_PAGE_TEXT.HEADER.TITLE}</h1>
+        <p className="text-muted-foreground">{HISTORY_PAGE_TEXT.HEADER.DESCRIPTION}</p>
       </div>
 
       <HistoryStats total={total} avg={avg} best={best} />

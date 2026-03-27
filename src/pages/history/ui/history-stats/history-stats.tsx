@@ -1,3 +1,5 @@
+import { HISTORY_PAGE_TEXT } from '../../locales';
+
 import { Card } from '@/shared/ui';
 
 interface HistoryStatsProps {
@@ -10,18 +12,26 @@ export const HistoryStats = ({ total, avg, best }: HistoryStatsProps) => {
   return (
     <div className="grid grid-cols-3 gap-4">
       <Card className="p-6">
-        <div className="text-sm text-muted-foreground">Всего тренировок</div>
+        <div className="text-sm text-muted-foreground">{HISTORY_PAGE_TEXT.STATS.TOTAL}</div>
         <div className="text-2xl font-bold mt-2 text-light">{total}</div>
       </Card>
 
       <Card className="p-6">
-        <div className="text-sm text-muted-foreground">Средний балл</div>
-        <div className="text-2xl font-bold mt-2 text-primary">{avg}/10</div>
+        <div className="text-sm text-muted-foreground">{HISTORY_PAGE_TEXT.STATS.AVG}</div>
+        <div className="text-2xl font-bold mt-2 text-primary">
+          {avg}
+          {HISTORY_PAGE_TEXT.CARD.DIVIDER}
+          {HISTORY_PAGE_TEXT.CARD.MAX_SCORE}
+        </div>
       </Card>
 
       <Card className="p-6">
-        <div className="text-sm text-muted-foreground">Лучший результат</div>
-        <div className="text-2xl font-bold mt-2 text-success">{best}/10</div>
+        <div className="text-sm text-muted-foreground">{HISTORY_PAGE_TEXT.STATS.BEST}</div>
+        <div className="text-2xl font-bold mt-2 text-success">
+          {best}
+          {HISTORY_PAGE_TEXT.CARD.DIVIDER}
+          {HISTORY_PAGE_TEXT.CARD.MAX_SCORE}
+        </div>
       </Card>
     </div>
   );

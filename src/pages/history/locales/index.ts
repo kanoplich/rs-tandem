@@ -1,21 +1,37 @@
 export const HISTORY_PAGE_TEXT = {
-  TITLE: 'История тренировок',
-  DESCRIPTION: 'Все результаты и достижения',
+  HEADER: {
+    TITLE: 'История тренировок',
+    DESCRIPTION: 'Все ваши результаты и достижения',
+    LOADING: 'Загрузка...',
+  },
 
   STATS: {
     TOTAL: 'Всего тренировок',
-    AVERAGE: 'Средний балл',
+    AVG: 'Средний балл',
     BEST: 'Лучший результат',
   },
 
   LIST: {
     TITLE: 'Все тренировки',
     DESCRIPTION: 'Хронология ваших занятий',
+    SCORE_SUFFIX: 'из 10',
+    STAGE_PREFIX: 'Stage',
+    ONLY_SUCCESS: 'Отображаются только успешные попытки',
   },
 
   STAGE_STATS: {
     TITLE: 'Статистика по этапам',
     TRAININGS: 'Тренировок',
-    AVG_SCORE: 'Средний балл',
+    AVG: 'Средний балл',
+    STAGE_PREFIX: 'Stage',
   },
-};
+
+  CARD: {
+    COMPLETED: 'Пройдено',
+    AVG: 'Средний балл:',
+    FROM: 'из',
+    PERCENT: '%',
+    DIVIDER: '/',
+    MAX_SCORE: '10',
+  },
+} as const;

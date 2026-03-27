@@ -1,3 +1,5 @@
+import { HISTORY_PAGE_TEXT } from '../../locales';
+
 import { Card } from '@/shared/ui';
 
 interface HistoryItem {
@@ -17,8 +19,8 @@ export const HistoryList = ({ items }: HistoryListProps) => {
   return (
     <Card className="p-6 space-y-4">
       <div>
-        <h2 className="text-lg font-semibold">Все тренировки</h2>
-        <p className="text-sm text-muted-foreground">Хронология ваших занятий</p>
+        <h2 className="text-lg font-semibold">{HISTORY_PAGE_TEXT.LIST.TITLE}</h2>
+        <p className="text-sm text-muted-foreground">{HISTORY_PAGE_TEXT.LIST.DESCRIPTION}</p>
       </div>
 
       <div className="space-y-3">
@@ -27,7 +29,7 @@ export const HistoryList = ({ items }: HistoryListProps) => {
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs bg-secondary text-primary px-2 py-1 rounded">
-                  Stage {item.stage}
+                  {HISTORY_PAGE_TEXT.LIST.STAGE_PREFIX} {item.stage}
                 </span>
                 <span className="font-medium text-light">{item.title}</span>
               </div>
@@ -43,11 +45,13 @@ export const HistoryList = ({ items }: HistoryListProps) => {
 
             <div className="text-right">
               <div className="text-lg font-semibold text-success">{item.score}</div>
-              <div className="text-xs text-muted-foreground">из 10</div>
+              <div className="text-xs text-muted-foreground">
+                {HISTORY_PAGE_TEXT.LIST.SCORE_SUFFIX}
+              </div>
             </div>
           </div>
         ))}
-        <p className="text-xs text-muted-foreground">Отображаются только успешные попытки</p>
+        <p className="text-xs text-muted-foreground">{HISTORY_PAGE_TEXT.LIST.ONLY_SUCCESS}</p>
       </div>
     </Card>
   );
