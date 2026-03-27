@@ -6,7 +6,6 @@ export const TASK_HEADER = {
 
 export const TASK_PROGRESS = {
   LABEL: 'Прогресс тренировки',
-  VALUE: '0%',
 };
 
 export const TASK_MESSAGE = {

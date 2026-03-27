@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
+import { getProgressPercent } from '@/shared';
 import {
   getSubmissionHistoryByTaskId,
   evaluateTheory,
@@ -24,6 +25,7 @@ interface UseTaskSessionReturn {
   userAnswer: string;
   isPassed: boolean;
   isLastTask: boolean;
+  progressPercent: number;
   handleSubmit: (message: string) => Promise<void>;
   handleRetry: () => void;
   handleNext: () => void;
@@ -36,6 +38,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const [result, setResult] = useState<JudgeResult | null>(null);
   const [isSending, setIsSending] = useState(false);
   const [isPassed, setIsPassed] = useState(false);
+  const [progressPercent, setProgressPercent] = useState(0);
 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
@@ -77,6 +80,11 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       const judgeResult = submission.result;
       const passed = submission.result.score >= 70;
 
+      if (passed) {
+        const percent = getProgressPercent(currentTaskNumber, tasksCount);
+        setProgressPercent(percent);
+      }
+
       setResult(judgeResult);
       setIsPassed(passed);
     } catch (error: unknown) {
@@ -109,6 +117,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     isSending,
     isPassed,
     isLastTask,
+    progressPercent,
     handleNext,
     handleRetry,
     handleSubmit,

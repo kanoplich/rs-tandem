@@ -26,6 +26,7 @@ export const Task = () => {
     userAnswer,
     feedback,
     result,
+    progressPercent,
     handleNext,
     handleRetry,
     isSending,
@@ -50,7 +51,7 @@ export const Task = () => {
         stageNumber={stageNumber}
         tasksCount={tasksCount}
       />
-      <TaskProgress />
+      <TaskProgress progressPercent={progressPercent} />
       {currentTask && <TaskArea task={currentTask} />}
       {userAnswer ? (
         <TaskAnswer userAnswer={userAnswer} />
