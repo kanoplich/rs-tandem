@@ -1,24 +1,13 @@
-import { useMemo } from 'react';
-
 import { STAGE_PROGRESS_TEXT } from '../locales';
 
-import {
-  Card,
-  getProgressPercent,
-  isTopicCompleted,
-  Progress,
-  STAGES,
-  groupByStage,
-} from '@/shared';
+import { Card, getProgressPercent, isTopicCompleted, Progress, STAGES } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
 
 type StageProgressProps = {
-  progress: TopicProgress[];
+  grouped: Record<number, TopicProgress[]>;
 };
 
-export const StageProgressCard = ({ progress }: StageProgressProps) => {
-  const grouped = useMemo(() => groupByStage(progress), [progress]);
-
+export const StageProgressCard = ({ grouped }: StageProgressProps) => {
   return (
     <Card className="p-4 sm:p-6 w-full">
       <div className="flex flex-col gap-1 mb-2">
