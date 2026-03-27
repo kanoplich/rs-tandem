@@ -1,6 +1,7 @@
 import { BookOpen, Trophy, Award, Zap } from 'lucide-react';
 
-import { PROFILE_STATS_TEXT } from '../locales';
+import { Expert, FirstStep, Perfection, StageMaster, TenWorkouts } from '../assets/icons';
+import { ACHIEVEMENTS_TEXT, PROFILE_STATS_TEXT } from '../locales';
 
 export const STATS_CARDS = [
   {
@@ -27,4 +28,12 @@ export const STATS_CARDS = [
     icon: Zap,
     color: 'text-light',
   },
+] as const;
+
+export const ACHIEVEMENTS = [
+  { key: 'first', title: ACHIEVEMENTS_TEXT.FIRST_TRAINING, Icon: FirstStep },
+  { key: 'ten', title: ACHIEVEMENTS_TEXT.TEN_TRAININGS, Icon: TenWorkouts },
+  { key: 'stage1', title: ACHIEVEMENTS_TEXT.STAGE1_MASTER, Icon: StageMaster },
+  { key: 'perfect', title: ACHIEVEMENTS_TEXT.PERFECTIONIST, Icon: Perfection },
+  { key: 'expert', title: ACHIEVEMENTS_TEXT.EXPERT, Icon: Expert },
 ] as const;
