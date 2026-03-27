@@ -1,15 +1,23 @@
 import { STAGE_CARDS_TEXT } from '../../locales';
 
 import { Progress, STAGES } from '@/shared';
+import type { TopicProgress } from '@/shared/api';
 
 interface StageCardProps {
   id: number;
+  allTopics: TopicProgress[];
+  completedTopics: TopicProgress[];
   progress: number;
-  topicsFinished: string;
-  averageScore: string;
+  averageScore: number;
 }
 
-export const StageCard = ({ id, progress, topicsFinished, averageScore }: StageCardProps) => {
+export const StageCard = ({
+  id,
+  allTopics,
+  progress,
+  completedTopics,
+  averageScore,
+}: StageCardProps) => {
   const stage = STAGES.find((stage) => stage.id === id);
 
   return (
@@ -28,7 +36,7 @@ export const StageCard = ({ id, progress, topicsFinished, averageScore }: StageC
           <div className="flex flex-row justify-between">
             <p>{STAGE_CARDS_TEXT.PROGRESS_TITLE}</p>
             <div className="flex flex-row font-bold gap-1">
-              <p className="text-light">{topicsFinished}</p>
+              <p className="text-light">{`${completedTopics.length}/${allTopics.length}`}</p>
               <p className="text-light">{STAGE_CARDS_TEXT.PROGRESS_ITEM}</p>
             </div>
           </div>
@@ -39,7 +47,7 @@ export const StageCard = ({ id, progress, topicsFinished, averageScore }: StageC
         <div>
           <div className="pt-2 flex flex-row justify-between border-t border-border items-center">
             <p>{STAGE_CARDS_TEXT.AVERAGE_SCORE_TITLE}</p>
-            <p className="text-primary text-2xl font-bold">{averageScore}</p>
+            <p className="text-primary text-2xl font-bold">{`${averageScore}/10`}</p>
           </div>
         </div>
       </div>

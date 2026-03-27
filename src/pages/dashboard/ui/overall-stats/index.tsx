@@ -1,9 +1,17 @@
 import { OVERALL_STATS_TEXT } from '../../locales';
+import { getTopicStats } from '../../model/get-topic-stats';
 import { StatCard } from '../stat-card';
 
+import type { TopicProgress } from '@/shared/api';
 import { ProgressIcon, StatisticIcon, TopicIcon } from '@/shared/assets/icons';
 
-export const OverallStats = () => {
+interface OverallStatsProps {
+  topicProgress: TopicProgress[];
+}
+
+export const OverallStats = ({ topicProgress: allTopics }: OverallStatsProps) => {
+  const { completedTopics, progress, averageScore } = getTopicStats(allTopics);
+
   return (
     <section className="mb-8 bg-card border border-border rounded-xl">
       <p className="pt-5 px-6 text-light">{OVERALL_STATS_TEXT.HEADER}</p>
@@ -11,17 +19,17 @@ export const OverallStats = () => {
         <StatCard
           icon={<ProgressIcon />}
           description={OVERALL_STATS_TEXT.GENERAL_PROGRESS_CARD_TEXT}
-          stats="42%"
+          stats={`${progress}%`}
         />
         <StatCard
           icon={<TopicIcon />}
           description={OVERALL_STATS_TEXT.AVERAGE_SCORE_CARD_TEXT}
-          stats="6.5/10"
+          stats={`${averageScore}/10`}
         />
         <StatCard
           icon={<StatisticIcon />}
           description={OVERALL_STATS_TEXT.TOPICS_FINISHED_CARD_TEXT}
-          stats="16/37"
+          stats={`${completedTopics.length}/${allTopics.length}`}
         />
       </div>
     </section>

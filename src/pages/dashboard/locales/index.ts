@@ -18,3 +18,7 @@ export const STAGE_CARDS_TEXT = {
 };
 
 export const START_BUTTON_TEXT = 'Начать тренироваться';
+
+export const DASHBOARD_ERRORS = {
+  TOPICS_DATA: 'Не удалось загрузить данные. Попробуйте позже.',
+};
