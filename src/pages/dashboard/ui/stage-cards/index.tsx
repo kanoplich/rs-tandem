@@ -1,10 +1,9 @@
 import { useMemo } from 'react';
 
-import { getTopicStats } from '../../lib/get-topic-stats';
 import { STAGE_CARDS_TEXT } from '../../locales';
 import { StageCard } from '../stage-card';
 
-import { groupByStage } from '@/shared';
+import { getTopicStats, groupByStage } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
 
 interface StageCardsProps {
@@ -16,13 +15,14 @@ export const StageCards = ({ topicProgress }: StageCardsProps) => {
     const stages = groupByStage(topicProgress);
 
     return Object.entries(stages).map(([stageId, stageTopics]) => {
-      const { topicsCount, completedCount, progress, averageScore } = getTopicStats(stageTopics);
+      const { totalCount, completedCount, progressPercent, averageScore } =
+        getTopicStats(stageTopics);
 
       return {
         id: Number(stageId),
-        topicsCount,
+        totalCount,
         completedCount,
-        progress,
+        progressPercent,
         averageScore,
       };
     });
@@ -36,9 +36,9 @@ export const StageCards = ({ topicProgress }: StageCardsProps) => {
           <StageCard
             key={stage.id}
             id={stage.id}
-            topicsCount={stage.topicsCount}
+            totalCount={stage.totalCount}
             completedCount={stage.completedCount}
-            progress={stage.progress}
+            progressPercent={stage.progressPercent}
             averageScore={stage.averageScore}
           />
         ))}

@@ -1,18 +1,19 @@
 import { useMemo } from 'react';
 
-import { getTopicStats } from '../../lib/get-topic-stats';
 import { OVERALL_STATS_TEXT } from '../../locales';
 import { StatCard } from '../stat-card';
 
+import { getTopicStats } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
 import { ProgressIcon, StatisticIcon, TopicIcon } from '@/shared/assets/icons';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 interface OverallStatsProps {
   topicProgress: TopicProgress[];
 }
 
 export const OverallStats = ({ topicProgress }: OverallStatsProps) => {
-  const { topicsCount, completedCount, progress, averageScore } = useMemo(
+  const { totalCount, completedCount, progressPercent, averageScore } = useMemo(
     () => getTopicStats(topicProgress),
     [topicProgress]
   );
@@ -24,17 +25,17 @@ export const OverallStats = ({ topicProgress }: OverallStatsProps) => {
         <StatCard
           icon={<ProgressIcon />}
           description={OVERALL_STATS_TEXT.GENERAL_PROGRESS_CARD_TEXT}
-          stats={`${progress}%`}
+          stats={`${progressPercent}%`}
         />
         <StatCard
           icon={<TopicIcon />}
           description={OVERALL_STATS_TEXT.AVERAGE_SCORE_CARD_TEXT}
-          stats={`${averageScore}/10`}
+          stats={`${averageScore}/${MAX_DISPLAY_SCORE}`}
         />
         <StatCard
           icon={<StatisticIcon />}
           description={OVERALL_STATS_TEXT.TOPICS_FINISHED_CARD_TEXT}
-          stats={`${completedCount}/${topicsCount}`}
+          stats={`${completedCount}/${totalCount}`}
         />
       </div>
     </section>

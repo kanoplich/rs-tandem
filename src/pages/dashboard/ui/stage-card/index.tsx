@@ -4,17 +4,17 @@ import { Progress, STAGES } from '@/shared';
 
 interface StageCardProps {
   id: number;
-  topicsCount: number;
+  totalCount: number;
   completedCount: number;
-  progress: number;
-  averageScore: number;
+  progressPercent: number;
+  averageScore: string;
 }
 
 export const StageCard = ({
   id,
-  topicsCount,
+  totalCount,
   completedCount,
-  progress,
+  progressPercent,
   averageScore,
 }: StageCardProps) => {
   const stage = STAGES.find((stage) => stage.id === id);
@@ -27,7 +27,7 @@ export const StageCard = ({
           <p>{stage?.description}</p>
         </div>
         <div className="ml-3 mb-3 px-3 py-1 bg-primary h-fit rounded-full">
-          <p className="text-light-foreground font-bold">{progress}%</p>
+          <p className="text-light-foreground font-bold">{progressPercent}%</p>
         </div>
       </div>
       <div className="px-6 pb-6 flex flex-col gap-4">
@@ -35,12 +35,12 @@ export const StageCard = ({
           <div className="flex flex-row justify-between">
             <p>{STAGE_CARDS_TEXT.PROGRESS_TITLE}</p>
             <div className="flex flex-row font-bold gap-1">
-              <p className="text-light">{`${completedCount}/${topicsCount}`}</p>
+              <p className="text-light">{`${completedCount}/${totalCount}`}</p>
               <p className="text-light">{STAGE_CARDS_TEXT.PROGRESS_ITEM}</p>
             </div>
           </div>
           <div>
-            <Progress value={progress} />
+            <Progress value={progressPercent} />
           </div>
         </div>
         <div>
