@@ -24,17 +24,19 @@ export const useHistory = () => {
     const fetchHistory = async () => {
       try {
         const submissions = await getSubmissionHistory();
+        const successfulSubmissions = submissions.filter((item) => item.result.score > 70);
         const grouped = groupByStage(submissions);
         const stageStats: StageInfo[] = Object.entries(grouped).map(([stage, items]) => {
           const successful = items.filter((item) => item.result.score > 70);
 
-          const totalTopics = items.length;
+          const totalTopics = successful.length;
 
           const completedTopics = successful.length;
 
           const avgScore =
-            items.length > 0
-              ? items.reduce((sum, item) => sum + item.result.score / 10, 0) / items.length
+            successful.length > 0
+              ? successful.reduce((sum, item) => sum + item.result.score / 10, 0) /
+                successful.length
               : 0;
 
           return {
@@ -47,16 +49,14 @@ export const useHistory = () => {
 
         setStages(stageStats);
 
-        const mapped: Training[] = submissions
-          .filter((item) => item.result.score > 70)
-          .map((item) => ({
-            id: item.id,
-            title: item.title,
-            stage: item.stage,
-            date: item.submittedAt,
-            duration: '',
-            score: Number((item.result.score / 10).toFixed(1)),
-          }));
+        const mapped: Training[] = successfulSubmissions.map((item) => ({
+          id: item.id,
+          title: item.title,
+          stage: item.stage,
+          date: item.submittedAt,
+          duration: '',
+          score: Number((item.result.score / 10).toFixed(1)),
+        }));
 
         setHistory(mapped);
       } catch (err) {
