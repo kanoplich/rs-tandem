@@ -23,7 +23,7 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
       'flex items-center gap-2 rounded-md px-4 py-2 text-sm transition',
       isActive
         ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-        : 'text-white hover:bg-white/10'
+        : 'text-light hover:bg-white/10'
     );
 
   const mobileLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -31,7 +31,7 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
       'px-3 py-2 flex items-center gap-2 text-sm transition-colors',
       isActive
         ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-        : 'text-white hover:bg-white/10'
+        : 'text-light hover:bg-white/10'
     );
 
   const iconClass = isDesktop ? 'w-4 h-4' : 'w-5 h-5';
@@ -79,7 +79,7 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
         variant="ghost"
         className={
           isDesktop
-            ? 'flex items-center gap-2 text-white hover:bg-white/10'
+            ? 'flex items-center gap-2 text-light hover:bg-white/10'
             : 'px-4 py-3 flex items-center gap-2 text-destructive hover:bg-white/10 justify-start'
         }
         onClick={handleLogout}

@@ -15,9 +15,9 @@ export const ProfileHeader = ({ stageBadges = [] }: ProfileHeaderProps) => {
   const { email, fullName, avatar, initials } = useUserProfile();
 
   return (
-    <div className="px-4 pt-8 pb-6">
+    <div className="px-4 py-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-row items-center gap-4 sm:gap-6 rounded-2xl shadow-sm overflow-hidden">
+        <div className="p-2 flex flex-row items-center gap-4 sm:gap-6 rounded-2xl shadow-sm overflow-hidden">
           {avatar ? (
             <img
               src={avatar}
@@ -35,7 +35,7 @@ export const ProfileHeader = ({ stageBadges = [] }: ProfileHeaderProps) => {
               {fullName}
             </span>
 
-            <span className="text-sm text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
+            <span className="text-sm text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis pt-1">
               {email}
             </span>
 
