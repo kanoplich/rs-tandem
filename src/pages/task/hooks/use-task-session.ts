@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
-import { getProgressPercent } from '@/shared';
+import { getProgressPercent, PASSING_SCORE } from '@/shared';
 import {
   getSubmissionHistoryByTaskId,
   evaluateTheory,
@@ -78,7 +78,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
 
       const submission = await getSubmissionHistoryByTaskId(currentTask.id);
       const judgeResult = submission.result;
-      const passed = submission.result.score >= 70;
+      const passed = submission.result.score >= PASSING_SCORE;
 
       if (passed) {
         const percent = getProgressPercent(currentTaskNumber, tasksCount);
@@ -95,7 +95,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   };
 
   const handleNext = () => {
-    const isPassed = result?.score !== undefined && result.score >= 70;
+    const isPassed = result?.score !== undefined && result.score >= PASSING_SCORE;
 
     if (currentIndex < tasks.length - 1 && isPassed) {
       setCurrentIndex((prev) => prev + 1);

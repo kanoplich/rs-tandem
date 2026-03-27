@@ -1,6 +1,6 @@
 import { TASK_PROGRESS } from '../../locales';
 
-import { Field, FieldLabel, Progress } from '@/shared/ui';
+import { Progress } from '@/shared/ui';
 
 interface TaskProgressProps {
   progressPercent: number;
@@ -9,13 +9,13 @@ interface TaskProgressProps {
 export const TaskProgress = ({ progressPercent }: TaskProgressProps) => {
   return (
     <section className="pb-6">
-      <Field className="mx-auto max-w-5xl p-3 sm:p-6 rounded-xl bg-card border border-border">
-        <FieldLabel className="flex justify-between items-center" htmlFor="progress">
+      <div className="mx-auto max-w-5xl p-3 sm:p-6 rounded-xl bg-card border border-border">
+        <div className="flex justify-between items-center">
           <h3 className="text-base">{TASK_PROGRESS.LABEL}</h3>
           <span className="text-sm font-bold text-primary">{progressPercent}%</span>
-        </FieldLabel>
-        <Progress value={progressPercent} id="progress" />
-      </Field>
+        </div>
+        <Progress className="mt-6" value={progressPercent} />
+      </div>
     </section>
   );
 };

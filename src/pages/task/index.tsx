@@ -65,8 +65,8 @@ export const Task = () => {
       {result && (
         <TaskResult
           result={result}
-          handleNext={handleNext}
-          handleRetry={handleRetry}
+          onNext={handleNext}
+          onRetry={handleRetry}
           isPassed={isPassed}
           isLastTask={isLastTask}
         />
