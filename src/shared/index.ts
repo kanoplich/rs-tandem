@@ -8,3 +8,4 @@ export { getProgressPercent } from './lib/get-progress-percent';
 export { isTopicCompleted } from './lib/is-topic-completed';
 export { formatScore } from './lib/format-score';
 export { groupByStage } from './lib/group-by-stage';
+export { getTopicStats } from './lib/get-topic-stats';
