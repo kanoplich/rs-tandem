@@ -9,6 +9,7 @@ import { TaskFeedback } from './ui/task-feedback';
 import { TaskHeader } from './ui/task-header';
 import { TaskMessage } from './ui/task-message';
 import { TaskProgress } from './ui/task-progress';
+import { TaskResult } from './ui/task-result';
 
 import { Loader } from '@/shared';
 
@@ -17,10 +18,22 @@ export const Task = () => {
   const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
   const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
-  const { currentTaskNumber, tasksCount, currentTask, handleSubmit, userAnswer, feedback } =
-    useTaskSession({
-      tasks,
-    });
+  const {
+    currentTaskNumber,
+    tasksCount,
+    currentTask,
+    handleSubmit,
+    userAnswer,
+    feedback,
+    result,
+    handleNext,
+    handleRetry,
+    isSending,
+    isPassed,
+    isLastTask,
+  } = useTaskSession({
+    tasks,
+  });
 
   if (isLoading) {
     return <Loader />;
@@ -44,7 +57,19 @@ export const Task = () => {
       ) : (
         <TaskMessage onSubmit={handleSubmit} />
       )}
+      {isSending && (
+        <span className="inline-block w-1.5 h-4 mb-2 bg-primary ml-0.5 animate-pulse" />
+      )}
       {feedback && <TaskFeedback feedback={feedback} />}
+      {result && (
+        <TaskResult
+          result={result}
+          handleNext={handleNext}
+          handleRetry={handleRetry}
+          isPassed={isPassed}
+          isLastTask={isLastTask}
+        />
+      )}
       <TaskAdvice />
     </div>
   );

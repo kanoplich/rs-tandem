@@ -22,6 +22,8 @@ interface UseTaskSessionReturn {
   result: JudgeResult | null;
   isSending: boolean;
   userAnswer: string;
+  isPassed: boolean;
+  isLastTask: boolean;
   handleSubmit: (message: string) => Promise<void>;
   handleRetry: () => void;
   handleNext: () => void;
@@ -33,15 +35,18 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const [feedback, setFeedback] = useState('');
   const [result, setResult] = useState<JudgeResult | null>(null);
   const [isSending, setIsSending] = useState(false);
+  const [isPassed, setIsPassed] = useState(false);
 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
   const tasksCount = tasks.length;
+  const isLastTask = currentTaskNumber === tasksCount;
 
   const reset = () => {
     setUserAnswer('');
     setFeedback('');
     setResult(null);
+    setIsPassed(false);
   };
 
   const handleRetry = () => {
@@ -70,8 +75,10 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
 
       const submission = await getSubmissionHistoryByTaskId(currentTask.id);
       const judgeResult = submission.result;
+      const passed = submission.result.score >= 70;
 
       setResult(judgeResult);
+      setIsPassed(passed);
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : USE_TASK_SESSION.LOADING_ERROR);
     } finally {
@@ -100,6 +107,8 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     result,
     userAnswer,
     isSending,
+    isPassed,
+    isLastTask,
     handleNext,
     handleRetry,
     handleSubmit,
