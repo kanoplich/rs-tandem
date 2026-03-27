@@ -4,6 +4,7 @@ import { STATS_CARDS } from '../lib/constants';
 
 import { Card, getTopicStats } from '@/shared';
 import type { TopicProgress, UserStats } from '@/shared/api';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 type StatsCardsProps = {
   stats: UserStats | null;
@@ -16,7 +17,7 @@ export const StatsCards = ({ stats, progress = [] }: StatsCardsProps) => {
   const computedStats = useMemo(
     () => ({
       completedTasks: stats?.completedTasks ?? 0,
-      avgScore: `${averageScore}/10`,
+      avgScore: `${averageScore}/${MAX_DISPLAY_SCORE}`,
       rank: stats?.rank ?? '—',
       xp: stats?.xp ?? 0,
     }),
