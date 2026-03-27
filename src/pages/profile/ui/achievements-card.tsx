@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { ACHIEVEMENTS } from '../lib/constants';
 import { ACHIEVEMENTS_TEXT } from '../locales';
 
-import { Card, groupByStage, isTopicCompleted } from '@/shared';
+import { Card, DEFAULT_MAX_SCORE, isTopicCompleted, STAGES } from '@/shared';
 import type { TopicProgress, UserStats } from '@/shared/api';
 
 type AchievementsCardProps = {
@@ -11,29 +11,44 @@ type AchievementsCardProps = {
   progress: TopicProgress[];
 };
 
-export const AchievementsCard = ({ stats, progress }: AchievementsCardProps) => {
+export const AchievementsCard = ({ stats, progress = [] }: AchievementsCardProps) => {
   const achievements = useMemo(() => {
     const completedTasks = stats?.completedTasks ?? 0;
-    const totalTasks = stats?.totalTasks ?? 0;
 
-    const grouped = groupByStage(progress);
-    const stage1Topics = grouped[1] ?? [];
-    const isStage1Master = stage1Topics.length > 0 && stage1Topics.every(isTopicCompleted);
+    const isStageMaster = STAGES.some((stage) => {
+      const stageTopics = progress.filter((t) => t.stage === stage.id);
+      return stageTopics.length > 0 && stageTopics.every(isTopicCompleted);
+    });
 
-    const isPerfectionist = progress.some((t) => t.avgScore === 100);
+    const isPerfectionist = progress.some(
+      (topic) => isTopicCompleted(topic) && topic.avgScore === DEFAULT_MAX_SCORE
+    );
 
-    const conditions: Record<string, boolean> = {
-      first: completedTasks >= 1,
-      ten: completedTasks >= 10,
-      stage1: isStage1Master,
-      perfect: isPerfectionist,
-      expert: totalTasks > 0 && completedTasks === totalTasks,
-    };
+    const isExpert = progress.length > 0 && progress.every(isTopicCompleted);
 
-    return ACHIEVEMENTS.map((a) => ({
-      ...a,
-      completed: conditions[a.key],
-    }));
+    return ACHIEVEMENTS.map((achievement) => {
+      let completed = false;
+
+      switch (achievement.key) {
+        case 'first':
+          completed = completedTasks >= 1;
+          break;
+        case 'ten':
+          completed = completedTasks >= 10;
+          break;
+        case 'stage':
+          completed = isStageMaster;
+          break;
+        case 'perfect':
+          completed = isPerfectionist;
+          break;
+        case 'expert':
+          completed = isExpert;
+          break;
+      }
+
+      return { ...achievement, completed };
+    });
   }, [stats, progress]);
 
   return (
@@ -50,7 +65,7 @@ export const AchievementsCard = ({ stats, progress }: AchievementsCardProps) => 
             className={`
                flex items-center gap-2 justify-center p-3
                w-full min-h-[93px] rounded-lg
-               ${completed ? 'border border-primary bg-primary/5' : ''}
+               ${completed ? 'border border-primary bg-primary/5 text-light' : ''}
              `}
           >
             {Icon && <Icon className="w-8 h-8 flex-shrink-0" />}

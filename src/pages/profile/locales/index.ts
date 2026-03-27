@@ -19,7 +19,7 @@ export const ACHIEVEMENTS_TEXT = {
   SUBTITLE: 'Ваши награды и прогресс',
   FIRST_TRAINING: 'Первая тренировка',
   TEN_TRAININGS: '10 тренировок',
-  STAGE1_MASTER: 'Stage 1 мастер',
+  STAGE_MASTER: 'Мастер',
   PERFECTIONIST: 'Перфекционист',
   EXPERT: 'Эксперт',
 };

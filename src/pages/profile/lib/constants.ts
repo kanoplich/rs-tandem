@@ -33,7 +33,7 @@ export const STATS_CARDS = [
 export const ACHIEVEMENTS = [
   { key: 'first', title: ACHIEVEMENTS_TEXT.FIRST_TRAINING, Icon: FirstStep },
   { key: 'ten', title: ACHIEVEMENTS_TEXT.TEN_TRAININGS, Icon: TenWorkouts },
-  { key: 'stage1', title: ACHIEVEMENTS_TEXT.STAGE1_MASTER, Icon: StageMaster },
+  { key: 'stage', title: ACHIEVEMENTS_TEXT.STAGE_MASTER, Icon: StageMaster },
   { key: 'perfect', title: ACHIEVEMENTS_TEXT.PERFECTIONIST, Icon: Perfection },
   { key: 'expert', title: ACHIEVEMENTS_TEXT.EXPERT, Icon: Expert },
 ] as const;

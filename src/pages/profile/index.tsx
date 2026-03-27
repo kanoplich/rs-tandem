@@ -12,20 +12,17 @@ export const Profile = () => {
 
   const stageBadges = useMemo(
     () =>
-      STAGES.map((stage) => {
-        const topics = grouped[stage.id] ?? [];
-        return {
-          title: stage.title,
-          completed: topics.length > 0 && topics.every(isTopicCompleted),
-        };
-      }),
+      STAGES.map((stage) => ({
+        title: stage.title,
+        completed: (grouped[stage.id] ?? []).every(isTopicCompleted),
+      })),
     [grouped]
   );
 
   if (isLoading) return <Loader />;
 
   return (
-    <div className="px-4 py-6 max-w-7xl mx-auto flex flex-col gap-6">
+    <section className="px-4 py-6 max-w-7xl mx-auto flex flex-col gap-6">
       <ProfileHeader stageBadges={stageBadges} />
       <StatsCards stats={stats} progress={progress} />
       <div className="flex flex-col lg:flex-row gap-4 sm:gap-5">
@@ -34,9 +31,9 @@ export const Profile = () => {
         </div>
 
         <div className="w-full lg:w-1/2">
-          <StageProgressCard progress={progress} />
+          <StageProgressCard grouped={grouped} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
