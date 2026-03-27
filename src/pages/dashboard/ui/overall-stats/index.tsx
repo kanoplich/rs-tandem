@@ -1,5 +1,7 @@
+import { useMemo } from 'react';
+
+import { getTopicStats } from '../../lib/get-topic-stats';
 import { OVERALL_STATS_TEXT } from '../../locales';
-import { getTopicStats } from '../../model/get-topic-stats';
 import { StatCard } from '../stat-card';
 
 import type { TopicProgress } from '@/shared/api';
@@ -9,8 +11,11 @@ interface OverallStatsProps {
   topicProgress: TopicProgress[];
 }
 
-export const OverallStats = ({ topicProgress: allTopics }: OverallStatsProps) => {
-  const { completedTopics, progress, averageScore } = getTopicStats(allTopics);
+export const OverallStats = ({ topicProgress }: OverallStatsProps) => {
+  const { topicsCount, completedCount, progress, averageScore } = useMemo(
+    () => getTopicStats(topicProgress),
+    [topicProgress]
+  );
 
   return (
     <section className="mb-8 bg-card border border-border rounded-xl">
@@ -29,7 +34,7 @@ export const OverallStats = ({ topicProgress: allTopics }: OverallStatsProps) =>
         <StatCard
           icon={<StatisticIcon />}
           description={OVERALL_STATS_TEXT.TOPICS_FINISHED_CARD_TEXT}
-          stats={`${completedTopics.length}/${allTopics.length}`}
+          stats={`${completedCount}/${topicsCount}`}
         />
       </div>
     </section>

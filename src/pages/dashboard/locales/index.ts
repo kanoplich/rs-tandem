@@ -14,7 +14,7 @@ export const STAGE_CARDS_TEXT = {
   HEADER: 'Ваши этапы',
   PROGRESS_TITLE: 'Прогресс',
   PROGRESS_ITEM: 'тем',
-  AVERAGE_SCORE_TITLE: 'Средняя оценка',
+  AVERAGE_SCORE_TITLE: 'Средний балл',
 };
 
 export const START_BUTTON_TEXT = 'Начать тренироваться';

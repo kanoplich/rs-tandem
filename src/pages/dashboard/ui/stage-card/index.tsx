@@ -1,21 +1,20 @@
 import { STAGE_CARDS_TEXT } from '../../locales';
 
 import { Progress, STAGES } from '@/shared';
-import type { TopicProgress } from '@/shared/api';
 
 interface StageCardProps {
   id: number;
-  allTopics: TopicProgress[];
-  completedTopics: TopicProgress[];
+  topicsCount: number;
+  completedCount: number;
   progress: number;
   averageScore: number;
 }
 
 export const StageCard = ({
   id,
-  allTopics,
+  topicsCount,
+  completedCount,
   progress,
-  completedTopics,
   averageScore,
 }: StageCardProps) => {
   const stage = STAGES.find((stage) => stage.id === id);
@@ -36,7 +35,7 @@ export const StageCard = ({
           <div className="flex flex-row justify-between">
             <p>{STAGE_CARDS_TEXT.PROGRESS_TITLE}</p>
             <div className="flex flex-row font-bold gap-1">
-              <p className="text-light">{`${completedTopics.length}/${allTopics.length}`}</p>
+              <p className="text-light">{`${completedCount}/${topicsCount}`}</p>
               <p className="text-light">{STAGE_CARDS_TEXT.PROGRESS_ITEM}</p>
             </div>
           </div>
