@@ -12,13 +12,11 @@ export const getTopicStats = (topicsProgress: TopicProgress[]): TopicStats => {
   const completedTopics = topicsProgress.filter(isTopicCompleted);
   const completedCount = completedTopics.length;
   const totalCount = topicsProgress.length;
-  const progressPercent = getProgressPercent(completedTopics.length, topicsProgress.length);
+  const progressPercent = getProgressPercent(completedCount, totalCount);
 
   const averageScore =
     completedTopics.length === 0
       ? '0'
-      : formatScore(
-          completedTopics.reduce((sum, t) => sum + t.avgScore, 0) / completedTopics.length
-        );
+      : formatScore(completedTopics.reduce((sum, t) => sum + t.avgScore, 0) / completedCount);
   return { totalCount, completedCount, progressPercent, averageScore };
 };

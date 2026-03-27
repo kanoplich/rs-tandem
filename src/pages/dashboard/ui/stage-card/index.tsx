@@ -1,6 +1,7 @@
 import { STAGE_CARDS_TEXT } from '../../locales';
 
 import { Progress, STAGES } from '@/shared';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 interface StageCardProps {
   id: number;
@@ -46,7 +47,7 @@ export const StageCard = ({
         <div>
           <div className="pt-2 flex flex-row justify-between border-t border-border items-center">
             <p>{STAGE_CARDS_TEXT.AVERAGE_SCORE_TITLE}</p>
-            <p className="text-primary text-2xl font-bold">{`${averageScore}/10`}</p>
+            <p className="text-primary text-2xl font-bold">{`${averageScore}/${MAX_DISPLAY_SCORE}`}</p>
           </div>
         </div>
       </div>
