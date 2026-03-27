@@ -47,6 +47,7 @@ export const HistoryList = ({ items }: HistoryListProps) => {
             </div>
           </div>
         ))}
+        <p className="text-xs text-muted-foreground">Отображаются только успешные попытки</p>
       </div>
     </Card>
   );
