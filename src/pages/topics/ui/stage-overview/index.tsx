@@ -1,9 +1,7 @@
 import { TOPICS_OVERVIEW_TEXT } from '../../locales';
 
-import { STAGES, getProgressPercent, Progress } from '@/shared';
+import { STAGES, getProgressPercent, isTopicCompleted, Progress } from '@/shared';
 import type { Topic, TopicProgress } from '@/shared/api';
-import { isTopicCompleted } from '@/shared/lib/is-topic-completed';
-
 interface StageOverviewProps {
   stageId: number;
   topics: Topic[];
