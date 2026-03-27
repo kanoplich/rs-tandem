@@ -1,7 +1,6 @@
 import type { JudgeResult } from '../judge/types';
 
 export interface Submission {
-  score: any;
   id: string;
   userId: string;
   taskId: string;
