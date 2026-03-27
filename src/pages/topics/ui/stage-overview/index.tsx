@@ -24,7 +24,10 @@ export const StageOverview = ({ stageId, topics }: StageOverviewProps) => {
   return (
     <div className="bg-card rounded-xl border p-6 border-border">
       <div className="flex items-start justify-between mb-4">
-        <h3>{stage.title}</h3>
+        <div>
+          <p className="text-light">{stage.title}</p>
+          <p>{stage.description}</p>
+        </div>
         <div className="text-right">
           <div className="text-4xl font-bold text-primary">{percent}%</div>
           <div className="text-sm text-foreground mt-1">
