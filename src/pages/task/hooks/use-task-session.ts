@@ -3,9 +3,12 @@ import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
-import { getSubmissionHistoryByTaskId, type Task } from '@/shared/api';
-import { evaluateTheory } from '@/shared/api/judge';
-import type { JudgeResult } from '@/shared/api/judge/types';
+import {
+  getSubmissionHistoryByTaskId,
+  evaluateTheory,
+  type Task,
+  type JudgeResult,
+} from '@/shared/api';
 
 interface UseTaskSession {
   tasks: Task[];
@@ -17,7 +20,7 @@ interface UseTaskSessionReturn {
   tasksCount: number;
   feedback: string;
   result: JudgeResult | null;
-  isLoading: boolean;
+  isSending: boolean;
   userAnswer: string;
   handleSubmit: (message: string) => Promise<void>;
   handleRetry: () => void;
@@ -29,7 +32,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const [userAnswer, setUserAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
   const [result, setResult] = useState<JudgeResult | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
@@ -53,7 +56,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       return;
     }
 
-    setIsLoading(true);
+    setIsSending(true);
 
     try {
       const reader = await evaluateTheory(currentTask.id, message);
@@ -72,7 +75,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : USE_TASK_SESSION.LOADING_ERROR);
     } finally {
-      setIsLoading(false);
+      setIsSending(false);
     }
   };
 
@@ -96,7 +99,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     feedback,
     result,
     userAnswer,
-    isLoading,
+    isSending,
     handleNext,
     handleRetry,
     handleSubmit,
