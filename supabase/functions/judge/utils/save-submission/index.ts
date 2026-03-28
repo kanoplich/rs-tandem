@@ -38,12 +38,9 @@ export const saveSubmission = async (
       score: finalScore,
       covered: coveredPoints,
       missed: missedPoints,
-      feedback: `${feedback.trim()} &&&&& ${JSON.stringify(pointsData)}`,
+      feedback: feedback.trim(),
       judge_level: 1,
     });
-    console.log(
-      `[Tool Use] Submission saved: score=${finalScore}, covered=${coveredPoints.length}/${rubricItems.length}`
-    );
   } catch (err) {
     console.error('Failed to save submission:', err);
   }
