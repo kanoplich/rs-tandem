@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 
-import { THEMES, type Theme, THEME_STORAGE_KEY } from '@/shared';
-import { ThemeProviderContext } from '@/shared';
+import { THEMES, type Theme, THEME_STORAGE_KEY, ThemeProviderContext } from '@/shared';
 
 type ThemeProviderProps = {
   children: ReactNode;
@@ -16,12 +15,10 @@ export function ThemeProvider({ children, defaultTheme = THEMES.DARK }: ThemePro
   useEffect(() => {
     const root = window.document.documentElement;
 
-    // Определяем, нужно ли включить темную тему
-    const isDark =
-      theme === THEMES.DARK ||
-      (theme === THEMES.SYSTEM && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const isDark = theme === THEMES.DARK;
 
-    root.classList.toggle(THEMES.DARK, isDark);
+    root.classList.remove(THEMES.LIGHT, THEMES.DARK);
+    root.classList.add(isDark ? THEMES.DARK : THEMES.LIGHT);
   }, [theme]);
 
   const value = {

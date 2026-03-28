@@ -8,7 +8,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: THEMES.SYSTEM,
+  theme: THEMES.DARK,
   setTheme: () => null,
 };
 
