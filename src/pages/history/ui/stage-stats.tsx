@@ -1,16 +1,7 @@
-import { HISTORY_PAGE_TEXT } from '../../locales';
+import { HISTORY_PAGE_TEXT } from '../locales';
+import { type StageStatsProps } from '../model';
 
-import { Card } from '@/shared/ui';
-
-interface StageStatsItem {
-  stage: number;
-  total: number;
-  avg: number;
-}
-
-interface StageStatsProps {
-  items: StageStatsItem[];
-}
+import { Card } from '@/shared';
 
 export const StageStats = ({ items }: StageStatsProps) => {
   return (

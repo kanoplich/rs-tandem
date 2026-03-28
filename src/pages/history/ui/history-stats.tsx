@@ -1,12 +1,7 @@
-import { HISTORY_PAGE_TEXT } from '../../locales';
+import { HISTORY_PAGE_TEXT } from '../locales';
+import { type HistoryStatsProps } from '../model';
 
-import { Card } from '@/shared/ui';
-
-interface HistoryStatsProps {
-  total: number;
-  avg: number | string;
-  best: number;
-}
+import { Card } from '@/shared';
 
 export const HistoryStats = ({ total, avg, best }: HistoryStatsProps) => {
   return (

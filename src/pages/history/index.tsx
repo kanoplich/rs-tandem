@@ -1,25 +1,13 @@
-import { useHistory } from './hooks/use-history';
+import { useHistory } from './hooks';
 import { HISTORY_PAGE_TEXT } from './locales';
-import { HistoryList } from './ui/history-list/history-list';
-import { HistoryStats } from './ui/history-stats/history-stats';
-import { StageStats } from './ui/stage-stats/stage-stats';
+import { HistoryList, HistoryStats, StageStats } from './ui';
 
 export const History = () => {
-  const { stages, history, isLoading } = useHistory();
+  const { stages, history, isLoading, total, avg, best } = useHistory();
 
   if (isLoading) {
     return <div className="p-6">{HISTORY_PAGE_TEXT.HEADER.LOADING}</div>;
   }
-
-  const total = stages.reduce((sum, s) => sum + s.totalTopics, 0);
-
-  const totalAttempts = history.length;
-
-  const totalScore = stages.reduce((sum, s) => sum + s.avgScore * s.completedTopics, 0);
-
-  const avg = totalAttempts > 0 ? (totalScore / totalAttempts).toFixed(1) : '0.0';
-
-  const best = history.length > 0 ? Math.max(...history.map((item) => item.score)) : 0;
 
   return (
     <div className="p-6 space-y-6">
@@ -32,13 +20,7 @@ export const History = () => {
 
       <HistoryList items={history} />
 
-      <StageStats
-        items={stages.map((s) => ({
-          stage: s.stage,
-          total: s.totalTopics,
-          avg: s.avgScore,
-        }))}
-      />
+      <StageStats items={stages} />
     </div>
   );
 };

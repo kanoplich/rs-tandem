@@ -1,16 +1,7 @@
-import { HISTORY_PAGE_TEXT } from '../../locales';
+import { HISTORY_PAGE_TEXT } from '../locales';
+import { type HistoryCardProps } from '../model';
 
-import { STAGES } from '@/shared/lib/constants';
-import { formatScore } from '@/shared/lib/format-score';
-import { Progress } from '@/shared/ui';
-
-interface HistoryCardProps {
-  stage: number;
-  completedTopics: number;
-  totalTopics: number;
-  percent: number;
-  avgScore: number;
-}
+import { STAGES, formatScore, Progress } from '@/shared';
 
 export const HistoryCard = ({
   stage,
@@ -25,7 +16,7 @@ export const HistoryCard = ({
     <div className="p-4 border rounded-xl space-y-3">
       <div className="flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-semibold">{stageInfo?.title}</h3>
+          <p className="text-lg font-semibold">{stageInfo?.title}</p>
           <p className="text-sm text-muted-foreground">{stageInfo?.description}</p>
         </div>
 

@@ -1,23 +1,15 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-import type { StageInfo } from '../model/types';
+import { getStageStats } from '../lib/get-stage-stats';
+import { HISTORY_PAGE_TEXT } from '../locales';
+import type { HistoryItem, StageStatsItem } from '../model';
 
-import { groupByStage } from '@/shared';
-import { getSubmissionHistory } from '@/shared/api/submissions';
-
-export interface Training {
-  id: string;
-  title: string;
-  stage: number;
-  date: string;
-  duration: string;
-  score: number;
-}
+import { groupByStage, getSubmissionHistory } from '@/shared';
 
 export const useHistory = () => {
-  const [stages, setStages] = useState<StageInfo[]>([]);
-  const [history, setHistory] = useState<Training[]>([]);
+  const [stages, setStages] = useState<StageStatsItem[]>([]);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,42 +17,22 @@ export const useHistory = () => {
       try {
         const submissions = await getSubmissionHistory();
         const successfulSubmissions = submissions.filter((item) => item.result.score > 70);
-        const grouped = groupByStage(submissions);
-        const stageStats: StageInfo[] = Object.entries(grouped).map(([stage, items]) => {
-          const successful = items.filter((item) => item.result.score > 70);
-
-          const totalTopics = successful.length;
-
-          const completedTopics = successful.length;
-
-          const avgScore =
-            successful.length > 0
-              ? successful.reduce((sum, item) => sum + item.result.score / 10, 0) /
-                successful.length
-              : 0;
-
-          return {
-            stage: Number(stage),
-            totalTopics,
-            completedTopics,
-            avgScore,
-          };
-        });
+        const grouped = groupByStage(successfulSubmissions);
+        const stageStats = getStageStats(grouped);
 
         setStages(stageStats);
 
-        const mapped: Training[] = successfulSubmissions.map((item) => ({
+        const mapped: HistoryItem[] = successfulSubmissions.map((item) => ({
           id: item.id,
           title: item.title,
           stage: item.stage,
           date: item.submittedAt,
-          duration: '',
           score: Number((item.result.score / 10).toFixed(1)),
         }));
 
         setHistory(mapped);
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Ошибка загрузки истории';
+        const message = err instanceof Error ? err.message : HISTORY_PAGE_TEXT.ERROR.LOAD;
 
         toast.error(message);
       } finally {
@@ -70,6 +42,15 @@ export const useHistory = () => {
 
     fetchHistory();
   }, []);
+  const total = stages.reduce((sum, s) => sum + s.total, 0);
 
-  return { stages, history, isLoading };
+  const totalAttempts = history.length;
+
+  const totalScore = stages.reduce((sum, s) => sum + s.avg * s.total, 0);
+
+  const avg = totalAttempts > 0 ? Number((totalScore / totalAttempts).toFixed(1)) : 0;
+
+  const best = history.length > 0 ? Math.max(...history.map((item) => item.score)) : 0;
+
+  return { stages, history, isLoading, total, avg, best };
 };

@@ -1,15 +1,7 @@
-import { HISTORY_PAGE_TEXT } from '../../locales';
+import { HISTORY_PAGE_TEXT } from '../locales';
+import { type HistoryItem } from '../model';
 
-import { Card } from '@/shared/ui';
-
-interface HistoryItem {
-  id: string;
-  title: string;
-  stage: number;
-  date: string;
-  duration: string;
-  score: number;
-}
+import { Card } from '@/shared';
 
 interface HistoryListProps {
   items: HistoryItem[];
@@ -32,14 +24,6 @@ export const HistoryList = ({ items }: HistoryListProps) => {
                   {HISTORY_PAGE_TEXT.LIST.STAGE_PREFIX} {item.stage}
                 </span>
                 <span className="font-medium text-light">{item.title}</span>
-              </div>
-
-              <div className="text-xs text-muted-foreground mt-1">
-                {item.date && item.duration && (
-                  <div className="text-xs text-muted-foreground mt-1">
-                    {item.date} • {item.duration}
-                  </div>
-                )}
               </div>
             </div>
 

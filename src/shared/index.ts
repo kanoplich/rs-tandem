@@ -8,3 +8,5 @@ export { getProgressPercent } from './lib/get-progress-percent';
 export { isTopicCompleted } from './lib/is-topic-completed';
 export { formatScore } from './lib/format-score';
 export { groupByStage } from './lib/group-by-stage';
+export { getSubmissionHistory } from './api/submissions/index';
+export { type Submission } from './api/submissions/types';

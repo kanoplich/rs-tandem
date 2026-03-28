@@ -34,4 +34,8 @@ export const HISTORY_PAGE_TEXT = {
     DIVIDER: '/',
     MAX_SCORE: '10',
   },
+
+  ERROR: {
+    LOAD: 'Ошибка загрузки истории',
+  },
 } as const;
