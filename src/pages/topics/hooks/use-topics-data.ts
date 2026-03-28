@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { ERROR } from '../locales';
@@ -6,7 +6,8 @@ import { ERROR } from '../locales';
 import { getTopics, getTopicProgress, type Topic, type TopicProgress } from '@/shared/api';
 
 type UseTopicsDataResult = {
-  topics: (Topic & Partial<TopicProgress>)[];
+  topics: Topic[];
+  progress: TopicProgress[];
   isLoading: boolean;
 };
 
@@ -33,13 +34,5 @@ export const useTopicsData = (): UseTopicsDataResult => {
     fetchData();
   }, []);
 
-  const mergedTopics = useMemo(() => {
-    const progressMap = new Map(progress.map((p) => [p.topicId, p]));
-    return topics.map((topic) => ({
-      ...topic,
-      ...progressMap.get(topic.id),
-    }));
-  }, [topics, progress]);
-
-  return { topics: mergedTopics, isLoading };
+  return { topics, progress, isLoading };
 };

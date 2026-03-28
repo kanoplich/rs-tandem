@@ -3,9 +3,13 @@ import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
-import { getSubmissionHistoryByTaskId, type Task } from '@/shared/api';
-import { evaluateTheory } from '@/shared/api/judge';
-import type { JudgeResult } from '@/shared/api/judge/types';
+import { getProgressPercent, PASSING_SCORE } from '@/shared';
+import {
+  getSubmissionHistoryByTaskId,
+  evaluateTheory,
+  type Task,
+  type JudgeResult,
+} from '@/shared/api';
 
 interface UseTaskSession {
   tasks: Task[];
@@ -17,8 +21,11 @@ interface UseTaskSessionReturn {
   tasksCount: number;
   feedback: string;
   result: JudgeResult | null;
-  isLoading: boolean;
+  isSending: boolean;
   userAnswer: string;
+  isPassed: boolean;
+  isLastTask: boolean;
+  progressPercent: number;
   handleSubmit: (message: string) => Promise<void>;
   handleRetry: () => void;
   handleNext: () => void;
@@ -29,16 +36,20 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const [userAnswer, setUserAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
   const [result, setResult] = useState<JudgeResult | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [isPassed, setIsPassed] = useState(false);
+  const [progressPercent, setProgressPercent] = useState(0);
 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
   const tasksCount = tasks.length;
+  const isLastTask = currentTaskNumber === tasksCount;
 
   const reset = () => {
     setUserAnswer('');
     setFeedback('');
     setResult(null);
+    setIsPassed(false);
   };
 
   const handleRetry = () => {
@@ -53,7 +64,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       return;
     }
 
-    setIsLoading(true);
+    setIsSending(true);
 
     try {
       const reader = await evaluateTheory(currentTask.id, message);
@@ -67,17 +78,24 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
 
       const submission = await getSubmissionHistoryByTaskId(currentTask.id);
       const judgeResult = submission.result;
+      const passed = submission.result.score >= PASSING_SCORE;
+
+      if (passed) {
+        const percent = getProgressPercent(currentTaskNumber, tasksCount);
+        setProgressPercent(percent);
+      }
 
       setResult(judgeResult);
+      setIsPassed(passed);
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : USE_TASK_SESSION.LOADING_ERROR);
     } finally {
-      setIsLoading(false);
+      setIsSending(false);
     }
   };
 
   const handleNext = () => {
-    const isPassed = result?.score !== undefined && result.score >= 70;
+    const isPassed = result?.score !== undefined && result.score >= PASSING_SCORE;
 
     if (currentIndex < tasks.length - 1 && isPassed) {
       setCurrentIndex((prev) => prev + 1);
@@ -96,7 +114,10 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     feedback,
     result,
     userAnswer,
-    isLoading,
+    isSending,
+    isPassed,
+    isLastTask,
+    progressPercent,
     handleNext,
     handleRetry,
     handleSubmit,
