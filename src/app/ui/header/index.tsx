@@ -17,7 +17,7 @@ export const Header = () => {
     <header className="bg-card px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
       <Link
         to={ROUTES.DASHBOARD}
-        className="flex items-center gap-2 text-white text-lg lg:text-xl font-semibold whitespace-nowrap"
+        className="flex items-center gap-2 text-light text-lg lg:text-xl font-semibold whitespace-nowrap"
       >
         <LogoIcon className="w-6 h-6" />
         <span>{MENU_LINK_TEXT.APP_TITLE}</span>
@@ -26,7 +26,7 @@ export const Header = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden text-white hover:bg-white/10"
+        className="md:hidden text-light hover:bg-white/10"
         onClick={() => setMobileOpen((prev) => !prev)}
         aria-label="navigation menu"
         aria-expanded={mobileOpen}

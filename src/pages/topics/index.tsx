@@ -6,16 +6,17 @@ import { TopicsHeader, StageTabs } from './ui';
 import { groupByStage, Loader } from '@/shared';
 
 export const Topics = () => {
-  const { topics, isLoading } = useTopicsData();
+  const { topics, progress, isLoading } = useTopicsData();
 
-  const groupedByStage = useMemo(() => groupByStage(topics), [topics]);
+  const groupedTopics = useMemo(() => groupByStage(topics), [topics]);
+  const groupedProgress = useMemo(() => groupByStage(progress), [progress]);
 
   if (isLoading) return <Loader />;
 
   return (
     <div className="flex flex-col">
       <TopicsHeader />
-      <StageTabs groupedByStage={groupedByStage} />
+      <StageTabs groupedTopics={groupedTopics} groupedProgress={groupedProgress} />
     </div>
   );
 };

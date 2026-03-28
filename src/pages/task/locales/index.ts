@@ -6,7 +6,6 @@ export const TASK_HEADER = {
 
 export const TASK_PROGRESS = {
   LABEL: 'Прогресс тренировки',
-  VALUE: '0%',
 };
 
 export const TASK_MESSAGE = {
@@ -50,4 +49,10 @@ export const TASK_FEEDBACK = {
 
 export const TASK_ANSWER = {
   TITLE: 'Твой ответ',
+};
+
+export const TASK_RESULT = {
+  NEXT: 'Следующий вопрос',
+  RETRY: 'Попробовать снова',
+  FINISH: 'Завершить тренировку',
 };
