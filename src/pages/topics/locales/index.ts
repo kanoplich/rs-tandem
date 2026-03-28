@@ -10,3 +10,14 @@ export const ERROR = {
 export const TOPICS_OVERVIEW_TEXT = {
   ABSENCE: 'Нет тем',
 };
+
+export const TOPICS_CARD_TEXT = {
+  SCORE: 'Баллы:',
+  PROGRESS: 'Прогресс:',
+  ATTEMPTS: 'Попыток:',
+};
+
+export const TOPICS_SUCCESS_TEXT = {
+  COMPLETED: 'Завершено',
+  INPROGRESS: 'В процессе',
+};
