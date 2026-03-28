@@ -23,7 +23,7 @@ export const StageTabs = ({ groupedTopics, groupedProgress }: StageTabsProps) =>
           <TabsContent key={stage.id} value={String(stage.id)}>
             <StageOverview
               stageId={stage.id}
-              topics={groupedTopics[stage.id] ?? []}
+              totalTopics={groupedTopics[stage.id]?.length ?? 0}
               progress={groupedProgress[stage.id] ?? []}
             />
           </TabsContent>
