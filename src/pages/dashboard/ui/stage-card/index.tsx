@@ -1,15 +1,23 @@
 import { STAGE_CARDS_TEXT } from '../../locales';
 
 import { Progress, STAGES } from '@/shared';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 interface StageCardProps {
   id: number;
-  progress: number;
-  topicsFinished: string;
+  totalCount: number;
+  completedCount: number;
+  progressPercent: number;
   averageScore: string;
 }
 
-export const StageCard = ({ id, progress, topicsFinished, averageScore }: StageCardProps) => {
+export const StageCard = ({
+  id,
+  totalCount,
+  completedCount,
+  progressPercent,
+  averageScore,
+}: StageCardProps) => {
   const stage = STAGES.find((stage) => stage.id === id);
 
   return (
@@ -20,7 +28,7 @@ export const StageCard = ({ id, progress, topicsFinished, averageScore }: StageC
           <p>{stage?.description}</p>
         </div>
         <div className="ml-3 mb-3 px-3 py-1 bg-primary h-fit rounded-full">
-          <p className="text-light-foreground font-bold">{progress}%</p>
+          <p className="text-light-foreground font-bold">{progressPercent}%</p>
         </div>
       </div>
       <div className="px-6 pb-6 flex flex-col gap-4">
@@ -28,18 +36,18 @@ export const StageCard = ({ id, progress, topicsFinished, averageScore }: StageC
           <div className="flex flex-row justify-between">
             <p>{STAGE_CARDS_TEXT.PROGRESS_TITLE}</p>
             <div className="flex flex-row font-bold gap-1">
-              <p className="text-light">{topicsFinished}</p>
+              <p className="text-light">{`${completedCount}/${totalCount}`}</p>
               <p className="text-light">{STAGE_CARDS_TEXT.PROGRESS_ITEM}</p>
             </div>
           </div>
           <div>
-            <Progress value={progress} />
+            <Progress value={progressPercent} />
           </div>
         </div>
         <div>
           <div className="pt-2 flex flex-row justify-between border-t border-border items-center">
             <p>{STAGE_CARDS_TEXT.AVERAGE_SCORE_TITLE}</p>
-            <p className="text-primary text-2xl font-bold">{averageScore}</p>
+            <p className="text-primary text-2xl font-bold">{`${averageScore}/${MAX_DISPLAY_SCORE}`}</p>
           </div>
         </div>
       </div>
