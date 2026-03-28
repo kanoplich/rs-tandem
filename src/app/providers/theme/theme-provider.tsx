@@ -1,52 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
-import { THEMES } from './locales';
-import { ThemeProviderContext, type Theme } from './theme-context';
+import { THEMES, type Theme, THEME_STORAGE_KEY } from '@/shared';
+import { ThemeProviderContext } from '@/shared';
 
 type ThemeProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   defaultTheme?: Theme;
-  storageKey?: string;
 };
 
-export function ThemeProvider({
-  children,
-  defaultTheme = THEMES.DARK,
-  storageKey = 'vite-ui-theme',
-  ...props
-}: ThemeProviderProps) {
+export function ThemeProvider({ children, defaultTheme = THEMES.DARK }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => (localStorage.getItem(THEME_STORAGE_KEY) as Theme) || defaultTheme
   );
 
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove(THEMES.LIGHT, THEMES.DARK);
+    // Определяем, нужно ли включить темную тему
+    const isDark =
+      theme === THEMES.DARK ||
+      (theme === THEMES.SYSTEM && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-    if (theme === THEMES.SYSTEM) {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? THEMES.DARK
-        : THEMES.LIGHT;
-
-      root.classList.add(systemTheme);
-      return;
-    }
-
-    root.classList.add(theme);
+    root.classList.toggle(THEMES.DARK, isDark);
   }, [theme]);
 
   const value = {
     theme,
     setTheme: (newTheme: Theme) => {
-      localStorage.setItem(storageKey, newTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, newTheme);
       setTheme(newTheme);
     },
   };
 
-  return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
-  );
+  return <ThemeProviderContext.Provider value={value}>{children}</ThemeProviderContext.Provider>;
 }

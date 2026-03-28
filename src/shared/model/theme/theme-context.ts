@@ -1,8 +1,6 @@
 import { createContext } from 'react';
 
-import { THEMES } from './locales';
-
-export type Theme = (typeof THEMES)[keyof typeof THEMES];
+import { THEMES, type Theme } from '@/shared';
 
 type ThemeProviderState = {
   theme: Theme;
