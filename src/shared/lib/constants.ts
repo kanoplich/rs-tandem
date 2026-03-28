@@ -22,3 +22,4 @@ export const STAGES = [
 ] as const;
 
 export const DEFAULT_STAGES_VALUE = STAGES[0].id;
+export const PASSING_SCORE = 70;
