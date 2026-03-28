@@ -1,5 +1,7 @@
 export * from './config/routes';
 
+export { useTheme } from './hooks/use-theme';
+
 export * from './ui';
 
 export { PROVIDERS, DEFAULT_MAX_SCORE, STAGES, DEFAULT_STAGES_VALUE } from './lib/constants';

@@ -5,6 +5,7 @@ import { MENU_LINK_TEXT } from '../locales';
 
 import { MENU_LINKS } from './lib/constants';
 
+import { ModeToggle } from '@/features/theme/ui/mode-toggle';
 import { Button } from '@/shared';
 import { signOut } from '@/shared/api';
 import { cn } from '@/shared/lib/utils';
@@ -73,6 +74,16 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
           <span className={textClass}>{label}</span>
         </NavLink>
       ))}
+
+      <div
+        className={cn(
+          'flex items-center',
+          isDesktop ? 'ml-2' : 'px-4 py-2 border-t border-white/10 mt-1 justify-between'
+        )}
+      >
+        {!isDesktop && <span className="text-sm text-light/60">MENU_LINK_TEXT.THEME</span>}
+        <ModeToggle />
+      </div>
 
       <Button
         type="button"

@@ -5,4 +5,5 @@ export const MENU_LINK_TEXT = {
   PROFILE: 'Профиль',
   LOGOUT: 'Выход',
   APP_TITLE: 'Тренажёр интервью',
+  THEME: 'Тема оформления',
 };
