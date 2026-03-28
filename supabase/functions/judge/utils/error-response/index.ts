@@ -1,4 +1,4 @@
-import { corsHeaders } from './cors.ts';
+import { corsHeaders } from '../cors/index.ts';
 
 export const errorResponse = (error: string, status: number) => {
   return new Response(JSON.stringify({ error: `${error}` }), {
