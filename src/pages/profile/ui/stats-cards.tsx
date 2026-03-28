@@ -2,8 +2,9 @@ import { useMemo } from 'react';
 
 import { STATS_CARDS } from '../lib/constants';
 
-import { Card } from '@/shared';
+import { Card, getTopicStats } from '@/shared';
 import type { TopicProgress, UserStats } from '@/shared/api';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 type StatsCardsProps = {
   stats: UserStats | null;
@@ -11,17 +12,16 @@ type StatsCardsProps = {
 };
 
 export const StatsCards = ({ stats, progress = [] }: StatsCardsProps) => {
+  const { averageScore } = useMemo(() => getTopicStats(progress), [progress]);
+
   const computedStats = useMemo(
     () => ({
       completedTasks: stats?.completedTasks ?? 0,
-      avgScore:
-        progress.length > 0
-          ? (progress.reduce((acc, item) => acc + item.avgScore, 0) / progress.length).toFixed(1)
-          : 0,
+      avgScore: `${averageScore}/${MAX_DISPLAY_SCORE}`,
       rank: stats?.rank ?? '—',
       xp: stats?.xp ?? 0,
     }),
-    [stats, progress]
+    [stats, averageScore]
   );
 
   return (

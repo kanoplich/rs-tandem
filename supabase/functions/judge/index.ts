@@ -89,8 +89,13 @@ RESPONSE FORMAT:
   "points": {"<rubric point text>": 0 | 1 | 2, ...}
 }
 
+LANGUAGE REQUIREMENT:
+- All feedback MUST be in Russian.
+- Ignore the language of the CANDIDATE_ANSWER.
+- Do NOT use any other language in the feedback.
+
 RULES:
-- Respond in the SAME LANGUAGE as the CANDIDATE_ANSWER.
+- The feedback MUST be in Russian.
 - Every rubric point MUST appear in "points" — do not skip or invent new ones.
 - Do NOT add any text outside of feedback and JSON.`;
 
