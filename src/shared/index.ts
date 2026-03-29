@@ -8,6 +8,7 @@ export {
   STAGES,
   DEFAULT_STAGES_VALUE,
   PASSING_SCORE,
+  MAX_DISPLAY_SCORE,
 } from './lib/constants';
 
 export { getProgressPercent } from './lib/get-progress-percent';

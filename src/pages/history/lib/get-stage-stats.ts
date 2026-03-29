@@ -1,20 +1,22 @@
-import type { StageStatsItem } from '../model';
-
 import type { Submission } from '@/shared';
+
+export type StageStatsItem = {
+  stage: number;
+  total: number;
+  avgScore: number;
+};
 
 export const getStageStats = (grouped: Record<number, Submission[]>): StageStatsItem[] => {
   return Object.entries(grouped).map(([stage, items]) => {
-    const successful = items.filter((item) => item.result.score > 70);
+    const total = items.length;
 
-    const total = successful.length;
-
-    const avg =
-      total > 0 ? successful.reduce((sum, item) => sum + item.result.score, 0) / total / 10 : 0;
+    const avgScore =
+      total > 0 ? items.reduce((sum, item) => sum + item.result.score, 0) / total : 0;
 
     return {
       stage: Number(stage),
       total,
-      avg,
+      avgScore,
     };
   });
 };

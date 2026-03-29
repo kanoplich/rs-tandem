@@ -1,11 +1,11 @@
 import { HISTORY_PAGE_TEXT } from '../locales';
-import { type HistoryItem } from '../model';
 
-import { Card } from '@/shared';
+import { HistoryCard } from './history-card';
 
-interface HistoryListProps {
-  items: HistoryItem[];
-}
+import { Card, type Submission } from '@/shared';
+type HistoryListProps = {
+  items: Submission[];
+};
 
 export const HistoryList = ({ items }: HistoryListProps) => {
   return (
@@ -16,27 +16,14 @@ export const HistoryList = ({ items }: HistoryListProps) => {
       </div>
 
       <div className="space-y-3">
-        {items.map((item) => (
-          <div key={item.id} className="flex items-center justify-between border rounded-xl p-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs bg-secondary text-primary px-2 py-1 rounded">
-                  {HISTORY_PAGE_TEXT.LIST.STAGE_PREFIX} {item.stage}
-                </span>
-                <span className="font-medium text-light">{item.title}</span>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <div className="text-lg font-semibold text-success">{item.score}</div>
-              <div className="text-xs text-muted-foreground">
-                {HISTORY_PAGE_TEXT.LIST.SCORE_SUFFIX}
-              </div>
-            </div>
-          </div>
-        ))}
-        <p className="text-xs text-muted-foreground">{HISTORY_PAGE_TEXT.LIST.ONLY_SUCCESS}</p>
+        {items.length === 0 ? (
+          <p className="text-muted-foreground">{HISTORY_PAGE_TEXT.LIST.EMPTY}</p>
+        ) : (
+          items.map((item) => <HistoryCard key={item.id} submission={item} />)
+        )}
       </div>
+
+      <p className="text-xs text-muted-foreground">{HISTORY_PAGE_TEXT.LIST.ONLY_SUCCESS}</p>
     </Card>
   );
 };

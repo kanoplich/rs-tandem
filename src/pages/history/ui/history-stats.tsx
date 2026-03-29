@@ -1,7 +1,7 @@
 import { HISTORY_PAGE_TEXT } from '../locales';
-import { type HistoryStatsProps } from '../model';
+import type { HistoryStatsProps } from '../model';
 
-import { Card } from '@/shared';
+import { Card, MAX_DISPLAY_SCORE } from '@/shared';
 
 export const HistoryStats = ({ total, avg, best }: HistoryStatsProps) => {
   return (
@@ -14,18 +14,14 @@ export const HistoryStats = ({ total, avg, best }: HistoryStatsProps) => {
       <Card className="p-6">
         <div className="text-sm text-muted-foreground">{HISTORY_PAGE_TEXT.STATS.AVG}</div>
         <div className="text-2xl font-bold mt-2 text-primary">
-          {avg}
-          {HISTORY_PAGE_TEXT.CARD.DIVIDER}
-          {HISTORY_PAGE_TEXT.CARD.MAX_SCORE}
+          {avg}/{MAX_DISPLAY_SCORE}
         </div>
       </Card>
 
       <Card className="p-6">
         <div className="text-sm text-muted-foreground">{HISTORY_PAGE_TEXT.STATS.BEST}</div>
         <div className="text-2xl font-bold mt-2 text-success">
-          {best}
-          {HISTORY_PAGE_TEXT.CARD.DIVIDER}
-          {HISTORY_PAGE_TEXT.CARD.MAX_SCORE}
+          {best}/{MAX_DISPLAY_SCORE}
         </div>
       </Card>
     </div>
