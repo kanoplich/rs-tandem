@@ -7,7 +7,7 @@ import { ProtectedRoute } from './protected-route';
 import { useAuth } from '@/entities/session';
 import { ROUTES } from '@/shared/config/routes';
 
-vi.mock('@/shared/hooks/use-auth', () => ({
+vi.mock('@/entities/session', () => ({
   useAuth: vi.fn(),
 }));
 
