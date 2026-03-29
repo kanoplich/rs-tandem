@@ -4,8 +4,8 @@ import { describe, test, expect, vi } from 'vitest';
 
 import { ProtectedRoute } from './protected-route';
 
+import { useAuth } from '@/entities/session';
 import { ROUTES } from '@/shared/config/routes';
-import { useAuth } from '@/shared/hooks/use-auth';
 
 vi.mock('@/shared/hooks/use-auth', () => ({
   useAuth: vi.fn(),
