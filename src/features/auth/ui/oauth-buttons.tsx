@@ -43,7 +43,7 @@ export const OAuthButtons = ({ onError }: Props) => {
         onClick={() => manageSignIn(PROVIDERS.GITHUB)}
         className="flex-1 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
       >
-        <GithubIcon className="fill-white" />
+        <GithubIcon className="w-5 h-5 text-light fill-current" />
       </Button>
     </div>
   );
