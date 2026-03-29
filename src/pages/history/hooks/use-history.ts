@@ -16,9 +16,9 @@ export const useHistory = () => {
       try {
         const data = await getSubmissionHistory();
 
-        const filtered = data.filter((item) => item.result.score > PASSING_SCORE);
+        const successfulSubmissions = data.filter((item) => item.result.score > PASSING_SCORE);
 
-        setSubmissions(filtered);
+        setSubmissions(successfulSubmissions);
       } catch (err) {
         const message = err instanceof Error ? err.message : HISTORY_PAGE_TEXT.ERROR.LOAD;
 

@@ -5,7 +5,14 @@ import { Card, STAGES, formatScore } from '@/shared';
 import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 export const StageStats = ({ items }: StageStatsProps) => {
-  if (items.length === 0) return null;
+  if (items.length === 0) {
+    return (
+      <Card className="p-6">
+        <h2 className="text-lg font-semibold">{HISTORY_PAGE_TEXT.STAGE_STATS.TITLE}</h2>
+        <p className="text-sm text-muted-foreground mt-2">{HISTORY_PAGE_TEXT.LIST.EMPTY}</p>
+      </Card>
+    );
+  }
 
   return (
     <Card className="p-6">
