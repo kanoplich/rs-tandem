@@ -6,6 +6,8 @@ import type { Topic, TopicProgress } from '@/shared/api';
 interface StageTabsProps {
   groupedTopics: Record<number, Topic[]>;
   groupedProgress: Record<number, TopicProgress[]>;
+  value?: string;
+  onValueChange?: (value: string) => void;
 }
 
 export const StageTabs = ({ groupedTopics, groupedProgress }: StageTabsProps) => {

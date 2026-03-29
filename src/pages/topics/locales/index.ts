@@ -21,3 +21,7 @@ export const TOPICS_SUCCESS_TEXT = {
   COMPLETED: 'Завершено',
   INPROGRESS: 'В процессе',
 };
+
+export const TOPICS_GRID_TEXT = {
+  CHOICED: 'Выбрано тем',
+};
