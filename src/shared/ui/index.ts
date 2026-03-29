@@ -8,4 +8,5 @@ export * from './tabs';
 export * from './loader';
 export * from './progress';
 export * from './badge';
+export * from './textarea';
 export * from './checkbox';

@@ -22,3 +22,13 @@ export const STAGES = [
 ] as const;
 
 export const DEFAULT_STAGES_VALUE = STAGES[0].id;
+export const PASSING_SCORE = 70;
+
+export const THEMES = {
+  DARK: 'dark',
+  LIGHT: 'light',
+} as const;
+
+export type Theme = (typeof THEMES)[keyof typeof THEMES];
+
+export const THEME_STORAGE_KEY = 'project-theme';

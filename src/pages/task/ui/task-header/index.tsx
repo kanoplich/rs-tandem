@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { TASK_HEADER } from '@/pages/task/locales';
-import { ROUTES, STAGES } from '@/shared';
+import { Badge, ROUTES, STAGES } from '@/shared';
 
 interface TaskHeaderProps {
   currentTaskNumber: number;
@@ -21,7 +21,7 @@ export const TaskHeader = ({ currentTaskNumber, stageNumber, tasksCount }: TaskH
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-3">
             <h1 className="text-base">{TASK_HEADER.TITLE}</h1>
-            <div className="text-xs px-1 py-1.5 rounded bg-input">{stage?.title}</div>
+            <Badge variant="active">{stage?.title}</Badge>
           </div>
           <div>
             {TASK_HEADER.QUESTION} {currentTaskNumber} {TASK_HEADER.FROM} {tasksCount}

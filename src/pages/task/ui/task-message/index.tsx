@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { TASK_MESSAGE } from '../../locales';
 
-import { Button } from '@/shared';
+import { Button, Textarea } from '@/shared';
 
 interface TaskMessageProps {
   onSubmit: (message: string) => Promise<void>;
@@ -35,16 +35,17 @@ export const TaskMessage = ({ onSubmit }: TaskMessageProps) => {
     <section className="pb-6">
       <div className="p-3 sm:p-6 rounded-xl bg-card border border-border">
         <form onSubmit={handleSubmit}>
-          <textarea
-            className="[scrollbar-width:none] w-full min-h-[120px] text-sm px-3 py-2 rounded-md bg-input focus:outline-none"
-            name="task-message"
-            id="task-message"
+          <Textarea
+            className="[scrollbar-width:none] min-h-[120px]"
             value={userMessage}
             onKeyDown={handleKeyDown}
             onChange={(e) => setUserMessage(e.target.value)}
             placeholder={TASK_MESSAGE.PLACEHOLDER}
-          ></textarea>
-          <Button className="cursor-pointer transition-opacity w-full" disabled={isEmptyMessage}>
+          ></Textarea>
+          <Button
+            className="cursor-pointer transition-opacity w-full mt-2"
+            disabled={isEmptyMessage}
+          >
             {TASK_MESSAGE.BUTTON_TEXT}
           </Button>
         </form>
