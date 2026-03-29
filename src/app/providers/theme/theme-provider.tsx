@@ -7,7 +7,7 @@ type ThemeProviderProps = {
   defaultTheme?: Theme;
 };
 
-export function ThemeProvider({ children, defaultTheme = THEMES.DARK }: ThemeProviderProps) {
+export const ThemeProvider = ({ children, defaultTheme = THEMES.DARK }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(THEME_STORAGE_KEY) as Theme) || defaultTheme
   );
@@ -15,10 +15,7 @@ export function ThemeProvider({ children, defaultTheme = THEMES.DARK }: ThemePro
   useEffect(() => {
     const root = window.document.documentElement;
 
-    const isDark = theme === THEMES.DARK;
-
-    root.classList.remove(THEMES.LIGHT, THEMES.DARK);
-    root.classList.add(isDark ? THEMES.DARK : THEMES.LIGHT);
+    root.classList.toggle(THEMES.DARK, theme === THEMES.DARK);
   }, [theme]);
 
   const value = {
@@ -30,4 +27,4 @@ export function ThemeProvider({ children, defaultTheme = THEMES.DARK }: ThemePro
   };
 
   return <ThemeProviderContext.Provider value={value}>{children}</ThemeProviderContext.Provider>;
-}
+};
