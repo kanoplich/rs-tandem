@@ -3,8 +3,9 @@ import { toast } from 'sonner';
 
 import { HISTORY_PAGE_TEXT } from '../locales';
 
-import { getSubmissionHistory, PASSING_SCORE } from '@/shared';
-import type { Submission } from '@/shared';
+import { PASSING_SCORE } from '@/shared';
+import { getSubmissionHistory } from '@/shared/api';
+import type { Submission } from '@/shared/api';
 
 export const useHistory = () => {
   const [submissions, setSubmissions] = useState<Submission[]>([]);

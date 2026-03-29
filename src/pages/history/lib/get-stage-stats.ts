@@ -1,10 +1,6 @@
-import type { Submission } from '@/shared';
+import type { StageStatsItem } from '../model';
 
-export type StageStatsItem = {
-  stage: number;
-  total: number;
-  avgScore: number;
-};
+import type { Submission } from '@/shared/api';
 
 export const getStageStats = (grouped: Record<number, Submission[]>): StageStatsItem[] => {
   return Object.entries(grouped).map(([stage, items]) => {

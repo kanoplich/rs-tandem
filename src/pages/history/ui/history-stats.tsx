@@ -1,7 +1,8 @@
 import { HISTORY_PAGE_TEXT } from '../locales';
 import type { HistoryStatsProps } from '../model';
 
-import { Card, MAX_DISPLAY_SCORE } from '@/shared';
+import { Card } from '@/shared';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 export const HistoryStats = ({ total, avg, best }: HistoryStatsProps) => {
   return (

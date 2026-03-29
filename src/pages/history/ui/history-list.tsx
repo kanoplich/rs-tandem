@@ -2,7 +2,8 @@ import { HISTORY_PAGE_TEXT } from '../locales';
 
 import { HistoryCard } from './history-card';
 
-import { Card, type Submission } from '@/shared';
+import { Card } from '@/shared';
+import type { Submission } from '@/shared/api';
 type HistoryListProps = {
   items: Submission[];
 };

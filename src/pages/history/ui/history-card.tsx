@@ -1,5 +1,6 @@
-import { STAGES, formatScore, MAX_DISPLAY_SCORE } from '@/shared';
-import type { Submission } from '@/shared';
+import { STAGES, formatScore } from '@/shared';
+import type { Submission } from '@/shared/api';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 type HistoryCardProps = {
   submission: Submission;

@@ -5,6 +5,7 @@ import { DEVELOPERS } from './lib/constants';
 import { FOOTER_TEXTS } from './locales';
 
 import { RsSchool } from '@/shared/assets/icons';
+import { cn } from '@/shared/lib/utils';
 import { HEADERS_TEXT } from '@/shared/model/constants';
 
 export const Footer = () => {
@@ -48,10 +49,13 @@ export const Footer = () => {
                 />
               </button>
               <div
-                className={`absolute mt-2 right-0 flex flex-col bg-card border border-border rounded-lg shadow-lg
-                            py-2 px-4 space-y-1 min-w-[160px] text-xs text-light
-                            transition-all duration-300 ease-out
-                            ${showDevs ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
+                className={cn(
+                  'absolute bottom-full mb-2 right-0 flex flex-col bg-popover border border-border rounded-lg shadow-xl',
+                  'py-2 px-1 space-y-0.5 min-w-[180px] text-xs text-foreground z-50 transition-all duration-300 ease-out',
+                  showDevs
+                    ? 'opacity-100 translate-y-0 pointer-events-auto'
+                    : 'opacity-0 translate-y-2 pointer-events-none'
+                )}
               >
                 {DEVELOPERS.map((dev) => (
                   <a
@@ -59,10 +63,15 @@ export const Footer = () => {
                     href={dev.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:text-primary transition-colors duration-200"
+                    className="group flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-accent transition-colors"
                   >
-                    <Github size={14} />
-                    {dev.name}
+                    <Github
+                      size={14}
+                      className="text-muted-foreground group-hover:text-primary transition-colors"
+                    />
+                    <span className="group-hover:text-accent-foreground transition-colors">
+                      {dev.name}
+                    </span>
                   </a>
                 ))}
               </div>

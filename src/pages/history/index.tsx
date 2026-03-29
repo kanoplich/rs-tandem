@@ -5,7 +5,7 @@ import { getStageStats } from './lib/get-stage-stats';
 import { HISTORY_PAGE_TEXT } from './locales';
 import { HistoryList, HistoryStats, StageStats } from './ui';
 
-import { Loader, groupByStage, formatScore, PASSING_SCORE } from '@/shared';
+import { Loader, groupByStage, formatScore } from '@/shared';
 
 export const History = () => {
   const { submissions, isLoading } = useHistory();
@@ -25,7 +25,7 @@ export const History = () => {
   }, [submissions, total]);
 
   const best = useMemo(() => {
-    if (total === 0) return '0';
+    if (total === 0) return formatScore(0);
 
     return formatScore(Math.max(...submissions.map((s) => s.result.score)));
   }, [submissions, total]);

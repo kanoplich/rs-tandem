@@ -1,5 +1,7 @@
 export * from './config/routes';
 
+export { useTheme } from './hooks/use-theme';
+
 export * from './ui';
 
 export {
@@ -8,7 +10,9 @@ export {
   STAGES,
   DEFAULT_STAGES_VALUE,
   PASSING_SCORE,
-  MAX_DISPLAY_SCORE,
+  THEMES,
+  THEME_STORAGE_KEY,
+  type Theme,
 } from './lib/constants';
 
 export { getProgressPercent } from './lib/get-progress-percent';
@@ -16,6 +20,5 @@ export { isTopicCompleted } from './lib/is-topic-completed';
 export { formatScore } from './lib/format-score';
 export { groupByStage } from './lib/group-by-stage';
 export { getTopicStats } from './lib/get-topic-stats';
-
-export { getSubmissionHistory } from './api/submissions/index';
-export type { Submission } from './api/submissions/types';
+export { NOT_WITHIN_THEME_PROVIDER_ERROR } from './lib/locales';
+export { ThemeProviderContext } from './model/theme/theme-context';

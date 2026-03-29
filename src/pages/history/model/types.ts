@@ -8,7 +8,7 @@ export interface StageInfo {
 export interface StageStatsItem {
   stage: number;
   total: number;
-  avg: number;
+  avgScore: number;
 }
 
 export interface HistoryCardProps {
@@ -29,8 +29,8 @@ export interface HistoryItem {
 
 export interface HistoryStatsProps {
   total: number;
-  avg: number;
-  best: number;
+  avg: string;
+  best: string;
 }
 
 export interface StageStatsProps {
