@@ -19,9 +19,9 @@ export const TOPICS_CARD_TEXT = {
 
 export const TOPICS_SUCCESS_TEXT = {
   COMPLETED: 'Завершено',
-  INPROGRESS: 'В процессе',
+  IN_PROGRESS: 'В процессе',
 };
 
 export const TOPICS_GRID_TEXT = {
-  CHOICED: 'Выбрано тем',
+  SELECTED_TOPICS: 'Выбрано тем',
 };

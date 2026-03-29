@@ -2,7 +2,7 @@ import { Circle, CircleCheckBig } from 'lucide-react';
 
 import { TOPICS_CARD_TEXT, TOPICS_SUCCESS_TEXT } from '../../locales';
 
-import { isTopicCompleted, getProgressPercent, formatScore } from '@/shared';
+import { isTopicCompleted, getProgressPercent, formatScore, DEFAULT_MAX_SCORE } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
 import { cn } from '@/shared/lib/utils';
 import {
@@ -25,9 +25,6 @@ export const TopicCard = ({ topic, checked = false, onCheckedChange }: TopicCard
   const completed = isTopicCompleted(topic);
   const inProgress = !completed && topic.completed > 0;
   const progressPercent = getProgressPercent(topic.completed, topic.total);
-
-  const attempts = topic.completed;
-
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
@@ -48,7 +45,7 @@ export const TopicCard = ({ topic, checked = false, onCheckedChange }: TopicCard
         {inProgress && (
           <div className="flex items-center gap-1">
             <Circle className="h-5 w-5" />
-            <span className="text-sm">{TOPICS_SUCCESS_TEXT.INPROGRESS}</span>
+            <span className="text-sm">{TOPICS_SUCCESS_TEXT.IN_PROGRESS}</span>
           </div>
         )}
       </CardHeader>
@@ -58,7 +55,7 @@ export const TopicCard = ({ topic, checked = false, onCheckedChange }: TopicCard
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">{TOPICS_CARD_TEXT.SCORE}</span>
             <span className={cn('font-medium', completed && 'text-success')}>
-              {formatScore(topic.avgScore)}/{topic.total}
+              {formatScore(topic.avgScore)}/{DEFAULT_MAX_SCORE}
             </span>
           </div>
 
@@ -74,9 +71,7 @@ export const TopicCard = ({ topic, checked = false, onCheckedChange }: TopicCard
 
       {(completed || inProgress) && (
         <CardFooter className="pt-2 text-sm text-muted-foreground">
-          <div>
-            {TOPICS_CARD_TEXT.ATTEMPTS} {attempts}
-          </div>
+          <div>{TOPICS_CARD_TEXT.ATTEMPTS}</div>
         </CardFooter>
       )}
     </Card>
