@@ -1,10 +1,9 @@
-import { STAGES, formatScore } from '@/shared';
+import { STAGES, formatScore, MAX_DISPLAY_SCORE } from '@/shared';
 import type { Submission } from '@/shared/api';
-import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
-type HistoryCardProps = {
+interface HistoryCardProps {
   submission: Submission;
-};
+}
 
 export const HistoryCard = ({ submission }: HistoryCardProps) => {
   const stageInfo = STAGES.find((s) => s.id === submission.stage);

@@ -12,6 +12,7 @@ export {
   PASSING_SCORE,
   THEMES,
   THEME_STORAGE_KEY,
+  MAX_DISPLAY_SCORE,
   type Theme,
 } from './lib/constants';
 

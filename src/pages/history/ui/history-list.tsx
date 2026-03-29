@@ -4,9 +4,10 @@ import { HistoryCard } from './history-card';
 
 import { Card } from '@/shared';
 import type { Submission } from '@/shared/api';
-type HistoryListProps = {
+
+interface HistoryListProps {
   items: Submission[];
-};
+}
 
 export const HistoryList = ({ items }: HistoryListProps) => {
   return (

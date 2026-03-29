@@ -1,6 +1,10 @@
-import type { StageStatsItem } from '../model';
-
 import type { Submission } from '@/shared/api';
+
+interface StageStatsItem {
+  stage: number;
+  total: number;
+  avgScore: number;
+}
 
 export const getStageStats = (grouped: Record<number, Submission[]>): StageStatsItem[] => {
   return Object.entries(grouped).map(([stage, items]) => {
