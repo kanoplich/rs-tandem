@@ -32,7 +32,7 @@ export const History = () => {
 
   if (isLoading) return <Loader />;
   return (
-    <div className="p-6 space-y-6">
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
       <div>
         <h1>{HISTORY_PAGE_TEXT.HEADER.TITLE}</h1>
         <p className="text-muted-foreground">{HISTORY_PAGE_TEXT.HEADER.DESCRIPTION}</p>
