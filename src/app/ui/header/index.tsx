@@ -26,7 +26,7 @@ export const Header = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden text-light hover:bg-white/10"
+        className="md:hidden text-light hover:bg-accent"
         onClick={() => setMobileOpen((prev) => !prev)}
         aria-label="navigation menu"
         aria-expanded={mobileOpen}

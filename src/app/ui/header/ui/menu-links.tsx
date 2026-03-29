@@ -5,6 +5,7 @@ import { MENU_LINK_TEXT } from '../locales';
 
 import { MENU_LINKS } from './lib/constants';
 
+import { ModeToggle } from '@/features/theme';
 import { Button } from '@/shared';
 import { signOut } from '@/shared/api';
 import { cn } from '@/shared/lib/utils';
@@ -21,17 +22,13 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
   const navClass = ({ isActive }: { isActive: boolean }) =>
     cn(
       'flex items-center gap-2 rounded-md px-4 py-2 text-sm transition',
-      isActive
-        ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-        : 'text-light hover:bg-white/10'
+      isActive ? 'bg-sidebar-primary text-sidebar-primary-foreground' : 'text-light hover:bg-accent'
     );
 
   const mobileLinkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
       'px-3 py-2 flex items-center gap-2 text-sm transition-colors',
-      isActive
-        ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-        : 'text-light hover:bg-white/10'
+      isActive ? 'bg-sidebar-primary text-sidebar-primary-foreground' : 'text-light hover:bg-accent'
     );
 
   const iconClass = isDesktop ? 'w-4 h-4' : 'w-5 h-5';
@@ -74,13 +71,23 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
         </NavLink>
       ))}
 
+      <div
+        className={cn(
+          'flex items-center',
+          isDesktop ? 'ml-2' : 'px-4 py-2 border-t border-border mt-1 justify-between'
+        )}
+      >
+        {!isDesktop && <span className="text-sm text-light/60"></span>}
+        <ModeToggle />
+      </div>
+
       <Button
         type="button"
         variant="ghost"
         className={
           isDesktop
-            ? 'flex items-center gap-2 text-light hover:bg-white/10'
-            : 'px-4 py-3 flex items-center gap-2 text-destructive hover:bg-white/10 justify-start'
+            ? 'flex items-center gap-2 text-light hover:bg-accent'
+            : 'px-4 py-3 flex items-center gap-2 text-destructive hover:bg-accent justify-start'
         }
         onClick={handleLogout}
       >
