@@ -34,7 +34,7 @@ export const History = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">
       <div>
-        <h1>{HISTORY_PAGE_TEXT.HEADER.TITLE}</h1>
+        <h1 className="text-2xl font-normal leading-9">{HISTORY_PAGE_TEXT.HEADER.TITLE}</h1>
         <p className="text-muted-foreground">{HISTORY_PAGE_TEXT.HEADER.DESCRIPTION}</p>
       </div>
 
