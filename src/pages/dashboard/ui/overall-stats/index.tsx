@@ -5,7 +5,7 @@ import { StatCard } from '../stat-card';
 
 import { getTopicStats } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
-import { ProgressIcon, StatisticIcon, TopicIcon } from '@/shared/assets/icons';
+import { ProgressIcon, StatisticIcon, TrophyIcon } from '@/shared/assets/icons';
 import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 interface OverallStatsProps {
@@ -28,7 +28,7 @@ export const OverallStats = ({ topicProgress }: OverallStatsProps) => {
           stats={`${progressPercent}%`}
         />
         <StatCard
-          icon={<TopicIcon />}
+          icon={<TrophyIcon />}
           description={OVERALL_STATS_TEXT.AVERAGE_SCORE_CARD_TEXT}
           stats={`${averageScore}/${MAX_DISPLAY_SCORE}`}
         />

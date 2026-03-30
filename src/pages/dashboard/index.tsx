@@ -11,7 +11,7 @@ export const Dashboard = () => {
   }
 
   return (
-    <div className="flex flex-col px-4 py-8">
+    <div className=" px-4 py-8 max-w-7xl mx-auto flex flex-col">
       <DashboardHeader />
       <OverallStats topicProgress={topicProgress} />
       <StartButton />
