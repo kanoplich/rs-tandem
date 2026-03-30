@@ -1,5 +1,5 @@
 import { JUDGE_LEVEL, type JudgeLevel } from '../judge/types';
-import { supabase } from '../supabase-client';
+import { supabase, type Public } from '../supabase-client';
 
 import { MOCK_SUBMISSIONS } from './mock';
 import type { Submission } from './types';
@@ -10,6 +10,15 @@ import { delay } from '@/shared/lib/delay';
 
 const { USE_MOCK_SUPABASE } = config;
 
+type PublicSubmissionRow = Public['Tables']['submissions']['Row'] & {
+  public_tasks: {
+    topic_id: string | null;
+    topics: {
+      title: string;
+      stage: number;
+    } | null;
+  };
+};
 const VALID_JUDGE_LEVELS = new Set<number>(Object.values(JUDGE_LEVEL));
 
 const toJudgeLevel = (value: unknown): JudgeLevel => {
@@ -17,6 +26,26 @@ const toJudgeLevel = (value: unknown): JudgeLevel => {
     return value as JudgeLevel;
   }
   return JUDGE_LEVEL.KEYWORD;
+};
+
+const mapToSubmission = (data: PublicSubmissionRow): Submission => {
+  return {
+    id: data.id,
+    userId: data.user_id,
+    taskId: data.task_id,
+    answer: data.answer,
+    submittedAt: data.submitted_at,
+    title: data.public_tasks.topics?.title ?? '',
+    stage: data.public_tasks.topics?.stage ?? 1,
+    result: {
+      coveredPoints: data.covered ?? [],
+      missedPoints: data.missed ?? [],
+      feedback: data.feedback ?? '',
+      score: data.score ?? 0,
+      maxScore: DEFAULT_MAX_SCORE,
+      judgeLevel: toJudgeLevel(data.judge_level),
+    },
+  };
 };
 
 export const getSubmissionHistory = async (): Promise<Submission[]> => {
@@ -31,23 +60,27 @@ export const getSubmissionHistory = async (): Promise<Submission[]> => {
     .order('submitted_at', { ascending: false })
     .throwOnError();
 
-  return submissions.map((item) => {
-    return {
-      id: item.id,
-      userId: item.user_id,
-      taskId: item.task_id,
-      answer: item.answer,
-      submittedAt: item.submitted_at,
-      title: item.public_tasks.topics?.title ?? '',
-      stage: item.public_tasks.topics?.stage ?? 1,
-      result: {
-        coveredPoints: item.covered ?? [],
-        missedPoints: item.missed ?? [],
-        feedback: item.feedback ?? '',
-        score: item.score ?? 0,
-        maxScore: DEFAULT_MAX_SCORE,
-        judgeLevel: toJudgeLevel(item.judge_level),
-      },
-    };
-  });
+  return submissions.map((item) => mapToSubmission(item));
+};
+
+export const getSubmissionHistoryByTaskId = async (taskId: string): Promise<Submission> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(400);
+    const submission = MOCK_SUBMISSIONS.find((item) => item.taskId === taskId);
+
+    if (!submission) throw new Error(`Submission not found`);
+
+    return submission;
+  }
+
+  const { data: submission } = await supabase
+    .from('submissions')
+    .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+    .eq('task_id', taskId)
+    .order('submitted_at', { ascending: false })
+    .limit(1)
+    .single()
+    .throwOnError();
+
+  return mapToSubmission(submission);
 };

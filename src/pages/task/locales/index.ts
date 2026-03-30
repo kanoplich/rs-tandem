@@ -6,11 +6,11 @@ export const TASK_HEADER = {
 
 export const TASK_PROGRESS = {
   LABEL: 'Прогресс тренировки',
-  VALUE: '0%',
 };
 
 export const TASK_MESSAGE = {
   PLACEHOLDER: 'Введите ваш ответ... (Enter для отправки, Shift+Enter для новой строки)',
+  BUTTON_TEXT: 'Отправить',
 };
 
 export const TASK_ADVICE = {
@@ -30,4 +30,29 @@ export const TASK_EMPTY_STATE = {
   TITLE: 'Заданий по этой теме пока нет',
   DESCRIPTION: 'Попробуйте выбрать другую тему или вернитесь позже',
   BUTTON_TEXT: 'Вернуться назад',
+};
+
+export const TASK_AREA = {
+  WELCOME_MESSAGE:
+    'Привет! Я твой интервьюер. Я строгий, но справедливый — оцениваю знания, а не догадки. Мы будем тренироваться по выбранным темам. Учти: для перехода к следующему вопросу нужно набрать минимум 70%. Отвечай развернуто и подробно, без воды. Готов показать, на что способен? Поехали!',
+};
+
+export const USE_TASK_SESSION = {
+  SUCCESS: 'Поздравляем, вы успешно закончили тренировку!',
+  LOADING_ERROR: 'Не удалось загрузить данные. Попробуйте ещё раз.',
+  ID_MISSING: 'Не удалось определить текущее задание. Пожалуйста, выберите задание для тренировки.',
+};
+
+export const TASK_FEEDBACK = {
+  TITLE: 'Обратная связь',
+};
+
+export const TASK_ANSWER = {
+  TITLE: 'Твой ответ',
+};
+
+export const TASK_RESULT = {
+  NEXT: 'Следующий вопрос',
+  RETRY: 'Попробовать снова',
+  FINISH: 'Завершить тренировку',
 };

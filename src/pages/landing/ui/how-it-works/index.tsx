@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
+
 import styles from './styles.module.css';
 
 import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
 import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
 import { LANDING_HOW_IT_WORKS_TEXT, LANDING_STEPS_TEXT } from '@/pages/landing/locales';
+import { Button, ROUTES } from '@/shared';
 import { cn } from '@/shared/lib/utils';
 
 export const HowItWorks = () => {
@@ -45,6 +48,11 @@ export const HowItWorks = () => {
               </div>
             );
           })}
+        </div>
+        <div className="flex justify-center mt-8">
+          <Button asChild className="px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg">
+            <Link to={ROUTES.HOME}>{LANDING_HOW_IT_WORKS_TEXT.CTA}</Link>
+          </Button>
         </div>
       </div>
     </section>
