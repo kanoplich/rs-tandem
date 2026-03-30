@@ -4,7 +4,7 @@ import { supabase, type Public } from '../supabase-client';
 import { MOCK_SUBMISSIONS } from './mock';
 import type { Submission } from './types';
 
-import { DEFAULT_MAX_SCORE } from '@/shared';
+import { DEFAULT_MAX_SCORE, PASSING_SCORE } from '@/shared';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
@@ -85,4 +85,22 @@ export const getSubmissionHistoryByTaskId = async (taskId: string): Promise<Subm
     .throwOnError();
 
   return mapToSubmission(submission);
+};
+
+export const getPassedSubmissionHistory = async (): Promise<Submission[]> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(400);
+    const passedSubmission = MOCK_SUBMISSIONS.filter((data) => data.result.score >= PASSING_SCORE);
+
+    return passedSubmission;
+  }
+
+  const { data: passedSubmission } = await supabase
+    .from('submissions')
+    .select('*, public_tasks!task_id(title, topic_id, topics(title, stage))')
+    .gte('score', 70)
+    .order('submitted_at', { ascending: false })
+    .throwOnError();
+
+  return passedSubmission.map((item) => mapToSubmission(item));
 };
