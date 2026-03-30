@@ -1,4 +1,4 @@
-import { StageOverview } from '../stage-overview';
+import { TopicGrid, StageOverview } from '../index';
 
 import { STAGES, DEFAULT_STAGES_VALUE, Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared';
 import type { Topic, TopicProgress } from '@/shared/api';
@@ -6,9 +6,16 @@ import type { Topic, TopicProgress } from '@/shared/api';
 interface StageTabsProps {
   groupedTopics: Record<number, Topic[]>;
   groupedProgress: Record<number, TopicProgress[]>;
+  selectedTopicIds: string[];
+  onSelectionChange: (selectedIds: string[]) => void;
 }
 
-export const StageTabs = ({ groupedTopics, groupedProgress }: StageTabsProps) => {
+export const StageTabs = ({
+  groupedTopics,
+  groupedProgress,
+  selectedTopicIds,
+  onSelectionChange,
+}: StageTabsProps) => {
   return (
     <section className="container mx-auto max-w-7xl px-4 pt-6 gap-2">
       <Tabs defaultValue={String(DEFAULT_STAGES_VALUE)} className="w-full mx-auto max-w-312">
@@ -25,6 +32,11 @@ export const StageTabs = ({ groupedTopics, groupedProgress }: StageTabsProps) =>
               stageId={stage.id}
               totalTopics={groupedTopics[stage.id]?.length ?? 0}
               progress={groupedProgress[stage.id] ?? []}
+            />
+            <TopicGrid
+              topics={groupedProgress[stage.id] ?? []}
+              selectedTopicIds={selectedTopicIds}
+              onSelectionChange={onSelectionChange}
             />
           </TabsContent>
         ))}
