@@ -4,6 +4,7 @@ export { default as TopicIcon } from './container3.svg?react';
 export { default as StatisticIcon } from './container4.svg?react';
 export { default as CheckIcon } from './container5.svg?react';
 export { default as AwardIcon } from './container6.svg?react';
+export { default as TrophyIcon } from './container7.svg?react';
 export { default as LogoIcon } from './logo.svg?react';
 export { default as RsSchool } from './rs-school.svg?react';
 export { default as GoogleIcon } from './google.svg?react';

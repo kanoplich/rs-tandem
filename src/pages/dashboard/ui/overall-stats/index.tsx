@@ -3,10 +3,9 @@ import { useMemo } from 'react';
 import { OVERALL_STATS_TEXT } from '../../locales';
 import { StatCard } from '../stat-card';
 
-import { getTopicStats } from '@/shared';
+import { getTopicStats, MAX_DISPLAY_SCORE } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
-import { ProgressIcon, StatisticIcon, TopicIcon } from '@/shared/assets/icons';
-import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
+import { ProgressIcon, StatisticIcon, TrophyIcon } from '@/shared/assets/icons';
 
 interface OverallStatsProps {
   topicProgress: TopicProgress[];
@@ -28,7 +27,7 @@ export const OverallStats = ({ topicProgress }: OverallStatsProps) => {
           stats={`${progressPercent}%`}
         />
         <StatCard
-          icon={<TopicIcon />}
+          icon={<TrophyIcon />}
           description={OVERALL_STATS_TEXT.AVERAGE_SCORE_CARD_TEXT}
           stats={`${averageScore}/${MAX_DISPLAY_SCORE}`}
         />
