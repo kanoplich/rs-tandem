@@ -23,7 +23,7 @@ describe('getSubmissionHistory method', () => {
     vi.mocked(
       supabase
         .from('submissions')
-        .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+        .select('*, public_tasks!task_id(title, topic_id, topics(title, stage))')
         .order('submitted_at').throwOnError
     ).mockResolvedValue({
       data: [
@@ -39,6 +39,7 @@ describe('getSubmissionHistory method', () => {
           task_id: 'user-mock-01',
           user_id: 'closures-1',
           public_tasks: {
+            title: '',
             topic_id: '',
             topics: {
               stage: 1,
@@ -64,7 +65,7 @@ describe('getSubmissionHistory method', () => {
     vi.mocked(
       supabase
         .from('submissions')
-        .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+        .select('*, public_tasks!task_id(title, topic_id, topics(title, stage))')
         .order('submitted_at').throwOnError
     ).mockRejectedValue(new Error('Error'));
 
