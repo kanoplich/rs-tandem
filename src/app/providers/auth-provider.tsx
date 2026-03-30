@@ -1,7 +1,6 @@
 import { type ReactNode, useEffect, useState } from 'react';
 
-import { AuthContext } from '../../entities/session/';
-
+import { AuthContext } from '@/entities/session';
 import type { AuthSession as Session } from '@/shared/api';
 import { onAuthStateChange, getSession } from '@/shared/api';
 
