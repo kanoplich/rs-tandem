@@ -1,13 +1,7 @@
+import type { StageStatsItem } from '../lib/get-stage-stats';
 import { HISTORY_PAGE_TEXT } from '../locales';
 
-import { Card, STAGES, formatScore } from '@/shared';
-import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
-
-interface StageStatsItem {
-  stage: number;
-  total: number;
-  avgScore: number;
-}
+import { Card, STAGES, formatScore, MAX_DISPLAY_SCORE } from '@/shared';
 
 interface StageStatsProps {
   items: StageStatsItem[];

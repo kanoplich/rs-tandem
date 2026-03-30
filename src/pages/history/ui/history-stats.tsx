@@ -1,7 +1,6 @@
 import { HISTORY_PAGE_TEXT } from '../locales';
 
-import { Card } from '@/shared';
-import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
+import { Card, MAX_DISPLAY_SCORE } from '@/shared';
 
 interface HistoryStatsProps {
   total: number;

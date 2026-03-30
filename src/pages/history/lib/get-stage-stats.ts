@@ -1,6 +1,6 @@
 import type { Submission } from '@/shared/api';
 
-interface StageStatsItem {
+export interface StageStatsItem {
   stage: number;
   total: number;
   avgScore: number;
