@@ -1,4 +1,4 @@
-import { useAuth } from '@/shared/hooks';
+import { useAuth } from '@/entities/session';
 
 export const useUserProfile = () => {
   const { user } = useAuth();
