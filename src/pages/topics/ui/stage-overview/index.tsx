@@ -1,5 +1,3 @@
-import { TOPICS_OVERVIEW_TEXT } from '../../locales';
-
 import { STAGES, getProgressPercent, isTopicCompleted, Progress } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
 
@@ -12,8 +10,6 @@ interface StageOverviewProps {
 export const StageOverview = ({ stageId, totalTopics, progress }: StageOverviewProps) => {
   const stage = STAGES.find((stage) => stage.id === stageId);
   if (!stage) return null;
-  if (totalTopics === 0)
-    return <p className="text-center text-muted-foreground">{TOPICS_OVERVIEW_TEXT.ABSENCE}</p>;
 
   const completedTopics = progress.filter(isTopicCompleted).length;
   const percent = getProgressPercent(completedTopics, totalTopics);

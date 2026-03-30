@@ -1,3 +1,4 @@
+import { TOPICS_OVERVIEW_TEXT } from '../../locales';
 import { TopicCard } from '../index';
 
 import type { TopicProgress } from '@/shared/api';
@@ -9,12 +10,6 @@ interface TopicGridProps {
 }
 
 export const TopicGrid = ({ topics, selectedTopicIds, onSelectionChange }: TopicGridProps) => {
-  const stagesMap = new Map<number, TopicProgress[]>();
-  topics.forEach((topic) => {
-    if (!stagesMap.has(topic.stage)) stagesMap.set(topic.stage, []);
-    stagesMap.get(topic.stage)!.push(topic);
-  });
-
   const handleTopicSelect = (topicId: string, selected: boolean) => {
     const newSelected = selected
       ? [...selectedTopicIds, topicId]
@@ -22,19 +17,19 @@ export const TopicGrid = ({ topics, selectedTopicIds, onSelectionChange }: Topic
     onSelectionChange(newSelected);
   };
 
+  if (topics.length === 0) {
+    return <p className="text-center text-muted-foreground">{TOPICS_OVERVIEW_TEXT.ABSENCE}</p>;
+  }
+
   return (
-    <div className="space-y-8">
-      {Array.from(stagesMap.entries()).map(([stageId, stageTopics]) => (
-        <div key={stageId} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {stageTopics.map((topic) => (
-            <TopicCard
-              key={topic.topicId}
-              topic={topic}
-              checked={selectedTopicIds.includes(topic.topicId)}
-              onCheckedChange={(checked) => handleTopicSelect(topic.topicId, checked)}
-            />
-          ))}
-        </div>
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {topics.map((topic) => (
+        <TopicCard
+          key={topic.topicId}
+          topic={topic}
+          checked={selectedTopicIds.includes(topic.topicId)}
+          onCheckedChange={(checked) => handleTopicSelect(topic.topicId, checked)}
+        />
       ))}
     </div>
   );
