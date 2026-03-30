@@ -12,6 +12,7 @@ const { USE_MOCK_SUPABASE } = config;
 
 type PublicSubmissionRow = Public['Tables']['submissions']['Row'] & {
   public_tasks: {
+    title: string | null;
     topic_id: string | null;
     topics: {
       title: string;
@@ -35,6 +36,7 @@ const mapToSubmission = (data: PublicSubmissionRow): Submission => {
     taskId: data.task_id,
     answer: data.answer,
     submittedAt: data.submitted_at,
+    taskTitle: data.public_tasks.title ?? '',
     title: data.public_tasks.topics?.title ?? '',
     stage: data.public_tasks.topics?.stage ?? 1,
     result: {
@@ -56,7 +58,7 @@ export const getSubmissionHistory = async (): Promise<Submission[]> => {
 
   const { data: submissions } = await supabase
     .from('submissions')
-    .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+    .select('*, public_tasks!task_id(title, topic_id, topics(title, stage))')
     .order('submitted_at', { ascending: false })
     .throwOnError();
 
@@ -75,7 +77,7 @@ export const getSubmissionHistoryByTaskId = async (taskId: string): Promise<Subm
 
   const { data: submission } = await supabase
     .from('submissions')
-    .select('*, public_tasks!task_id(topic_id, topics(title, stage))')
+    .select('*, public_tasks!task_id(title, topic_id, topics(title, stage))')
     .eq('task_id', taskId)
     .order('submitted_at', { ascending: false })
     .limit(1)
