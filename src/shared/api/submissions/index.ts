@@ -98,7 +98,7 @@ export const getPassedSubmissionHistory = async (): Promise<Submission[]> => {
   const { data: passedSubmission } = await supabase
     .from('submissions')
     .select('*, public_tasks!task_id(title, topic_id, topics(title, stage))')
-    .gte('score', 70)
+    .gte('score', PASSING_SCORE)
     .order('submitted_at', { ascending: false })
     .throwOnError();
 
