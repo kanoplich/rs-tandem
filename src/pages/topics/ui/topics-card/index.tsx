@@ -2,18 +2,11 @@ import { Circle, CircleCheckBig } from 'lucide-react';
 
 import { TOPICS_CARD_TEXT, TOPICS_SUCCESS_TEXT } from '../../locales';
 
-import { isTopicCompleted, getProgressPercent, formatScore, DEFAULT_MAX_SCORE } from '@/shared';
+import { isTopicCompleted, getProgressPercent, formatScore } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
+import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 import { cn } from '@/shared/lib/utils';
-import {
-  Checkbox,
-  Progress,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/shared/ui';
+import { Checkbox, Progress, Card, CardContent, CardHeader, CardTitle } from '@/shared/ui';
 
 interface TopicCardProps {
   topic: TopicProgress;
@@ -55,7 +48,7 @@ export const TopicCard = ({ topic, checked = false, onCheckedChange }: TopicCard
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">{TOPICS_CARD_TEXT.SCORE}</span>
             <span className={cn('font-medium', completed && 'text-success')}>
-              {formatScore(topic.avgScore)}/{DEFAULT_MAX_SCORE}
+              {formatScore(topic.avgScore)}/{MAX_DISPLAY_SCORE}
             </span>
           </div>
 
@@ -67,12 +60,6 @@ export const TopicCard = ({ topic, checked = false, onCheckedChange }: TopicCard
             <Progress value={progressPercent} className="h-2" />
           </div>
         </CardContent>
-      )}
-
-      {(completed || inProgress) && (
-        <CardFooter className="pt-2 text-sm text-muted-foreground">
-          <div>{TOPICS_CARD_TEXT.ATTEMPTS}</div>
-        </CardFooter>
       )}
     </Card>
   );

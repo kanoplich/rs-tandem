@@ -1,5 +1,5 @@
 import { TOPICS_OVERVIEW_TEXT } from '../../locales';
-import { TopicCard } from '../index';
+import { TopicCard } from '../topics-card';
 
 import type { TopicProgress } from '@/shared/api';
 
