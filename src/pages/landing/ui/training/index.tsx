@@ -98,7 +98,7 @@ export const Training = () => {
               <img
                 src="/images/bg-landing1.png"
                 alt="RS School interview"
-                className="cursor-pointer w-full h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+                className="w-full h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
               />
               <div
                 className={cn(
