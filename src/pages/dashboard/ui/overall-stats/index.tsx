@@ -3,10 +3,9 @@ import { useMemo } from 'react';
 import { OVERALL_STATS_TEXT } from '../../locales';
 import { StatCard } from '../stat-card';
 
-import { getTopicStats } from '@/shared';
+import { getTopicStats, MAX_DISPLAY_SCORE } from '@/shared';
 import type { TopicProgress } from '@/shared/api';
 import { ProgressIcon, StatisticIcon, TrophyIcon } from '@/shared/assets/icons';
-import { MAX_DISPLAY_SCORE } from '@/shared/lib/constants';
 
 interface OverallStatsProps {
   topicProgress: TopicProgress[];
