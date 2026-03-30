@@ -5,7 +5,7 @@ export const useUserProfile = () => {
 
   const email = user?.email ?? '';
   const fullName = user?.user_metadata?.name ?? '';
-  const avatar = user?.user_metadata?.avatar;
+  const avatar = user?.user_metadata?.avatar_url;
 
   const initials = fullName?.[0]?.toUpperCase();
 
