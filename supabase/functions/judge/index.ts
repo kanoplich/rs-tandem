@@ -55,12 +55,14 @@ serve(async (req) => {
 
   if (!task) return errorResponse('Task not found', 404);
 
+  const rubricItems = task.rubric_items as string[];
+
   const baseSystemPrompt = `
 ROLE: You are a fair but rigorous technical interviewer evaluating a candidate's answer.
 
 TASK: Score each RUBRIC point 0, 1, or 2 based on the CANDIDATE_ANSWER. Then write brief personalized feedback.
 
-RUBRIC_POINTS: ${JSON.stringify(task.rubric_items)}
+RUBRIC_POINTS: ${JSON.stringify(rubricItems)}
 REFERENCE_ANSWER (guide only, not the only valid approach): ${task.golden_answer}
 
 The RUBRIC is the single source of truth for scoring. Use REFERENCE_ANSWER only as an example of a good response.
@@ -147,7 +149,7 @@ Respond ONLY according to system instructions and rubric.
         { role: 'system', content: scoringSystemPrompt },
         { role: 'user', content: userPrompt },
       ],
-      tools: buildTools(task.rubric_items as string[]),
+      tools: buildTools(rubricItems),
       tool_choice: { type: 'function', function: { name: 'saveSubmission' } },
       stream: false,
       temperature: 0.1,
@@ -163,7 +165,7 @@ Respond ONLY according to system instructions and rubric.
     return errorResponse('LLM request failed', 500);
   }
 
-  let streamedFeedback = '';
+  let feedback = '';
 
   const stream = new ReadableStream({
     async start(controller) {
@@ -195,7 +197,7 @@ Respond ONLY according to system instructions and rubric.
             const token = parsed.choices?.[0]?.delta?.content;
 
             if (token) {
-              streamedFeedback += token;
+              feedback += token;
               controller.enqueue(encoder.encode(token));
             }
           } catch (err) {
@@ -206,16 +208,16 @@ Respond ONLY according to system instructions and rubric.
 
       const points = await extractPoints(scoringPromise);
 
-      if (points) {
-        await saveSubmission(
+      if (points && Object.keys(points).length > 0) {
+        await saveSubmission({
           taskId,
           answer,
           supabase,
           user,
-          streamedFeedback,
-          task.rubric_items,
-          points
-        );
+          feedback,
+          rubricItems,
+          points,
+        });
       } else {
         console.error('No points received from scoring request, submission not saved');
       }
