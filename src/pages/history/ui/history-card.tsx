@@ -15,7 +15,10 @@ export const HistoryCard = ({ submission }: HistoryCardProps) => {
           <span className="text-xs bg-secondary text-primary px-2 py-1 rounded">
             {stageInfo?.title}
           </span>
-          <span className="font-medium text-light">{submission.title}</span>
+          <div className="flex flex-col">
+            <span className="font-medium text-light">{submission.title}</span>
+            <span className="text-xs text-muted-foreground">{submission.taskTitle}</span>
+          </div>
         </div>
       </div>
 
