@@ -56,6 +56,15 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     reset();
   };
 
+  const handleSuccess = () => {
+    const percent = getProgressPercent(currentTaskNumber, tasksCount);
+    setProgressPercent(percent);
+
+    if (isLastTask) {
+      toast.success(USE_TASK_SESSION.SUCCESS);
+    }
+  };
+
   const handleSubmit = async (message: string) => {
     setUserAnswer(message);
 
@@ -81,8 +90,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       const passed = submission.result.score >= PASSING_SCORE;
 
       if (passed) {
-        const percent = getProgressPercent(currentTaskNumber, tasksCount);
-        setProgressPercent(percent);
+        handleSuccess();
       }
 
       setResult(judgeResult);
@@ -95,15 +103,9 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   };
 
   const handleNext = () => {
-    const isPassed = result?.score !== undefined && result.score >= PASSING_SCORE;
-
     if (currentIndex < tasks.length - 1 && isPassed) {
       setCurrentIndex((prev) => prev + 1);
       reset();
-    }
-
-    if (currentIndex === tasks.length - 1 && isPassed) {
-      toast.success(USE_TASK_SESSION.SUCCESS);
     }
   };
 
