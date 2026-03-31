@@ -4,13 +4,13 @@ import { toast } from 'sonner';
 
 import { TASK_LOADING_ERRORS } from '../locales';
 
-import { ROUTES } from '@/shared';
+import { ROUTES, TASK_MODES, type TaskMode } from '@/shared';
 import { getPassedSubmissionHistory, getTasksByTopic, type Task } from '@/shared/api';
 
 interface UseTasksLoadingProps {
   stage: string | null;
   topicsParam: string | null;
-  mode: 'continue' | 'restart';
+  mode: TaskMode;
 }
 
 interface UseTasksReturn {
@@ -44,7 +44,7 @@ export const useTasksLoading = ({
         const topicsArr = topicsParam.split(',');
         const loadedTasks: Task[] = await getTasksByTopic(topicsArr);
 
-        if (mode === 'continue') {
+        if (mode === TASK_MODES.continue) {
           const passedTaskSubmission = await getPassedSubmissionHistory();
           const passedTaskIds = new Set(passedTaskSubmission.map((sub) => sub.taskId));
 

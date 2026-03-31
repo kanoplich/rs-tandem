@@ -32,3 +32,10 @@ export const THEMES = {
 export type Theme = (typeof THEMES)[keyof typeof THEMES];
 
 export const THEME_STORAGE_KEY = 'project-theme';
+
+export const TASK_MODES = {
+  continue: 'continue',
+  restart: 'restart',
+} as const;
+
+export type TaskMode = (typeof TASK_MODES)[keyof typeof TASK_MODES];
