@@ -3,8 +3,7 @@ import { toast } from 'sonner';
 
 import { HISTORY_PAGE_TEXT } from '../locales';
 
-import { PASSING_SCORE } from '@/shared';
-import { getSubmissionHistory, type Submission } from '@/shared/api';
+import { getPassedSubmissionHistory, type Submission } from '@/shared/api';
 
 export const useHistory = () => {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
@@ -13,11 +12,9 @@ export const useHistory = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const data = await getSubmissionHistory();
+        const data = await getPassedSubmissionHistory();
 
-        const successfulSubmissions = data.filter((item) => item.result.score >= PASSING_SCORE);
-
-        setSubmissions(successfulSubmissions);
+        setSubmissions(data);
       } catch (err) {
         const message = err instanceof Error ? err.message : HISTORY_PAGE_TEXT.ERROR.LOAD;
 
