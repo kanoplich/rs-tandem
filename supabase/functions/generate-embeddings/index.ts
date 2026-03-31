@@ -24,7 +24,6 @@ serve(async (req) => {
     return errorResponse('OPENAI_API_KEY not configured', 500);
   }
 
-  // Fetch all topics
   const { data: topics, error: topicsError } = await supabase
     .from('topics')
     .select('id, title, description');
@@ -37,7 +36,6 @@ serve(async (req) => {
     topics.map((t: { id: string; title: string; description: string }) => [t.id, t])
   );
 
-  // Fetch all tasks
   const { data: tasks, error: tasksError } = await supabase
     .from('tasks')
     .select('id, topic_id, title, type, difficulty, question_text, golden_answer');

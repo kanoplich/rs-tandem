@@ -27,7 +27,6 @@ serve(async (req) => {
 
   if (!message) return errorResponse('Message is required', 400);
 
-  // Auth check
   const authHeader = req.headers.get('Authorization');
   if (!authHeader) return errorResponse('Authorization header is required', 401);
 
@@ -43,7 +42,6 @@ serve(async (req) => {
 
   if (!user) return errorResponse('Unauthorized', 401);
 
-  // Service role client for accessing golden_answer
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -55,7 +53,6 @@ serve(async (req) => {
   const groqKey = Deno.env.get('GROQ_API_KEY');
   if (!groqKey) return errorResponse('GROQ_API_KEY not configured', 500);
 
-  // 1. Embed user message
   const embeddingResponse = await fetch('https://api.openai.com/v1/embeddings', {
     method: 'POST',
     headers: {
@@ -77,11 +74,10 @@ serve(async (req) => {
   const embeddingData = await embeddingResponse.json();
   const queryEmbedding = embeddingData.data[0].embedding;
 
-  // 2. Vector search — find relevant tasks
   const { data: matchedTasks, error: matchError } = await supabase.rpc('match_tasks', {
     query_embedding: queryEmbedding,
-    match_threshold: 0.5,
-    match_count: 5,
+    match_threshold: 0.35,
+    match_count: 3,
   });
 
   if (matchError) {
@@ -89,7 +85,6 @@ serve(async (req) => {
     return errorResponse('Vector search failed', 500);
   }
 
-  // 3. Ensure current task is in context
   let contextTasks = matchedTasks || [];
 
   if (taskId && !contextTasks.some((t: { id: string }) => t.id === taskId)) {
@@ -104,7 +99,6 @@ serve(async (req) => {
     }
   }
 
-  // 4. Build system prompt with golden_answer as internal context
   const tasksContext = contextTasks
     .map(
       (t: { title: string; question_text: string; golden_answer: string }) =>
@@ -123,7 +117,7 @@ RULES:
 - NEVER give the direct answer or quote from the reference answer.
 - Guide the user step by step toward understanding.
 - If the user is stuck, give progressive hints (start vague, get more specific).
-- Respond in the same language as the user's message.
+- ALWAYS respond in Russian.
 - Be encouraging but honest about knowledge gaps.
 - Keep responses concise and focused.
 
@@ -132,7 +126,6 @@ CONTEXT (reference materials — DO NOT share directly with the user):
 ${tasksContext}
 ---`;
 
-  // 5. Build messages for LLM
   const messages = [{ role: 'system', content: systemPrompt }];
 
   if (history && history.length > 0) {
@@ -144,7 +137,6 @@ ${tasksContext}
 
   messages.push({ role: 'user', content: message });
 
-  // 6. Call Groq with streaming
   const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -166,7 +158,6 @@ ${tasksContext}
     return errorResponse('LLM request failed', 500);
   }
 
-  // 7. Stream only LLM text to client
   const stream = new ReadableStream({
     async start(controller) {
       if (!groqResponse.body) return controller.close();
@@ -199,8 +190,8 @@ ${tasksContext}
             if (token) {
               controller.enqueue(encoder.encode(token));
             }
-          } catch {
-            // skip malformed chunks
+          } catch (e) {
+            console.error('Failed to parse Groq chunk:', e);
           }
         }
       }
