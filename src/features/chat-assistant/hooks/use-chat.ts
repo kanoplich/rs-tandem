@@ -29,10 +29,12 @@ export const useChat = (taskId?: string) => {
       setMessages((prev) => [...prev, userMessage, assistantMessage]);
       setIsStreaming(true);
 
+      let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
+
       try {
         const history = messages.map(({ role, content }) => ({ role, content }) as const);
 
-        const reader = await sendChatMessage({
+        reader = await sendChatMessage({
           message: text.trim(),
           ...(taskId && { taskId }),
           history,
@@ -44,7 +46,7 @@ export const useChat = (taskId?: string) => {
           const { done, value } = await reader.read();
           if (done) break;
 
-          const chunk = decoder.decode(value);
+          const chunk = decoder.decode(value, { stream: true });
           setMessages((prev) =>
             prev.map((msg) =>
               msg.id === assistantMessage.id ? { ...msg, content: msg.content + chunk } : msg
@@ -52,6 +54,7 @@ export const useChat = (taskId?: string) => {
           );
         }
       } catch {
+        reader?.cancel();
         setMessages((prev) =>
           prev.map((msg) =>
             msg.id === assistantMessage.id

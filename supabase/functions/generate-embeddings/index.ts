@@ -14,6 +14,18 @@ serve(async (req) => {
     return errorResponse('Authorization required', 401);
   }
 
+  const userClient = createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } }
+  );
+
+  const {
+    data: { user },
+  } = await userClient.auth.getUser();
+
+  if (!user) return errorResponse('Unauthorized', 401);
+
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -38,7 +50,8 @@ serve(async (req) => {
 
   const { data: tasks, error: tasksError } = await supabase
     .from('tasks')
-    .select('id, topic_id, title, type, difficulty, question_text, golden_answer');
+    .select('id, topic_id, title, type, difficulty, question_text, golden_answer')
+    .is('embedding', null);
 
   if (tasksError) {
     return errorResponse(`Failed to fetch tasks: ${tasksError.message}`, 500);

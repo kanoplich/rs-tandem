@@ -4,6 +4,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { corsHeaders } from '../_shared/cors.ts';
 import { errorResponse } from '../_shared/error-response.ts';
 
+const HISTORY_CHAR_BUDGET = 8000;
+
 interface ChatRequest {
   message: string;
   taskId?: string;
@@ -130,7 +132,17 @@ ${tasksContext}
 
   if (history && history.length > 0) {
     const recentHistory = history.slice(-10);
-    for (const msg of recentHistory) {
+    let totalChars = 0;
+    const budgetedHistory = [];
+
+    for (let i = recentHistory.length - 1; i >= 0; i--) {
+      const msg = recentHistory[i];
+      totalChars += msg.content.length;
+      if (totalChars > HISTORY_CHAR_BUDGET) break;
+      budgetedHistory.unshift(msg);
+    }
+
+    for (const msg of budgetedHistory) {
       messages.push({ role: msg.role, content: msg.content });
     }
   }
