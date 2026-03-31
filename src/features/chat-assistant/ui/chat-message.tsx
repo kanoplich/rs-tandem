@@ -1,5 +1,6 @@
 import Markdown from 'react-markdown';
 
+import { ROLES } from '../lib/constants';
 import type { ChatMessage as ChatMessageType } from '../lib/types';
 
 import { cn } from '@/shared/lib/utils';
@@ -9,7 +10,7 @@ interface ChatMessageProps {
 }
 
 export const ChatMessage = ({ message }: ChatMessageProps) => {
-  const isUser = message.role === 'user';
+  const isUser = message.role === ROLES.user;
 
   return (
     <div className={cn('flex', isUser ? 'justify-end' : 'justify-start')}>

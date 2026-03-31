@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { sendChatMessage } from '../api/chat';
+import { ROLES } from '../lib/constants';
 import type { ChatMessage } from '../lib/types';
 
 export const useChat = (taskId?: string) => {
@@ -16,13 +17,13 @@ export const useChat = (taskId?: string) => {
 
       const userMessage: ChatMessage = {
         id: crypto.randomUUID(),
-        role: 'user',
+        role: ROLES.user,
         content: text.trim(),
       };
 
       const assistantMessage: ChatMessage = {
         id: crypto.randomUUID(),
-        role: 'assistant',
+        role: ROLES.assistant,
         content: '',
       };
 
