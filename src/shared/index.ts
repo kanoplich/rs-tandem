@@ -13,7 +13,9 @@ export {
   THEMES,
   THEME_STORAGE_KEY,
   MAX_DISPLAY_SCORE,
+  TASK_MODES,
   type Theme,
+  type TaskMode,
 } from './lib/constants';
 
 export { getProgressPercent } from './lib/get-progress-percent';
