@@ -24,6 +24,7 @@ export const TASK_ADVICE = {
 export const TASK_LOADING_ERRORS = {
   TASKS_LOADING: 'Не удалось загрузить задания. Попробуйте позже.',
   NO_TOPICS: 'Темы не выбраны. Пожалуйста выберите темы для тренировки.',
+  ALL_TASKS_COMPLETED: 'Все задания по выбранным темам выполнены. Выберите другие темы.',
 };
 
 export const TASK_EMPTY_STATE = {

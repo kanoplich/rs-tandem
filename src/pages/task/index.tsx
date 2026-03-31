@@ -13,11 +13,14 @@ import { TaskResult } from './ui/task-result';
 
 import { Loader } from '@/shared';
 
+type TaskMode = 'continue' | 'restart';
+
 export const Task = () => {
   const [searchParams] = useSearchParams();
   const topicsParam = searchParams.get('topics');
   const stage = searchParams.get('stage');
-  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
+  const mode = (searchParams.get('mode') ?? 'continue') as TaskMode;
+  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam, mode });
   const {
     currentTaskNumber,
     tasksCount,
