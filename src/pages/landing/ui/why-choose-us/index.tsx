@@ -6,6 +6,7 @@ import {
   INTERSECTION_OBSERVER_THRESHOLD_FEATURES,
 } from '@/pages/landing/lib/constants';
 import { LANDING_FEATURES_TEXT, LANDING_WHY_CHOOSE_US_TEXT } from '@/pages/landing/locales';
+import { Card } from '@/shared';
 import {
   AwardIcon,
   CheckIcon,
@@ -32,8 +33,8 @@ const features = [
   {
     id: 'current-topics',
     icon: <TopicIcon />,
-    title: '37 актуальных тем',
-    text: 'От основ JavaScript до продвинутой архитектуры и Node.js',
+    title: '33 темы 157 заданий',
+    text: 'От основ JavaScript до продвинутой архитектуры приложений',
   },
   {
     id: 'analysis',
@@ -60,6 +61,8 @@ export const WhyChooseUs = () => {
     threshold: INTERSECTION_OBSERVER_THRESHOLD_FEATURES,
   });
 
+  const desc = LANDING_WHY_CHOOSE_US_TEXT.DESCRIPTION;
+
   return (
     <section className="py-12 sm:py-16 lg:py-24">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -68,7 +71,9 @@ export const WhyChooseUs = () => {
             {LANDING_WHY_CHOOSE_US_TEXT.TITLE}
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">
-            {LANDING_WHY_CHOOSE_US_TEXT.DESCRIPTION}
+            {desc.PART_1} <br />
+            <span className="text-primary font-semibold">157</span> {desc.PART_2}{' '}
+            <span className="text-primary font-semibold">0</span> {desc.PART_3}
           </p>
         </div>
 
@@ -77,13 +82,9 @@ export const WhyChooseUs = () => {
             const textItem = LANDING_FEATURES_TEXT.find((f) => f.ID === item.id);
             if (!textItem) return null;
             return (
-              <div
+              <Card
                 key={item.id}
-                className={cn(
-                  'bg-card border rounded-2xl p-6 sm:p-8',
-                  styles.whyCard,
-                  isVisible && styles.whyCardVisible
-                )}
+                className={cn('p-6 sm:p-8', styles.whyCard, isVisible && styles.whyCardVisible)}
                 style={
                   {
                     '--delay': `${(index + 1) * ANIMATION_DELAYS.FEATURE_CARD}ms`,
@@ -95,7 +96,7 @@ export const WhyChooseUs = () => {
                   <h4 className="text-lg sm:text-xl font-semibold">{item.title}</h4>
                   <p className="text-sm sm:text-base text-muted-foreground">{item.text}</p>
                 </div>
-              </div>
+              </Card>
             );
           })}
         </div>

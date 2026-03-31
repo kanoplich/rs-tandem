@@ -9,14 +9,20 @@ export const LANDING_SUCCESS_TEXT = {
 };
 
 export const LANDING_WHY_CHOOSE_US_TEXT = {
-  TITLE: 'Почему выбирают нас?',
-  DESCRIPTION:
-    'Платформа разработана специально для подготовки к интервью в рамках программы RS School',
+  TITLE: 'Самый строгий интервьюер RS School',
+
+  DESCRIPTION: {
+    PART_1: 'Он не подскажет ответ. Он заставит тебя думать.',
+    PART_2: 'полезных и актуальных заданий.',
+    PART_3:
+      'подсказок. Только ты и AI-интервьюер. Это будет сложно, но именно так ты подготовишься к реальному интервью.',
+  },
 };
 
 export const LANDING_HOW_IT_WORKS_TEXT = {
   TITLE: 'Как это работает?',
   DESCRIPTION: 'Простой процесс для эффективной подготовки',
+  CTA: 'Попробовать бесплатно',
 };
 
 export const LANDING_READY_TEXT = {
