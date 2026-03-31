@@ -81,8 +81,13 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
 
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
-        setFeedback((prev) => prev + decoder.decode(value));
+
+        if (done) {
+          setFeedback((prev) => prev + decoder.decode());
+          break;
+        }
+
+        setFeedback((prev) => prev + decoder.decode(value, { stream: true }));
       }
 
       const submission = await getSubmissionHistoryByTaskId(currentTask.id);
