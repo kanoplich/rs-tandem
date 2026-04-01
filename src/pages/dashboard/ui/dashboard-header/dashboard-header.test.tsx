@@ -5,7 +5,7 @@ import { DASHBOARD_HEADER_TEXT } from '../../locales';
 
 import { DashboardHeader } from '.';
 
-describe.only('DashboardHeader', () => {
+describe('DashboardHeader', () => {
   it('renders the header title and description', () => {
     render(<DashboardHeader />);
 
