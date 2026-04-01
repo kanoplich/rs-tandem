@@ -1,6 +1,6 @@
 import { Circle, CircleCheckBig, Play, RotateCcw } from 'lucide-react';
 
-import { TOPICS_CARD_TEXT } from '../../locales';
+import { TOPIC_CARD_TEXT } from '../../locales';
 
 import {
   isTopicCompleted,
@@ -64,15 +64,13 @@ export const TopicCard = ({
             {completed && (
               <div className="flex items-center gap-1">
                 <CircleCheckBig className="h-4 w-4 text-success" />
-                <span className="text-xs text-success">{TOPICS_CARD_TEXT.COMPLETED}</span>
+                <span className="text-xs text-success">{TOPIC_CARD_TEXT.COMPLETED}</span>
               </div>
             )}
             {inProgress && (
               <div className="flex items-center gap-1">
                 <Circle className="h-4 w-4 text-muted-foreground" />
-                <span className="text-xs text-muted-foreground">
-                  {TOPICS_CARD_TEXT.IN_PROGRESS}
-                </span>
+                <span className="text-xs text-muted-foreground">{TOPIC_CARD_TEXT.IN_PROGRESS}</span>
               </div>
             )}
           </div>
@@ -85,14 +83,14 @@ export const TopicCard = ({
             >
               {formatScore(progress.avgScore)}
             </span>
-            <p className="text-xs text-muted-foreground">{TOPICS_CARD_TEXT.SCORE}</p>
+            <p className="text-xs text-muted-foreground">{TOPIC_CARD_TEXT.SCORE}</p>
           </div>
         )}
       </div>
 
       <div className="space-y-1">
         <div className="flex justify-between text-sm">
-          <span className="text-muted-foreground">{TOPICS_CARD_TEXT.PROGRESS}</span>
+          <span className="text-muted-foreground">{TOPIC_CARD_TEXT.PROGRESS}</span>
           <span className="font-medium">{progressPercent}%</span>
         </div>
         <Progress value={progressPercent} className="h-2" />
@@ -109,7 +107,7 @@ export const TopicCard = ({
             }}
           >
             <Play className="h-3.5 w-3.5 mr-1" />
-            {inProgress ? TOPICS_CARD_TEXT.CONTINUE : TOPICS_CARD_TEXT.START}
+            {inProgress ? TOPIC_CARD_TEXT.CONTINUE : TOPIC_CARD_TEXT.START}
           </Button>
         )}
         {(completed || inProgress) && (
@@ -122,7 +120,7 @@ export const TopicCard = ({
             }}
           >
             <RotateCcw className="h-3.5 w-3.5 mr-1" />
-            {TOPICS_CARD_TEXT.RESTART}
+            {TOPIC_CARD_TEXT.RESTART}
           </Button>
         )}
       </div>

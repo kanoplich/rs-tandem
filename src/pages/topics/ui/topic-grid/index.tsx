@@ -1,4 +1,4 @@
-import { TOPICS_OVERVIEW_TEXT } from '../../locales';
+import { TOPIC_OVERVIEW_TEXT } from '../../locales';
 import { TopicCard } from '../topic-card';
 
 import type { Topic, TopicProgress } from '@/shared/api';
@@ -23,7 +23,7 @@ export const TopicGrid = ({
   const progressByTopicId = new Map(progress.map((p) => [p.topicId, p]));
 
   if (topics.length === 0) {
-    return <p className="text-center text-muted-foreground">{TOPICS_OVERVIEW_TEXT.ABSENCE}</p>;
+    return <p className="text-center text-muted-foreground">{TOPIC_OVERVIEW_TEXT.ABSENCE}</p>;
   }
 
   return (
