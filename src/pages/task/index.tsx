@@ -16,10 +16,9 @@ import { Loader, TASK_MODES, type TaskMode } from '@/shared';
 export const Task = () => {
   const [searchParams] = useSearchParams();
   const topicsParam = searchParams.get('topics');
-  const stage = searchParams.get('stage');
   const rawMode = searchParams.get('mode');
   const mode: TaskMode = rawMode === TASK_MODES.restart ? TASK_MODES.restart : TASK_MODES.continue;
-  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam, mode });
+  const { tasks, isLoading } = useTasksLoading({ topicsParam, mode });
   const {
     currentTaskNumber,
     tasksCount,
@@ -34,6 +33,7 @@ export const Task = () => {
     isSending,
     isPassed,
     isLastTask,
+    stageNumber,
   } = useTaskSession({
     tasks,
   });
