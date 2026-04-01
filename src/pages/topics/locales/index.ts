@@ -12,16 +12,18 @@ export const TOPICS_OVERVIEW_TEXT = {
 };
 
 export const TOPICS_CARD_TEXT = {
-  SCORE: 'Баллы:',
-  PROGRESS: 'Прогресс:',
-  ATTEMPTS: 'Попыток:',
-};
-
-export const TOPICS_SUCCESS_TEXT = {
+  SCORE: 'балл',
+  PROGRESS: 'Прогресс',
   COMPLETED: 'Завершено',
   IN_PROGRESS: 'В процессе',
+  START: 'Начать',
+  CONTINUE: 'Продолжить',
+  RESTART: 'Пройти заново',
 };
 
-export const TOPICS_GRID_TEXT = {
-  SELECTED_TOPICS: 'Выбрано тем',
+export const TOPICS_TOOLBAR_TEXT = {
+  SELECTED: 'Выбрано тем',
+  SELECT_ALL: 'Выбрать все',
+  DESELECT_ALL: 'Снять все',
+  START_TRAINING: 'Начать тренировку',
 };

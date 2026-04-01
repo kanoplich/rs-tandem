@@ -1,47 +1,73 @@
 import { StageOverview } from '../stage-overview';
+import { TopicToolbar } from '../topic-toolbar';
 import { TopicGrid } from '../topics-grid';
 
-import { STAGES, DEFAULT_STAGES_VALUE, Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared';
+import { DEFAULT_STAGES_VALUE, STAGES, Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared';
 import type { Topic, TopicProgress } from '@/shared/api';
 
 interface StageTabsProps {
   groupedTopics: Record<number, Topic[]>;
   groupedProgress: Record<number, TopicProgress[]>;
-  selectedTopicIds: string[];
-  onSelectionChange: (selectedIds: string[]) => void;
+  selectedTopicIds: Set<string>;
+  onTopicToggle: (topicId: string, checked: boolean) => void;
+  onSelectAll: (stageId: number) => void;
+  onDeselectAll: (stageId: number) => void;
+  onStartTraining: (stageId: number) => void;
+  onContinue: (topicId: string) => void;
+  onRestart: (topicId: string) => void;
+  onStageChange: () => void;
 }
 
 export const StageTabs = ({
   groupedTopics,
   groupedProgress,
   selectedTopicIds,
-  onSelectionChange,
+  onTopicToggle,
+  onSelectAll,
+  onDeselectAll,
+  onStartTraining,
+  onContinue,
+  onRestart,
+  onStageChange,
 }: StageTabsProps) => {
   return (
-    <section className="container mx-auto max-w-7xl p-6 px-4 pt-6">
-      <Tabs defaultValue={String(DEFAULT_STAGES_VALUE)} className="w-full mx-auto max-w-312">
-        <TabsList variant="stages" className="mb-4">
-          {STAGES.map((stage) => (
-            <TabsTrigger key={stage.id} value={String(stage.id)} variant="stages">
-              {stage.title}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+    <Tabs defaultValue={String(DEFAULT_STAGES_VALUE)} onValueChange={onStageChange}>
+      <TabsList variant="stages">
         {STAGES.map((stage) => (
+          <TabsTrigger key={stage.id} value={String(stage.id)} variant="stages">
+            {stage.title}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+      {STAGES.map((stage) => {
+        const stageTopics = groupedTopics[stage.id] ?? [];
+        const stageProgress = groupedProgress[stage.id] ?? [];
+        const stageSelectedCount = stageTopics.filter((t) => selectedTopicIds.has(t.id)).length;
+
+        return (
           <TabsContent key={stage.id} value={String(stage.id)} className="space-y-6">
             <StageOverview
               stageId={stage.id}
-              totalTopics={groupedTopics[stage.id]?.length ?? 0}
-              progress={groupedProgress[stage.id] ?? []}
+              totalTopics={stageTopics.length}
+              progress={stageProgress}
+            />
+            <TopicToolbar
+              selectedCount={stageSelectedCount}
+              onSelectAll={() => onSelectAll(stage.id)}
+              onDeselectAll={() => onDeselectAll(stage.id)}
+              onStartTraining={() => onStartTraining(stage.id)}
             />
             <TopicGrid
-              topics={groupedProgress[stage.id] ?? []}
+              topics={stageTopics}
+              progress={stageProgress}
               selectedTopicIds={selectedTopicIds}
-              onSelectionChange={onSelectionChange}
+              onTopicToggle={onTopicToggle}
+              onContinue={onContinue}
+              onRestart={onRestart}
             />
           </TabsContent>
-        ))}
-      </Tabs>
-    </section>
+        );
+      })}
+    </Tabs>
   );
 };
