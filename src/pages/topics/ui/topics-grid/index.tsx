@@ -22,7 +22,7 @@ export const TopicGrid = ({ topics, selectedTopicIds, onSelectionChange }: Topic
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {topics.map((topic) => (
         <TopicCard
           key={topic.topicId}

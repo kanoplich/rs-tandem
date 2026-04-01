@@ -18,9 +18,9 @@ export const StageTabs = ({
   onSelectionChange,
 }: StageTabsProps) => {
   return (
-    <section className="container mx-auto max-w-7xl px-4 pt-6">
+    <section className="container mx-auto max-w-7xl p-6 px-4 pt-6">
       <Tabs defaultValue={String(DEFAULT_STAGES_VALUE)} className="w-full mx-auto max-w-312">
-        <TabsList variant="stages">
+        <TabsList variant="stages" className="mb-4">
           {STAGES.map((stage) => (
             <TabsTrigger key={stage.id} value={String(stage.id)} variant="stages">
               {stage.title}
@@ -28,7 +28,7 @@ export const StageTabs = ({
           ))}
         </TabsList>
         {STAGES.map((stage) => (
-          <TabsContent key={stage.id} value={String(stage.id)} className="space-y-4">
+          <TabsContent key={stage.id} value={String(stage.id)} className="space-y-6">
             <StageOverview
               stageId={stage.id}
               totalTopics={groupedTopics[stage.id]?.length ?? 0}
