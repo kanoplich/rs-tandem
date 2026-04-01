@@ -1,6 +1,6 @@
 import { StageOverview } from '../stage-overview';
+import { TopicGrid } from '../topic-grid';
 import { TopicToolbar } from '../topic-toolbar';
-import { TopicGrid } from '../topics-grid';
 
 import { DEFAULT_STAGES_VALUE, STAGES, Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared';
 import type { Topic, TopicProgress } from '@/shared/api';
