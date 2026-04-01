@@ -1,22 +1,116 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useTopicsData } from './hooks/use-topics-data';
-import { TopicsHeader, StageTabs } from './ui';
+import { StageTabs, TopicsHeader } from './ui';
 
-import { groupByStage, Loader } from '@/shared';
+import { groupByStage, Loader, ROUTES, TASK_MODES, type TaskMode } from '@/shared';
 
 export const Topics = () => {
   const { topics, progress, isLoading } = useTopicsData();
+  const [selectedTopicIds, setSelectedTopicIds] = useState<Set<string>>(new Set());
+  const navigate = useNavigate();
 
   const groupedTopics = useMemo(() => groupByStage(topics), [topics]);
   const groupedProgress = useMemo(() => groupByStage(progress), [progress]);
 
+  const handleTopicToggle = useCallback((topicId: string, checked: boolean) => {
+    setSelectedTopicIds((prev) => {
+      const next = new Set(prev);
+      if (checked) {
+        next.add(topicId);
+      } else {
+        next.delete(topicId);
+      }
+      return next;
+    });
+  }, []);
+
+  const handleSelectAll = useCallback(
+    (stageId: number) => {
+      const stageTopics = groupedTopics[stageId] ?? [];
+      setSelectedTopicIds((prev) => {
+        const next = new Set(prev);
+        for (const t of stageTopics) {
+          next.add(t.id);
+        }
+        return next;
+      });
+    },
+    [groupedTopics]
+  );
+
+  const handleDeselectAll = useCallback(
+    (stageId: number) => {
+      const stageTopics = groupedTopics[stageId] ?? [];
+      setSelectedTopicIds((prev) => {
+        const next = new Set(prev);
+        for (const t of stageTopics) {
+          next.delete(t.id);
+        }
+        return next;
+      });
+    },
+    [groupedTopics]
+  );
+
+  const handleStageChange = useCallback(() => {
+    setSelectedTopicIds(new Set());
+  }, []);
+
+  const buildTaskUrl = useCallback(
+    ({ topicIds, stage, mode }: { topicIds: string; stage: number; mode: TaskMode }) => {
+      const params = new URLSearchParams({ topics: topicIds, stage: String(stage), mode });
+      return `${ROUTES.TASK}?${params.toString()}`;
+    },
+    []
+  );
+
+  const handleStartTraining = useCallback(
+    (stageId: number) => {
+      const topicIds = Array.from(selectedTopicIds).join(',');
+      navigate(buildTaskUrl({ topicIds, stage: stageId, mode: TASK_MODES.continue }));
+    },
+    [selectedTopicIds, navigate, buildTaskUrl]
+  );
+
+  const handleContinue = useCallback(
+    (topicId: string) => {
+      const topic = topics.find((t) => t.id === topicId);
+      navigate(
+        buildTaskUrl({ topicIds: topicId, stage: topic?.stage ?? 1, mode: TASK_MODES.continue })
+      );
+    },
+    [topics, navigate, buildTaskUrl]
+  );
+
+  const handleRestart = useCallback(
+    (topicId: string) => {
+      const topic = topics.find((t) => t.id === topicId);
+      navigate(
+        buildTaskUrl({ topicIds: topicId, stage: topic?.stage ?? 1, mode: TASK_MODES.restart })
+      );
+    },
+    [topics, navigate, buildTaskUrl]
+  );
+
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col">
+    <section className="container mx-auto max-w-7xl px-4 pt-6">
       <TopicsHeader />
-      <StageTabs groupedTopics={groupedTopics} groupedProgress={groupedProgress} />
-    </div>
+      <StageTabs
+        groupedTopics={groupedTopics}
+        groupedProgress={groupedProgress}
+        selectedTopicIds={selectedTopicIds}
+        onTopicToggle={handleTopicToggle}
+        onSelectAll={handleSelectAll}
+        onDeselectAll={handleDeselectAll}
+        onStartTraining={handleStartTraining}
+        onContinue={handleContinue}
+        onRestart={handleRestart}
+        onStageChange={handleStageChange}
+      />
+    </section>
   );
 };
