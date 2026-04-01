@@ -28,6 +28,7 @@ describe('getTask method', () => {
         id: 'closures-1',
         type: 'theory_open',
         difficulty: 2,
+        stage: 2,
         title: 'Что такое замыкание?',
         code_template: null,
         created_at: null,

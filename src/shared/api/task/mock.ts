@@ -5,6 +5,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'closures-1',
     topicId: 'closures',
     type: 'theory_open',
+    stage: 2,
     difficulty: 2,
     title: 'Что такое замыкание?',
     questionText:
@@ -20,6 +21,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'closures-2',
     topicId: 'closures',
     type: 'theory_choice',
+    stage: 1,
     difficulty: 1,
     title: 'Замыкание в цикле',
     questionText:
@@ -31,6 +33,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'closures-3',
     topicId: 'closures',
     type: 'coding',
+    stage: 3,
     difficulty: 3,
     title: 'Счётчик с замыканием',
     questionText:
@@ -51,6 +54,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'event-loop-1',
     topicId: 'event-loop',
     type: 'theory_open',
+    stage: 3,
     difficulty: 3,
     title: 'Порядок выполнения промисов',
     questionText:
@@ -67,6 +71,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'event-loop-2',
     topicId: 'event-loop',
     type: 'theory_choice',
+    stage: 2,
     difficulty: 2,
     title: 'Что выведет сначала?',
     questionText:
@@ -78,6 +83,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'event-loop-3',
     topicId: 'event-loop',
     type: 'coding',
+    stage: 3,
     difficulty: 4,
     title: 'Асинхронная очередь задач',
     questionText:
@@ -94,6 +100,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'async-1',
     topicId: 'async',
     type: 'theory_open',
+    stage: 3,
     difficulty: 3,
     title: 'Promise.all vs Promise.allSettled',
     questionText:
@@ -109,6 +116,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'async-2',
     topicId: 'async',
     type: 'theory_choice',
+    stage: 2,
     difficulty: 2,
     title: 'Результат await на rejected',
     questionText:
@@ -120,6 +128,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'async-3',
     topicId: 'async',
     type: 'coding',
+    stage: 3,
     difficulty: 4,
     title: 'Параллельные запросы',
     questionText:
@@ -140,6 +149,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'types-coercion-1',
     topicId: 'types-coercion',
     type: 'theory_open',
+    stage: 2,
     difficulty: 2,
     title: 'Явное и неявное приведение типов',
     questionText:
@@ -155,6 +165,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'types-coercion-2',
     topicId: 'types-coercion',
     type: 'theory_choice',
+    stage: 1,
     difficulty: 1,
     title: 'typeof null',
     questionText:
@@ -166,6 +177,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'types-coercion-3',
     topicId: 'types-coercion',
     type: 'coding',
+    stage: 3,
     difficulty: 3,
     title: 'Строгое сравнение',
     questionText:
@@ -186,6 +198,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'prototypes-1',
     topicId: 'prototypes',
     type: 'theory_open',
+    stage: 3,
     difficulty: 3,
     title: 'Прототипная цепочка',
     questionText:
@@ -201,6 +214,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'prototypes-2',
     topicId: 'prototypes',
     type: 'theory_choice',
+    stage: 2,
     difficulty: 2,
     title: 'instanceof vs typeof',
     questionText:
@@ -212,6 +226,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'prototypes-3',
     topicId: 'prototypes',
     type: 'coding',
+    stage: 3,
     difficulty: 4,
     title: 'Наследование через классы',
     questionText:
@@ -233,6 +248,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'typescript-basics-1',
     topicId: 'typescript-basics',
     type: 'theory_open',
+    stage: 2,
     difficulty: 2,
     title: 'Interface vs Type',
     questionText:
@@ -248,6 +264,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'typescript-basics-2',
     topicId: 'typescript-basics',
     type: 'theory_choice',
+    stage: 1,
     difficulty: 1,
     title: 'Narrowing типов',
     questionText:
@@ -259,6 +276,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'typescript-basics-3',
     topicId: 'typescript-basics',
     type: 'coding',
+    stage: 3,
     difficulty: 3,
     title: 'Generic-функция filter',
     questionText:
@@ -280,6 +298,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'algorithms-1',
     topicId: 'algorithms',
     type: 'theory_open',
+    stage: 2,
     difficulty: 2,
     title: 'O(n) vs O(n log n)',
     questionText:
@@ -295,6 +314,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'algorithms-2',
     topicId: 'algorithms',
     type: 'theory_choice',
+    stage: 1,
     difficulty: 1,
     title: 'Сложность бинарного поиска',
     questionText:
@@ -306,6 +326,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'algorithms-3',
     topicId: 'algorithms',
     type: 'coding',
+    stage: 3,
     difficulty: 3,
     title: 'Бинарный поиск',
     questionText:
@@ -326,6 +347,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'data-structures-1',
     topicId: 'data-structures',
     type: 'theory_open',
+    stage: 2,
     difficulty: 2,
     title: 'Stack vs Queue',
     questionText:
@@ -341,6 +363,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'data-structures-2',
     topicId: 'data-structures',
     type: 'theory_choice',
+    stage: 1,
     difficulty: 1,
     title: 'Сложность поиска в Hash Map',
     questionText:
@@ -352,6 +375,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'data-structures-3',
     topicId: 'data-structures',
     type: 'coding',
+    stage: 3,
     difficulty: 4,
     title: 'Реализация Stack',
     questionText:
@@ -373,6 +397,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'patterns-1',
     topicId: 'patterns',
     type: 'theory_open',
+    stage: 3,
     difficulty: 3,
     title: 'Паттерн Observer',
     questionText:
@@ -388,6 +413,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'patterns-2',
     topicId: 'patterns',
     type: 'theory_choice',
+    stage: 2,
     difficulty: 2,
     title: 'Какой это паттерн?',
     questionText:
@@ -399,6 +425,7 @@ export const MOCK_TASKS: Task[] = [
     id: 'patterns-3',
     topicId: 'patterns',
     type: 'coding',
+    stage: 3,
     difficulty: 4,
     title: 'EventEmitter',
     questionText:

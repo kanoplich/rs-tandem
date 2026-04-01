@@ -37,6 +37,7 @@ const mapToTask = (data: PublicTasksRow): Task => {
     id: data.id,
     topicId: data.topic_id,
     title: data.title ?? '',
+    stage: data.stage ?? 1,
     difficulty: toDifficulty(data.difficulty),
     type: toTaskType(data.type),
     maxScore: DEFAULT_MAX_SCORE,
