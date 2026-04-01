@@ -27,7 +27,7 @@ export const sendChatMessage = async ({
 
   if (!session) throw new Error('User is not authenticated');
 
-  const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat-assistant`, {
+  const response = await fetch(`${config.SUPABASE_URL}/functions/v1/chat-assistant`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
