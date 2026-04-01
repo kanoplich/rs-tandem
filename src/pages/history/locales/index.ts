@@ -4,7 +4,7 @@ export const HISTORY_PAGE_TEXT = {
     DESCRIPTION: 'Все ваши результаты и достижения',
   },
   STATS: {
-    TOTAL: 'Всего тренировок',
+    TOTAL: 'Всего успешных попыток',
     AVG: 'Средний балл',
     BEST: 'Лучший результат',
   },
