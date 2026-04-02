@@ -58,40 +58,28 @@ export const Topics = () => {
     setSelectedTopicIds(new Set());
   }, []);
 
-  const buildTaskUrl = useCallback(
-    ({ topicIds, stage, mode }: { topicIds: string; stage: number; mode: TaskMode }) => {
-      const params = new URLSearchParams({ topics: topicIds, stage: String(stage), mode });
-      return `${ROUTES.TASK}?${params.toString()}`;
-    },
-    []
-  );
+  const buildTaskUrl = useCallback(({ topicIds, mode }: { topicIds: string; mode: TaskMode }) => {
+    const params = new URLSearchParams({ topics: topicIds, mode });
+    return `${ROUTES.TASK}?${params.toString()}`;
+  }, []);
 
-  const handleStartTraining = useCallback(
-    (stageId: number) => {
-      const topicIds = Array.from(selectedTopicIds).join(',');
-      navigate(buildTaskUrl({ topicIds, stage: stageId, mode: TASK_MODES.continue }));
-    },
-    [selectedTopicIds, navigate, buildTaskUrl]
-  );
+  const handleStartTraining = useCallback(() => {
+    const topicIds = Array.from(selectedTopicIds).join(',');
+    navigate(buildTaskUrl({ topicIds, mode: TASK_MODES.continue }));
+  }, [selectedTopicIds, navigate, buildTaskUrl]);
 
   const handleContinue = useCallback(
     (topicId: string) => {
-      const topic = topics.find((t) => t.id === topicId);
-      navigate(
-        buildTaskUrl({ topicIds: topicId, stage: topic?.stage ?? 1, mode: TASK_MODES.continue })
-      );
+      navigate(buildTaskUrl({ topicIds: topicId, mode: TASK_MODES.continue }));
     },
-    [topics, navigate, buildTaskUrl]
+    [navigate, buildTaskUrl]
   );
 
   const handleRestart = useCallback(
     (topicId: string) => {
-      const topic = topics.find((t) => t.id === topicId);
-      navigate(
-        buildTaskUrl({ topicIds: topicId, stage: topic?.stage ?? 1, mode: TASK_MODES.restart })
-      );
+      navigate(buildTaskUrl({ topicIds: topicId, mode: TASK_MODES.restart }));
     },
-    [topics, navigate, buildTaskUrl]
+    [navigate, buildTaskUrl]
   );
 
   if (isLoading) return <Loader />;

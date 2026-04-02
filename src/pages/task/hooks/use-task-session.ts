@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
-import { getProgressPercent, PASSING_SCORE } from '@/shared';
+import { DEFAULT_STAGES_VALUE, getProgressPercent, PASSING_SCORE } from '@/shared';
 import {
   getSubmissionHistoryByTaskId,
   evaluateTheory,
@@ -26,6 +26,7 @@ interface UseTaskSessionReturn {
   isPassed: boolean;
   isLastTask: boolean;
   progressPercent: number;
+  stageNumber: number;
   handleSubmit: (message: string) => Promise<void>;
   handleRetry: () => void;
   handleNext: () => void;
@@ -43,6 +44,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
   const tasksCount = tasks.length;
+  const stageNumber = currentTask?.stage || DEFAULT_STAGES_VALUE;
   const isLastTask = currentTaskNumber === tasksCount;
 
   const reset = () => {
@@ -125,6 +127,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     isPassed,
     isLastTask,
     progressPercent,
+    stageNumber,
     handleNext,
     handleRetry,
     handleSubmit,

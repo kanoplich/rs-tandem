@@ -4,7 +4,7 @@ import { supabase, type Public } from '../supabase-client';
 import { MOCK_SUBMISSIONS } from './mock';
 import type { Submission } from './types';
 
-import { DEFAULT_MAX_SCORE, PASSING_SCORE } from '@/shared';
+import { DEFAULT_MAX_SCORE, DEFAULT_STAGES_VALUE, PASSING_SCORE } from '@/shared';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
@@ -38,7 +38,7 @@ const mapToSubmission = (data: PublicSubmissionRow): Submission => {
     submittedAt: data.submitted_at,
     taskTitle: data.public_tasks.title ?? '',
     title: data.public_tasks.topics?.title ?? '',
-    stage: data.public_tasks.topics?.stage ?? 1,
+    stage: data.public_tasks.topics?.stage ?? DEFAULT_STAGES_VALUE,
     result: {
       coveredPoints: data.covered ?? [],
       missedPoints: data.missed ?? [],
