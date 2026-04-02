@@ -33,7 +33,7 @@ describe('getTopicStats', () => {
       createTopic({ avgScore: 50, completed: 5, total: 9 }),
     ];
 
-    const result = getTopicStats(topics as TopicProgress[]);
+    const result = getTopicStats(topics);
 
     expect(result.totalCount).toBe(3);
     expect(result.completedCount).toBe(2);

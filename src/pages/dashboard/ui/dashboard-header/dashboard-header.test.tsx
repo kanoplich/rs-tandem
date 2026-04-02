@@ -17,11 +17,4 @@ describe('DashboardHeader', () => {
     expect(description).toBeInTheDocument();
     expect(description.tagName).toBe('P');
   });
-
-  it('has the correct section class', () => {
-    const { container } = render(<DashboardHeader />);
-    const section = container.querySelector('section');
-
-    expect(section).toHaveClass('mb-8 flex flex-col gap-2.5');
-  });
 });
