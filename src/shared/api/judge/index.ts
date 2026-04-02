@@ -26,7 +26,7 @@ export const evaluateTheory = async (
 
   if (!session) throw new Error('User is not authenticated');
 
-  const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/judge`, {
+  const response = await fetch(`${config.SUPABASE_URL}/functions/v1/judge`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
