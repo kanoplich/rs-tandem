@@ -142,8 +142,8 @@ npx supabase db reset
 - [Архитектура](docs/architecture.md) - проект построен на основе **Feature-Sliced Design (FSD)**, т.е. методологии организации фронтенд-кода по слоям и слайсам.
 - [База данных](docs/database.md) - использование **Supabase** (PostgreSQL) с расширениями pgvector, pgcrypto, uuid-ossp.
 - [Edge Functions](docs/edge-functions.md) - серверная логика на **Supabase Edge Functions** (Deno runtime).
-- [Скрипты и инструменты](docs\scripts.md).
-- [Установка и настройка](docs\setup.md) .
+- [Скрипты и инструменты](docs/scripts.md).
+- [Установка и настройка](docs/setup.md) .
 
 ## :cinema: ​Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API):
 
