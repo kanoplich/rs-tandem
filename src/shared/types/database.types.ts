@@ -232,9 +232,9 @@ export type Database = {
           query_embedding: string;
         };
         Returns: {
-          golden_answer: string;
           id: string;
           question_text: string;
+          rubric_items: string[];
           similarity: number;
           title: string;
         }[];
