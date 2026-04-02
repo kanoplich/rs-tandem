@@ -1,38 +1,91 @@
-# RS Tandem
+# **:atom_symbol:** RS Tandem
 
-**RS Tandem** — это интерактивная платформа для тренировки технических собеседований с AI-интервьюером.
+## :open_book: ​О проекте
 
-**Цель** — создать MVP проекта с AI агентом.
+**RS Tandem** — это интерактивный тренажёр для подготовки к техническим собеседованиям в RS School, где пользователь отвечает на вопросы, а искусственный интеллект оценивает ответы и даёт развёрнутый фидбек. AI выступает в роли «судьи», анализирует ответ по критериям (рубрикам) и объясняет ошибки понятным языком. База из 33 тем и 157 заданий, покрывающих фронтенд от основ до уровня middle+ — многие вопросы выходят за рамки учебной программы, чтобы подготовить к реальным собеседованиям.
 
-## Технологический стек
+- **OAuth-авторизация** — вход через GitHub или Google одним кликом.
+- **Theory tasks** — пользователь пишет текстовый ответ на вопрос, AI оценивает его по структурированной рубрике и показывает покрытые и непокрытые критерии.
+- **AI-чат помощник** — поскольку некоторые задания выходят за рамки курса, разработан встроенный чат для подсказок и разбора сложных тем. Построен на RAG-архитектуре: учитывает контекст правильных ответов из базы, помогает разобраться в теме без прямой выдачи ответа.
+- **История сабмитов** — все успешные попытки сохраняются, можно отслеживать динамику.
 
-- Frontend: React 19, TS 5 (Strict), Vite 5, pnpm,
-- Styling: CSS Modules + shadcn/ui
-- Backend: Supabase (Auth, RLS, Edge Functions)
-- AI API: Groq API (LLM)
-- Архитектура: FSD (Feature-Sliced Design)
-- React-router V.6
+## Deployment
 
-## Наша команда
+:globe_with_meridians: ​**Deploy Link** https://rs-tandem.netlify.app/
 
-- Андрей (https://github.com/kanoplich)
-- Валерий (https://github.com/rockabil)
-- Сева (https://github.com/sevasmith)
-- Фатима (https://github.com/sunyuna00)
-- Артур (https://github.com/artkoro94)
-- Вадим (https://github.com/vadim-troian)
+:link: **Linear Project** - https://linear.app/rs-team42/team/TEAM42/all
 
-## Менторы
+![](./public/images/linear.jpg)
 
-- Михаил (https://github.com/Michael-JS-Bel)
-- Ольга (https://github.com/HelgaZhizhka)
-- Ирина (https://github.com/IrinaOsp)
+## :busts_in_silhouette: ​Наша команда и дневники
 
-## Deploy
+| Разработчики | Github                                          | Дневники разработки |
+| ------------ | ----------------------------------------------- | ------------------- |
+| Андрей       | [kanoplich](https://github.com/kanoplich)       |                     |
+| Артур        | [artkoro94](https://github.com/artkoro94)       |                     |
+| Вадим        | [vadim-troian](https://github.com/vadim-troian) |                     |
+| Валерий      | [rockabil](https://github.com/rockabil)         |                     |
+| Сева         | [sevasmith](https://github.com/sevasmith)       |                     |
+| Фатима       | [sunyuna00](https://github.com/sunyuna00)       |                     |
 
-https://rs-tandem.netlify.app/
+### :mortar_board: Менторы:
 
-## Локальная разработка с Supabase
+- Михаил ( [Michael-JS-Bel](https://github.com/Michael-JS-Bel) )
+- Ольга ( [HelgaZhizhka](https://github.com/HelgaZhizhka) )
+- Ирина ( [IrinaOsp](https://github.com/IrinaOsp) )
+
+### :muscle: ​Сильные стороны команды
+
+- **FSD-структура** соблюдается, слои не перемешаны, shared/features/pages — каждый на своём месте.
+- **Инструменты** используются эффективные — Zod, React Hook Form, shadcn, кастомные хуки.
+- **Командная работа** — 6 человек пишут в один репозиторий, код не конфликтует, конвенции соблюдаются.
+- **Участники берутся за сложное** — edge functions, AI-стриминг, OAuth.
+- **Реагирование на ревью** — большинство замечаний исправляется, паттерны усваиваются.
+
+## :memo: ​Meeting Notes
+
+| Meeting Notes | Тема                                                                                          |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| 1             | [Настройка Github и конфигурирование проекта](docs/meeting-notes/2026-02-14-project-setup.md) |
+| 2             | [Github flow and Linear, Project MVP plan](docs/meeting-notes/2026-02-17-mvp-plan.md)         |
+| 3             | [Настройка Supabase для AI Prep](docs/meeting-notes/2026-02-21-config-supabase.md)            |
+| 4             | [Team Sync - 23-02-26](docs/meeting-notes/2026-02-23-team-sync.md)                            |
+| 5             | [AI Judge создать моки и Edge Function ](docs/meeting-notes/2026-02-25-AI-Judge.md)           |
+| 6             | [Team Sync - 26-02-26](docs/meeting-notes/2026-02-26-team-sync.md)                            |
+| 7             | [Team Sync - 02-03-26](docs/meeting-notes/2026-03-02-team-sync.md)                            |
+| 8             | [Team Sync - 09-03-26](docs/meeting-notes/2026-03-9-team-sync.md)                             |
+| 9             | [Team Sync - 16-03-26](docs/meeting-notes/2026-03-16-team-sync.md)                            |
+| 10            | [Team Sync - 23-03-26](docs/meeting-notes/2026-03-23-team-sync.md)                            |
+
+## :hammer_and_wrench: ​Технологический Стек
+
+**Frontend:**
+
+- React 19
+- TypeScript 5
+- Vite 5, pnpm, node ≥ 22.15.0
+- React Router v6
+- React Hook Form + Zod
+- CSS Modules
+- Shadcn/ui
+
+**Backend / AI:**
+
+- Mock APi Layer
+- Supabase (Auth + DB + RLS + RPC)
+- Supabase OAuth (Google, GitHub)
+- Supabase Edge Function → Groq llama-3.3-70b-versatile streaming with Tool Use + RAG pgvector(Supabase) + OpenAI text-embedding-3-small
+
+**Architecture & Tooling**
+
+- **FSD**
+- **Deployment:** Netlify
+- **CI/CD:** GitHub Actions
+- **Code Quality:** ESLint, Prettier
+- **Git Hooks:** Husky (pre-commit, pre-push, commit-msg)
+- **Commit Convention:** Conventional Commits (@commitlint)
+
+## :computer:Локальная разработка с Supabase
 
 ### ✅ Предварительные требования
 
@@ -84,6 +137,14 @@ npx supabase db reset
 | supabase db push                 | ☁️ Push на remote           |
 | pnpm types:db:local              | 🔤 Обновить TS типы         |
 
-## Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API):
+## :books: ​Документация проекта
+
+- [Архитектура](docs/architecture.md) - проект построен на основе **Feature-Sliced Design (FSD)**, т.е. методологии организации фронтенд-кода по слоям и слайсам.
+- [База данных](docs/database.md) - использование **Supabase** (PostgreSQL) с расширениями pgvector, pgcrypto, uuid-ossp.
+- [Edge Functions](docs/edge-functions.md) - серверная логика на **Supabase Edge Functions** (Deno runtime).
+- [Скрипты и инструменты](docs\scripts.md).
+- [Установка и настройка](docs\setup.md) .
+
+## :cinema: ​Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API):
 
 https://www.youtube.com/watch?v=M_s63RHPufU
