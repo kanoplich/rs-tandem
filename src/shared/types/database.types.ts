@@ -91,6 +91,7 @@ export type Database = {
           code_template: string | null;
           created_at: string;
           difficulty: number | null;
+          embedding: string | null;
           golden_answer: string;
           hints: string[] | null;
           id: string;
@@ -107,6 +108,7 @@ export type Database = {
           code_template?: string | null;
           created_at?: string;
           difficulty?: number | null;
+          embedding?: string | null;
           golden_answer: string;
           hints?: string[] | null;
           id: string;
@@ -123,6 +125,7 @@ export type Database = {
           code_template?: string | null;
           created_at?: string;
           difficulty?: number | null;
+          embedding?: string | null;
           golden_answer?: string;
           hints?: string[] | null;
           id?: string;
@@ -220,6 +223,20 @@ export type Database = {
           streak: number;
           total_tasks: number;
           xp: number;
+        }[];
+      };
+      match_tasks: {
+        Args: {
+          match_count?: number;
+          match_threshold?: number;
+          query_embedding: string;
+        };
+        Returns: {
+          golden_answer: string;
+          id: string;
+          question_text: string;
+          similarity: number;
+          title: string;
         }[];
       };
     };
