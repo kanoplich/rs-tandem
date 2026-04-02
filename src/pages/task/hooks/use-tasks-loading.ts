@@ -8,33 +8,23 @@ import { ROUTES, TASK_MODES, type TaskMode } from '@/shared';
 import { getPassedSubmissionHistory, getTasksByTopic, type Task } from '@/shared/api';
 
 interface UseTasksLoadingProps {
-  stage: string | null;
   topicsParam: string | null;
   mode: TaskMode;
 }
 
 interface UseTasksReturn {
   tasks: Task[];
-  stageNumber: number;
   isLoading: boolean;
 }
 
-export const useTasksLoading = ({
-  stage,
-  topicsParam,
-  mode,
-}: UseTasksLoadingProps): UseTasksReturn => {
+export const useTasksLoading = ({ topicsParam, mode }: UseTasksLoadingProps): UseTasksReturn => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [stageNumber, setStageNumber] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadTasks = async () => {
       try {
-        const parsedStage = stage ? Number.parseInt(stage, 10) : 1;
-        setStageNumber(parsedStage);
-
         if (!topicsParam) {
           toast.error(TASK_LOADING_ERRORS.NO_TOPICS);
           navigate(ROUTES.TOPICS);
@@ -68,11 +58,10 @@ export const useTasksLoading = ({
     };
 
     loadTasks();
-  }, [topicsParam, stage, navigate, mode]);
+  }, [topicsParam, navigate, mode]);
 
   return {
     tasks,
-    stageNumber,
     isLoading,
   };
 };

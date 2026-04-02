@@ -1,6 +1,11 @@
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: '14.1';
+  };
   public: {
     Tables: {
       profiles: {
@@ -178,33 +183,10 @@ export type Database = {
           max_score: number | null;
           question_text: string | null;
           rubric_items: string[] | null;
+          stage: number | null;
           title: string | null;
           topic_id: string | null;
           type: string | null;
-        };
-        Insert: {
-          code_template?: string | null;
-          created_at?: string | null;
-          difficulty?: number | null;
-          id?: string | null;
-          max_score?: number | null;
-          question_text?: string | null;
-          rubric_items?: string[] | null;
-          title?: string | null;
-          topic_id?: string | null;
-          type?: string | null;
-        };
-        Update: {
-          code_template?: string | null;
-          created_at?: string | null;
-          difficulty?: number | null;
-          id?: string | null;
-          max_score?: number | null;
-          question_text?: string | null;
-          rubric_items?: string[] | null;
-          title?: string | null;
-          topic_id?: string | null;
-          type?: string | null;
         };
         Relationships: [
           {

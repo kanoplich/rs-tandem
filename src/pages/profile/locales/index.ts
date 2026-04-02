@@ -3,7 +3,7 @@ export const PROFILE_TEXT = {
 };
 
 export const PROFILE_STATS_TEXT = {
-  TOTAL_TRAININGS: 'Всего тренировок',
+  TOTAL_TRAININGS: 'Пройдено задач',
   AVERAGE_SCORE: 'Средний балл',
   RANK: 'Ранг',
   XP: 'Опыт',
