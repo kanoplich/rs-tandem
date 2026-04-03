@@ -1,5 +1,7 @@
 import { SupabaseClient, User } from 'https://esm.sh/@supabase/supabase-js@2';
 
+import { logger } from '../../../_shared/logger.ts';
+
 type SaveSubmissionProps = {
   taskId: string;
   answer: string;
@@ -51,7 +53,7 @@ export const saveSubmission = async ({
       feedback: feedback.trim(),
       judge_level: 1,
     });
-  } catch (err) {
-    console.error('Failed to save submission:', err);
+  } catch (error) {
+    logger.error('Failed to save submission', { error, taskId });
   }
 };

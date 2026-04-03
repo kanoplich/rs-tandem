@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { sendChatMessage } from '../api/chat';
 import { ROLES } from '../lib/constants';
 import type { ChatMessage } from '../lib/types';
+import { ERROR_CHAT_MESSAGE_TEXT } from '../locales';
 
 export const useChat = (taskId?: string) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -58,9 +59,7 @@ export const useChat = (taskId?: string) => {
         reader?.cancel();
         setMessages((prev) =>
           prev.map((msg) =>
-            msg.id === assistantMessage.id
-              ? { ...msg, content: 'Произошла ошибка. Попробуйте ещё раз.' }
-              : msg
+            msg.id === assistantMessage.id ? { ...msg, content: ERROR_CHAT_MESSAGE_TEXT } : msg
           )
         );
       } finally {

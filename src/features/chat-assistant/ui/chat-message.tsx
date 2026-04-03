@@ -4,8 +4,10 @@ import Markdown from 'react-markdown';
 
 import { ROLES } from '../lib/constants';
 import type { ChatMessage as ChatMessageType } from '../lib/types';
+import { CHAT_MESSAGE_TEXT } from '../locales';
 
 import { cn } from '@/shared/lib/utils';
+import { Button } from '@/shared/ui';
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -56,13 +58,15 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
             >
               {message.content || '...'}
             </Markdown>
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={handleCopy}
-              className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground"
-              title="Копировать"
+              className="mt-1 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground"
+              title={CHAT_MESSAGE_TEXT.COPY}
             >
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-            </button>
+            </Button>
           </>
         )}
       </div>

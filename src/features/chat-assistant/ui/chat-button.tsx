@@ -1,6 +1,6 @@
 import { MessageCircle } from 'lucide-react';
 
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui';
 
 interface ChatButtonProps {
   onClick: () => void;

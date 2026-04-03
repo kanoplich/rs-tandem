@@ -1,7 +1,7 @@
 import { Send } from 'lucide-react';
 import { useRef, useState, type KeyboardEvent, type ChangeEvent } from 'react';
 
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui';
 
 interface ChatInputProps {
   onSend: (message: string) => void;

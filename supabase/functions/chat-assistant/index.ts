@@ -1,8 +1,11 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
+import { API_ENDPOINTS } from '../_shared/api-endpoints.ts';
 import { corsHeaders } from '../_shared/cors.ts';
 import { errorResponse } from '../_shared/error-response.ts';
+import { ERROR_CODES, HTTP_STATUS } from '../_shared/errors.ts';
+import { logger } from '../_shared/logger.ts';
 
 const HISTORY_CHAR_BUDGET = 8000;
 
@@ -22,15 +25,16 @@ serve(async (req) => {
   try {
     body = await req.json();
   } catch {
-    return errorResponse('Invalid JSON body', 400);
+    return errorResponse('Invalid JSON body', HTTP_STATUS.BAD_REQUEST);
   }
 
   const { message, taskId, history } = body;
 
-  if (!message) return errorResponse('Message is required', 400);
+  if (!message) return errorResponse('Message is required', HTTP_STATUS.BAD_REQUEST);
 
   const authHeader = req.headers.get('Authorization');
-  if (!authHeader) return errorResponse('Authorization header is required', 401);
+  if (!authHeader)
+    return errorResponse('Authorization header is required', HTTP_STATUS.UNAUTHORIZED);
 
   const userClient = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -42,7 +46,7 @@ serve(async (req) => {
     data: { user },
   } = await userClient.auth.getUser();
 
-  if (!user) return errorResponse('Unauthorized', 401);
+  if (!user) return errorResponse('Unauthorized', HTTP_STATUS.UNAUTHORIZED);
 
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -50,12 +54,17 @@ serve(async (req) => {
   );
 
   const openaiKey = Deno.env.get('OPENAI_API_KEY');
-  if (!openaiKey) return errorResponse('OPENAI_API_KEY not configured', 500);
+  if (!openaiKey)
+    return errorResponse(
+      ERROR_CODES.OPENAI_API_KEY_MISSING.message,
+      ERROR_CODES.OPENAI_API_KEY_MISSING.status
+    );
 
   const groqKey = Deno.env.get('GROQ_API_KEY');
-  if (!groqKey) return errorResponse('GROQ_API_KEY not configured', 500);
+  if (!groqKey)
+    return errorResponse('GROQ_API_KEY not configured', HTTP_STATUS.INTERNAL_SERVER_ERROR);
 
-  const embeddingResponse = await fetch('https://api.openai.com/v1/embeddings', {
+  const embeddingResponse = await fetch(API_ENDPOINTS.OPENAI.EMBEDDINGS, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${openaiKey}`,
@@ -69,8 +78,8 @@ serve(async (req) => {
 
   if (!embeddingResponse.ok) {
     const errorText = await embeddingResponse.text();
-    console.error('OpenAI embedding failed:', errorText);
-    return errorResponse('Failed to generate embedding', 500);
+    logger.error('OpenAI embedding failed', { error: errorText });
+    return errorResponse(ERROR_CODES.EMBEDDING_FAILED.message, ERROR_CODES.EMBEDDING_FAILED.status);
   }
 
   const embeddingData = await embeddingResponse.json();
@@ -83,8 +92,11 @@ serve(async (req) => {
   });
 
   if (matchError) {
-    console.error('match_tasks error:', matchError);
-    return errorResponse('Vector search failed', 500);
+    logger.error('match_tasks error', { error: matchError });
+    return errorResponse(
+      ERROR_CODES.VECTOR_SEARCH_FAILED.message,
+      ERROR_CODES.VECTOR_SEARCH_FAILED.status
+    );
   }
 
   let contextTasks = matchedTasks || [];
@@ -164,7 +176,7 @@ ${tasksContext}
 
   messages.push({ role: 'user', content: message });
 
-  const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+  const groqResponse = await fetch(API_ENDPOINTS.GROQ.CHAT_COMPLETIONS, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${groqKey}`,
@@ -181,8 +193,8 @@ ${tasksContext}
 
   if (!groqResponse.ok) {
     const errorText = await groqResponse.text();
-    console.error('Groq request failed:', errorText);
-    return errorResponse('LLM request failed', 500);
+    logger.error('Groq request failed', { error: errorText });
+    return errorResponse('LLM request failed', HTTP_STATUS.INTERNAL_SERVER_ERROR);
   }
 
   const stream = new ReadableStream({
@@ -217,8 +229,8 @@ ${tasksContext}
             if (token) {
               controller.enqueue(encoder.encode(token));
             }
-          } catch (e) {
-            console.error('Failed to parse Groq chunk:', e);
+          } catch (error) {
+            logger.warn('Failed to parse Groq chunk', { error });
           }
         }
       }
