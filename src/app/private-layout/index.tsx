@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 import { Footer } from '../ui';
 import { Header } from '../ui/header';
@@ -11,6 +11,7 @@ export const PrivateLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ScrollRestoration />
     </>
   );
 };

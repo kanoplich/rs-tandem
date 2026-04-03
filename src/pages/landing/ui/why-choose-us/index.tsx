@@ -70,11 +70,13 @@ export const WhyChooseUs = () => {
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight mb-4">
             {LANDING_WHY_CHOOSE_US_TEXT.TITLE}
           </h2>
+
           <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">
             {desc.PART_1} <br />
             <span className="text-primary font-semibold">157</span> {desc.PART_2}{' '}
             <span className="text-primary font-semibold">0</span> {desc.PART_3}
           </p>
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">{desc.PART_4}</p>
         </div>
 
         <div ref={ref} className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
