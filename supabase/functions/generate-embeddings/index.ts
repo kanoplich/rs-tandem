@@ -121,7 +121,7 @@ serve(async (req) => {
         updated++;
       } catch (error) {
         logger.error('Task processing failed', { error, taskId: task.id });
-        errors.push(`Task ${task.id}: ${err.message}`);
+        errors.push(`Task ${task.id}: ${error}`);
         failed++;
       }
     }
