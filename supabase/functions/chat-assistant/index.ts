@@ -106,7 +106,8 @@ serve(async (req) => {
       .from('tasks')
       .select('id, title, question_text, rubric_items')
       .eq('id', taskId)
-      .single();
+      .single()
+      .throwOnError();
 
     if (currentTask) {
       contextTasks = [currentTask, ...contextTasks].slice(0, 5);
