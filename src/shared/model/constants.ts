@@ -5,5 +5,5 @@ export const BUTTON_TEXT = {
 };
 
 export const HEADERS_TEXT = {
-  SITE_TITLE: 'Interview Training Platform',
+  SITE_TITLE: 'Тренажёр интервью',
 };
