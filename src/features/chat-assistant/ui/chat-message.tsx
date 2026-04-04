@@ -6,8 +6,7 @@ import { ROLES } from '../lib/constants';
 import type { ChatMessage as ChatMessageType } from '../lib/types';
 import { CHAT_MESSAGE_TEXT } from '../locales';
 
-import { cn } from '@/shared/lib/utils';
-import { Button } from '@/shared/ui';
+import { Button, cn } from '@/shared';
 
 interface ChatMessageProps {
   message: ChatMessageType;

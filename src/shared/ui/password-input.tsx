@@ -1,7 +1,7 @@
 import { Eye, EyeOff } from 'lucide-react';
 import * as React from 'react';
 
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared';
 import { Input } from '@/shared/ui/input';
 
 type PasswordInputProps = React.ComponentProps<'input'>;

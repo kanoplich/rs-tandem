@@ -6,9 +6,8 @@ import { MENU_LINK_TEXT } from '../locales';
 import { MENU_LINKS } from './lib/constants';
 
 import { ModeToggle } from '@/features/theme';
-import { Button } from '@/shared';
+import { Button, cn } from '@/shared';
 import { signOut } from '@/shared/api';
-import { cn } from '@/shared/lib/utils';
 
 interface MenuLinksProps {
   variant: 'desktop' | 'mobile';

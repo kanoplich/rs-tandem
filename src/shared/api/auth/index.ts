@@ -5,7 +5,7 @@ import { supabase } from '../supabase-client';
 import { addMockAuthListener, MOCK_SESSION, mockIsAuth, setMockIsAuth } from './mock';
 import type { AuthCredentials, AuthSession, AuthUser, RegisterCredentials } from './types';
 
-import { ROUTES } from '@/shared/config/routes';
+import { ROUTES } from '@/shared';
 import { config } from '@/shared/config/supabase';
 import { delay } from '@/shared/lib/delay';
 
