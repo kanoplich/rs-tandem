@@ -1,3 +1,5 @@
+import { logger } from '../../../_shared/logger.ts';
+
 export const extractPoints = async (
   scoringPromise: Promise<Response>
 ): Promise<Record<string, number> | null> => {
@@ -6,7 +8,7 @@ export const extractPoints = async (
 
     if (!scoringResponse.ok) {
       const errorText = await scoringResponse.text();
-      console.error('Scoring LLM request failed:', errorText);
+      logger.error('Scoring LLM request failed', { error: errorText });
       return null;
     }
 
@@ -16,11 +18,11 @@ export const extractPoints = async (
     if (toolCall?.function?.name === 'saveSubmission') {
       return JSON.parse(toolCall.function.arguments);
     } else {
-      console.error('Unexpected tool call or no tool call returned:', scoringData);
+      logger.error('Unexpected tool call or no tool call returned', { scoringData });
       return null;
     }
-  } catch (err) {
-    console.error('Failed to parse scoring response:', err);
+  } catch (error) {
+    logger.error('Failed to parse scoring response', { error });
     return null;
   }
 };
