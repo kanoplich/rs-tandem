@@ -10,8 +10,7 @@ import { BUTTON_TEXT, LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '../../loca
 
 import styles from './styles.module.css';
 
-import { ROUTES, Button, cn } from '@/shared';
-import { HEADERS_TEXT } from '@/shared/lib/locales';
+import { ROUTES, Button, cn, HEADERS_TEXT } from '@/shared';
 
 export const Training = () => {
   const { ref, isVisible } = useIntersectionObserver({

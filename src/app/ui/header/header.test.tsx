@@ -6,7 +6,7 @@ import { Header } from '../header';
 
 import { MENU_LINK_TEXT } from './locales';
 
-import { HEADERS_TEXT } from '@/shared/lib/locales';
+import { HEADERS_TEXT } from '@/shared';
 
 vi.mock('@/shared/api', () => ({
   signOut: vi.fn().mockResolvedValue(undefined),

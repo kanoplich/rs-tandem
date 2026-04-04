@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { MenuLinks } from './ui/menu-links';
 
-import { Button, ROUTES } from '@/shared';
+import { Button, ROUTES, HEADERS_TEXT } from '@/shared';
 import { LogoIcon } from '@/shared/assets/icons';
-import { HEADERS_TEXT } from '@/shared/lib/locales';
 
 export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
