@@ -72,7 +72,6 @@ export const getTasksByTopic = async (topicIds: string[]): Promise<Task[]> => {
     await delay(400);
 
     const tasks = MOCK_TASKS.filter((t) => topicIds.includes(t.topicId));
-    if (!tasks) throw new Error(`Tasks not found`);
 
     return tasks;
   }
