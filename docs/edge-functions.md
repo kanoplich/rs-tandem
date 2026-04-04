@@ -64,7 +64,7 @@ RAG Chat Assistant — AI-помощник для подготовки к соб
 ### Что делает
 
 1. Принимает `message`, `taskId`, `history` от клиента
-2. Проверяет авторизацию (JWT → `auth.getUser()`)
+2. Проверяет авторизацию (`auth.getUser()`)
 3. Векторизирует сообщение через OpenAI `text-embedding-3-small`
 4. Ищет похожие задания через `match_tasks()` (pgvector, cosine similarity)
 5. Гарантирует что текущее задание (`taskId`) попадёт в контекст
@@ -118,17 +118,16 @@ Authorization: Bearer <jwt>
 
 ### Что делает
 
-1. Проверяет авторизацию (JWT → `auth.getUser()`)
-2. Загружает все topics и tasks **без embedding** (фильтр `embedding IS NULL`)
-3. Для каждого task формирует текст:
+1. Загружает все topics и tasks **без embedding** (фильтр `embedding IS NULL`)
+2. Для каждого task формирует текст:
    ```
    Topic: {topic.title} - {topic.description}
    Task: {task.title} | Type: {task.type} | Difficulty: {difficulty}/5
    Question: {task.question_text}
    Answer: {task.golden_answer}
    ```
-4. Отправляет текст в OpenAI → получает вектор (1536 чисел)
-5. Сохраняет вектор в `tasks.embedding`
+3. Отправляет текст в OpenAI → получает вектор (1536 чисел)
+4. Сохраняет вектор в `tasks.embedding`
 
 ### Request
 

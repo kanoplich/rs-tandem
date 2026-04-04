@@ -19,14 +19,14 @@
 
 ## :busts_in_silhouette: ​Наша команда и дневники
 
-| Разработчики | Github                                          | Дневники разработки |
-| ------------ | ----------------------------------------------- | ------------------- |
-| Андрей       | [kanoplich](https://github.com/kanoplich)       |                     |
-| Артур        | [artkoro94](https://github.com/artkoro94)       |                     |
-| Вадим        | [vadim-troian](https://github.com/vadim-troian) |                     |
-| Валерий      | [rockabil](https://github.com/rockabil)         |                     |
-| Сева         | [sevasmith](https://github.com/sevasmith)       |                     |
-| Фатима       | [sunyuna00](https://github.com/sunyuna00)       |                     |
+| Разработчики | Github                                          | Дневники разработки                                                                  |
+| ------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Андрей       | [kanoplich](https://github.com/kanoplich)       | :file_folder: [дневники + self-assessment ](./development-notes/github-kanoplich)    |
+| Артур        | [artkoro94](https://github.com/artkoro94)       | :file_folder: ​[дневники + self-assessment](./development-notes/github-artkoro94)    |
+| Вадим        | [vadim-troian](https://github.com/vadim-troian) | :file_folder: ​[дневники + self-assessment](./development-notes/github-vadim-troian) |
+| Валерий      | [rockabil](https://github.com/rockabil)         | :file_folder: ​[дневники + self-assessment](./development-notes/github-rockabil)     |
+| Сева         | [sevasmith](https://github.com/sevasmith)       | :file_folder: ​[дневники + self-assessment](./development-notes/github-sevasmith)    |
+| Фатима       | [sunyuna00](https://github.com/sunyuna00)       | :file_folder: ​[дневники + self-assessment](./development-notes/github-sunyuna00)    |
 
 ### :mortar_board: Менторы:
 
@@ -143,7 +143,8 @@ npx supabase db reset
 - [База данных](docs/database.md) - использование **Supabase** (PostgreSQL) с расширениями pgvector, pgcrypto, uuid-ossp.
 - [Edge Functions](docs/edge-functions.md) - серверная логика на **Supabase Edge Functions** (Deno runtime).
 - [Скрипты и инструменты](docs/scripts.md).
-- [Установка и настройка](docs/setup.md) .
+- [Установка и настройка](docs/setup.md).
+- [Git Flow & Collaboration Standards](docs/gitflow.md)
 
 ## :cinema: ​Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API):
 
