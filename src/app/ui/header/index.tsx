@@ -2,11 +2,11 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { MENU_LINK_TEXT } from './locales';
 import { MenuLinks } from './ui/menu-links';
 
 import { Button, ROUTES } from '@/shared';
 import { LogoIcon } from '@/shared/assets/icons';
+import { HEADERS_TEXT } from '@/shared/lib/locales';
 
 export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,7 +20,7 @@ export const Header = () => {
         className="flex items-center gap-2 text-light text-lg lg:text-xl font-semibold whitespace-nowrap"
       >
         <LogoIcon className="w-6 h-6" />
-        <span>{MENU_LINK_TEXT.APP_TITLE}</span>
+        <span>{HEADERS_TEXT.SITE_TITLE}</span>
       </Link>
 
       <Button

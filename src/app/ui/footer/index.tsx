@@ -6,7 +6,7 @@ import { FOOTER_TEXTS } from './locales';
 
 import { cn } from '@/shared';
 import { RsSchool } from '@/shared/assets/icons';
-import { HEADERS_TEXT } from '@/shared/model/constants';
+import { HEADERS_TEXT } from '@/shared/lib/locales';
 
 export const Footer = () => {
   const [showDevs, setShowDevs] = useState(false);

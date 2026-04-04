@@ -1,5 +1,5 @@
 import { AUTH_LOGIN_PAGE_TEXT, LoginForm } from '@/features/auth';
-import { HEADERS_TEXT } from '@/shared/model/constants';
+import { HEADERS_TEXT } from '@/shared/lib/locales';
 
 export const Login = () => {
   return (

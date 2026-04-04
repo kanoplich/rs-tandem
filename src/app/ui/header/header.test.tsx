@@ -6,6 +6,8 @@ import { Header } from '../header';
 
 import { MENU_LINK_TEXT } from './locales';
 
+import { HEADERS_TEXT } from '@/shared/lib/locales';
+
 vi.mock('@/shared/api', () => ({
   signOut: vi.fn().mockResolvedValue(undefined),
 }));
@@ -25,7 +27,7 @@ describe('Header', () => {
 
   it('render app title', () => {
     renderHeader();
-    expect(screen.getByText(MENU_LINK_TEXT.APP_TITLE)).toBeTruthy();
+    expect(screen.getByText(HEADERS_TEXT.SITE_TITLE)).toBeTruthy();
   });
 
   it('renders navigation menu button', () => {

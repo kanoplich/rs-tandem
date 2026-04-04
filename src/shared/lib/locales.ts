@@ -6,3 +6,6 @@ export const STAGE_2_DESCRIPTION = 'Основы JS 1';
 export const STAGE_3_DESCRIPTION = 'Основы JS 2';
 export const NOT_WITHIN_THEME_PROVIDER_ERROR =
   'useTheme должен использоваться внутри ThemeProvider';
+export const HEADERS_TEXT = {
+  SITE_TITLE: 'Тренажёр интервью',
+};
