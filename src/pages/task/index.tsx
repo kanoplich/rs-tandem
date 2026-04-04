@@ -11,6 +11,7 @@ import { TaskMessage } from './ui/task-message';
 import { TaskProgress } from './ui/task-progress';
 import { TaskResult } from './ui/task-result';
 
+import { ChatButton, ChatPanel, useChat } from '@/features/chat-assistant';
 import { Loader, TASK_MODES, type TaskMode } from '@/shared';
 
 export const Task = () => {
@@ -37,6 +38,8 @@ export const Task = () => {
   } = useTaskSession({
     tasks,
   });
+
+  const { messages, isStreaming, isOpen, toggleOpen, sendMessage } = useChat(currentTask?.id);
 
   if (isLoading) {
     return <Loader />;
@@ -74,6 +77,14 @@ export const Task = () => {
         />
       )}
       <TaskAdvice />
+      <ChatButton onClick={toggleOpen} isOpen={isOpen} />
+      <ChatPanel
+        isOpen={isOpen}
+        messages={messages}
+        isStreaming={isStreaming}
+        onClose={toggleOpen}
+        onSend={sendMessage}
+      />
     </div>
   );
 };

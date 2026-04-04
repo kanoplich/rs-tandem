@@ -51,7 +51,7 @@ export const HowItWorks = () => {
         </div>
         <div className="flex justify-center mt-8">
           <Button asChild className="px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg">
-            <Link to={ROUTES.HOME}>{LANDING_HOW_IT_WORKS_TEXT.CTA}</Link>
+            <Link to={ROUTES.LOGIN}>{LANDING_HOW_IT_WORKS_TEXT.CTA}</Link>
           </Button>
         </div>
       </div>
