@@ -9,7 +9,7 @@ export const LANDING_SUCCESS_TEXT = {
 };
 
 export const LANDING_WHY_CHOOSE_US_TEXT = {
-  TITLE: 'Самый строгий интервьюер RS School',
+  TITLE: 'Самый строгий интервьюер RS\u00A0School',
 
   DESCRIPTION: {
     PART_1: 'Он не подскажет ответ. Он заставит тебя думать.',
