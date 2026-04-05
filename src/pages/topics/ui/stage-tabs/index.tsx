@@ -12,7 +12,7 @@ interface StageTabsProps {
   onTopicToggle: (topicId: string, checked: boolean) => void;
   onSelectAll: (stageId: number) => void;
   onDeselectAll: (stageId: number) => void;
-  onStartTraining: (stageId: number) => void;
+  onStartTraining: () => void;
   onContinue: (topicId: string) => void;
   onRestart: (topicId: string) => void;
   onStageChange: () => void;
@@ -55,7 +55,7 @@ export const StageTabs = ({
               selectedCount={stageSelectedCount}
               onSelectAll={() => onSelectAll(stage.id)}
               onDeselectAll={() => onDeselectAll(stage.id)}
-              onStartTraining={() => onStartTraining(stage.id)}
+              onStartTraining={() => onStartTraining()}
             />
             <TopicGrid
               topics={stageTopics}
