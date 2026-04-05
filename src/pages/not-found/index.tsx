@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { ROUTES } from '@/shared/config/routes';
+import { ROUTES } from '@/shared';
 
 export const NotFound = () => {
   return (

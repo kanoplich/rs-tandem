@@ -11,8 +11,8 @@ import {
   Card,
   Button,
 } from '@/shared';
+import { cn } from '@/shared';
 import type { Topic, TopicProgress } from '@/shared/api';
-import { cn } from '@/shared/lib/utils';
 
 interface TopicCardProps {
   topic: Topic;

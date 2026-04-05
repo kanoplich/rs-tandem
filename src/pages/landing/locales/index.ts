@@ -23,7 +23,6 @@ export const LANDING_WHY_CHOOSE_US_TEXT = {
 export const LANDING_HOW_IT_WORKS_TEXT = {
   TITLE: 'Как это работает?',
   DESCRIPTION: 'Простой процесс для эффективной подготовки',
-  CTA: 'Попробовать бесплатно',
 };
 
 export const LANDING_READY_TEXT = {
@@ -93,4 +92,11 @@ export const LANDING_STATS_TEXT = {
   STUDENTS: 'Студентов',
   TOPICS: 'Тем',
   STAGES: 'Этапа',
+};
+
+export const BUTTON_TEXT = {
+  LOGIN: 'Войти',
+  START_FREE: 'Начать бесплатно',
+  REGISTER_NOW: 'Зарегистрироваться сейчас',
+  TRY_FREE: 'Попробовать бесплатно',
 };

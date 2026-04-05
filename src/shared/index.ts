@@ -1,4 +1,8 @@
-export * from './config/routes';
+export { cn } from './lib/utils';
+
+export { HEADERS_TEXT } from './lib/locales';
+
+export { ROUTES } from './config/routes';
 
 export { useTheme } from './hooks/use-theme';
 
