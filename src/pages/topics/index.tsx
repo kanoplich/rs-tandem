@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useTopicsData } from './hooks/use-topics-data';
-import { StageTabs, TopicsHeader } from './ui';
+import { StageTabs, TopicHeader } from './ui';
 
 import { groupByStage, Loader, ROUTES, TASK_MODES, type TaskMode } from '@/shared';
 
@@ -86,7 +86,7 @@ export const Topics = () => {
 
   return (
     <section className="container mx-auto max-w-7xl px-4 pt-6">
-      <TopicsHeader />
+      <TopicHeader />
       <StageTabs
         groupedTopics={groupedTopics}
         groupedProgress={groupedProgress}
