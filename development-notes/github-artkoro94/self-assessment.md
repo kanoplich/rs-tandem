@@ -9,12 +9,14 @@
 |                      |                                (TOAST для логина и регистрации)                                  | [PR#149](https://github.com/kanoplich/rs-tandem/pull/149)                                                            |       |
 |                      | **Rich UI Screen:** History Page (экран с историей)                                              | [PR#218](https://github.com/kanoplich/rs-tandem/pull/218), [PR#253](https://github.com/kanoplich/rs-tandem/pull/253) | +20   |
 | **UI & Interaction** | **Theme Switcher:** Переключение тем (Light/Dark) через CSS variables или Context                | [PR#213](https://github.com/kanoplich/rs-tandem/pull/213), [PR#229](https://github.com/kanoplich/rs-tandem/pull/229) | +10   |
-|                      | **Accessibility (a11y):** Оптимизация доступности (keyboard navigation)             |                                                                                                                      | +10   |
+|                      | **Accessibility (a11y):** Оптимизация доступности (keyboard navigation)                          |                                                                                                                      | +10   |
 |                      | **Responsive:** Адаптация верстки под мобильные устройства (от 320px)                            |                                                                                                                      | +5    |
 | **Quality**          | **Unit Tests (Basic):** Покрытие тестами 20%+ вашего личного кода                                | [PR#193](https://github.com/kanoplich/rs-tandem/pull/120)                                                            | +10   |
 | **Frameworks**       | **React:** Использование библиотеки React                                                        |                                                                                                                      | +5    |
+| **Architecture**     | **Design patterns:** Применил разделение ответственности через вынос логики в хуки и разделение слоев в FSD       |                                                                                                     | +10   |
+|                      | **API Layer:** Выделил слой работы с API через кастомные хуки                                    |                                                                                                                      | +10   |
 
-### Итого: 80 баллов
+### Итого: 100 баллов
 
 ## 2. Описание работы
 
@@ -72,4 +74,3 @@
 - **Работа с константами:** Вынес текст и статические значения в отдельные константы для упрощения поддержки и переиспользования.
 
   **Ссылка на [PR#296](https://github.com/kanoplich/rs-tandem/pull/296)** — место для вопросов от peers и ментора.
-  
