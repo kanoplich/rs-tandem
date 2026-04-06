@@ -65,6 +65,8 @@
 | 8             | [Team Sync - 09-03-26](docs/meeting-notes/2026-03-9-team-sync.md)                             |
 | 9             | [Team Sync - 16-03-26](docs/meeting-notes/2026-03-16-team-sync.md)                            |
 | 10            | [Team Sync - 23-03-26](docs/meeting-notes/2026-03-23-team-sync.md)                            |
+| 11            | [Team Sync - 23-03-30](docs/meeting-notes/2026-03-30-team-sync.md)                            |
+| 12            | [Team Sync - 23-04-03](docs/meeting-notes/2026-04-03-team-sync.md)                            |
 
 ## :hammer_and_wrench: ​Технологический Стек
 

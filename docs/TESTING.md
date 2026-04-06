@@ -59,16 +59,16 @@ PR с тестами: https://github.com/kanoplich/rs-tandem/pull/121
 
 Что тестирую: формы регистрации и сброса пароля
 
-| Файл                                                | Описание |
-| --------------------------------------------------- | -------- |
-| `src/features/auth/hooks/use-forgot-form.test.ts`   |          |
-| `src/features/auth/hooks/use-register-form.test.ts` |          |
-| `src/features/auth/hooks/use-reset-form.test.ts`    |          |
-| `src/features/auth/model/forgot-schema.test.ts`     |          |
-| `src/features/auth/model/register-schema.test.ts`   |          |
-| `src/features/auth/model/reset-schema.test.ts`      |          |
-| `src/features/auth/ui/forgot-form.test.tsx`         |          |
-| `src/features/auth/ui/register-form.test.tsx`       |          |
-| `src/features/auth/ui/reset-form.test.tsx`          |          |
+| Файл                                                | Описание                                                                                                                          |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `src/features/auth/hooks/use-forgot-form.test.ts`   | Тестирование логики сброса пароля: инициализация, успешный вызов API, обработка серверных и неизвестных ошибок через toast.       |
+| `src/features/auth/hooks/use-register-form.test.ts` | Тестирование логики регистрации: отправка данных в `signUp`, обработка ошибок, состояние загрузки (`isSubmitting`) и уведомления. |
+| `src/features/auth/hooks/use-reset-form.test.ts`    | Тестирование логики обновления пароля: вызов API, редирект на Dashboard после успеха и обработка ошибок валидации.                |
+| `src/features/auth/model/forgot-schema.test.ts`     | Валидация Zod-схемы для забытого пароля: проверка корректности формата email.                                                     |
+| `src/features/auth/model/register-schema.test.ts`   | Тестирование схемы регистрации: совпадение паролей, сложность пароля, обязательность имени и формат email.                        |
+| `src/features/auth/model/reset-schema.test.ts`      | Валидация схемы нового пароля: проверка требований к надежности и идентичности двух полей пароля.                                 |
+| `src/features/auth/ui/forgot-form.test.tsx`         | Рендер формы восстановления: наличие заголовков, инпутов, кнопки отправки, лоадера и ссылки на логин.                             |
+| `src/features/auth/ui/register-form.test.tsx`       | Отрисовка формы регистрации: проверка всех полей ввода, кнопок соцсетей (OAuth) и навигационных ссылок.                           |
+| `src/features/auth/ui/reset-form.test.tsx`          | Рендер формы установки нового пароля: проверка полей, лейблов, кнопки сабмита и отображения ошибок API.                           |
 
 PR с тестами: https://github.com/kanoplich/rs-tandem/pull/193
