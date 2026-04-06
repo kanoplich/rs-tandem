@@ -2,30 +2,33 @@
 
 ## 1. Таблица фич
 
-| Категория            | Фича                                                             | Баллы |
-| -------------------- | ---------------------------------------------------------------- | ----- |
-| **My Components**    | Complex Backend Service (AI Edge Function – judge)               | +30   |
-|                      | Rich UI Screen (Dashboard)                                       | +20   |
-| **AI**               | AI Streaming (stream ответа LLM)                                 | +10   |
-|                      | Raw LLM API (fetch + ReadableStream + Groq API)                  | +10   |
-|                      | Tool Use (Function Calling для оценки)                           | +15   |
-| **UI & Interaction** | Responsive (Dashboard адаптив)                                   | +5    |
-|                      | Unit Tests (Basic)                                               | +10   |
-|                      | Unit Tests (Full)                                                | +10   |
-|                      | E2E Tests: (Cypress)                                             | +10   |
-| **DevOps & Role**    | Prompt Engineering (итерации улучшения промптов)                 | +15   |
-|                      | Docker (локальный запуск Supabase + Edge Functions)              | +10   |
-| **Architecture**     | API Layer (выделенный слой работы с API)                         | +10   |
-|                      | Design Patterns (валидация, разделение ответственности, helpers) | +10   |
-| **Framework**        | React: Использование библиотеки React                            | +5    |
+Ссылка на PR c Self-Assesment:
 
-### Итого: **170 баллов**
+| Категория            | Фича                                                             | PR                                                                                                                                                                                | Баллы |
+| -------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **My Components**    | Complex Backend Service (AI Edge Function – judge)               | [PR #77](https://github.com/kanoplich/rs-tandem/pull/77)                                                                                                                          | +30   |
+|                      | Rich UI Screen (Dashboard)                                       | [PR #203](https://github.com/kanoplich/rs-tandem/pull/203), [PR #216](https://github.com/kanoplich/rs-tandem/pull/216)                                                            | +20   |
+| **AI**               | AI Streaming (stream ответа LLM)                                 | [PR #109](https://github.com/kanoplich/rs-tandem/pull/109)                                                                                                                        | +10   |
+|                      | Raw LLM API (fetch + ReadableStream + Groq API)                  | [PR #35](https://github.com/kanoplich/rs-tandem/pull/35)                                                                                                                          | +10   |
+|                      | Tool Use (Function Calling для оценки)                           | [PR #232](https://github.com/kanoplich/rs-tandem/pull/232)                                                                                                                        | +15   |
+| **UI & Interaction** | Responsive (Dashboard адаптив)                                   | [PR #203](https://github.com/kanoplich/rs-tandem/pull/203)                                                                                                                        | +5    |
+|                      | Unit Tests (Basic)                                               | [PR #256](https://github.com/kanoplich/rs-tandem/pull/256)                                                                                                                        | +10   |
+|                      | Unit Tests (Full)                                                | [PR #256](https://github.com/kanoplich/rs-tandem/pull/256)                                                                                                                        | +10   |
+|                      | E2E Tests: (Cypress)                                             | [PR #266](https://github.com/kanoplich/rs-tandem/pull/266)                                                                                                                        | +10   |
+|                      | Accessibility: Оптимизация доступности (keyboard navigation)     | [PR #203](https://github.com/kanoplich/rs-tandem/pull/203)                                                                                                                        | +10   |
+| **DevOps & Role**    | Docker (локальный запуск Supabase + Edge Functions)              | [PR #35](https://github.com/kanoplich/rs-tandem/pull/35)                                                                                                                          | +10   |
+|                      | Prompt Engineering (итерации улучшения промптов)                 | [PR #77](https://github.com/kanoplich/rs-tandem/pull/77), [PR #109](https://github.com/kanoplich/rs-tandem/pull/109), [PR #232](https://github.com/kanoplich/rs-tandem/pull/232), | +15   |
+| **Architecture**     | API Layer (выделенный слой работы с API)                         | [PR #35](https://github.com/kanoplich/rs-tandem/pull/35)                                                                                                                          | +10   |
+|                      | Design Patterns (валидация, разделение ответственности, helpers) | [PR #109](https://github.com/kanoplich/rs-tandem/pull/109), [PR #35](https://github.com/kanoplich/rs-tandem/pull/35), [PR #216](https://github.com/kanoplich/rs-tandem/pull/216)  | +10   |
+| **Framework**        | React: Использование библиотеки React                            | [PR #216](https://github.com/kanoplich/rs-tandem/pull/216)                                                                                                                        | +5    |
+
+### Итого: **180 баллов**
 
 ---
 
 ## 2. Описание моей работы
 
-В рамках проекта я отвечал за разработку **AI-компонента** и **Dashboard**.
+В рамках проекта я отвечал за разработку **AI-компонента** (Edge Function, LLM Answer Streaming, Tool Use / Functional Calling) и **Dashboard**. Также я создал Unit тесты и e2e тесты, был в течение одной недели тим-лидом, и записал видео-презентацию проекта.
 
 ### AI Edge Function (judge)
 
