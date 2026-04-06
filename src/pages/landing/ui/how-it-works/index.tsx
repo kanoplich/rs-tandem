@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
+import { useIntersectionObserver } from '../../hooks';
+import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '../../lib/constants';
+import { BUTTON_TEXT, LANDING_HOW_IT_WORKS_TEXT, LANDING_STEPS_TEXT } from '../../locales';
+
 import styles from './styles.module.css';
 
-import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
-import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
-import { LANDING_HOW_IT_WORKS_TEXT, LANDING_STEPS_TEXT } from '@/pages/landing/locales';
-import { Button, ROUTES } from '@/shared';
-import { cn } from '@/shared/lib/utils';
+import { Button, ROUTES, cn } from '@/shared';
 
 export const HowItWorks = () => {
   const { ref, isVisible } = useIntersectionObserver({
@@ -51,7 +51,7 @@ export const HowItWorks = () => {
         </div>
         <div className="flex justify-center mt-8">
           <Button asChild className="px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg">
-            <Link to={ROUTES.LOGIN}>{LANDING_HOW_IT_WORKS_TEXT.CTA}</Link>
+            <Link to={ROUTES.LOGIN}>{BUTTON_TEXT.TRY_FREE}</Link>
           </Button>
         </div>
       </div>

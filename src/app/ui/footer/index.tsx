@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { DEVELOPERS } from './lib/constants';
 import { FOOTER_TEXTS } from './locales';
 
+import { cn, HEADERS_TEXT } from '@/shared';
 import { RsSchool } from '@/shared/assets/icons';
-import { cn } from '@/shared/lib/utils';
-import { HEADERS_TEXT } from '@/shared/model/constants';
 
 export const Footer = () => {
   const [showDevs, setShowDevs] = useState(false);

@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { THEMES, type Theme } from '@/shared';
+import { THEMES, type Theme } from '../../lib/constants';
 
 type ThemeProviderState = {
   theme: Theme;

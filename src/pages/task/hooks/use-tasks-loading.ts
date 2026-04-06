@@ -34,6 +34,10 @@ export const useTasksLoading = ({ topicsParam, mode }: UseTasksLoadingProps): Us
         const topicsArr = topicsParam.split(',');
         const loadedTasks: Task[] = await getTasksByTopic(topicsArr);
 
+        if (loadedTasks.length === 0) {
+          return;
+        }
+
         if (mode === TASK_MODES.continue) {
           const passedTaskSubmission = await getPassedSubmissionHistory();
           const passedTaskIds = new Set(passedTaskSubmission.map((sub) => sub.taskId));

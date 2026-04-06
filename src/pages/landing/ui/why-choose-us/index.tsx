@@ -1,12 +1,10 @@
+import { useIntersectionObserver } from '../../hooks';
+import { ANIMATION_DELAYS, INTERSECTION_OBSERVER_THRESHOLD_FEATURES } from '../../lib/constants';
+import { LANDING_FEATURES_TEXT, LANDING_WHY_CHOOSE_US_TEXT } from '../../locales';
+
 import styles from './styles.module.css';
 
-import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
-import {
-  ANIMATION_DELAYS,
-  INTERSECTION_OBSERVER_THRESHOLD_FEATURES,
-} from '@/pages/landing/lib/constants';
-import { LANDING_FEATURES_TEXT, LANDING_WHY_CHOOSE_US_TEXT } from '@/pages/landing/locales';
-import { Card } from '@/shared';
+import { Card, cn } from '@/shared';
 import {
   AwardIcon,
   CheckIcon,
@@ -15,7 +13,6 @@ import {
   StatisticIcon,
   TopicIcon,
 } from '@/shared/assets/icons';
-import { cn } from '@/shared/lib/utils';
 
 const features = [
   {
