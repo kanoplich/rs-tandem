@@ -5,7 +5,7 @@
 ## Как запустить
 
 ```bash
-npm test
+pnpm test
 ```
 
 ## Участники
@@ -72,3 +72,17 @@ PR с тестами: https://github.com/kanoplich/rs-tandem/pull/121
 | `src/features/auth/ui/reset-form.test.tsx`          | Рендер формы установки нового пароля: проверка полей, лейблов, кнопки сабмита и отображения ошибок API.                           |
 
 PR с тестами: https://github.com/kanoplich/rs-tandem/pull/193
+
+### @sevasmith
+
+Что тестирую: Dashboard
+
+| Файл                                                                | Описание                                           |
+| ------------------------------------------------------------------- | -------------------------------------------------- |
+| `src/shared/lib/get-topic-stats.test.ts`                            | Проверка подсчета статистики                       |
+| `src/pages/dashboard/ui/overall-stats/overall-stats.test.tsx`       | Проверка отбражения статистики                     |
+| `src/pages/dashboard/ui/stat-card/stat-card.test.tsx`               | Проверка отбражения статистики                     |
+| `src/pages/dashboard/ui/dashboard-header/dashboard-header.test.tsx` | Проверка отображения заголовка                     |
+| `src/pages/dashboard/hooks/use-dashboard-data.test.tsx`             | Проверка работы хука для получения данных дашборда |
+
+PR с тестами: https://github.com/kanoplich/rs-tandem/pull/256

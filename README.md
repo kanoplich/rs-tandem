@@ -67,6 +67,7 @@
 | 10            | [Team Sync - 23-03-26](docs/meeting-notes/2026-03-23-team-sync.md)                            |
 | 11            | [Team Sync - 23-03-30](docs/meeting-notes/2026-03-30-team-sync.md)                            |
 | 12            | [Team Sync - 23-04-03](docs/meeting-notes/2026-04-03-team-sync.md)                            |
+| 13            | [Team Sync - 23-04-06](docs/meeting-notes/2026-04-06-team-sync.md)                            |
 
 ## :hammer_and_wrench: ​Технологический Стек
 
@@ -156,7 +157,7 @@ npx supabase db reset
 - [Скрипты и инструменты](docs/scripts.md).
 - [Установка и настройка](docs/setup.md).
 - [Git Flow & Collaboration Standards](docs/gitflow.md)
-- [Тесты](docs/TESTING.md)
+- [Тесты](docs/testing.md)
 
 ## :cinema: Demo Video
 
