@@ -54,17 +54,3 @@ PR с тестами: https://github.com/kanoplich/rs-tandem/pull/128
 | `src/shared/api/topic/topic.test.ts`             | Получение тем              |
 
 PR с тестами: https://github.com/kanoplich/rs-tandem/pull/121
-
-### @sevasmith
-
-Что тестирую: Dashboard
-
-| Файл                                                                | Описание                                           |
-| ------------------------------------------------------------------- | -------------------------------------------------- |
-| `src/shared/lib/get-topic-stats.test.ts`                            | Проверка подсчета статистики                       |
-| `src/pages/dashboard/ui/overall-stats/overall-stats.test.tsx`       | Проверка отбражения статистики                     |
-| `src/pages/dashboard/ui/stat-card/stat-card.test.tsx`               | Проверка отбражения статистики                     |
-| `src/pages/dashboard/ui/dashboard-header/dashboard-header.test.tsx` | Проверка отображения заголовка                     |
-| `src/pages/dashboard/hooks/use-dashboard-data.test.tsx`             | Проверка работы хука для получения данных дашборда |
-
-PR с тестами: https://github.com/kanoplich/rs-tandem/pull/256
