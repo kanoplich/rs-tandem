@@ -5,11 +5,11 @@ import { ERROR } from '../locales';
 
 import { getTopics, getTopicProgress, type Topic, type TopicProgress } from '@/shared/api';
 
-type UseTopicsDataResult = {
+interface UseTopicsDataResult {
   topics: Topic[];
   progress: TopicProgress[];
   isLoading: boolean;
-};
+}
 
 export const useTopicsData = (): UseTopicsDataResult => {
   const [topics, setTopics] = useState<Topic[]>([]);

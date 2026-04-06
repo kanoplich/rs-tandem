@@ -6,7 +6,11 @@ export type { Topic } from './topic/types';
 export type { JudgeResult } from './judge/types';
 export { getSession, onAuthStateChange, signUp, signIn, signOut, signInWithOAuth } from './auth';
 export { getDashboardStats, getTopicProgress } from './dashboard/';
-export { getSubmissionHistory, getSubmissionHistoryByTaskId } from './submissions';
+export {
+  getSubmissionHistory,
+  getSubmissionHistoryByTaskId,
+  getPassedSubmissionHistory,
+} from './submissions';
 export { getTask, getTasksByTopic } from './task';
 export { getTopics } from './topic';
 export { evaluateTheory } from './judge';

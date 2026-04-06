@@ -9,20 +9,20 @@ export const LANDING_SUCCESS_TEXT = {
 };
 
 export const LANDING_WHY_CHOOSE_US_TEXT = {
-  TITLE: 'Самый строгий интервьюер RS School',
+  TITLE: 'Самый строгий интервьюер RS\u00A0School',
 
   DESCRIPTION: {
     PART_1: 'Он не подскажет ответ. Он заставит тебя думать.',
     PART_2: 'полезных и актуальных заданий.',
-    PART_3:
-      'подсказок. Только ты и AI-интервьюер. Это будет сложно, но именно так ты подготовишься к реальному интервью.',
+    PART_3: 'подсказок.',
+    PART_4:
+      'Только ты и AI-интервьюер. Это будет сложно, но именно так ты подготовишься к реальному интервью.',
   },
 };
 
 export const LANDING_HOW_IT_WORKS_TEXT = {
   TITLE: 'Как это работает?',
   DESCRIPTION: 'Простой процесс для эффективной подготовки',
-  CTA: 'Попробовать бесплатно',
 };
 
 export const LANDING_READY_TEXT = {
@@ -45,7 +45,7 @@ export const LANDING_FEATURES_TEXT = [
   },
   {
     ID: 'current-topics',
-    TITLE: '37 актуальных тем',
+    TITLE: '33 актуальные темы',
     DESCRIPTION: 'От основ JavaScript до продвинутой архитектуры и Node.js',
   },
   {
@@ -90,6 +90,13 @@ export const LANDING_STEPS_TEXT = [
 
 export const LANDING_STATS_TEXT = {
   STUDENTS: 'Студентов',
-  TOPICS: 'Тем',
+  TOPICS: 'Темы',
   STAGES: 'Этапа',
+};
+
+export const BUTTON_TEXT = {
+  LOGIN: 'Войти',
+  START_FREE: 'Начать бесплатно',
+  REGISTER_NOW: 'Зарегистрироваться сейчас',
+  TRY_FREE: 'Попробовать бесплатно',
 };

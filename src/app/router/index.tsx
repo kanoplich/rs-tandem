@@ -16,7 +16,7 @@ import {
   Task,
   Topics,
 } from '@/pages';
-import { ROUTES } from '@/shared/config/routes';
+import { ROUTES } from '@/shared';
 
 export const router = createBrowserRouter([
   {

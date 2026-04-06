@@ -13,7 +13,11 @@ export const TaskArea = ({ task }: TaskAreaProps) => {
         <h2 className="w-fit font-light text-primary text-sm px-3 py-1.5 rounded-md bg-secondary">
           {task.title}
         </h2>
-        <p className="py-4">{TASK_AREA.WELCOME_MESSAGE}</p>
+        <p className="py-4">
+          {TASK_AREA.WELCOME_MESSAGE_PREFIX}
+          <span className="text-primary">{TASK_AREA.WELCOME_MESSAGE_HIGHLIGHT}</span>
+          {TASK_AREA.WELCOME_MESSAGE_SUFFIX}
+        </p>
         <hr />
         <p className="pt-3 font-bold text-base sm:text-lg">{task.questionText}</p>
       </div>

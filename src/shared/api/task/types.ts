@@ -18,6 +18,7 @@ export interface Task {
   id: string;
   topicId: string;
   type: TaskType;
+  stage: number;
   difficulty: DifficultyLevel;
   title: string;
   questionText: string;

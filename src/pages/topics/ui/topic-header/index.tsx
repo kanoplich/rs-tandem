@@ -1,0 +1,10 @@
+import { TOPIC_HEADER_TEXT } from '../../locales';
+
+export const TopicHeader = () => {
+  return (
+    <div className="mb-6">
+      <h1 className="text-2xl font-normal leading-9">{TOPIC_HEADER_TEXT.TITLE}</h1>
+      <p className="text-base text-foreground">{TOPIC_HEADER_TEXT.DESCRIPTION}</p>
+    </div>
+  );
+};

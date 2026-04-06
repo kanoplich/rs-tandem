@@ -12,6 +12,6 @@ export const ANIMATION_DELAYS = {
 } as const;
 export const LANDING_STATS = [
   { value: '1000+', label: LANDING_STATS_TEXT.STUDENTS },
-  { value: '37', label: LANDING_STATS_TEXT.TOPICS },
+  { value: '33', label: LANDING_STATS_TEXT.TOPICS },
   { value: '3', label: LANDING_STATS_TEXT.STAGES },
 ];

@@ -4,5 +4,4 @@ export const MENU_LINK_TEXT = {
   HISTORY: 'История',
   PROFILE: 'Профиль',
   LOGOUT: 'Выход',
-  APP_TITLE: 'Тренажёр интервью',
 };

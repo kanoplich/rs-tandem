@@ -1,4 +1,8 @@
-export * from './config/routes';
+export { cn } from './lib/utils';
+
+export { HEADERS_TEXT } from './lib/locales';
+
+export { ROUTES } from './config/routes';
 
 export { useTheme } from './hooks/use-theme';
 
@@ -13,7 +17,9 @@ export {
   THEMES,
   THEME_STORAGE_KEY,
   MAX_DISPLAY_SCORE,
+  TASK_MODES,
   type Theme,
+  type TaskMode,
 } from './lib/constants';
 
 export { getProgressPercent } from './lib/get-progress-percent';

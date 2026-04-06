@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
-import { getProgressPercent, PASSING_SCORE } from '@/shared';
+import { DEFAULT_STAGES_VALUE, getProgressPercent, PASSING_SCORE } from '@/shared';
 import {
   getSubmissionHistoryByTaskId,
   evaluateTheory,
@@ -26,6 +26,7 @@ interface UseTaskSessionReturn {
   isPassed: boolean;
   isLastTask: boolean;
   progressPercent: number;
+  stageNumber: number;
   handleSubmit: (message: string) => Promise<void>;
   handleRetry: () => void;
   handleNext: () => void;
@@ -43,6 +44,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
   const tasksCount = tasks.length;
+  const stageNumber = currentTask?.stage || DEFAULT_STAGES_VALUE;
   const isLastTask = currentTaskNumber === tasksCount;
 
   const reset = () => {
@@ -54,6 +56,15 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
 
   const handleRetry = () => {
     reset();
+  };
+
+  const handleSuccess = () => {
+    const percent = getProgressPercent(currentTaskNumber, tasksCount);
+    setProgressPercent(percent);
+
+    if (isLastTask) {
+      toast.success(USE_TASK_SESSION.SUCCESS);
+    }
   };
 
   const handleSubmit = async (message: string) => {
@@ -72,8 +83,13 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
 
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
-        setFeedback((prev) => prev + decoder.decode(value));
+
+        if (done) {
+          setFeedback((prev) => prev + decoder.decode());
+          break;
+        }
+
+        setFeedback((prev) => prev + decoder.decode(value, { stream: true }));
       }
 
       const submission = await getSubmissionHistoryByTaskId(currentTask.id);
@@ -81,8 +97,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       const passed = submission.result.score >= PASSING_SCORE;
 
       if (passed) {
-        const percent = getProgressPercent(currentTaskNumber, tasksCount);
-        setProgressPercent(percent);
+        handleSuccess();
       }
 
       setResult(judgeResult);
@@ -95,15 +110,9 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   };
 
   const handleNext = () => {
-    const isPassed = result?.score !== undefined && result.score >= PASSING_SCORE;
-
     if (currentIndex < tasks.length - 1 && isPassed) {
       setCurrentIndex((prev) => prev + 1);
       reset();
-    }
-
-    if (currentIndex === tasks.length - 1 && isPassed) {
-      toast.success(USE_TASK_SESSION.SUCCESS);
     }
   };
 
@@ -118,6 +127,7 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
     isPassed,
     isLastTask,
     progressPercent,
+    stageNumber,
     handleNext,
     handleRetry,
     handleSubmit,

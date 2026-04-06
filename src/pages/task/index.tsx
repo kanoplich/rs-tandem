@@ -11,13 +11,15 @@ import { TaskMessage } from './ui/task-message';
 import { TaskProgress } from './ui/task-progress';
 import { TaskResult } from './ui/task-result';
 
-import { Loader } from '@/shared';
+import { ChatButton, ChatPanel, useChat } from '@/features/chat-assistant';
+import { Loader, TASK_MODES, type TaskMode } from '@/shared';
 
 export const Task = () => {
   const [searchParams] = useSearchParams();
   const topicsParam = searchParams.get('topics');
-  const stage = searchParams.get('stage');
-  const { tasks, stageNumber, isLoading } = useTasksLoading({ stage, topicsParam });
+  const rawMode = searchParams.get('mode');
+  const mode: TaskMode = rawMode === TASK_MODES.restart ? TASK_MODES.restart : TASK_MODES.continue;
+  const { tasks, isLoading } = useTasksLoading({ topicsParam, mode });
   const {
     currentTaskNumber,
     tasksCount,
@@ -32,9 +34,12 @@ export const Task = () => {
     isSending,
     isPassed,
     isLastTask,
+    stageNumber,
   } = useTaskSession({
     tasks,
   });
+
+  const { messages, isStreaming, isOpen, toggleOpen, sendMessage } = useChat(currentTask?.id);
 
   if (isLoading) {
     return <Loader />;
@@ -72,6 +77,14 @@ export const Task = () => {
         />
       )}
       <TaskAdvice />
+      <ChatButton onClick={toggleOpen} isOpen={isOpen} />
+      <ChatPanel
+        isOpen={isOpen}
+        messages={messages}
+        isStreaming={isStreaming}
+        onClose={toggleOpen}
+        onSend={sendMessage}
+      />
     </div>
   );
 };

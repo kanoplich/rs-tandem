@@ -6,7 +6,7 @@ export const ROUTES = {
   FORGOT: '/forgot',
   DASHBOARD: '/dashboard',
   TOPICS: '/topics',
-  TASK: '/task/:id',
+  TASK: '/task',
   HISTORY: '/history',
   PROFILE: '/profile',
   NOT_FOUND: '*',
