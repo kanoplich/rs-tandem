@@ -9,6 +9,8 @@
 - **AI-чат помощник** — поскольку некоторые задания выходят за рамки курса, разработан встроенный чат для подсказок и разбора сложных тем. Построен на RAG-архитектуре: учитывает контекст правильных ответов из базы, помогает разобраться в теме без прямой выдачи ответа.
 - **История сабмитов** — все успешные попытки сохраняются, можно отслеживать динамику.
 
+:link: Реализовано на основании документации [AI Judge: Supabase + WebContainer](https://github.com/rolling-scopes-school/tasks/blob/master/stage2/tasks/rs-tandem/examples/03-ai-prep-app/variant-b/ai-judge.md) к заданию RS School.
+
 ## Deployment
 
 :globe_with_meridians: ​**Deploy Link** https://rs-tandem.netlify.app/
@@ -41,6 +43,13 @@
 - **Командная работа** — 6 человек пишут в один репозиторий, код не конфликтует, конвенции соблюдаются.
 - **Участники берутся за сложное** — edge functions, AI-стриминг, OAuth.
 - **Реагирование на ревью** — большинство замечаний исправляется, паттерны усваиваются.
+
+## Лучшие PR ( PR с содержательным code review)
+
+1. :link: [PR#112](https://github.com/kanoplich/rs-tandem/pull/112) Кнопки логина Google Github
+2. :link: [PR#114](https://github.com/kanoplich/rs-tandem/pull/114) Development of Stagetabs
+3. :link: [PR#213](https://github.com/kanoplich/rs-tandem/pull/213) Подготовка стилей для переключения тем
+4. :link: [PR#218](https://github.com/kanoplich/rs-tandem/pull/218) Страница истории
 
 ## :memo: ​Meeting Notes
 
@@ -145,7 +154,10 @@ npx supabase db reset
 - [Скрипты и инструменты](docs/scripts.md).
 - [Установка и настройка](docs/setup.md).
 - [Git Flow & Collaboration Standards](docs/gitflow.md)
+- [Тесты](docs/TESTING.md)
 
-## :cinema: ​Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API):
+## :cinema: Demo Video
 
-https://www.youtube.com/watch?v=M_s63RHPufU
+:link: [Демо-видео **Team42. RS-Tandem Project Presentation**](https://www.youtube.com/watch?v=ZUbFWD2hDkQ)
+
+:link: [​Видео для 5 недели (Страница 404, Состояние загрузки, Обработка ошибок API)](https://www.youtube.com/watch?v=M_s63RHPufU)

@@ -54,3 +54,21 @@ PR с тестами: https://github.com/kanoplich/rs-tandem/pull/128
 | `src/shared/api/topic/topic.test.ts`             | Получение тем              |
 
 PR с тестами: https://github.com/kanoplich/rs-tandem/pull/121
+
+### @vadim-troian
+
+Что тестирую: формы регистрации и сброса пароля
+
+| Файл                                                | Описание |
+| --------------------------------------------------- | -------- |
+| `src/features/auth/hooks/use-forgot-form.test.ts`   |          |
+| `src/features/auth/hooks/use-register-form.test.ts` |          |
+| `src/features/auth/hooks/use-reset-form.test.ts`    |          |
+| `src/features/auth/model/forgot-schema.test.ts`     |          |
+| `src/features/auth/model/register-schema.test.ts`   |          |
+| `src/features/auth/model/reset-schema.test.ts`      |          |
+| `src/features/auth/ui/forgot-form.test.tsx`         |          |
+| `src/features/auth/ui/register-form.test.tsx`       |          |
+| `src/features/auth/ui/reset-form.test.tsx`          |          |
+
+PR с тестами: https://github.com/kanoplich/rs-tandem/pull/193
