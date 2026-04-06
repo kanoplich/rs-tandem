@@ -5,8 +5,17 @@
 | Категория            | Фича                                                                                | Баллы |
 | -------------------- | ----------------------------------------------------------------------------------- | ----- |
 | **My Components**    | **Complex Component:** Разработка защищенного роутера (Protected Route)             | +25   |
+|                      | [PR 4](https://github.com/kanoplich/rs-tandem/pull/4)                               |       |
+|                      | [PR 7](https://github.com/kanoplich/rs-tandem/pull/7/)                              |       |
+|                      | [PR 67](https://github.com/kanoplich/rs-tandem/pull/67)                             |       |
+|                      | [PR 100](https://github.com/kanoplich/rs-tandem/pull/100)                           |       |
 |                      | **Rich UI Screen:** Реализация экрана со сложной логикой и состоянием (Topics page) | +20   |
+|                      | [PR 114](https://github.com/kanoplich/rs-tandem/pull/114)                           |       |
+|                      | [PR 174](https://github.com/kanoplich/rs-tandem/pull/174)                           |       |
+|                      | [PR 188](https://github.com/kanoplich/rs-tandem/pull/188)                           |       |
+|                      | [PR 220](https://github.com/kanoplich/rs-tandem/pull/220)                           |       |
 | **Quality**          | **Unit Tests (Basic):** Покрытие тестами 20%+ вашего личного кода                   | +10   |
+|                      | [PR 128](https://github.com/kanoplich/rs-tandem/pull/128)                           |       |
 | **UI & Interaction** | **Responsive:** Адаптация верстки под мобильные устройства (от 320px)               | +5    |
 | **Frameworks**       | **React:** Использование библиотеки React                                           | +5    |
 
@@ -60,3 +69,5 @@
 - Карточка темы (TopicCard: статус «Не начата / В процессе / Завершена», процент выполнения, средний балл, кнопки «Начать / Продолжить» и «Пройти заново»)
 - Два режима навигации на страницу заданий (continue – продолжение с сохранённого прогресса, restart – полный сброс и прохождение заново) через параметры URL
 - Интеграция с API (getTopics, getTopicProgress)
+
+**Ссылка на [PR#286](https://github.com/kanoplich/rs-tandem/pull/286)** — место для вопросов от peers и ментора.
