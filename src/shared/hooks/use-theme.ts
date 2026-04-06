@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { NOT_WITHIN_THEME_PROVIDER_ERROR, ThemeProviderContext } from '@/shared';
+import { NOT_WITHIN_THEME_PROVIDER_ERROR } from '../lib/locales';
+import { ThemeProviderContext } from '../model/theme/theme-context';
 
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
