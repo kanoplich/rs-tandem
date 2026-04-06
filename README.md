@@ -157,7 +157,7 @@ npx supabase db reset
 - [Скрипты и инструменты](docs/scripts.md).
 - [Установка и настройка](docs/setup.md).
 - [Git Flow & Collaboration Standards](docs/gitflow.md)
-- [Тесты](docs/testing.md)
+- [Тесты](docs/TESTING.md)
 
 ## :cinema: Demo Video
 
