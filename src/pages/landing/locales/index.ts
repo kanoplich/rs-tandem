@@ -45,7 +45,7 @@ export const LANDING_FEATURES_TEXT = [
   },
   {
     ID: 'current-topics',
-    TITLE: '37 актуальных тем',
+    TITLE: '33 актуальные темы',
     DESCRIPTION: 'От основ JavaScript до продвинутой архитектуры и Node.js',
   },
   {
@@ -90,7 +90,7 @@ export const LANDING_STEPS_TEXT = [
 
 export const LANDING_STATS_TEXT = {
   STUDENTS: 'Студентов',
-  TOPICS: 'Тем',
+  TOPICS: 'Темы',
   STAGES: 'Этапа',
 };
 
