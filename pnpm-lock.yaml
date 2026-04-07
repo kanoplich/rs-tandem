@@ -84,9 +84,6 @@ importers:
       '@testing-library/user-event':
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.1)
-      '@types/cypress':
-        specifier: ^1.1.6
-        version: 1.1.6
       '@types/jsdom':
         specifier: ^28.0.0
         version: 28.0.0
@@ -1922,10 +1919,6 @@ packages:
 
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
-
-  '@types/cypress@1.1.6':
-    resolution: {integrity: sha512-CfeLLD3+6vIWe2AO5hR63f1c8EbRzrp/j1ExubAwOTpwZFZvF3Nm9cOPQiUwzNmAUmZuhO0QVH98Qlujni6nPw==}
-    deprecated: This is a stub types definition. cypress provides its own type definitions, so you do not need this installed.
 
   '@types/debug@4.1.13':
     resolution: {integrity: sha512-KSVgmQmzMwPlmtljOomayoR89W4FynCAi3E8PPs7vmDVPe84hT+vGPKkJfThkmXs0x0jAaa9U8uW8bbfyS2fWw==}
@@ -7223,10 +7216,6 @@ snapshots:
     dependencies:
       '@types/deep-eql': 4.0.2
       assertion-error: 2.0.1
-
-  '@types/cypress@1.1.6':
-    dependencies:
-      cypress: 15.13.0
 
   '@types/debug@4.1.13':
     dependencies:
