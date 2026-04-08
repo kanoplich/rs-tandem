@@ -127,6 +127,11 @@ export const signInWithOAuth = async (provider: Provider): Promise<void> => {
 };
 
 export const resetPassword = async (email: string): Promise<void> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(300);
+    return;
+  }
+
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${HOST}${ROUTES.RESET}`,
   });
@@ -135,6 +140,11 @@ export const resetPassword = async (email: string): Promise<void> => {
 };
 
 export const updateUserPassword = async (password: string): Promise<AuthUser | null> => {
+  if (USE_MOCK_SUPABASE) {
+    await delay(300);
+    return MOCK_SESSION.user ?? null;
+  }
+
   const {
     data: { user },
     error,

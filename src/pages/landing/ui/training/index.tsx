@@ -1,18 +1,16 @@
 import { Link } from 'react-router-dom';
 
-import styles from './styles.module.css';
-
-import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
+import { useIntersectionObserver } from '../../hooks';
 import {
   ANIMATION_DELAYS,
   INTERSECTION_OBSERVER_THRESHOLD,
   LANDING_STATS,
-} from '@/pages/landing/lib/constants';
-import { LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '@/pages/landing/locales';
-import { ROUTES } from '@/shared/config/routes';
-import { cn } from '@/shared/lib/utils';
-import { BUTTON_TEXT, HEADERS_TEXT } from '@/shared/model/constants';
-import { Button } from '@/shared/ui/button';
+} from '../../lib/constants';
+import { BUTTON_TEXT, LANDING_HERO_TEXT, LANDING_SUCCESS_TEXT } from '../../locales';
+
+import styles from './styles.module.css';
+
+import { ROUTES, Button, cn, HEADERS_TEXT } from '@/shared';
 
 export const Training = () => {
   const { ref, isVisible } = useIntersectionObserver({

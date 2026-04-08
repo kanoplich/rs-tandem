@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
 
+import { useIntersectionObserver } from '../../hooks';
+import { INTERSECTION_OBSERVER_THRESHOLD } from '../../lib/constants';
+import { BUTTON_TEXT, LANDING_READY_TEXT } from '../../locales';
+
 import styles from './styles.module.css';
 
-import { useIntersectionObserver } from '@/pages/landing/hooks/use-intersection-observer';
-import { INTERSECTION_OBSERVER_THRESHOLD } from '@/pages/landing/lib/constants';
-import { LANDING_READY_TEXT } from '@/pages/landing/locales';
-import { ROUTES } from '@/shared/config/routes';
-import { cn } from '@/shared/lib/utils';
-import { BUTTON_TEXT } from '@/shared/model/constants';
-import { Button } from '@/shared/ui/button';
+import { ROUTES, Button, cn } from '@/shared';
 
 export const ReadyToStart = () => {
   const { ref, isVisible } = useIntersectionObserver({

@@ -36,8 +36,8 @@ describe('getSubmissionHistory method', () => {
           missed: null,
           score: null,
           submitted_at: '',
-          task_id: 'user-mock-01',
-          user_id: 'closures-1',
+          task_id: 'closures-1',
+          user_id: 'user-mock-01',
           public_tasks: {
             title: '',
             topic_id: '',
@@ -58,7 +58,7 @@ describe('getSubmissionHistory method', () => {
 
     expect(Array.isArray(submission)).toBe(true);
     expect(submission[0]?.id).toBe('sub-001');
-    expect(submission[0]?.userId).toBe('closures-1');
+    expect(submission[0]?.userId).toBe('user-mock-01');
   });
 
   it('getSubmissionHistory throw error', async () => {

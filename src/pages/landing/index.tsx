@@ -1,4 +1,4 @@
-import { HowItWorks, ReadyToStart, Training, WhyChooseUs } from '@/pages/landing/ui';
+import { HowItWorks, ReadyToStart, Training, WhyChooseUs } from '../landing/ui';
 
 export const Landing = () => {
   return (
