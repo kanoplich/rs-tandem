@@ -54,3 +54,7 @@ PR с тестами: https://github.com/kanoplich/rs-tandem/pull/128
 | `src/shared/api/topic/topic.test.ts`             | Получение тем              |
 
 PR с тестами: https://github.com/kanoplich/rs-tandem/pull/121
+
+## E2E-Tests
+
+Как запустить: [инструкция по запуску](docs/e2e-testing/e2e-testing.md)
