@@ -1,7 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import { cn } from '@/shared';
-import { FormItem, FormLabel, FormMessage, PasswordInput } from '@/shared/ui';
+import { FormItem, FormLabel, FormMessage, PasswordInput, cn } from '@/shared';
 
 type Props = {
   name: string;
