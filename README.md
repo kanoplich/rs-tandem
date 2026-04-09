@@ -149,6 +149,34 @@ npx supabase db reset
 | supabase db push                 | ☁️ Push на remote           |
 | pnpm types:db:local              | 🔤 Обновить TS типы         |
 
+## :rocket: Быстрый старт
+
+Установка проекта и окружения описана в [docs/setup.md](docs/setup.md).
+
+После настройки рабочий процесс выглядит так:
+
+```bash
+# 1. Актуализировать develop
+git checkout develop
+git pull origin develop
+
+# 2. Создать ветку задачи
+git checkout -b team42-{ID}/feat/my-feature
+
+# 3. Разработка
+pnpm dev                # dev-сервер на :5173
+
+# 4. Коммит (хуки проверят lint и формат автоматически)
+git add src/features/my-feature/
+git commit -m "feat: add my feature"
+
+# 5. Пуш (хук запустит тесты перед отправкой)
+git push -u origin team42-{ID}/feat/my-feature
+
+# 6. Создать Pull Request → develop
+#    Заполнить шаблон, дождаться CI и code review
+```
+
 ## :books: ​Документация проекта
 
 - [Архитектура](docs/architecture.md) - проект построен на основе **Feature-Sliced Design (FSD)**, т.е. методологии организации фронтенд-кода по слоям и слайсам.
@@ -156,7 +184,7 @@ npx supabase db reset
 - [Edge Functions](docs/edge-functions.md) - серверная логика на **Supabase Edge Functions** (Deno runtime).
 - [Скрипты и инструменты](docs/scripts.md).
 - [Установка и настройка](docs/setup.md).
-- [Git Flow & Collaboration Standards](docs/gitflow.md)
+- [Development Workflow](docs/workflow.md)
 - [Тесты](docs/TESTING.md)
 
 ## :cinema: Demo Video
