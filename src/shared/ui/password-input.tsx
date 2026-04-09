@@ -3,7 +3,7 @@ import { useState, useRef, forwardRef } from 'react';
 
 import { cn } from '../lib/utils';
 
-import { Input } from '@/shared/ui/input';
+import { Input } from '@/shared/ui';
 
 type PasswordInputProps = React.ComponentProps<'input'>;
 
