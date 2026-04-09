@@ -9,7 +9,7 @@ type PasswordInputProps = React.ComponentProps<'input'>;
 
 export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ className, ...props }, ref) => {
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = React.useState(true);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const handleToggle = () => {
@@ -34,7 +34,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
             if (typeof ref === 'function') ref(node);
             else if (ref) (ref as React.RefObject<HTMLInputElement | null>).current = node;
           }}
-          type={show ? 'text' : 'password'}
+          type={show ? 'password' : 'text'}
           className={cn('pr-10', className)}
           {...props}
         />

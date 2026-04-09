@@ -8,6 +8,7 @@ import { GoogleIcon, GithubIcon } from '@/shared/assets/icons';
 
 type Props = {
   onError: (error: string) => void;
+  сlassName?: string;
 };
 
 export const OAuthButtons = ({ onError }: Props) => {
@@ -27,12 +28,12 @@ export const OAuthButtons = ({ onError }: Props) => {
   };
 
   return (
-    <div className="flex justify-center gap-3 mt-2">
+    <div className="flex gap-3">
       <Button
         type="button"
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GOOGLE)}
-        className="flex-1 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
+        className="flex-1 h-10 items-center justify-center cursor-pointer hover:ring-3 hover:ring-primary"
       >
         <GoogleIcon />
       </Button>
@@ -41,7 +42,7 @@ export const OAuthButtons = ({ onError }: Props) => {
         type="button"
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GITHUB)}
-        className="flex-1 h-10 flex items-center justify-center cursor-pointer bg-card border-2 hover:border-primary"
+        className="flex-1 h-10 items-center justify-center cursor-pointer hover:ring-3 hover:ring-primary"
       >
         <GithubIcon className="w-5 h-5 text-light fill-current" />
       </Button>
