@@ -1,23 +1,28 @@
 import { useFormContext } from 'react-hook-form';
 
-import { FormItem, FormLabel, FormMessage, Input } from '@/shared/ui';
+import { FormItem, FormLabel, FormMessage, Input, cn } from '@/shared';
 
 type Props = {
   label: string;
   placeholder: string;
+  className?: string;
 };
 
-export const EmailField = ({ label, placeholder }: Props) => {
+export const EmailField = ({ label, placeholder, className }: Props) => {
   const { register } = useFormContext();
 
   return (
-    <FormItem>
+    <FormItem className="space-y-2">
       <FormLabel htmlFor="email">{label}</FormLabel>
       <Input
         id="email"
         type="email"
         autoComplete="email"
         placeholder={placeholder}
+        className={cn(
+          'focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary',
+          className
+        )}
         {...register('email')}
       />
       <FormMessage name="email" className="text-xs text-destructive" />
