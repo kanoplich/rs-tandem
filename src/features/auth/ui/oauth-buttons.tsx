@@ -2,10 +2,9 @@ import { toast } from 'sonner';
 
 import { AUTH_LOGIN_ERRORS } from '../locales';
 
-import { PROVIDERS, Button } from '@/shared';
+import { PROVIDERS, Button, cn } from '@/shared';
 import { signInWithOAuth } from '@/shared/api';
 import { GoogleIcon, GithubIcon } from '@/shared/assets/icons';
-import { cn } from '@/shared/lib/utils';
 
 type Props = {
   onError: (error: string) => void;
