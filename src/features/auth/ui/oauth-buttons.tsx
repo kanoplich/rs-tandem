@@ -5,13 +5,14 @@ import { AUTH_LOGIN_ERRORS } from '../locales';
 import { PROVIDERS, Button } from '@/shared';
 import { signInWithOAuth } from '@/shared/api';
 import { GoogleIcon, GithubIcon } from '@/shared/assets/icons';
+import { cn } from '@/shared/lib/utils';
 
 type Props = {
   onError: (error: string) => void;
-  сlassName?: string;
+  className?: string;
 };
 
-export const OAuthButtons = ({ onError }: Props) => {
+export const OAuthButtons = ({ onError, className }: Props) => {
   const manageSignIn = (provider: 'google' | 'github') => {
     onError('');
     signInWithOAuth(provider).catch((error: unknown) => {
@@ -33,7 +34,10 @@ export const OAuthButtons = ({ onError }: Props) => {
         type="button"
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GOOGLE)}
-        className="flex-1 h-10 items-center justify-center cursor-pointer hover:ring-3 hover:ring-primary"
+        className={cn(
+          'flex-1 h-10 items-center justify-center cursor-pointer hover:ring-3 hover:ring-primary',
+          className
+        )}
       >
         <GoogleIcon />
       </Button>
@@ -42,7 +46,10 @@ export const OAuthButtons = ({ onError }: Props) => {
         type="button"
         variant="outline"
         onClick={() => manageSignIn(PROVIDERS.GITHUB)}
-        className="flex-1 h-10 items-center justify-center cursor-pointer hover:ring-3 hover:ring-primary"
+        className={cn(
+          'flex-1 h-10 items-center justify-center cursor-pointer hover:ring-3 hover:ring-primary',
+          className
+        )}
       >
         <GithubIcon className="w-5 h-5 text-light fill-current" />
       </Button>
