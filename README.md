@@ -13,7 +13,9 @@
 
 ## Deployment
 
-:globe_with_meridians: ​**Deploy Link** https://rs-tandem.netlify.app/
+:globe_with_meridians: ​**Deploy Link** - https://rs-tandem.netlify.app/
+
+:art: **Макет** - https://www.figma.com/design/bQCkyhTSNkriU6O9xdDZaQ/Team42
 
 :link: **Linear Project** - https://linear.app/rs-team42/team/TEAM42/all
 
@@ -65,9 +67,9 @@
 | 8             | [Team Sync - 09-03-26](docs/meeting-notes/2026-03-9-team-sync.md)                             |
 | 9             | [Team Sync - 16-03-26](docs/meeting-notes/2026-03-16-team-sync.md)                            |
 | 10            | [Team Sync - 23-03-26](docs/meeting-notes/2026-03-23-team-sync.md)                            |
-| 11            | [Team Sync - 23-03-30](docs/meeting-notes/2026-03-30-team-sync.md)                            |
-| 12            | [Team Sync - 23-04-03](docs/meeting-notes/2026-04-03-team-sync.md)                            |
-| 13            | [Team Sync - 23-04-06](docs/meeting-notes/2026-04-06-team-sync.md)                            |
+| 11            | [Team Sync - 30-03-26](docs/meeting-notes/2026-03-30-team-sync.md)                            |
+| 12            | [Team Sync - 03-04-26](docs/meeting-notes/2026-04-03-team-sync.md)                            |
+| 13            | [Team Sync - 06-04-26](docs/meeting-notes/2026-04-06-team-sync.md)                            |
 
 ## :hammer_and_wrench: ​Технологический Стек
 
