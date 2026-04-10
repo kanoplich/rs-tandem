@@ -13,9 +13,11 @@
 
 ## Deployment
 
-:globe_with_meridians: ​**Deploy Link** https://rs-tandem.netlify.app/
+:globe_with_meridians: ​**Deploy Link** - https://rs-tandem.netlify.app/
 
 :link: **Linear Project** - https://linear.app/rs-team42/team/TEAM42/all
+
+:art: **Макет** - https://www.figma.com/design/bQCkyhTSNkriU6O9xdDZaQ/Team42
 
 ![](./public/images/linear.jpg)
 
