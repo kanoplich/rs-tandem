@@ -20,7 +20,7 @@ export const AUTH_LOGIN_PAGE_TEXT = {
 
 export const AUTH_LOGIN_ERRORS = {
   INVALID_EMAIL: 'Введите корректный email (пример: your.email@example.com)',
-  PASSWORD_MIN: 'Введите пароль',
+  PASSWORD_MIN: 'Пароль должен содержать не менее 8 символов',
   PASSWORD_INVALID: 'Используйте только латинские буквы (A–Z, a–z) и цифры (0–9)',
   AUTH_ERROR: 'Ошибка авторизации. Попробуйте позже.',
   OAUTH_ERROR: 'Ошибка авторизации. Попробуйте другой способ входа или повторите попытку позже.',

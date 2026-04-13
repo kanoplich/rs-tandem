@@ -1,16 +1,16 @@
 import { Eye, EyeOff } from 'lucide-react';
-import * as React from 'react';
+import { useState, useRef, forwardRef } from 'react';
 
 import { cn } from '../lib/utils';
 
-import { Input } from '@/shared/ui/input';
+import { Input } from '@/shared/ui';
 
 type PasswordInputProps = React.ComponentProps<'input'>;
 
-export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ className, ...props }, ref) => {
-    const [show, setShow] = React.useState(false);
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const [show, setShow] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleToggle = () => {
       const input = inputRef.current;

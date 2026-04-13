@@ -16,7 +16,10 @@
     "test:coverage": "vitest --coverage",
     "prepare": "husky",
     "types:db": "supabase gen types typescript --project-id etxrqnjqqinygywiudcd --schema public > src/shared/types/database.types.ts",
-    "types:db:local": "supabase gen types typescript --local --schema public > src/shared/types/database.types.ts"
+    "types:db:local": "supabase gen types typescript --local --schema public > src/shared/types/database.types.ts",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "postinstall": "cypress install"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -64,8 +67,10 @@
     "@typescript-eslint/parser": "^8.56.0",
     "@vitejs/plugin-react": "^5.1.1",
     "@vitest/ui": "^4.0.18",
+    "cypress": "^15.13.0",
     "eslint": "^9.39.3",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-cypress": "^6.2.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.5",

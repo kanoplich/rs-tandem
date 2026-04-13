@@ -86,3 +86,7 @@ PR с тестами: https://github.com/kanoplich/rs-tandem/pull/193
 | `src/pages/dashboard/hooks/use-dashboard-data.test.tsx`             | Проверка работы хука для получения данных дашборда |
 
 PR с тестами: https://github.com/kanoplich/rs-tandem/pull/256
+
+## E2E-Tests
+
+Как запустить: [инструкция по запуску](docs/e2e-testing/e2e-testing.md)

@@ -13,7 +13,9 @@
 
 ## Deployment
 
-:globe_with_meridians: ​**Deploy Link** https://rs-tandem.netlify.app/
+:globe_with_meridians: ​**Deploy Link** - https://rs-tandem.netlify.app/
+
+:art: **Макет** - https://www.figma.com/design/bQCkyhTSNkriU6O9xdDZaQ/Team42
 
 :link: **Linear Project** - https://linear.app/rs-team42/team/TEAM42/all
 
@@ -65,9 +67,9 @@
 | 8             | [Team Sync - 09-03-26](docs/meeting-notes/2026-03-9-team-sync.md)                             |
 | 9             | [Team Sync - 16-03-26](docs/meeting-notes/2026-03-16-team-sync.md)                            |
 | 10            | [Team Sync - 23-03-26](docs/meeting-notes/2026-03-23-team-sync.md)                            |
-| 11            | [Team Sync - 23-03-30](docs/meeting-notes/2026-03-30-team-sync.md)                            |
-| 12            | [Team Sync - 23-04-03](docs/meeting-notes/2026-04-03-team-sync.md)                            |
-| 13            | [Team Sync - 23-04-06](docs/meeting-notes/2026-04-06-team-sync.md)                            |
+| 11            | [Team Sync - 30-03-26](docs/meeting-notes/2026-03-30-team-sync.md)                            |
+| 12            | [Team Sync - 03-04-26](docs/meeting-notes/2026-04-03-team-sync.md)                            |
+| 13            | [Team Sync - 06-04-26](docs/meeting-notes/2026-04-06-team-sync.md)                            |
 
 ## :hammer_and_wrench: ​Технологический Стек
 
@@ -149,6 +151,34 @@ npx supabase db reset
 | supabase db push                 | ☁️ Push на remote           |
 | pnpm types:db:local              | 🔤 Обновить TS типы         |
 
+## :rocket: Быстрый старт
+
+Установка проекта и окружения описана в [docs/setup.md](docs/setup.md).
+
+После настройки рабочий процесс выглядит так:
+
+```bash
+# 1. Актуализировать develop
+git checkout develop
+git pull origin develop
+
+# 2. Создать ветку задачи
+git checkout -b team42-{ID}/feat/my-feature
+
+# 3. Разработка
+pnpm dev                # dev-сервер на :5173
+
+# 4. Коммит (хуки проверят lint и формат автоматически)
+git add src/features/my-feature/
+git commit -m "feat: add my feature"
+
+# 5. Пуш (хук запустит тесты перед отправкой)
+git push -u origin team42-{ID}/feat/my-feature
+
+# 6. Создать Pull Request → develop
+#    Заполнить шаблон, дождаться CI и code review
+```
+
 ## :books: ​Документация проекта
 
 - [Архитектура](docs/architecture.md) - проект построен на основе **Feature-Sliced Design (FSD)**, т.е. методологии организации фронтенд-кода по слоям и слайсам.
@@ -156,7 +186,7 @@ npx supabase db reset
 - [Edge Functions](docs/edge-functions.md) - серверная логика на **Supabase Edge Functions** (Deno runtime).
 - [Скрипты и инструменты](docs/scripts.md).
 - [Установка и настройка](docs/setup.md).
-- [Git Flow & Collaboration Standards](docs/gitflow.md)
+- [Development Workflow](docs/workflow.md)
 - [Тесты](docs/TESTING.md)
 
 ## :cinema: Demo Video
