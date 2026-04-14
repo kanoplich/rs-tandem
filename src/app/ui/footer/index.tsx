@@ -47,7 +47,7 @@ export const Footer = () => {
               </button>
               <div
                 className={cn(
-                  'absolute bottom-full mb-2 right-0 flex flex-col bg-popover border border-border rounded-lg shadow-xl',
+                  'absolute bottom-full right-0 flex flex-col bg-popover border border-border rounded-lg shadow-xl',
                   'py-2 px-1 space-y-0.5 min-w-[180px] text-xs text-foreground z-50 transition-all duration-300 ease-out',
                   showDevs
                     ? 'opacity-100 translate-y-0 pointer-events-auto'
@@ -66,9 +66,7 @@ export const Footer = () => {
                       size={14}
                       className="text-muted-foreground group-hover:text-primary transition-colors"
                     />
-                    <span className="group-hover:text-accent-foreground transition-colors">
-                      {dev.name}
-                    </span>
+                    <span className="transition-colors">{dev.name}</span>
                   </a>
                 ))}
               </div>
