@@ -25,9 +25,7 @@ export const Footer = () => {
               href="https://rs.school/"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-2 no-underline text-foreground transition-colors duration-300 hover:text-primary
-             after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0
-             after:bg-primary hover:after:w-full"
+              className="relative inline-flex items-center gap-2 no-underline text-foreground transition-colors duration-300 hover:text-primary"
             >
               {FOOTER_TEXTS.POWERED_BY}
               <RsSchool className="h-8 w-auto shrink-0" />
