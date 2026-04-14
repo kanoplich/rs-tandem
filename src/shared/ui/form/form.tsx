@@ -16,7 +16,7 @@ export const Form = <T extends FieldValues>({
 }: FormProps<T>): ReactElement => {
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={className}>
+      <form noValidate onSubmit={form.handleSubmit(onSubmit)} className={className}>
         {children}
       </form>
     </FormProvider>

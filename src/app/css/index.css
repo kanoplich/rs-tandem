@@ -204,10 +204,6 @@
   a {
     @apply text-primary transition-colors;
   }
-
-  a:hover {
-    @apply underline-offset-4 underline text-primary/75;
-  }
 }
 
 .app {

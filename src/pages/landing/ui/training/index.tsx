@@ -94,7 +94,7 @@ export const Training = () => {
           >
             <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
               <img
-                src="/images/bg-landing1.png"
+                src="/images/bg-landing1.webp"
                 alt="RS School interview"
                 className="w-full h-auto object-contain rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
               />
