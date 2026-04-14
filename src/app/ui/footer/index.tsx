@@ -37,7 +37,7 @@ export const Footer = () => {
             >
               <button
                 type="button"
-                className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="flex items-center gap-1 cursor-pointer text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 {FOOTER_TEXTS.DEVELOPERS_LABEL}
                 <ChevronDown
