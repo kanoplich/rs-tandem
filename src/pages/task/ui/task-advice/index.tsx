@@ -5,7 +5,7 @@ export const TaskAdvice = () => {
     <section className="pb-6">
       <div className="p-6 rounded-xl border border-secondary bg-secondary/45">
         <div className="flex gap-4 flex-col-reverse items-center sm:items-start sm:flex-row">
-          <img src="/images/bg-landing2.png" alt="RS School interview" className="w-24 h-24" />
+          <img src="/images/bg-landing2.webp" alt="RS School interview" className="w-24 h-24" />
           <div className="flex flex-col">
             <h3 className="text-base pb-2">{TASK_ADVICE.TITLE}</h3>
             <ul className="text-sm pl-4 list-disc space-y-1">

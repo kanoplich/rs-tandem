@@ -25,7 +25,7 @@ export const ReadyToStart = () => {
           )}
         >
           <img
-            src="/images/bg-landing2.png"
+            src="/images/bg-landing2.webp"
             alt="RS School interview"
             className="w-36 h-36 sm:w-48 sm:h-48 lg:w-52 lg:h-52"
           />
