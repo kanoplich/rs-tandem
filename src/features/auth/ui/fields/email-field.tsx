@@ -16,7 +16,7 @@ export const EmailField = ({ label, placeholder, className }: Props) => {
       <FormLabel htmlFor="email">{label}</FormLabel>
       <Input
         id="email"
-        type="text"
+        type="email"
         autoComplete="email"
         placeholder={placeholder}
         className={cn(
