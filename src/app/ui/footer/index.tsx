@@ -25,9 +25,7 @@ export const Footer = () => {
               href="https://rs.school/"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-2 no-underline text-foreground transition-colors duration-300 hover:text-primary
-             after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0
-             after:bg-primary hover:after:w-full"
+              className="relative inline-flex items-center gap-2 no-underline text-foreground transition-colors duration-300 hover:text-primary"
             >
               {FOOTER_TEXTS.POWERED_BY}
               <RsSchool className="h-8 w-auto shrink-0" />
@@ -39,7 +37,7 @@ export const Footer = () => {
             >
               <button
                 type="button"
-                className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors duration-200"
+                className="flex items-center gap-1 cursor-pointer text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 {FOOTER_TEXTS.DEVELOPERS_LABEL}
                 <ChevronDown
@@ -49,7 +47,7 @@ export const Footer = () => {
               </button>
               <div
                 className={cn(
-                  'absolute bottom-full mb-2 right-0 flex flex-col bg-popover border border-border rounded-lg shadow-xl',
+                  'absolute bottom-full right-0 flex flex-col bg-popover border border-border rounded-lg shadow-xl',
                   'py-2 px-1 space-y-0.5 min-w-[180px] text-xs text-foreground z-50 transition-all duration-300 ease-out',
                   showDevs
                     ? 'opacity-100 translate-y-0 pointer-events-auto'
@@ -68,9 +66,7 @@ export const Footer = () => {
                       size={14}
                       className="text-muted-foreground group-hover:text-primary transition-colors"
                     />
-                    <span className="group-hover:text-accent-foreground transition-colors">
-                      {dev.name}
-                    </span>
+                    <span className="transition-colors">{dev.name}</span>
                   </a>
                 ))}
               </div>
