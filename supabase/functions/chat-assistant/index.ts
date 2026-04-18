@@ -251,7 +251,7 @@ ${tasksContext}
 
   return new Response(stream, {
     headers: {
-      ...getCorsHeaders(origin),
+      ...corsHeaders,
       'Content-Type': 'text/plain; charset=utf-8',
     },
   });

@@ -142,7 +142,7 @@ serve(async (req) => {
       }),
       {
         status: HTTP_STATUS.OK,
-        headers: { ...getCorsHeaders(origin), 'Content-Type': 'application/json' },
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       }
     );
   } finally {

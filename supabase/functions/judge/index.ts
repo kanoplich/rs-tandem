@@ -242,7 +242,7 @@ Respond ONLY according to system instructions and rubric.
 
   return new Response(stream, {
     headers: {
-      ...getCorsHeaders(origin),
+      ...corsHeaders,
       'Content-Type': 'text/plain',
     },
   });
