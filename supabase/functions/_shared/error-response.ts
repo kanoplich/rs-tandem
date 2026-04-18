@@ -1,8 +1,8 @@
-import { corsHeaders } from './cors.ts';
+import { getCorsHeaders } from './cors.ts';
 import type { HttpStatus } from './errors.ts';
 
-export const errorResponse = (error: string, status: HttpStatus) =>
+export const errorResponse = (error: string, status: HttpStatus, origin?: string | null) =>
   new Response(JSON.stringify({ error }), {
     status,
-    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    headers: { ...getCorsHeaders(origin), 'Content-Type': 'application/json' },
   });

@@ -2,7 +2,7 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 import { API_ENDPOINTS } from '../_shared/api-endpoints.ts';
-import { corsHeaders } from '../_shared/cors.ts';
+import { getCorsHeaders } from '../_shared/cors.ts';
 import { errorResponse } from '../_shared/error-response.ts';
 import { ERROR_CODES, HTTP_STATUS } from '../_shared/errors.ts';
 import { logger } from '../_shared/logger.ts';
@@ -16,6 +16,9 @@ interface ChatRequest {
 }
 
 serve(async (req) => {
+  const origin = req.headers.get('Origin');
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
@@ -25,16 +28,16 @@ serve(async (req) => {
   try {
     body = await req.json();
   } catch {
-    return errorResponse('Invalid JSON body', HTTP_STATUS.BAD_REQUEST);
+    return errorResponse('Invalid JSON body', HTTP_STATUS.BAD_REQUEST, origin);
   }
 
   const { message, taskId, history } = body;
 
-  if (!message) return errorResponse('Message is required', HTTP_STATUS.BAD_REQUEST);
+  if (!message) return errorResponse('Message is required', HTTP_STATUS.BAD_REQUEST, origin);
 
   const authHeader = req.headers.get('Authorization');
   if (!authHeader)
-    return errorResponse('Authorization header is required', HTTP_STATUS.UNAUTHORIZED);
+    return errorResponse('Authorization header is required', HTTP_STATUS.UNAUTHORIZED, origin);
 
   const userClient = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -46,7 +49,7 @@ serve(async (req) => {
     data: { user },
   } = await userClient.auth.getUser();
 
-  if (!user) return errorResponse('Unauthorized', HTTP_STATUS.UNAUTHORIZED);
+  if (!user) return errorResponse('Unauthorized', HTTP_STATUS.UNAUTHORIZED, origin);
 
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -57,12 +60,13 @@ serve(async (req) => {
   if (!openaiKey)
     return errorResponse(
       ERROR_CODES.OPENAI_API_KEY_MISSING.message,
-      ERROR_CODES.OPENAI_API_KEY_MISSING.status
+      ERROR_CODES.OPENAI_API_KEY_MISSING.status,
+      origin
     );
 
   const groqKey = Deno.env.get('GROQ_API_KEY');
   if (!groqKey)
-    return errorResponse('GROQ_API_KEY not configured', HTTP_STATUS.INTERNAL_SERVER_ERROR);
+    return errorResponse('GROQ_API_KEY not configured', HTTP_STATUS.INTERNAL_SERVER_ERROR, origin);
 
   const embeddingResponse = await fetch(API_ENDPOINTS.OPENAI.EMBEDDINGS, {
     method: 'POST',
@@ -79,7 +83,11 @@ serve(async (req) => {
   if (!embeddingResponse.ok) {
     const errorText = await embeddingResponse.text();
     logger.error('OpenAI embedding failed', { error: errorText });
-    return errorResponse(ERROR_CODES.EMBEDDING_FAILED.message, ERROR_CODES.EMBEDDING_FAILED.status);
+    return errorResponse(
+      ERROR_CODES.EMBEDDING_FAILED.message,
+      ERROR_CODES.EMBEDDING_FAILED.status,
+      origin
+    );
   }
 
   const embeddingData = await embeddingResponse.json();
@@ -95,7 +103,8 @@ serve(async (req) => {
     logger.error('match_tasks error', { error: matchError });
     return errorResponse(
       ERROR_CODES.VECTOR_SEARCH_FAILED.message,
-      ERROR_CODES.VECTOR_SEARCH_FAILED.status
+      ERROR_CODES.VECTOR_SEARCH_FAILED.status,
+      origin
     );
   }
 
@@ -195,7 +204,7 @@ ${tasksContext}
   if (!groqResponse.ok) {
     const errorText = await groqResponse.text();
     logger.error('Groq request failed', { error: errorText });
-    return errorResponse('LLM request failed', HTTP_STATUS.INTERNAL_SERVER_ERROR);
+    return errorResponse('LLM request failed', HTTP_STATUS.INTERNAL_SERVER_ERROR, origin);
   }
 
   const stream = new ReadableStream({

@@ -2,7 +2,7 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 import { API_ENDPOINTS } from '../_shared/api-endpoints.ts';
-import { corsHeaders } from '../_shared/cors.ts';
+import { getCorsHeaders } from '../_shared/cors.ts';
 import { errorResponse } from '../_shared/error-response.ts';
 import { ERROR_CODES, HTTP_STATUS } from '../_shared/errors.ts';
 import { logger } from '../_shared/logger.ts';
@@ -10,6 +10,9 @@ import { logger } from '../_shared/logger.ts';
 import { buildTools, extractPoints, saveSubmission } from './utils/index.ts';
 
 serve(async (req) => {
+  const origin = req.headers.get('Origin');
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
@@ -19,18 +22,18 @@ serve(async (req) => {
   try {
     body = await req.json();
   } catch {
-    return errorResponse('Invalid JSON body', HTTP_STATUS.BAD_REQUEST);
+    return errorResponse('Invalid JSON body', HTTP_STATUS.BAD_REQUEST, origin);
   }
 
   const { taskId, answer } = body;
 
   if (!taskId || !answer)
-    return errorResponse('TaskId and answer are required', HTTP_STATUS.BAD_REQUEST);
+    return errorResponse('TaskId and answer are required', HTTP_STATUS.BAD_REQUEST, origin);
 
   const authHeader = req.headers.get('Authorization');
 
   if (!authHeader)
-    return errorResponse('Authorization header is required', HTTP_STATUS.UNAUTHORIZED);
+    return errorResponse('Authorization header is required', HTTP_STATUS.UNAUTHORIZED, origin);
 
   const userClient = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -42,7 +45,7 @@ serve(async (req) => {
     data: { user },
   } = await userClient.auth.getUser();
 
-  if (!user) return errorResponse('Unauthorized user', HTTP_STATUS.UNAUTHORIZED);
+  if (!user) return errorResponse('Unauthorized user', HTTP_STATUS.UNAUTHORIZED, origin);
 
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL')!,
@@ -56,7 +59,11 @@ serve(async (req) => {
     .single();
 
   if (!task)
-    return errorResponse(ERROR_CODES.TASK_NOT_FOUND.message, ERROR_CODES.TASK_NOT_FOUND.status);
+    return errorResponse(
+      ERROR_CODES.TASK_NOT_FOUND.message,
+      ERROR_CODES.TASK_NOT_FOUND.status,
+      origin
+    );
 
   const rubricItems = task.rubric_items as string[];
 
@@ -167,7 +174,8 @@ Respond ONLY according to system instructions and rubric.
     logger.error('LLM request failed', { error: errorText, taskId });
     return errorResponse(
       ERROR_CODES.CHAT_COMPLETION_FAILED.message,
-      ERROR_CODES.CHAT_COMPLETION_FAILED.status
+      ERROR_CODES.CHAT_COMPLETION_FAILED.status,
+      origin
     );
   }
 
