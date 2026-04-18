@@ -2,7 +2,7 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 import { API_ENDPOINTS } from '../_shared/api-endpoints.ts';
-import { corsHeaders } from '../_shared/cors.ts';
+import { getCorsHeaders } from '../_shared/cors.ts';
 import { errorResponse } from '../_shared/error-response.ts';
 import { ERROR_CODES, HTTP_STATUS } from '../_shared/errors.ts';
 import { logger } from '../_shared/logger.ts';
@@ -10,6 +10,9 @@ import { logger } from '../_shared/logger.ts';
 let isRunning = false;
 
 serve(async (req) => {
+  const origin = req.headers.get('Origin');
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
@@ -17,7 +20,8 @@ serve(async (req) => {
   if (isRunning) {
     return errorResponse(
       ERROR_CODES.CONCURRENT_REQUEST.message,
-      ERROR_CODES.CONCURRENT_REQUEST.status
+      ERROR_CODES.CONCURRENT_REQUEST.status,
+      origin
     );
   }
 
@@ -33,7 +37,8 @@ serve(async (req) => {
     if (!openaiKey) {
       return errorResponse(
         ERROR_CODES.OPENAI_API_KEY_MISSING.message,
-        ERROR_CODES.OPENAI_API_KEY_MISSING.status
+        ERROR_CODES.OPENAI_API_KEY_MISSING.status,
+        origin
       );
     }
 
@@ -44,7 +49,8 @@ serve(async (req) => {
     if (topicsError) {
       return errorResponse(
         `Failed to fetch topics: ${topicsError.message}`,
-        HTTP_STATUS.INTERNAL_SERVER_ERROR
+        HTTP_STATUS.INTERNAL_SERVER_ERROR,
+        origin
       );
     }
 
@@ -60,7 +66,8 @@ serve(async (req) => {
     if (tasksError) {
       return errorResponse(
         `Failed to fetch tasks: ${tasksError.message}`,
-        HTTP_STATUS.INTERNAL_SERVER_ERROR
+        HTTP_STATUS.INTERNAL_SERVER_ERROR,
+        origin
       );
     }
 
@@ -135,7 +142,7 @@ serve(async (req) => {
       }),
       {
         status: HTTP_STATUS.OK,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        headers: { ...getCorsHeaders(origin), 'Content-Type': 'application/json' },
       }
     );
   } finally {
