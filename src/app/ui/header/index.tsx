@@ -13,7 +13,7 @@ export const Header = () => {
   const handleNavigate = () => setMobileOpen(false);
 
   return (
-    <header className="bg-card px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
+    <header className="relative bg-card px-4 sm:px-6 py-3 lg:py-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
       <Link
         to={ROUTES.DASHBOARD}
         className="flex items-center gap-2 text-light text-lg lg:text-xl font-semibold whitespace-nowrap"
@@ -33,11 +33,7 @@ export const Header = () => {
         {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </Button>
 
-      <MenuLinks
-        variant={window.innerWidth >= 768 ? 'desktop' : 'mobile'}
-        mobileOpen={mobileOpen}
-        onNavigate={handleNavigate}
-      />
+      <MenuLinks variant="desktop" mobileOpen={mobileOpen} onNavigate={handleNavigate} />
     </header>
   );
 };
