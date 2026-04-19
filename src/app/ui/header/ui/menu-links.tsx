@@ -31,7 +31,7 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
     );
 
   const iconClass = isDesktop ? 'w-4 h-4' : 'w-5 h-5';
-  const textClass = isDesktop ? 'hidden lg:inline' : '';
+  const textClass = isDesktop ? 'md:hidden lg:inline' : 'inline';
 
   const handleLogout = async () => {
     try {
@@ -71,23 +71,19 @@ export const MenuLinks = ({ variant, mobileOpen, onNavigate }: MenuLinksProps) =
       ))}
 
       <div
-        className={cn(
-          'flex items-center',
-          isDesktop ? 'ml-2' : 'px-4 py-2 border-t border-border mt-1 justify-between'
-        )}
+        className="
+          flex items-center
+          px-4 py-2 border-t border-border mt-1 justify-between
+          md:px-0 md:py-0 md:border-0 md:mt-0 md:justify-center
+        "
       >
-        {!isDesktop && <span className="text-sm text-light/60"></span>}
         <ModeToggle />
       </div>
 
       <Button
         type="button"
         variant="ghost"
-        className={
-          isDesktop
-            ? 'flex items-center gap-2 text-light hover:bg-accent'
-            : 'px-4 py-3 flex items-center gap-2 text-destructive hover:bg-accent justify-start'
-        }
+        className="flex items-center gap-2 text-destructive md:text-light hover:bg-accent px-4 py-3 md:px-2 md:py-1 justify-start md:justify-center"
         onClick={handleLogout}
       >
         <LogOut className={iconClass} />
