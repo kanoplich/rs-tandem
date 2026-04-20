@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ErrorFallback } from '../error-boundary/error-fallback';
+import { ErrorFallback } from './error-fallback';
 
 type Props = {
   children: React.ReactNode;
