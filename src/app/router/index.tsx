@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { RouteErrorBoundary } from '../providers/error-boundary/route-error-boundary';
+
 import { PrivateLayout } from '@/app/private-layout';
 import { PublicLayout } from '@/app/public-layout';
 import { ProtectedRoute } from '@/app/router/protected-route';
@@ -21,6 +23,7 @@ import { ROUTES } from '@/shared';
 export const router = createBrowserRouter([
   {
     element: <PublicLayout />,
+    errorElement: <RouteErrorBoundary />,
     children: [
       {
         path: ROUTES.HOME,
@@ -71,6 +74,7 @@ export const router = createBrowserRouter([
         <PrivateLayout />
       </ProtectedRoute>
     ),
+    errorElement: <RouteErrorBoundary />,
     children: [
       { path: ROUTES.DASHBOARD, element: <Dashboard /> },
       { path: ROUTES.TOPICS, element: <Topics /> },
