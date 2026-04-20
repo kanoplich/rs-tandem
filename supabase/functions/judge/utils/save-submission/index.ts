@@ -42,18 +42,19 @@ export const saveSubmission = async ({
 
   const finalScore = Math.round(totalScore);
 
-  try {
-    await supabase.from('submissions').insert({
-      user_id: user.id,
-      task_id: taskId,
-      answer,
-      score: finalScore,
-      covered: coveredPoints,
-      missed: missedPoints,
-      feedback: feedback.trim(),
-      judge_level: 1,
-    });
-  } catch (error) {
+  const { error } = await supabase.from('submissions').insert({
+    user_id: user.id,
+    task_id: taskId,
+    answer,
+    score: finalScore,
+    covered: coveredPoints,
+    missed: missedPoints,
+    feedback: feedback.trim(),
+    judge_level: 1,
+  });
+
+  if (error) {
     logger.error('Failed to save submission', { error, taskId });
+    throw new Error(`Failed to save submission: ${error.message}`);
   }
 };

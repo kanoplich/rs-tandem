@@ -5,9 +5,11 @@ export const HTTP_STATUS = {
 
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
+  PAYMENT_REQUIRED: 402,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
+  TOO_MANY_REQUESTS: 429,
 
   INTERNAL_SERVER_ERROR: 500,
   BAD_GATEWAY: 502,
@@ -61,6 +63,11 @@ export const ERROR_CODES = {
     code: 'CONCURRENT_REQUEST',
     message: 'Request already in progress',
     status: HTTP_STATUS.CONFLICT,
+  },
+  INPUT_TOO_LONG: {
+    code: 'INPUT_TOO_LONG',
+    message: 'Input exceeds maximum allowed length',
+    status: HTTP_STATUS.BAD_REQUEST,
   },
 } as const;
 
