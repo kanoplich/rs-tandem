@@ -7,7 +7,7 @@ const RETRYABLE_STATUSES = new Set([
   HTTP_STATUS.SERVICE_UNAVAILABLE,
 ]);
 const BASE_DELAY_MS = 1000;
-const MAX_DELAY_MS = 15_000;
+const MAX_DELAY_MS = 5_000;
 
 interface RetryOptions {
   maxRetries: number;

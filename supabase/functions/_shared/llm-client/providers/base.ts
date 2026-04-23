@@ -1,5 +1,6 @@
 import { HTTP_STATUS } from '../../errors.ts';
 import { logger } from '../../logger.ts';
+import { PROVIDER_API_KEYS, PROVIDER_URLS } from '../config.ts';
 import { fetchWithRetry } from '../retry.ts';
 import { parseSSEStream } from '../stream-utils.ts';
 import type {
@@ -100,33 +101,45 @@ export class BaseLLMProvider implements LLMProvider {
       { maxRetries: this.config.maxRetries, timeoutMs: this.config.timeoutMs }
     );
 
-    if (response.status === HTTP_STATUS.PAYMENT_REQUIRED && this.config.fallbackModel) {
-      logger.warn('LLM payment required, switching to fallback model', {
-        provider: this.config.provider,
-        originalModel: this.config.model,
-        fallbackModel: this.config.fallbackModel,
+    const shouldFallback =
+      (response.status === HTTP_STATUS.PAYMENT_REQUIRED ||
+        response.status === HTTP_STATUS.TOO_MANY_REQUESTS) &&
+      (this.config.fallbackModel || this.config.fallbackProvider);
+
+    if (shouldFallback) {
+      const fallbackProvider = this.config.fallbackProvider || this.config.provider;
+      const fallbackModel = this.config.fallbackModel || this.config.model;
+      const fallbackApiKeyEnvVar = PROVIDER_API_KEYS[fallbackProvider];
+      const fallbackApiKey = Deno.env.get(fallbackApiKeyEnvVar);
+
+      if (!fallbackApiKey) {
+        logger.error('Fallback API key not configured', { envVar: fallbackApiKeyEnvVar });
+        return response;
+      }
+
+      logger.warn('LLM switching to fallback', {
+        reason: response.status,
+        from: `${this.config.provider}/${this.config.model}`,
+        to: `${fallbackProvider}/${fallbackModel}`,
       });
 
-      const { fallbackModel } = this.config;
-      const fallbackConfig = {
-        ...this.config,
-        model: fallbackModel,
-        fallbackModel: undefined,
-      };
       const fallbackBody: Record<string, unknown> = {
         ...body,
-        model: fallbackConfig.model,
+        model: fallbackModel,
       };
 
       return fetchWithRetry(
         (signal) =>
-          fetch(fallbackConfig.baseUrl, {
+          fetch(PROVIDER_URLS[fallbackProvider], {
             method: 'POST',
-            headers: this.getHeaders(),
+            headers: {
+              Authorization: `Bearer ${fallbackApiKey}`,
+              'Content-Type': 'application/json',
+            },
             body: JSON.stringify(fallbackBody),
             signal,
           }),
-        { maxRetries: fallbackConfig.maxRetries, timeoutMs: fallbackConfig.timeoutMs }
+        { maxRetries: this.config.maxRetries, timeoutMs: this.config.timeoutMs }
       );
     }
 

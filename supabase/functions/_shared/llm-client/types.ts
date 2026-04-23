@@ -5,6 +5,7 @@ export type LLMPurpose = 'chat' | 'judge_feedback' | 'judge_scoring';
 export interface ModelConfig {
   provider: ProviderName;
   model: string;
+  fallbackProvider?: ProviderName;
   fallbackModel?: string;
   apiKeyEnvVar: string;
   baseUrl: string;

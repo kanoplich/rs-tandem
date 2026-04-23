@@ -5,12 +5,12 @@ interface LLMPurposeConfig {
   model: string;
 }
 
-const PROVIDER_URLS: Record<ProviderName, string> = {
+export const PROVIDER_URLS: Record<ProviderName, string> = {
   groq: 'https://api.groq.com/openai/v1/chat/completions',
   openrouter: 'https://openrouter.ai/api/v1/chat/completions',
 };
 
-const PROVIDER_API_KEYS: Record<ProviderName, string> = {
+export const PROVIDER_API_KEYS: Record<ProviderName, string> = {
   groq: 'GROQ_API_KEY',
   openrouter: 'OPENROUTER_API_KEY',
 };
@@ -51,15 +51,21 @@ export const getModelConfig = (purpose: LLMPurpose): ModelConfig => {
 
   const provider = rawProvider as ProviderName;
   const model = Deno.env.get(`${prefix}_MODEL`) || defaults.model;
+  const rawFallbackProvider = Deno.env.get(`${prefix}_FALLBACK_PROVIDER`);
+  const fallbackProvider =
+    rawFallbackProvider && VALID_PROVIDERS.has(rawFallbackProvider)
+      ? (rawFallbackProvider as ProviderName)
+      : undefined;
   const fallbackModel = Deno.env.get(`${prefix}_FALLBACK_MODEL`) || undefined;
 
   return {
     provider,
     model,
+    fallbackProvider,
     fallbackModel,
     apiKeyEnvVar: PROVIDER_API_KEYS[provider],
     baseUrl: PROVIDER_URLS[provider],
-    maxRetries: 3,
+    maxRetries: 1,
     timeoutMs: 30_000,
   };
 };

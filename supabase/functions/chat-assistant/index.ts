@@ -110,6 +110,14 @@ serve(async (req) => {
 
   let contextTasks = matchedTasks || [];
 
+  logger.info('RAG matched tasks', {
+    count: contextTasks.length,
+    tasks: contextTasks.map((t: { title: string; similarity?: number }) => ({
+      title: t.title,
+      similarity: t.similarity,
+    })),
+  });
+
   if (taskId && !contextTasks.some((t: { id: string }) => t.id === taskId)) {
     const { data: currentTask, error: taskError } = await supabase
       .from('tasks')
