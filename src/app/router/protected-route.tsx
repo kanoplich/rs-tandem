@@ -17,7 +17,8 @@ export const ProtectedRoute = ({ children, reverse = false }: ProtectedRouteProp
   }
 
   if (reverse && isAuthenticated) {
-    return <Navigate to={ROUTES.DASHBOARD} replace />;
+    const from = (location.state as { from?: Location })?.from;
+    return <Navigate to={from ?? ROUTES.DASHBOARD} replace />;
   }
 
   if (!reverse && !isAuthenticated) {

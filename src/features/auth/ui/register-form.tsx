@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useRegisterForm } from '../hooks/use-register-form';
 import { AUTH_REGISTER_TEXT } from '../locales';
@@ -13,6 +13,7 @@ import { Form } from '@/shared/ui';
 export const RegisterForm = () => {
   const { form, handleSubmit, error, isSubmitting } = useRegisterForm();
   const [oauthError, setOAuthError] = useState<string | null>(null);
+  const location = useLocation();
 
   return (
     <Card className="w-full max-w-[448px]">
@@ -57,7 +58,7 @@ export const RegisterForm = () => {
 
         <p className="text-center text-sm text-muted-foreground">
           {AUTH_REGISTER_TEXT.HAS_ACCOUNT}{' '}
-          <Link to={ROUTES.LOGIN} className="text-primary">
+          <Link to={ROUTES.LOGIN} state={location.state} className="text-primary">
             {AUTH_REGISTER_TEXT.LOGIN_LINK}
           </Link>
         </p>

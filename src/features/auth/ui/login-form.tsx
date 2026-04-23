@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useLoginForm } from '../hooks/use-login-form';
 import { AUTH_LOGIN_TEXT } from '../locales';
@@ -13,6 +13,7 @@ import { Form } from '@/shared/ui';
 export const LoginForm = () => {
   const { form, handleSubmit, error, isSubmitting } = useLoginForm();
   const [oauthError, setOAuthError] = useState<string | null>(null);
+  const location = useLocation();
 
   return (
     <Card className="w-full max-w-[448px]">
@@ -47,7 +48,11 @@ export const LoginForm = () => {
 
         <p className="text-center text-sm text-muted-foreground">
           {AUTH_LOGIN_TEXT.NO_ACCOUNT}{' '}
-          <Link to={ROUTES.REGISTER} className="text-primary hover:no-underline">
+          <Link
+            to={ROUTES.REGISTER}
+            state={location.state}
+            className="text-primary hover:no-underline"
+          >
             {AUTH_LOGIN_TEXT.REGISTER_LINK}
           </Link>
         </p>
