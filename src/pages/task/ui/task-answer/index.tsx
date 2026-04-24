@@ -1,6 +1,6 @@
-import Markdown from 'react-markdown';
-
 import { TASK_ANSWER } from '../../locales';
+
+import { Markdown } from '@/shared';
 
 interface TaskAnswerProps {
   userAnswer: string;
