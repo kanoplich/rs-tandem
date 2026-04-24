@@ -11,7 +11,7 @@ const formatMessage = (level: LogLevel, message: string): string => {
 
 export const logger = {
   info: (message: string, context?: LogContext) => {
-    console.log(formatMessage('info', message), context || '');
+    console.info(formatMessage('info', message), context || '');
   },
   error: (message: string, context?: LogContext) => {
     console.error(formatMessage('error', message), context || '');

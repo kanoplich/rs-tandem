@@ -1,7 +1,6 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-import { API_ENDPOINTS } from '../_shared/api-endpoints.ts';
 import { getCorsHeaders } from '../_shared/cors.ts';
 import { errorResponse } from '../_shared/error-response.ts';
 import { ERROR_CODES, HTTP_STATUS } from '../_shared/errors.ts';
