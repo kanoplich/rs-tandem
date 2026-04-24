@@ -18,7 +18,7 @@ export const Markdown = ({ children }: MarkdownProps) => {
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
       components={{
-        code({ children: codeChildren, className, node, style, ref, ...rest }) {
+        code({ children: codeChildren, className, node, style: _, ref: __, ...rest }) {
           const match = /language-(\w+)/.exec(className || '');
           const language = match ? match[1] : 'javascript';
 
