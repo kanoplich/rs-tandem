@@ -7,8 +7,8 @@ const OPENROUTER_DEFAULTS: ModelConfig = {
   model: 'anthropic/claude-3.5-haiku',
   apiKeyEnvVar: 'OPENROUTER_API_KEY',
   baseUrl: 'https://openrouter.ai/api/v1/chat/completions',
-  maxRetries: 3,
-  timeoutMs: 30_000,
+  maxRetries: 1,
+  timeoutMs: 25_000,
 };
 
 export class OpenRouterProvider extends BaseLLMProvider {

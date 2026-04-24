@@ -66,6 +66,6 @@ export const getModelConfig = (purpose: LLMPurpose): ModelConfig => {
     apiKeyEnvVar: PROVIDER_API_KEYS[provider],
     baseUrl: PROVIDER_URLS[provider],
     maxRetries: 1,
-    timeoutMs: 30_000,
+    timeoutMs: 25_000,
   };
 };
