@@ -1,11 +1,14 @@
 export const buildTools = (rubricItems: string[]) => {
   const properties: Record<string, { type: string; enum: number[]; description: string }> = {};
+  const required: string[] = [];
 
-  for (const item of rubricItems) {
-    properties[item] = {
+  for (let i = 0; i < rubricItems.length; i++) {
+    const key = `rubric_${i}`;
+    required.push(key);
+    properties[key] = {
       type: 'integer',
       enum: [0, 1, 2],
-      description: `Score: 0 = not addressed, 1 = partial, 2 = full`,
+      description: `Score for: "${rubricItems[i]}". 0 = not addressed, 1 = partial, 2 = full`,
     };
   }
 
@@ -19,7 +22,7 @@ export const buildTools = (rubricItems: string[]) => {
         parameters: {
           type: 'object',
           properties,
-          required: rubricItems,
+          required,
         },
       },
     },

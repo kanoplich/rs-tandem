@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 import { USE_TASK_SESSION } from '../locales';
 
 import { DEFAULT_STAGES_VALUE, getProgressPercent, PASSING_SCORE } from '@/shared';
 import {
-  getSubmissionHistoryByTaskId,
   evaluateTheory,
-  type Task,
+  getSubmissionHistoryByTaskId,
   type JudgeResult,
+  type Task,
 } from '@/shared/api';
+import { getErrorMessage } from '@/shared/api/judge/api-error';
 
 interface UseTaskSession {
   tasks: Task[];
@@ -40,6 +41,14 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
   const [isSending, setIsSending] = useState(false);
   const [isPassed, setIsPassed] = useState(false);
   const [progressPercent, setProgressPercent] = useState(0);
+
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => {
+      abortControllerRef.current?.abort();
+    };
+  }, []);
 
   const currentTask = tasks[currentIndex] || null;
   const currentTaskNumber = currentIndex + 1;
@@ -75,11 +84,22 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       return;
     }
 
+    setFeedback('');
+    setResult(null);
     setIsSending(true);
 
+    abortControllerRef.current?.abort();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
+    let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
+
     try {
-      const reader = await evaluateTheory(currentTask.id, message);
+      reader = await evaluateTheory(currentTask.id, message, controller.signal);
       const decoder = new TextDecoder();
+
+      let streamError = false;
+      let scoringError = false;
 
       while (true) {
         const { done, value } = await reader.read();
@@ -89,10 +109,31 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
           break;
         }
 
-        setFeedback((prev) => prev + decoder.decode(value, { stream: true }));
+        const chunk = decoder.decode(value, { stream: true });
+        if (chunk.includes('[ERROR]')) {
+          streamError = true;
+          break;
+        }
+        if (chunk.includes('[SCORING_ERROR]')) {
+          scoringError = true;
+          break;
+        }
+        setFeedback((prev) => prev + chunk);
+      }
+
+      if (streamError) {
+        toast.error(USE_TASK_SESSION.EVALUATION_ERROR);
+        return;
+      }
+
+      if (scoringError) {
+        toast.error(USE_TASK_SESSION.SCORING_ERROR);
+        return;
       }
 
       const submission = await getSubmissionHistoryByTaskId(currentTask.id);
+      if (controller.signal.aborted) return;
+
       const judgeResult = submission.result;
       const passed = submission.result.score >= PASSING_SCORE;
 
@@ -103,8 +144,11 @@ export const useTaskSession = ({ tasks }: UseTaskSession): UseTaskSessionReturn 
       setResult(judgeResult);
       setIsPassed(passed);
     } catch (error: unknown) {
-      toast.error(error instanceof Error ? error.message : USE_TASK_SESSION.LOADING_ERROR);
+      if (!(error instanceof DOMException && error.name === 'AbortError')) {
+        toast.error(getErrorMessage(error));
+      }
     } finally {
+      reader?.cancel().catch(() => {});
       setIsSending(false);
     }
   };

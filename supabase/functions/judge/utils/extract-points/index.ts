@@ -1,26 +1,37 @@
+import type { LLMChatResponse } from '../../../_shared/llm-client/index.ts';
 import { logger } from '../../../_shared/logger.ts';
 
-export const extractPoints = async (
-  scoringPromise: Promise<Response>
-): Promise<Record<string, number> | null> => {
+export const extractPoints = (
+  scoringResponse: LLMChatResponse,
+  rubricItems: string[]
+): Record<string, number> | null => {
   try {
-    const scoringResponse = await scoringPromise;
+    const toolCall = scoringResponse.toolCalls?.[0];
 
-    if (!scoringResponse.ok) {
-      const errorText = await scoringResponse.text();
-      logger.error('Scoring LLM request failed', { error: errorText });
+    if (toolCall?.name !== 'saveSubmission') {
+      logger.error('Unexpected tool call or no tool call returned', {
+        toolCalls: scoringResponse.toolCalls,
+      });
       return null;
     }
 
-    const scoringData = await scoringResponse.json();
-    const toolCall = scoringData.choices?.[0]?.message?.tool_calls?.[0];
+    const indexed: Record<string, number> = JSON.parse(toolCall.arguments);
+    const mapped: Record<string, number> = {};
 
-    if (toolCall?.function?.name === 'saveSubmission') {
-      return JSON.parse(toolCall.function.arguments);
-    } else {
-      logger.error('Unexpected tool call or no tool call returned', { scoringData });
-      return null;
+    for (let i = 0; i < rubricItems.length; i++) {
+      const key = `rubric_${i}`;
+      const score = indexed[key];
+
+      if (score === undefined) {
+        logger.warn(`Missing score for ${key} ("${rubricItems[i]}"), defaulting to 0`);
+        mapped[rubricItems[i]] = 0;
+      } else {
+        const rounded = Math.round(Number(score));
+        mapped[rubricItems[i]] = Math.min(2, Math.max(0, rounded));
+      }
     }
+
+    return mapped;
   } catch (error) {
     logger.error('Failed to parse scoring response', { error });
     return null;

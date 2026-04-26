@@ -1,5 +1,6 @@
 import { supabase } from '../supabase-client';
 
+import { ApiError } from './api-error';
 import { MOCK_JUDGE_RESULT_GOOD } from './mock';
 
 import { config } from '@/shared/config/supabase';
@@ -7,7 +8,8 @@ import { delay } from '@/shared/lib/delay';
 
 export const evaluateTheory = async (
   taskId: string,
-  answer: string
+  answer: string,
+  signal?: AbortSignal
 ): Promise<ReadableStreamDefaultReader> => {
   if (config.USE_MOCK_AI) {
     await delay(800);
@@ -33,12 +35,13 @@ export const evaluateTheory = async (
       Authorization: `Bearer ${session.access_token}`,
     },
     body: JSON.stringify({ taskId, answer }),
+    signal: signal ?? null,
   });
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error('Judge request failed:', errorText);
-    throw new Error('Judge request failed');
+    console.error('Judge request failed:', response.status, errorText);
+    throw new ApiError('Judge request failed', response.status);
   }
 
   if (!response.body) throw new Error('No stream returned');

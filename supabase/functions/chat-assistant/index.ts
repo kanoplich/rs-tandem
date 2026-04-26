@@ -5,9 +5,11 @@ import { API_ENDPOINTS } from '../_shared/api-endpoints.ts';
 import { getCorsHeaders } from '../_shared/cors.ts';
 import { errorResponse } from '../_shared/error-response.ts';
 import { ERROR_CODES, HTTP_STATUS } from '../_shared/errors.ts';
+import { getClient } from '../_shared/llm-client/index.ts';
 import { logger } from '../_shared/logger.ts';
 
 const HISTORY_CHAR_BUDGET = 8000;
+const MAX_MESSAGE_LENGTH = 5000;
 
 interface ChatRequest {
   message: string;
@@ -35,15 +37,17 @@ serve(async (req) => {
 
   if (!message) return errorResponse('Message is required', HTTP_STATUS.BAD_REQUEST, origin);
 
+  if (message.length > MAX_MESSAGE_LENGTH) {
+    return errorResponse(ERROR_CODES.INPUT_TOO_LONG.message, ERROR_CODES.INPUT_TOO_LONG.status);
+  }
+
   const authHeader = req.headers.get('Authorization');
   if (!authHeader)
     return errorResponse('Authorization header is required', HTTP_STATUS.UNAUTHORIZED, origin);
 
-  const userClient = createClient(
-    Deno.env.get('SUPABASE_URL')!,
-    Deno.env.get('SUPABASE_ANON_KEY')!,
-    { global: { headers: { Authorization: authHeader } } }
-  );
+  const userClient = createClient(Deno.env.get('SUPABASE_URL'), Deno.env.get('SUPABASE_ANON_KEY'), {
+    global: { headers: { Authorization: authHeader } },
+  });
 
   const {
     data: { user },
@@ -52,8 +56,8 @@ serve(async (req) => {
   if (!user) return errorResponse('Unauthorized', HTTP_STATUS.UNAUTHORIZED, origin);
 
   const supabase = createClient(
-    Deno.env.get('SUPABASE_URL')!,
-    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+    Deno.env.get('SUPABASE_URL'),
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
   );
 
   const openaiKey = Deno.env.get('OPENAI_API_KEY');
@@ -63,10 +67,6 @@ serve(async (req) => {
       ERROR_CODES.OPENAI_API_KEY_MISSING.status,
       origin
     );
-
-  const groqKey = Deno.env.get('GROQ_API_KEY');
-  if (!groqKey)
-    return errorResponse('GROQ_API_KEY not configured', HTTP_STATUS.INTERNAL_SERVER_ERROR, origin);
 
   const embeddingResponse = await fetch(API_ENDPOINTS.OPENAI.EMBEDDINGS, {
     method: 'POST',
@@ -110,15 +110,24 @@ serve(async (req) => {
 
   let contextTasks = matchedTasks || [];
 
+  logger.info('RAG matched tasks', {
+    count: contextTasks.length,
+    tasks: contextTasks.map((t: { title: string; similarity?: number }) => ({
+      title: t.title,
+      similarity: t.similarity,
+    })),
+  });
+
   if (taskId && !contextTasks.some((t: { id: string }) => t.id === taskId)) {
-    const { data: currentTask } = await supabase
+    const { data: currentTask, error: taskError } = await supabase
       .from('tasks')
       .select('id, title, question_text, rubric_items')
       .eq('id', taskId)
-      .single()
-      .throwOnError();
+      .single();
 
-    if (currentTask) {
+    if (taskError) {
+      logger.warn('Failed to fetch current task', { error: taskError, taskId });
+    } else if (currentTask) {
       contextTasks = [currentTask, ...contextTasks].slice(0, 5);
     }
   }
@@ -165,7 +174,9 @@ KEY POINTS the student must cover (use to guide, NEVER list all at once):
 ${tasksContext}
 ---`;
 
-  const messages = [{ role: 'system', content: systemPrompt }];
+  const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
+    { role: 'system', content: systemPrompt },
+  ];
 
   if (history && history.length > 0) {
     const recentHistory = history.slice(-10);
@@ -186,73 +197,25 @@ ${tasksContext}
 
   messages.push({ role: 'user', content: message });
 
-  const groqResponse = await fetch(API_ENDPOINTS.GROQ.CHAT_COMPLETIONS, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${groqKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
+  try {
+    const client = getClient('chat');
+    const streamResult = await client.chatStream({
       messages,
       temperature: 0.4,
-      stream: true,
-      max_tokens: 1000,
-    }),
-  });
+      maxTokens: 1000,
+    });
 
-  if (!groqResponse.ok) {
-    const errorText = await groqResponse.text();
-    logger.error('Groq request failed', { error: errorText });
-    return errorResponse('LLM request failed', HTTP_STATUS.INTERNAL_SERVER_ERROR, origin);
+    return new Response(streamResult.readable, {
+      headers: {
+        ...corsHeaders,
+        'Content-Type': 'text/plain; charset=utf-8',
+      },
+    });
+  } catch (error) {
+    logger.error('Chat LLM request failed', { error });
+    return errorResponse(
+      ERROR_CODES.CHAT_COMPLETION_FAILED.message,
+      ERROR_CODES.CHAT_COMPLETION_FAILED.status
+    );
   }
-
-  const stream = new ReadableStream({
-    async start(controller) {
-      if (!groqResponse.body) return controller.close();
-
-      const reader = groqResponse.body.getReader();
-      const decoder = new TextDecoder();
-      const encoder = new TextEncoder();
-
-      let sseBuffer = '';
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        sseBuffer += decoder.decode(value);
-
-        const lines = sseBuffer.split('\n');
-        sseBuffer = lines.pop() ?? '';
-
-        for (const line of lines) {
-          if (!line.startsWith('data:')) continue;
-
-          const json = line.replace('data:', '').trim();
-          if (json === '[DONE]') continue;
-
-          try {
-            const parsed = JSON.parse(json);
-            const token = parsed.choices?.[0]?.delta?.content;
-
-            if (token) {
-              controller.enqueue(encoder.encode(token));
-            }
-          } catch (error) {
-            logger.warn('Failed to parse Groq chunk', { error });
-          }
-        }
-      }
-
-      controller.close();
-    },
-  });
-
-  return new Response(stream, {
-    headers: {
-      ...corsHeaders,
-      'Content-Type': 'text/plain; charset=utf-8',
-    },
-  });
 });
