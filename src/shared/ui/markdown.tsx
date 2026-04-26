@@ -7,6 +7,7 @@ import markup from 'react-syntax-highlighter/dist/esm/languages/prism/markup';
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
 import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import remarkGfm from 'remark-gfm';
 
 import { useTheme } from '../hooks';
 
@@ -28,6 +29,7 @@ export const Markdown = ({ children }: MarkdownProps) => {
 
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
       components={{
         code({ children: codeChildren, className }) {
           const match = /language-(\w+)/.exec(className || '');
