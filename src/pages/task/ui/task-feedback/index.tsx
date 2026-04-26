@@ -1,6 +1,6 @@
-import Markdown from 'react-markdown';
-
 import { TASK_FEEDBACK } from '../../locales';
+
+import { Markdown } from '@/shared';
 
 interface TaskFeedbackProps {
   feedback: string;
